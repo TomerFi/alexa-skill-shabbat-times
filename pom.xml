@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>info.tomfi</groupId>
+  <artifactId>alexa-shabbat-times-skill</artifactId>
+  <packaging>jar</packaging>
+  <version>3.0.0</version>
+
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.5.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>3.13.2</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
+    <dependency>
+      <groupId>org.reflections</groupId>
+      <artifactId>reflections</artifactId>
+      <version>0.9.11</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.amazon.alexa/ask-sdk -->
+    <dependency>
+      <groupId>com.amazon.alexa</groupId>
+      <artifactId>ask-sdk</artifactId>
+      <version>2.21.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.8.2</version>
+    </dependency>
+  </dependencies>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.install.skip>true</maven.install.skip>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <name>Shabbat Times</name>
+  <description>Alexa skill for retrieving the Shabbat start and stop times in various cities around the world.</description>
+  <url>https://www.amazon.com/Tomer-Figenblat-Shabbat-Times/dp/B072PRCHRD</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>tomerfi</id>
+      <name>Tomer Figenblat</name>
+      <email>tomer.figenblat@gmail.com</email>
+      <url>https://portfolio.tomfi.info</url>
+      <roles>
+        <role>Java developer</role>
+      </roles>
+      <timezone>Asia/Jerusalem</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/TomerFi/alexa-skill-shabbat-times/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/TomerFialexa-skill-shabbat-times</url>
+    <connection>scm:git:https://github.com/TomerFi/alexa-skill-shabbat-times.git</connection>
+    <developerConnection>scm:git:https://github.com:TomerFi/alexa-skill-shabbat-times.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
+  <build>
+    <defaultGoal>package</defaultGoal>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <failOnWarning>true</failOnWarning>
+          <forceJavacCompilerUse>true</forceJavacCompilerUse>
+          <showWarnings>true</showWarnings>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>3.2.1</version>
+        <configuration>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.0.0-M3</version>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
