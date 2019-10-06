@@ -15,6 +15,7 @@
 
 # Project Files
 .classpath
+.factorypath
 .project
 .settings
 .ask
