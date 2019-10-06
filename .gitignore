@@ -25,9 +25,3 @@ target
 
 # Cache Files
 *.cache
-
-# Project docs
-docs
-
-# Special includes
-!lib/*
