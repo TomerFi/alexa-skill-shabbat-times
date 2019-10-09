@@ -1,57 +1,57 @@
-{
-    "belfast": {
-        "geoname": "GB-Belfast",
-        "geoid" : "2655984",
-        "list" : "yes"
+[
+    {
+        "cityName": "belfast",
+        "geoName": "GB-Belfast",
+        "geoId" : "2655984"
     },
-    "birmingham": {
-        "geoname": "GB-Birmingham",
-        "geoid" : "2655603",
-        "list" : "yes"
+    {
+        "cityName": "birmingham",
+        "geoName": "GB-Birmingham",
+        "geoId" : "2655603"
     },
-    "bristol": {
-        "geoname": "GB-Bristol",
-        "geoid" : "2654675",
-        "list" : "yes"
+    {
+        "cityName": "bristol",
+        "geoName": "GB-Bristol",
+        "geoId" : "2654675"
     },
-    "cardiff": {
-        "geoname": "GB-Cardiff",
-        "geoid" : "2653822",
-        "list" : "yes"
+    {
+        "cityName": "cardiff",
+        "geoName": "GB-Cardiff",
+        "geoId" : "2653822"
     },
-    "edinburgh": {
-        "geoname": "GB-Edinburgh",
-        "geoid" : "2650225",
-        "list" : "yes"
+    {
+        "cityName": "edinburgh",
+        "geoName": "GB-Edinburgh",
+        "geoId" : "2650225"
     },
-    "glasgow": {
-        "geoname": "GB-Glasgow",
-        "geoid" : "2648579",
-        "list" : "yes"
+    {
+        "cityName": "glasgow",
+        "geoName": "GB-Glasgow",
+        "geoId" : "2648579"
     },
-    "leeds": {
-        "geoname": "GB-Leeds",
-        "geoid" : "2644688",
-        "list" : "yes"
+    {
+        "cityName": "leeds",
+        "geoName": "GB-Leeds",
+        "geoId" : "2644688"
     },
-    "liverpool": {
-        "geoname": "GB-Liverpool",
-        "geoid" : "2644210",
-        "list" : "yes"
+    {
+        "cityName": "liverpool",
+        "geoName": "GB-Liverpool",
+        "geoId" : "2644210"
     },
-    "london": {
-        "geoname": "GB-London",
-        "geoid" : "2643743",
-        "list" : "yes"
+    {
+        "cityName": "london",
+        "geoName": "GB-London",
+        "geoId" : "2643743"
     },
-    "manchester": {
-        "geoname": "GB-Manchester",
-        "geoid" : "2643123",
-        "list" : "yes"
+    {
+        "cityName": "manchester",
+        "geoName": "GB-Manchester",
+        "geoId" : "2643123"
     },
-    "sheffield": {
-        "geoname": "GB-Sheffield",
-        "geoid" : "2638077",
-        "list" : "yes"
+    {
+        "cityName": "sheffield",
+        "geoName": "GB-Sheffield",
+        "geoId" : "2638077"
     }
-}
+]

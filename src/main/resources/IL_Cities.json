@@ -1,132 +1,128 @@
-{
-    "ashdod": {
-        "geoname": "IL-Ashdod",
-        "geoid" : "295629",
-        "list" : "yes"
+[
+    {
+        "cityName": "ashdod",
+        "geoName": "IL-Ashdod",
+        "geoId" : "295629"
     },
-    "ashkelon": {
-        "geoname": "IL-Ashkelon",
-        "geoid" : "295620",
-        "list" : "yes"
+    {
+        "cityName": "ashkelon",
+        "geoName": "IL-Ashkelon",
+        "geoId" : "295620"
     },
-    "bat yam": {
-        "geoname": "IL-Bat Yam",
-        "geoid" : "295548",
-        "list" : "yes"
+    {
+        "cityName": "bat yam",
+        "geoName": "IL-Bat Yam",
+        "geoId" : "295548"
     },
-    "beer sheva": {
-        "geoname": "IL-Be'er Sheva",
-        "geoid" : "295530",
-        "list" : "yes"
+    {
+        "cityName": "beer sheva",
+        "geoName": "IL-Be'er Sheva",
+        "geoId" : "295530"
     },
-    "beit shemesh": {
-        "geoname": "IL-Beit Shemesh",
-        "geoid" : "295432",
-        "list" : "yes"
+    {
+        "cityName": "beit shemesh",
+        "geoName": "IL-Beit Shemesh",
+        "geoId" : "295432"
     },
-    "bnei brak": {
-        "geoname": "IL-Bnei Brak",
-        "geoid" : "295514",
-        "list" : "yes"
+    {
+        "cityName": "bnei brak",
+        "geoName": "IL-Bnei Brak",
+        "geoId" : "295514"
     },
-    "eilat": {
-        "geoname": "IL-Eilat",
-        "geoid" : "295277",
-        "list" : "yes"
+    {
+        "cityName": "eilat",
+        "geoName": "IL-Eilat",
+        "geoId" : "295277"
     },
-    "hadera": {
-        "geoname": "IL-Hadera",
-        "geoid" : "294946",
-        "list" : "yes"
+    {
+        "cityName": "hadera",
+        "geoName": "IL-Hadera",
+        "geoId" : "294946"
     },
-    "haifa": {
-        "geoname": "IL-Haifa",
-        "geoid" : "294801",
-        "list" : "yes"
+    {
+        "cityName": "haifa",
+        "geoName": "IL-Haifa",
+        "geoId" : "294801"
     },
-    "herzliya": {
-        "geoname": "IL-Herzliya",
-        "geoid" : "294778",
-        "list" : "yes"
+    {
+        "cityName": "herzliya",
+        "geoName": "IL-Herzliya",
+        "geoId" : "294778"
     },
-    "holon": {
-        "geoname": "IL-Holon",
-        "geoid" : "294751",
-        "list" : "yes"
+    {
+        "cityName": "holon",
+        "geoName": "IL-Holon",
+        "geoId" : "294751"
     },
-    "jerusalem": {
-        "geoname": "IL-Jerusalem",
-        "geoid" : "281184",
-        "list" : "yes"
+    {
+        "cityName": "jerusalem",
+        "geoName": "IL-Jerusalem",
+        "geoId" : "281184",
+        "aliases": [
+            "yerushalaim"
+        ]
     },
-    "yerushalaim": {
-        "geoname": "IL-Jerusalem",
-        "geoid" : "281184",
-        "list" : "no"
+    {
+        "cityName": "kefar saba",
+        "geoName": "IL-Kfar Saba",
+        "geoId" : "294514"
     },
-    "kefar saba": {
-        "geoname": "IL-Kfar Saba",
-        "geoid" : "294514",
-        "list" : "yes"
+    {
+        "cityName": "lod",
+        "geoName": "IL-Lod",
+        "geoId" : "294421"
     },
-    "lod": {
-        "geoname": "IL-Lod",
-        "geoid" : "294421",
-        "list" : "yes"
+    {
+        "cityName": "modiin",
+        "geoName": "IL-Modiin",
+        "geoId" : "6693679"
     },
-    "modiin": {
-        "geoname": "IL-Modiin",
-        "geoid" : "6693679",
-        "list" : "yes"
+    {
+        "cityName": "nazareth",
+        "geoName": "IL-Nazareth",
+        "geoId" : "294098"
     },
-    "nazareth": {
-        "geoname": "IL-Nazareth",
-        "geoid" : "294098",
-        "list" : "yes"
+    {
+        "cityName": "netanya",
+        "geoName": "IL-Netanya",
+        "geoId" : "294071"
     },
-    "netanya": {
-        "geoname": "IL-Netanya",
-        "geoid" : "294071",
-        "list" : "yes"
-    }, 
-    "petach tikvah": {
-        "geoname": "IL-Petach Tikvah",
-        "geoid" : "293918",
-        "list" : "yes"
-    },    
-    "raanana": {
-        "geoname": "IL-Ra'anana",
-        "geoid" : "293807",
-        "list" : "yes"
+    {
+        "cityName":  "petach tikvah",
+        "geoName": "IL-Petach Tikvah",
+        "geoId" : "293918"
     },
-    "ramat gan": {
-        "geoname": "IL-Ramat Gan",
-        "geoid" : "293788",
-        "list" : "yes"
+    {
+        "cityName": "raanana",
+        "geoName": "IL-Ra'anana",
+        "geoId" : "293807"
     },
-    "ramla": {
-        "geoname": "IL-Ramla",
-        "geoid" : "293768",
-        "list" : "yes"
+    {
+        "cityName": "ramat gan",
+        "geoName": "IL-Ramat Gan",
+        "geoId" : "293788"
     },
-    "rishon lezion": {
-        "geoname": "IL-Rishon LeZion",
-        "geoid" : "293703",
-        "list" : "yes"
+    {
+        "cityName": "ramla",
+        "geoName": "IL-Ramla",
+        "geoId" : "293768"
     },
-    "tel aviv": {
-        "geoname": "IL-Tel Aviv",
-        "geoid" : "293397",
-        "list" : "yes"
+    {
+        "cityName": "rishon lezion",
+        "geoName": "IL-Rishon LeZion",
+        "geoId" : "293703"
     },
-    "tiberias": {
-        "geoname": "IL-Tiberias",
-        "geoid" : "293322",
-        "list" : "yes"
+    {
+        "cityName": "tel aviv",
+        "geoName": "IL-Tel Aviv",
+        "geoId" : "293397"
     },
-    "tveria": {
-        "geoname": "IL-Tiberias",
-        "geoid" : "293322",
-        "list" : "no"
+    {
+        "cityName": "tiberias",
+        "geoName": "IL-Tiberias",
+        "geoId" : "293322",
+        "aliases": [
+            "tveria"
+        ]
     }
-}
+]

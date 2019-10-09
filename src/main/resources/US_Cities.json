@@ -1,222 +1,222 @@
-{
-    "atlanta": {
-        "geoname": "US-Atlanta-GA",
-        "geoid" : "4180439",
-        "list" : "yes"
+[
+    {
+        "cityName": "atlanta",
+        "geoName": "US-Atlanta-GA",
+        "geoId" : "4180439"
     },
-    "austin": {
-        "geoname": "US-Austin-TX",
-        "geoid" : "4671654",
-        "list" : "yes"
+    {
+        "cityName": "austin",
+        "geoName": "US-Austin-TX",
+        "geoId" : "4671654"
     },
-    "baltimore": {
-        "geoname": "US-Baltimore-MD",
-        "geoid" : "4347778",
-        "list" : "yes"
+    {
+        "cityName": "baltimore",
+        "geoName": "US-Baltimore-MD",
+        "geoId" : "4347778"
     },
-    "boston": {
-        "geoname": "US-Boston-MA",
-        "geoid" : "4930956",
-        "list" : "yes"
+    {
+        "cityName": "boston",
+        "geoName": "US-Boston-MA",
+        "geoId" : "4930956"
     },
-    "buffalo": {
-        "geoname": "US-Buffalo-NY",
-        "geoid" : "5110629",
-        "list" : "yes"
+    {
+        "cityName": "buffalo",
+        "geoName": "US-Buffalo-NY",
+        "geoId" : "5110629"
     },
-    "chicago": {
-        "geoname": "US-Chicago-IL",
-        "geoid" : "4887398",
-        "list" : "yes"
+    {
+        "cityName": "chicago",
+        "geoName": "US-Chicago-IL",
+        "geoId" : "4887398"
     },
-    "cincinnati": {
-        "geoname": "US-Cincinnati-OH",
-        "geoid" : "4508722",
-        "list" : "yes"
+    {
+        "cityName": "cincinnati",
+        "geoName": "US-Cincinnati-OH",
+        "geoId" : "4508722"
     },
-    "cleveland": {
-        "geoname": "US-Cleveland-OH",
-        "geoid" : "5150529",
-        "list" : "yes"
+    {
+        "cityName": "cleveland",
+        "geoName": "US-Cleveland-OH",
+        "geoId" : "5150529"
     },
-    "columbus": {
-        "geoname": "US-Columbus-OH",
-        "geoid" : "4509177",
-        "list" : "yes"
+    {
+        "cityName": "columbus",
+        "geoName": "US-Columbus-OH",
+        "geoId" : "4509177"
     },
-    "dallas": {
-        "geoname": "US-Dallas-TX",
-        "geoid" : "4684888",
-        "list" : "yes"
+    {
+        "cityName": "dallas",
+        "geoName": "US-Dallas-TX",
+        "geoId" : "4684888"
     },
-    "denver": {
-        "geoname": "US-Denver-CO",
-        "geoid" : "5419384",
-        "list" : "yes"
+    {
+        "cityName": "denver",
+        "geoName": "US-Denver-CO",
+        "geoId" : "5419384"
     },
-    "detroit": {
-        "geoname": "US-Detroit-MI",
-        "geoid" : "4990729",
-        "list" : "yes"
+    {
+        "cityName": "detroit",
+        "geoName": "US-Detroit-MI",
+        "geoId" : "4990729"
     },
-    "hartford": {
-        "geoname": "US-Hartford-CT",
-        "geoid" : "4835797",
-        "list" : "yes"
+    {
+        "cityName": "hartford",
+        "geoName": "US-Hartford-CT",
+        "geoId" : "4835797"
     },
-    "honolulu": {
-        "geoname": "US-Honolulu-HI",
-        "geoid" : "5856195",
-        "list" : "yes"
+    {
+        "cityName": "honolulu",
+        "geoName": "US-Honolulu-HI",
+        "geoId" : "5856195"
     },
-    "houston": {
-        "geoname": "US-Houston-TX",
-        "geoid" : "4699066",
-        "list" : "yes"
+    {
+        "cityName": "houston",
+        "geoName": "US-Houston-TX",
+        "geoId" : "4699066"
     },
-    "lakewood": {
-        "geoname": "US-Lakewood-NJ",
-        "geoid" : "5100280",
-        "list" : "yes"
+    {
+        "cityName": "lakewood",
+        "geoName": "US-Lakewood-NJ",
+        "geoId" : "5100280"
     },
-    "las vegas": {
-        "geoname": "US-Las Vegas-NV",
-        "geoid" : "5506956",
-        "list" : "yes"
+    {
+        "cityName": "las vegas",
+        "geoName": "US-Las Vegas-NV",
+        "geoId" : "5506956"
     },
-    "livingston": {
-        "geoname": "US-Livingston-NY",
-        "geoid" : "5100572",
-        "list" : "yes"
+    {
+        "cityName": "livingston",
+        "geoName": "US-Livingston-NY",
+        "geoId" : "5100572"
     },
-    "los angeles": {
-        "geoname": "US-Los Angeles-CA",
-        "geoid" : "5368361",
-        "list" : "yes"
+    {
+        "cityName": "los angeles",
+        "geoName": "US-Los Angeles-CA",
+        "geoId" : "5368361"
     },
-    "memphis": {
-        "geoname": "US-Memphis-TN",
-        "geoid" : "4641239",
-        "list" : "yes"
+    {
+        "cityName": "memphis",
+        "geoName": "US-Memphis-TN",
+        "geoId" : "4641239"
     },
-    "miami": {
-        "geoname": "US-Miami-FL",
-        "geoid" : "4164138",
-        "list" : "yes"
+    {
+        "cityName": "miami",
+        "geoName": "US-Miami-FL",
+        "geoId" : "4164138"
     },
-    "milwaukee": {
-        "geoname": "US-Milwaukee-WI",
-        "geoid" : "5263045",
-        "list" : "yes"
+    {
+        "cityName": "milwaukee",
+        "geoName": "US-Milwaukee-WI",
+        "geoId" : "5263045"
     },
-    "monsey": {
-        "geoname": "US-Monsey-NY",
-        "geoid" : "5127315",
-        "list" : "yes"
+    {
+        "cityName": "monsey",
+        "geoName": "US-Monsey-NY",
+        "geoId" : "5127315"
     },
-    "new haven": {
-        "geoname": "US-New Haven-CT",
-        "geoid" : "4839366",
-        "list" : "yes"
+    {
+        "cityName": "new haven",
+        "geoName": "US-New Haven-CT",
+        "geoId" : "4839366"
     },
-    "new york": {
-        "geoname": "US-New York-NY",
-        "geoid" : "5128581",
-        "list" : "yes"
+    {
+        "cityName": "new york",
+        "geoName": "US-New York-NY",
+        "geoId" : "5128581"
     },
-    "omaha": {
-        "geoname": "US-Omaha-NE",
-        "geoid" : "5074472",
-        "list" : "yes"
+    {
+        "cityName": "omaha",
+        "geoName": "US-Omaha-NE",
+        "geoId" : "5074472"
     },
-    "orlando": {
-        "geoname": "US-Orlando-FL",
-        "geoid" : "4167147",
-        "list" : "yes"
+    {
+        "cityName": "orlando",
+        "geoName": "US-Orlando-FL",
+        "geoId" : "4167147"
     },
-    "passaic": {
-        "geoname": "US-Passaic-NJ",
-        "geoid" : "5102443",
-        "list" : "yes"
+    {
+        "cityName": "passaic",
+        "geoName": "US-Passaic-NJ",
+        "geoId" : "5102443"
     },
-    "philadelphia": {
-        "geoname": "US-Philadelphia-PA",
-        "geoid" : "4560349",
-        "list" : "yes"
+    {
+        "cityName": "philadelphia",
+        "geoName": "US-Philadelphia-PA",
+        "geoId" : "4560349"
     },
-    "phoenix": {
-        "geoname": "US-Phoenix-AZ",
-        "geoid" : "5308655",
-        "list" : "yes"
+    {
+        "cityName": "phoenix",
+        "geoName": "US-Phoenix-AZ",
+        "geoId" : "5308655"
     },
-    "pittsburgh": {
-        "geoname": "US-Pittsburgh-PA",
-        "geoid" : "5206379",
-        "list" : "yes"
+    {
+        "cityName": "pittsburgh",
+        "geoName": "US-Pittsburgh-PA",
+        "geoId" : "5206379"
     },
-    "portland": {
-        "geoname": "US-Portland-OR",
-        "geoid" : "5746545",
-        "list" : "yes"
+    {
+        "cityName": "portland",
+        "geoName": "US-Portland-OR",
+        "geoId" : "5746545"
     },
-    "providence": {
-        "geoname": "US-Providence-RI",
-        "geoid" : "5224151",
-        "list" : "yes"
+    {
+        "cityName": "providence",
+        "geoName": "US-Providence-RI",
+        "geoId" : "5224151"
     },
-    "richmond": {
-        "geoname": "US-Richmond-VA",
-        "geoid" : "4781708",
-        "list" : "yes"
+    {
+        "cityName": "richmond",
+        "geoName": "US-Richmond-VA",
+        "geoId" : "4781708"
     },
-    "rochester": {
-        "geoname": "US-Rochester-NY",
-        "geoid" : "5134086",
-        "list" : "yes"
-    },    
-    "saint louis": {
-        "geoname": "US-Saint Louis-MO",
-        "geoid" : "4407066",
-        "list" : "yes"
-    },    
-    "saint paul": {
-        "geoname": "US-Saint Paul-MN",
-        "geoid" : "5045360",
-        "list" : "yes"
-    },    
-    "san diego": {
-        "geoname": "US-San Diego-CA",
-        "geoid" : "5391811",
-        "list" : "yes"
-    },    
-    "san francisco": {
-        "geoname": "US-San Francisco-CA",
-        "geoid" : "5391959",
-        "list" : "yes"
-    },    
-    "seattle": {
-        "geoname": "US-Seattle-WA",
-        "geoid" : "5809844",
-        "list" : "yes"
-    },    
-    "silver spring": {
-        "geoname": "US-Silver Spring-MD",
-        "geoid" : "4369596",
-        "list" : "yes"
-    },    
-    "teaneck": {
-        "geoname": "US-Teaneck-NJ",
-        "geoid" : "5105262",
-        "list" : "yes"
-    },    
-    "washington": {
-        "geoname": "US-Washington-DC",
-        "geoid" : "4140963",
-        "list" : "yes"
-    },    
-    "white plains": {
-        "geoname": "US-White Plains-NY",
-        "geoid" : "5144336",
-        "list" : "yes"
+    {
+        "cityName": "rochester",
+        "geoName": "US-Rochester-NY",
+        "geoId" : "5134086"
+    },
+    {
+        "cityName": "saint louis",
+        "geoName": "US-Saint Louis-MO",
+        "geoId" : "4407066"
+    },
+    {
+        "cityName": "saint paul",
+        "geoName": "US-Saint Paul-MN",
+        "geoId" : "5045360"
+    },
+    {
+        "cityName": "san diego",
+        "geoName": "US-San Diego-CA",
+        "geoId" : "5391811"
+    },
+    {
+        "cityName": "san francisco",
+        "geoName": "US-San Francisco-CA",
+        "geoId" : "5391959"
+    },
+    {
+        "cityName": "seattle",
+        "geoName": "US-Seattle-WA",
+        "geoId" : "5809844"
+    },
+    {
+        "cityName": "silver spring",
+        "geoName": "US-Silver Spring-MD",
+        "geoId" : "4369596"
+    },
+    {
+        "cityName": "teaneck",
+        "geoName": "US-Teaneck-NJ",
+        "geoId" : "5105262"
+    },
+    {
+        "cityName": "washington",
+        "geoName": "US-Washington-DC",
+        "geoId" : "4140963"
+    },
+    {
+        "cityName": "white plains",
+        "geoName": "US-White Plains-NY",
+        "geoId" : "5144336"
     }
-}
+]

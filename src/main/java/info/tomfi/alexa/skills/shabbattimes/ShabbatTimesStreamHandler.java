@@ -9,31 +9,45 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.SkillStreamHandler;
 
-import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeHandler;
-import info.tomfi.alexa.skills.shabbattimes.exceptionhandlers.SdkExceptionHandler;
-import info.tomfi.alexa.skills.shabbattimes.interceptors.PersistAttributesInterceptor;
+import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
+import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCountrySlotHandler;
+import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoJsonFileHandler;
+import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandler;
+import info.tomfi.alexa.skills.shabbattimes.exception.handlers.UnknownCountryHandler;
+import info.tomfi.alexa.skills.shabbattimes.response.interceptors.PersistSessionAttributes;
 
 import org.reflections.Reflections;
 
 public class ShabbatTimesStreamHandler extends SkillStreamHandler
 {
+    private static final String HANDLERS_PACKAGE_NAME = "info.tomfi.alexa.skills.shabbattimes.request.handlers";
+
     @SuppressWarnings("unchecked")
     private static Skill getSkill() throws IllegalAccessException, InstantiationException
     {
-        final Reflections reflections = new Reflections("info.tomfi.alexa.skills.shabbattimes.handlers");
-        final Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(IncludeHandler.class);
-        final List<GenericRequestHandler<HandlerInput, Optional<Response>>> handlers = new ArrayList<>();
+        final Reflections reflections = new Reflections(HANDLERS_PACKAGE_NAME);
+        final Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(IncludeRequestHandler.class);
+
+        final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers = new ArrayList<>();
         for (Class<?> clazz : annotated)
         {
-            handlers.add((GenericRequestHandler<HandlerInput, Optional<Response>>) clazz.newInstance());
+            requestHandlers.add((GenericRequestHandler<HandlerInput, Optional<Response>>) clazz.newInstance());
         }
+
+        final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers = new ArrayList<>();
+        exceptionHandlers.add(new NoCountrySlotHandler());
+        exceptionHandlers.add(new NoJsonFileHandler());
+        exceptionHandlers.add(new UnknownCountryHandler());
+        exceptionHandlers.add(new SdkExceptionHandler()); // keep last
+
         return Skills.standard()
-            .addRequestHandlers(handlers)
-            .addResponseInterceptor(new PersistAttributesInterceptor())
-            .addExceptionHandler(new SdkExceptionHandler())
+            .addResponseInterceptor(new PersistSessionAttributes())
+            .addRequestHandlers(requestHandlers)
+            .addExceptionHandlers(exceptionHandlers)
             .build();
     }
 
