@@ -4,7 +4,6 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,11 +34,13 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
         final Slot countrySlot = intent.getIntent().getSlots().get(Slots.COUNTRY.name);
         if (countrySlot == null)
         {
-            throw new NoCountrySlotException("No 'Country' slot found.");
+            throw new NoCountrySlotException("No country slot found.");
         }
-        final Country country = CountryFactory.getCountry(countrySlot.getValue().toLowerCase());
-        final Map<String, Object> attribs = new HashMap<>();
+        final Country country = CountryFactory.getCountry(countrySlot.getValue());
+
+        final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
         attribs.put(Attributes.COUNTRY.name, country.getAbbreviation());
+        input.getAttributesManager().setSessionAttributes(attribs);
 
         return input.getResponseBuilder()
             .withSpeech(String.format("These are the city names I know in %s: %s.", country.getName(), country.getPrettyCityNames()))
@@ -47,4 +48,5 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
             .withShouldEndSession(false)
             .build();
     }
+
 }

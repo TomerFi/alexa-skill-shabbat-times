@@ -2,56 +2,78 @@
     {
         "cityName": "belfast",
         "geoName": "GB-Belfast",
-        "geoId" : "2655984"
+        "geoId" : "2655984",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "birmingham",
         "geoName": "GB-Birmingham",
-        "geoId" : "2655603"
+        "geoId" : "2655603",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "bristol",
         "geoName": "GB-Bristol",
-        "geoId" : "2654675"
+        "geoId" : "2654675",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "cardiff",
         "geoName": "GB-Cardiff",
-        "geoId" : "2653822"
+        "geoId" : "2653822",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "edinburgh",
         "geoName": "GB-Edinburgh",
-        "geoId" : "2650225"
+        "geoId" : "2650225",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "glasgow",
         "geoName": "GB-Glasgow",
-        "geoId" : "2648579"
+        "geoId" : "2648579",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "leeds",
         "geoName": "GB-Leeds",
-        "geoId" : "2644688"
+        "geoId" : "2644688",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "liverpool",
         "geoName": "GB-Liverpool",
-        "geoId" : "2644210"
+        "geoId" : "2644210",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "london",
         "geoName": "GB-London",
-        "geoId" : "2643743"
+        "geoId" : "2643743",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "manchester",
         "geoName": "GB-Manchester",
-        "geoId" : "2643123"
+        "geoId" : "2643123",
+        "countryAbbreviation": "GB",
+        "aliases": []
     },
     {
         "cityName": "sheffield",
         "geoName": "GB-Sheffield",
-        "geoId" : "2638077"
+        "geoId" : "2638077",
+        "countryAbbreviation": "GB",
+        "aliases": []
     }
 ]

@@ -59,7 +59,10 @@ public final class GlobalEnums
 
     public static enum Attributes
     {
+        CITY("city"),
         COUNTRY("country"),
+        GEOID("geoid"),
+        GEONAME("geoname"),
         LAST_INTENT("lastIntent");
 
         public final String name;

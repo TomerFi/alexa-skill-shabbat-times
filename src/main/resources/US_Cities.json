@@ -2,221 +2,309 @@
     {
         "cityName": "atlanta",
         "geoName": "US-Atlanta-GA",
-        "geoId" : "4180439"
+        "geoId" : "4180439",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "austin",
         "geoName": "US-Austin-TX",
-        "geoId" : "4671654"
+        "geoId" : "4671654",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "baltimore",
         "geoName": "US-Baltimore-MD",
-        "geoId" : "4347778"
+        "geoId" : "4347778",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "boston",
         "geoName": "US-Boston-MA",
-        "geoId" : "4930956"
+        "geoId" : "4930956",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "buffalo",
         "geoName": "US-Buffalo-NY",
-        "geoId" : "5110629"
+        "geoId" : "5110629",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "chicago",
         "geoName": "US-Chicago-IL",
-        "geoId" : "4887398"
+        "geoId" : "4887398",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "cincinnati",
         "geoName": "US-Cincinnati-OH",
-        "geoId" : "4508722"
+        "geoId" : "4508722",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "cleveland",
         "geoName": "US-Cleveland-OH",
-        "geoId" : "5150529"
+        "geoId" : "5150529",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "columbus",
         "geoName": "US-Columbus-OH",
-        "geoId" : "4509177"
+        "geoId" : "4509177",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "dallas",
         "geoName": "US-Dallas-TX",
-        "geoId" : "4684888"
+        "geoId" : "4684888",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "denver",
         "geoName": "US-Denver-CO",
-        "geoId" : "5419384"
+        "geoId" : "5419384",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "detroit",
         "geoName": "US-Detroit-MI",
-        "geoId" : "4990729"
+        "geoId" : "4990729",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "hartford",
         "geoName": "US-Hartford-CT",
-        "geoId" : "4835797"
+        "geoId" : "4835797",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "honolulu",
         "geoName": "US-Honolulu-HI",
-        "geoId" : "5856195"
+        "geoId" : "5856195",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "houston",
         "geoName": "US-Houston-TX",
-        "geoId" : "4699066"
+        "geoId" : "4699066",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "lakewood",
         "geoName": "US-Lakewood-NJ",
-        "geoId" : "5100280"
+        "geoId" : "5100280",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "las vegas",
         "geoName": "US-Las Vegas-NV",
-        "geoId" : "5506956"
+        "geoId" : "5506956",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "livingston",
         "geoName": "US-Livingston-NY",
-        "geoId" : "5100572"
+        "geoId" : "5100572",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "los angeles",
         "geoName": "US-Los Angeles-CA",
-        "geoId" : "5368361"
+        "geoId" : "5368361",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "memphis",
         "geoName": "US-Memphis-TN",
-        "geoId" : "4641239"
+        "geoId" : "4641239",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "miami",
         "geoName": "US-Miami-FL",
-        "geoId" : "4164138"
+        "geoId" : "4164138",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "milwaukee",
         "geoName": "US-Milwaukee-WI",
-        "geoId" : "5263045"
+        "geoId" : "5263045",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "monsey",
         "geoName": "US-Monsey-NY",
-        "geoId" : "5127315"
+        "geoId" : "5127315",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "new haven",
         "geoName": "US-New Haven-CT",
-        "geoId" : "4839366"
+        "geoId" : "4839366",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "new york",
         "geoName": "US-New York-NY",
-        "geoId" : "5128581"
+        "geoId" : "5128581",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "omaha",
         "geoName": "US-Omaha-NE",
-        "geoId" : "5074472"
+        "geoId" : "5074472",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "orlando",
         "geoName": "US-Orlando-FL",
-        "geoId" : "4167147"
+        "geoId" : "4167147",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "passaic",
         "geoName": "US-Passaic-NJ",
-        "geoId" : "5102443"
+        "geoId" : "5102443",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "philadelphia",
         "geoName": "US-Philadelphia-PA",
-        "geoId" : "4560349"
+        "geoId" : "4560349",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "phoenix",
         "geoName": "US-Phoenix-AZ",
-        "geoId" : "5308655"
+        "geoId" : "5308655",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "pittsburgh",
         "geoName": "US-Pittsburgh-PA",
-        "geoId" : "5206379"
+        "geoId" : "5206379",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "portland",
         "geoName": "US-Portland-OR",
-        "geoId" : "5746545"
+        "geoId" : "5746545",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "providence",
         "geoName": "US-Providence-RI",
-        "geoId" : "5224151"
+        "geoId" : "5224151",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "richmond",
         "geoName": "US-Richmond-VA",
-        "geoId" : "4781708"
+        "geoId" : "4781708",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "rochester",
         "geoName": "US-Rochester-NY",
-        "geoId" : "5134086"
+        "geoId" : "5134086",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "saint louis",
         "geoName": "US-Saint Louis-MO",
-        "geoId" : "4407066"
+        "geoId" : "4407066",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "saint paul",
         "geoName": "US-Saint Paul-MN",
-        "geoId" : "5045360"
+        "geoId" : "5045360",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "san diego",
         "geoName": "US-San Diego-CA",
-        "geoId" : "5391811"
+        "geoId" : "5391811",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "san francisco",
         "geoName": "US-San Francisco-CA",
-        "geoId" : "5391959"
+        "geoId" : "5391959",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "seattle",
         "geoName": "US-Seattle-WA",
-        "geoId" : "5809844"
+        "geoId" : "5809844",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "silver spring",
         "geoName": "US-Silver Spring-MD",
-        "geoId" : "4369596"
+        "geoId" : "4369596",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "teaneck",
         "geoName": "US-Teaneck-NJ",
-        "geoId" : "5105262"
+        "geoId" : "5105262",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "washington",
         "geoName": "US-Washington-DC",
-        "geoId" : "4140963"
+        "geoId" : "4140963",
+        "countryAbbreviation": "US",
+        "aliases": []
     },
     {
         "cityName": "white plains",
         "geoName": "US-White Plains-NY",
-        "geoId" : "5144336"
+        "geoId" : "5144336",
+        "countryAbbreviation": "US",
+        "aliases": []
     }
 ]

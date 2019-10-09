@@ -2,62 +2,85 @@
     {
         "cityName": "ashdod",
         "geoName": "IL-Ashdod",
-        "geoId" : "295629"
+        "geoId" : "295629",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "ashkelon",
         "geoName": "IL-Ashkelon",
-        "geoId" : "295620"
+        "geoId" : "295620",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "bat yam",
         "geoName": "IL-Bat Yam",
-        "geoId" : "295548"
+        "geoId" : "295548",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "beer sheva",
         "geoName": "IL-Be'er Sheva",
-        "geoId" : "295530"
+        "geoId" : "295530",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "beit shemesh",
         "geoName": "IL-Beit Shemesh",
-        "geoId" : "295432"
+        "geoId" : "295432",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "bnei brak",
         "geoName": "IL-Bnei Brak",
-        "geoId" : "295514"
+        "geoId" : "295514",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "eilat",
         "geoName": "IL-Eilat",
-        "geoId" : "295277"
+        "geoId" : "295277",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "hadera",
         "geoName": "IL-Hadera",
-        "geoId" : "294946"
+        "geoId" : "294946",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "haifa",
         "geoName": "IL-Haifa",
-        "geoId" : "294801"
+        "geoId" : "294801",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "herzliya",
         "geoName": "IL-Herzliya",
-        "geoId" : "294778"
+        "geoId" : "294778",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "holon",
         "geoName": "IL-Holon",
-        "geoId" : "294751"
+        "geoId" : "294751",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "jerusalem",
         "geoName": "IL-Jerusalem",
         "geoId" : "281184",
+        "countryAbbreviation": "IL",
         "aliases": [
             "yerushalaim"
         ]
@@ -65,62 +88,85 @@
     {
         "cityName": "kefar saba",
         "geoName": "IL-Kfar Saba",
-        "geoId" : "294514"
+        "geoId" : "294514",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "lod",
         "geoName": "IL-Lod",
-        "geoId" : "294421"
+        "geoId" : "294421",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "modiin",
         "geoName": "IL-Modiin",
-        "geoId" : "6693679"
+        "geoId" : "6693679",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "nazareth",
         "geoName": "IL-Nazareth",
-        "geoId" : "294098"
+        "geoId" : "294098",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "netanya",
         "geoName": "IL-Netanya",
-        "geoId" : "294071"
+        "geoId" : "294071",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName":  "petach tikvah",
         "geoName": "IL-Petach Tikvah",
-        "geoId" : "293918"
+        "geoId" : "293918",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "raanana",
         "geoName": "IL-Ra'anana",
-        "geoId" : "293807"
+        "geoId" : "293807",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "ramat gan",
         "geoName": "IL-Ramat Gan",
-        "geoId" : "293788"
+        "geoId" : "293788",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "ramla",
         "geoName": "IL-Ramla",
-        "geoId" : "293768"
+        "geoId" : "293768",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "rishon lezion",
         "geoName": "IL-Rishon LeZion",
-        "geoId" : "293703"
+        "geoId" : "293703",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "tel aviv",
         "geoName": "IL-Tel Aviv",
-        "geoId" : "293397"
+        "geoId" : "293397",
+        "countryAbbreviation": "IL",
+        "aliases": []
     },
     {
         "cityName": "tiberias",
         "geoName": "IL-Tiberias",
         "geoId" : "293322",
+        "countryAbbreviation": "IL",
         "aliases": [
             "tveria"
         ]
