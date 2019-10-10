@@ -1,10 +1,12 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.CityLocator.getByCityAndCountry;
+import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.getShabbatStartLocalDate;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -55,9 +57,20 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         attribs.put(Attributes.GEONAME.name, selectedCity.getGeoName());
         input.getAttributesManager().setSessionAttributes(attribs);
 
+        final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
+
+
+        String hebCalUrl = "http://www.hebcal.com/hebcal/?v=1&cfg=json&maj=off&min=off&mod=off&nx=off&year=%s&month=%s&ss=off&mf=off&c=on&geo=geoname&geonameid=%s&m=0&s=off";
+
+        hebCalUrl = String.format(
+            hebCalUrl, String.valueOf(shabbatDate.getYear()),
+            String.format("0%d", shabbatDate.getMonth().getValue()).substring(0, 1),
+            selectedCity.getGeoId()
+        );
+
         // TODO
         return input.getResponseBuilder()
-            .withSpeech("TODO found city")
+            .withSpeech("TODO found city shabbat is " + shabbatDate)
             .withShouldEndSession(true)
             .build();
     }
