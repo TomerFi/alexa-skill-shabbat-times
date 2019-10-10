@@ -4,20 +4,6 @@ import java.util.Optional;
 
 public final class ResponseItem
 {
-    public static enum Categories
-    {
-        CANDLES("candles"),
-        HAVDALAH("havdalah"),
-        HOLIDAY("holiday");
-
-        public final String value;
-
-        Categories(final String setValue)
-        {
-            value = setValue;
-        }
-    }
-
     private String hebrew;
     private String date;
     private String title;
