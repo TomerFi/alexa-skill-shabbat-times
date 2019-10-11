@@ -24,11 +24,12 @@ public final class APIRequestMaker
     private static String DEFAULT_CANDLE_LIGHTING = "18";
 
     private final HttpTransport transport;
-
+    private final String selectedUrl;
     private Map<String, String> queryParams;
 
-    public APIRequestMaker()
+    public APIRequestMaker(String... args)
     {
+        selectedUrl = args.length > 0 ? args[0] : BASE_URL;
         transport = new NetHttpTransport();
 
         queryParams = new ConcurrentHashMap<>();
@@ -89,7 +90,7 @@ public final class APIRequestMaker
             throw new IllegalStateException("we need the requested city geo id for build the request.");
         }
         final HttpRequestFactory requestFactory = transport.createRequestFactory(new APIRequestInitializer());
-        final GenericUrl url = new GenericUrl(BASE_URL);
+        final GenericUrl url = new GenericUrl(selectedUrl);
         url.putAll(queryParams);
         final HttpRequest request = requestFactory.buildGetRequest(url);
         return request.execute().parseAs(APIResponse.class);
