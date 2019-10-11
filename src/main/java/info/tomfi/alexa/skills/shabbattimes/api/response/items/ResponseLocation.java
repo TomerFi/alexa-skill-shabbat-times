@@ -1,17 +1,19 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
+import com.google.api.client.util.Key;
+
 public final class ResponseLocation
 {
-    private String admin1;
-    private String asciiname;
-    private String city;
-    private String country;
-    private String geo;
-    private String geonameid;
-    private Double latitude;
-    private Double longitude;
-    private String title;
-    private String tzid;
+    @Key("admin1") private String admin1;
+    @Key("asciiname") private String asciiname;
+    @Key("city") private String city;
+    @Key("country") private String country;
+    @Key("geo") private String geo;
+    @Key("geonameid") private int geonameid;
+    @Key("latitude") private Double latitude;
+    @Key("longitude") private Double longitude;
+    @Key("title") private String title;
+    @Key("tzid") private String tzid;
 
     public String getAdmin1()
     {
@@ -38,7 +40,7 @@ public final class ResponseLocation
         return geo;
     }
 
-    public String getGeonameid()
+    public int getGeonameid()
     {
         return geonameid;
     }

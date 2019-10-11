@@ -2,18 +2,20 @@ package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
 import java.util.Optional;
 
+import com.google.api.client.util.Key;
+
 public final class ResponseItem
 {
-    private String hebrew;
-    private String date;
-    private String title;
-    private String category;
+    @Key("hebrew") private String hebrew;
+    @Key("date") private String date;
+    @Key("title") private String title;
+    @Key("category") private String category;
 
-    private String link;
-    private String memo;
-    private String subcat;
+    @Key("link") private String link;
+    @Key("memo") private String memo;
+    @Key("subcat") private String subcat;
 
-    private boolean yomtov;
+    @Key("yomtov") private boolean yomtov;
 
     public String getHebrew()
     {
