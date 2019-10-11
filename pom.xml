@@ -64,6 +64,7 @@
     <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco.coverage.minimum>3%</jacoco.coverage.minimum>
   </properties>
 
   <name>Shabbat Times</name>
@@ -105,7 +106,7 @@
   </scm>
 
   <build>
-    <defaultGoal>package</defaultGoal>
+    <defaultGoal>verify</defaultGoal>
     <finalName>${project.artifactId}</finalName>
     <plugins>
       <plugin>
@@ -138,6 +139,45 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M3</version>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.4</version>
+        <configuration>
+          <excludes>
+            <exclude>info/tomfi/mancala/exception/*</exclude>
+          </excludes>
+        </configuration>
+        <executions>
+          <execution>
+            <id>prepare-jacoco-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>check-jacoco-metrics</id>
+            <goals>
+              <goal>check</goal>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${jacoco.coverage.minimum}</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
