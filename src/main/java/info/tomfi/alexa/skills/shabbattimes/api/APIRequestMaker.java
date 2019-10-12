@@ -1,7 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.api;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -71,7 +71,7 @@ public final class APIRequestMaker
         return this;
     }
 
-    public APIRequestMaker setSpecificDate(final LocalDateTime dateTime)
+    public APIRequestMaker setSpecificDate(final LocalDate dateTime)
     {
         final String year = String.valueOf(dateTime.getYear());
         final String month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
