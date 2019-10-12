@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import java.util.stream.Stream;
 
@@ -67,7 +67,7 @@ public final class APIRequestMakerTest {
         requestMaker.setHavdalahMinutesAfterSundown(20);
         requestMaker.setCandleLightingMinutesBeforeSunset(10);
         requestMaker.setGeoId(1);
-        requestMaker.setSpecificDate(LocalDateTime.now());
+        requestMaker.setSpecificDate(LocalDate.now());
 
         String responesText;
         try
