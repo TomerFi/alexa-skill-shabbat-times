@@ -1,6 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
@@ -13,7 +14,6 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,7 +61,7 @@ public final class APIToolsTest
     public void getShabbatCandlesItem_listContainingCorrectItem_getCorrectItem()
     {
         final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
-        final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", DateTimeFormatter.ISO_LOCAL_DATE);
+        final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
         assertThat(APITools.getShabbatCandlesItem(listOfItems, shabbatStartDate).get()).isEqualTo(candlesShabbatItem);
     }
 
@@ -70,7 +70,7 @@ public final class APIToolsTest
     public void getShabbatCandlesItem_listNotContainingCorrectItem_optionalEmpty()
     {
         final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
-        final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", DateTimeFormatter.ISO_LOCAL_DATE);
+        final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
         assertThat(APITools.getShabbatCandlesItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
     }
 
