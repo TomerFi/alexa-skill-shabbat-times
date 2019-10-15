@@ -22,6 +22,27 @@
       <version>3.13.2</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.1.0</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-client-java -->
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-client-java</artifactId>
+      <version>5.6.1</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-netty -->
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <version>5.6.1</version>
+      <scope>test</scope>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/org.reflections/reflections -->
     <dependency>
       <groupId>org.reflections</groupId>
@@ -52,20 +73,6 @@
       <artifactId>ask-sdk</artifactId>
       <version>2.21.0</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-client-java -->
-    <dependency>
-      <groupId>org.mock-server</groupId>
-      <artifactId>mockserver-client-java</artifactId>
-      <version>5.6.1</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-netty -->
-    <dependency>
-      <groupId>org.mock-server</groupId>
-      <artifactId>mockserver-netty</artifactId>
-      <version>5.6.1</version>
-      <scope>test</scope>
-    </dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -78,7 +85,7 @@
     <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.coverage.minimum>3%</jacoco.coverage.minimum>
+    <jacoco.coverage.minimum>30%</jacoco.coverage.minimum>
   </properties>
 
   <name>Shabbat Times</name>
