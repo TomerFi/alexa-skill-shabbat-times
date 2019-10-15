@@ -18,6 +18,7 @@ import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityFoundHandle
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityInCountryHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCitySlotHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCountrySlotHandler;
+import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoItemFoundForDateHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoJsonFileHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoResponseFromAPIHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandler;
@@ -50,6 +51,7 @@ public class ShabbatTimesStreamHandler extends SkillStreamHandler
         exceptionHandlers.add(new NoCityInCountryHandler());
         exceptionHandlers.add(new NoCityFoundHandler());
         exceptionHandlers.add(new NoResponseFromAPIHandler());
+        exceptionHandlers.add(new NoItemFoundForDateHandler());
         exceptionHandlers.add(new SdkExceptionHandler()); // keep last
 
         return Skills.standard()

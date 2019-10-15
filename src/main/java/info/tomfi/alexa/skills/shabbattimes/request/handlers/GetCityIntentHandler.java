@@ -38,6 +38,7 @@ import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
 
 @IncludeRequestHandler
@@ -51,7 +52,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
-        throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoResponseFromAPIException
+        throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateExepion, NoResponseFromAPIException
     {
         final Map<String, Slot> slots = intent.getIntent().getSlots();
         final City selectedCity = getByCityAndCountry(slots.get(COUNTRY.name), getCitySlot(slots));
@@ -72,10 +73,14 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         }
 
         final List<ResponseItem> items = getCandlesAndHavdalahItems(response);
-        final ResponseItem shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);
-        final ResponseItem shabbatEndItem = items.get(items.indexOf(shabbatStartItem) + 1);
+        final Optional<ResponseItem> shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);
+        if (!shabbatStartItem.isPresent())
+        {
+            throw new NoItemFoundForDateExepion("no candles item found for requested date");
+        }
+        final ResponseItem shabbatEndItem = items.get(items.indexOf(shabbatStartItem.get()) + 1);
 
-        final ZonedDateTime shabbatStartDateTime = ZonedDateTime.parse(shabbatStartItem.getDate());
+        final ZonedDateTime shabbatStartDateTime = ZonedDateTime.parse(shabbatStartItem.get().getDate());
         final ZonedDateTime shabbatEndDateTime = ZonedDateTime.parse(shabbatEndItem.getDate());
         final ZonedDateTime currentDateTime = intent.getTimestamp().toZonedDateTime();
 
