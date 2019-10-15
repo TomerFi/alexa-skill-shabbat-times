@@ -14,9 +14,9 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.CITY_
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.COUNTRY;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getCandlesAndHavdalahItems;
-import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getResponseFromAPI;
 import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatCandlesItem;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -31,6 +31,7 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
+import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
@@ -61,7 +62,14 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         input.getAttributesManager().setSessionAttributes(attribs);
 
         final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
-        final APIResponse response = getResponseFromAPI(selectedCity.getGeoId(), shabbatDate);
+        final APIResponse response;
+        try
+        {
+            response = new APIRequestMaker().setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
+        } catch (IllegalStateException | IOException exc)
+        {
+            throw new NoResponseFromAPIException("no response from hebcal's shabbat api");
+        }
 
         final List<ResponseItem> items = getCandlesAndHavdalahItems(response);
         final ResponseItem shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);

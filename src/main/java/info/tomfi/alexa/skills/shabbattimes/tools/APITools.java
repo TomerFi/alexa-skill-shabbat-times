@@ -6,32 +6,18 @@ import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CAND
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
 
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
 
 public final class APITools
 {
     private APITools()
     {
-    }
-
-    public static APIResponse getResponseFromAPI(final int geoId, final LocalDate shabbatDate) throws NoResponseFromAPIException
-    {
-        try
-        {
-            return new APIRequestMaker().setGeoId(geoId).setSpecificDate(shabbatDate).send();
-        } catch (IllegalStateException | IOException exc)
-        {
-            throw new NoResponseFromAPIException("no response from hebcal's shabbat api");
-        }
     }
 
     public static List<ResponseItem> getCandlesAndHavdalahItems(final APIResponse response)
