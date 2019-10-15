@@ -75,7 +75,7 @@ public final class APIToolsTest
     }
 
     @Test
-    @DisplayName("test")
+    @DisplayName("test the reducing and sorting of the response items list")
     public void getCandlesAndHavdalahItems_unsortedFullList_sortedMinmizedList()
     {
         final APIResponse response = mock(APIResponse.class);
