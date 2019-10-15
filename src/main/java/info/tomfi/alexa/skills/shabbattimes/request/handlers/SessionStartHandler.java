@@ -1,6 +1,11 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
+
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler;
@@ -20,9 +25,10 @@ public class SessionStartHandler implements LaunchRequestHandler {
 
     @Override
     public Optional<Response> handle(final HandlerInput input, final LaunchRequest request) {
+        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-                .withSpeech("Welcome to shabbat times! What is your city name?")
-                .withReprompt("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.")
+                .withSpeech(getFromBundle(bundle, BundleKeys.WELCOME_SPEECH))
+                .withReprompt(getFromBundle(bundle, BundleKeys.DEFAULT_REPROMPT))
                 .withShouldEndSession(false)
                 .build();
     }

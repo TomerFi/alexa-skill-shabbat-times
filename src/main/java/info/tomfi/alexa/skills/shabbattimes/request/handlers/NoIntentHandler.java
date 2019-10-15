@@ -1,10 +1,14 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.CountryInfo;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -25,29 +29,27 @@ public final class NoIntentHandler implements IntentRequestHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
-        String speechOutput = "Ok.";
+        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
+        String speechOutput = bundle.getString(BundleKeys.DEFAULT_OK.toString());
         try
         {
             if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.name).equals(Intents.COUNTRY_SELECTED.name))
             {
-                final String speechPrefix = "I'm sorry. Those are all the city names I know%s";
                 final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.name);
+                String speechMiddle = "";
                 if (attribValue.equals(CountryInfo.UNITED_STATES.abbreviation))
                 {
-                    speechOutput = String.format(speechPrefix, " in the United States! Please try again, Goodbye!");
+                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_US);
                 }
                 else if (attribValue.equals(CountryInfo.ISRAEL.abbreviation))
                 {
-                    speechOutput = String.format(speechPrefix, " in Israel! Please try again, Goodbye!");
+                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_ISRAEL);
                 }
                 else if (attribValue.equals(CountryInfo.UNITED_KINGDOM.abbreviation))
                 {
-                    speechOutput = String.format(speechPrefix, " in the United Kingdom! Please try again, Goodbye!");
+                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_UK);
                 }
-                else
-                {
-                    speechOutput = String.format(speechPrefix, "! Please try again, Goodbye!");
-                }
+                speechOutput = String.format(getFromBundle(bundle, BundleKeys.NOT_FOUND_FMT), speechMiddle);
             }
         } catch (IllegalStateException exc)
         {

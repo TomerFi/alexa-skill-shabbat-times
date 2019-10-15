@@ -1,11 +1,15 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -42,9 +46,10 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
         attribs.put(Attributes.COUNTRY.name, country.getAbbreviation());
         input.getAttributesManager().setSessionAttributes(attribs);
 
+        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech(String.format("These are the city names I know in %s: %s.", country.getName(), country.getPrettyCityNames()))
-            .withReprompt("Please tell me the requested city name.")
+            .withSpeech(String.format(getFromBundle(bundle, BundleKeys.CITIES_IN_COUNTRY_FMT), country.getName(), country.getPrettyCityNames()))
+            .withReprompt(getFromBundle(bundle, BundleKeys.DEFAULT_ASK_FOR_CITY))
             .withShouldEndSession(false)
             .build();
     }

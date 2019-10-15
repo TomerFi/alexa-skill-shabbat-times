@@ -7,11 +7,11 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsToday;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.CITY_GB;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.CITY_IL;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.CITY_US;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots.COUNTRY;
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getCandlesAndHavdalahItems;
 import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatCandlesItem;
@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -55,7 +56,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateExepion, NoResponseFromAPIException
     {
         final Map<String, Slot> slots = intent.getIntent().getSlots();
-        final City selectedCity = getByCityAndCountry(slots.get(COUNTRY.name), getCitySlot(slots));
+        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.name), getCitySlot(slots));
 
         final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
         attribs.put(Attributes.COUNTRY.name, selectedCity.getCountryAbbreviation());
@@ -84,29 +85,31 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         final ZonedDateTime shabbatEndDateTime = ZonedDateTime.parse(shabbatEndItem.getDate());
         final ZonedDateTime currentDateTime = intent.getTimestamp().toZonedDateTime();
 
-        String speechPart1 = "starts on friday.";
-        String speechPart2 = "and ends on saturday.";
+        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
+
+        String speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_FRIDAY);
+        String speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_SATURDAY);
 
         if (isShabbatNow(shabbatStartDateTime, currentDateTime, shabbatEndDateTime))
         {
             if (isShabbatStartsToday(shabbatStartDateTime, currentDateTime))
             {
-                speechPart1 = "starts today.";
-                speechPart2 = "and ends tomorrow.";
+                speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_TODAY);
+                speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_TOMORROW);
             }
             else if (isShabbatEndsToday(currentDateTime, shabbatEndDateTime))
             {
-                speechPart1 = "started yesterday.";
-                speechPart2 = "and ends today.";
+                speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_YESTERDAY);
+                speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_TODAY);
             }
         }
         else if (isShabbatStartsTommorow(shabbatStartDateTime, currentDateTime))
         {
-            speechPart1 = "starts tomorrow.";
+            speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_TOMORROW);
         }
 
         final String speechOutput = String.format(
-            "Shabbat times in %s: %s %s, at %s. %s %s, at %s.<break time='500ms'/>Would you like me to get the shabbat times in another city?",
+            getFromBundle(bundle, BundleKeys.SHABBAT_INFORMATION_FMT),
             response.getLocation().getCity(),
             speechPart1,
             shabbatStartDateTime.toLocalDate().toString(),
@@ -118,7 +121,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
         return input.getResponseBuilder()
             .withSpeech(speechOutput)
-            .withReprompt("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.")
+            .withReprompt(getFromBundle(bundle, BundleKeys.ASK_FOR_ANOTHER_REPROMPT))
             .withSimpleCard(String.format("Shabbat times: %s", selectedCity.getGeoName()), speechOutput)
             .withShouldEndSession(false)
             .build();
@@ -126,7 +129,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
     private Slot getCitySlot(final Map<String, Slot> slots) throws NoCitySlotException
     {
-        final List<String> cityKeys = Arrays.asList(CITY_IL.name, CITY_GB.name, CITY_US.name);
+        final List<String> cityKeys = Arrays.asList(Slots.CITY_IL.name, Slots.CITY_GB.name, Slots.CITY_US.name);
         final Optional<String> slotKey = slots.keySet()
             .stream()
             .filter(key -> cityKeys.contains(key))

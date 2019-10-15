@@ -1,8 +1,12 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -22,8 +26,9 @@ public final class FallbackIntentHandler implements IntentRequestHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
+        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech("I'm sorry. I am unable to help you at the moment. Please try again later!")
+            .withSpeech(getFromBundle(bundle, BundleKeys.DEFAULT_ERROR))
             .withShouldEndSession(true)
             .build();
     }

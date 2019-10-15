@@ -23,6 +23,7 @@ import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoJsonFileHandler
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoResponseFromAPIHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.UnknownCountryHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.interceptors.SetLocaleBundleResource;
 import info.tomfi.alexa.skills.shabbattimes.response.interceptors.PersistSessionAttributes;
 
 import org.reflections.Reflections;
@@ -55,6 +56,7 @@ public class ShabbatTimesStreamHandler extends SkillStreamHandler
         exceptionHandlers.add(new SdkExceptionHandler()); // keep last
 
         return Skills.standard()
+            .addRequestInterceptor(new SetLocaleBundleResource())
             .addResponseInterceptor(new PersistSessionAttributes())
             .addRequestHandlers(requestHandlers)
             .addExceptionHandlers(exceptionHandlers)
