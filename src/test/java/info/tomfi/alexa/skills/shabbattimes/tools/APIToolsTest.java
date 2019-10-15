@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
@@ -10,6 +12,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
@@ -78,6 +81,13 @@ public final class APIToolsTest
         final APIResponse response = mock(APIResponse.class);
         when(response.getItems()).thenReturn(Arrays.asList(havdalaShabbatItem, candlesShabbatItem, havdalaHolidayItem, candlesHolidayItem, holidayItem));
 
-        assertThat(APITools.getCandlesAndHavdalahItems(response)).containsExactly(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
+        assertThat(APITools.getCandlesAndHavdalahItems(response))
+            .containsExactly(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem)
+            .isSortedAccordingTo(
+                (prevItem, currentItem) ->
+                ZonedDateTime.parse(prevItem.getDate(), ISO_OFFSET_DATE_TIME).compareTo(
+                    ZonedDateTime.parse(currentItem.getDate(), ISO_OFFSET_DATE_TIME)
+                )
+            );
     }
 }
