@@ -1,14 +1,14 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+import static java.time.format.DateTimeFormatter.ISO_DATE;
+import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
 
-
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
@@ -26,8 +26,8 @@ public final class APITools
             .filter(item -> !item.getCategory().equals(HOLIDAY.value))
             .sorted(
                 (prevItem, currentItem) ->
-                ZonedDateTime.parse(prevItem.getDate(), DateTimeFormatter.ISO_DATE_TIME).compareTo(
-                    ZonedDateTime.parse(currentItem.getDate(), DateTimeFormatter.ISO_DATE_TIME)
+                ZonedDateTime.parse(prevItem.getDate(), ISO_DATE_TIME).compareTo(
+                    ZonedDateTime.parse(currentItem.getDate(), ISO_DATE_TIME)
                 )
             ).collect(toList());
     }
@@ -36,7 +36,7 @@ public final class APITools
     {
         return items.stream()
             .filter(item -> item.getCategory().equals(CANDLES.value))
-            .filter(item -> ZonedDateTime.parse(item.getDate(), DateTimeFormatter.ISO_DATE).toLocalDate().equals(shabbatDate))
+            .filter(item -> ZonedDateTime.parse(item.getDate(), ISO_DATE).toLocalDate().equals(shabbatDate))
             .findFirst()
             .get();
     }
