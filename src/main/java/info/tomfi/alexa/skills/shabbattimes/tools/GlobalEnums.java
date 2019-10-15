@@ -61,8 +61,6 @@ public final class GlobalEnums
     {
         CITY("city"),
         COUNTRY("country"),
-        GEOID("geoid"),
-        GEONAME("geoname"),
         LAST_INTENT("lastIntent");
 
         public final String name;
