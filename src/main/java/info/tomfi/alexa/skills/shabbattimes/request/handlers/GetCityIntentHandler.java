@@ -9,7 +9,6 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Slots;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -36,6 +35,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
+import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
@@ -56,7 +56,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateExepion, NoResponseFromAPIException
     {
         final Map<String, Slot> slots = intent.getIntent().getSlots();
-        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.name), getCitySlot(slots));
+        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlot(slots));
 
         final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
         attribs.put(Attributes.COUNTRY.name, selectedCity.getCountryAbbreviation());
@@ -129,7 +129,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
     private Slot getCitySlot(final Map<String, Slot> slots) throws NoCitySlotException
     {
-        final List<String> cityKeys = Arrays.asList(Slots.CITY_IL.name, Slots.CITY_GB.name, Slots.CITY_US.name);
+        final List<String> cityKeys = Arrays.asList(Slots.CITY_IL.getName(), Slots.CITY_GB.getName(), Slots.CITY_US.getName());
         final Optional<String> slotKey = slots.keySet()
             .stream()
             .filter(key -> cityKeys.contains(key))

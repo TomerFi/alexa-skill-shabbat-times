@@ -6,21 +6,6 @@ public final class GlobalEnums
     {
     }
 
-    public static enum Slots
-    {
-        CITY_GB("City_GB"),
-        CITY_IL("City_IL"),
-        CITY_US("City_US"),
-        COUNTRY("Country");
-
-        public final String name;
-
-        Slots(final String setName)
-        {
-            name = setName;
-        }
-    }
-
     public static enum Intents
     {
         CANCEL("AMAZON.CancelIntent"),
