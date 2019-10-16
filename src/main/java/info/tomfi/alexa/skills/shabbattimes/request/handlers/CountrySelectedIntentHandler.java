@@ -36,7 +36,7 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) throws NoCountrySlotException, NoJsonFileException
     {
         final Slot countrySlot = intent.getIntent().getSlots().get(Slots.COUNTRY.getName());
-        if (countrySlot == null)
+        if (countrySlot.getValue() == null)
         {
             throw new NoCountrySlotException("No country slot found.");
         }
