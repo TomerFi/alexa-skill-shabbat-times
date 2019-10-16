@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
-public final class CountryTest
+public final class CountryFactoryTest
 {
     @Test
     @DisplayName("test country object with a test json file represnting the cities")
@@ -23,7 +23,7 @@ public final class CountryTest
         when(mockedMember.getAbbreviation()).thenReturn("TST");
         when(mockedMember.getName()).thenReturn("test country");
 
-        final Country countryTest = new Country(mockedMember);
+        final Country countryTest = CountryFactory.getCountryByMember(mockedMember);
         CountryAssert.assertThat(countryTest)
             .abbreviationIs("TST")
             .nameIs("test country")
