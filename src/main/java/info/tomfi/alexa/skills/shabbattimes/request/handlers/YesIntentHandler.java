@@ -1,7 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -14,6 +13,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
+import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
 @IncludeRequestHandler
 public final class YesIntentHandler implements IntentRequestHandler
@@ -21,7 +21,7 @@ public final class YesIntentHandler implements IntentRequestHandler
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.YES.name);
+        return intent.getIntent().getName().equals(Intents.YES.getName());
     }
 
     @Override

@@ -2,7 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -16,6 +15,7 @@ import com.amazon.ask.model.Response;
 
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
+import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
 @IncludeRequestHandler
 public final class NoIntentHandler implements IntentRequestHandler
@@ -23,7 +23,7 @@ public final class NoIntentHandler implements IntentRequestHandler
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.NO.name);
+        return intent.getIntent().getName().equals(Intents.NO.getName());
     }
 
     @Override
@@ -33,7 +33,7 @@ public final class NoIntentHandler implements IntentRequestHandler
         String speechOutput = bundle.getString(BundleKeys.DEFAULT_OK.toString());
         try
         {
-            if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.name).equals(Intents.COUNTRY_SELECTED.name))
+            if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.name).equals(Intents.COUNTRY_SELECTED.getName()))
             {
                 final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.name);
                 String speechMiddle = "";

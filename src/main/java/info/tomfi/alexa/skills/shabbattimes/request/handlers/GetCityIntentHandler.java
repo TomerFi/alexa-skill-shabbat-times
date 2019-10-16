@@ -8,7 +8,6 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -35,6 +34,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
+import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
@@ -48,7 +48,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.GET_CITY.name);
+        return intent.getIntent().getName().equals(Intents.GET_CITY.getName());
     }
 
     @Override

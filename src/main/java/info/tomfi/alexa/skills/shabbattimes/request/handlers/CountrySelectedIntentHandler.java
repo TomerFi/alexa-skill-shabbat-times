@@ -2,7 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -19,6 +18,7 @@ import com.amazon.ask.model.Slot;
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
+import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
@@ -29,7 +29,7 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.COUNTRY_SELECTED.name);
+        return intent.getIntent().getName().equals(Intents.COUNTRY_SELECTED.getName());
     }
 
     @Override
