@@ -1,6 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.country;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
+import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
 public final class CountryFactoryTest
@@ -23,7 +25,7 @@ public final class CountryFactoryTest
         when(mockedMember.getAbbreviation()).thenReturn("TST");
         when(mockedMember.getName()).thenReturn("test country");
 
-        final Country countryTest = CountryFactory.getCountryByMember(mockedMember);
+        final Country countryTest = CountryFactory.getCountry(mockedMember);
         CountryAssert.assertThat(countryTest)
             .abbreviationIs("TST")
             .nameIs("test country")
@@ -43,5 +45,12 @@ public final class CountryFactoryTest
 
         assertThat(countryTest.iterator()).toIterable()
             .extractingResultOf("iterator", Iterator.class).allMatch(obj -> obj instanceof DynTypeIterator);
+    }
+
+    @Test
+    @DisplayName("test exception throwing when attempting to create an unknown country")
+    public void getCountry_unknownCountryName_throwsExceptions()
+    {
+        assertThatExceptionOfType(UnknownCountryException.class).isThrownBy(() -> CountryFactory.getCountry("fake country"));
     }
 }

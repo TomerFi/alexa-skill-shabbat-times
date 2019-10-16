@@ -22,13 +22,13 @@ public final class CountryFactory
         {
             if (current.getUtterances().contains(lowerCountry))
             {
-                return getCountryByMember(current);
+                return getCountry(current);
             }
         }
         throw new UnknownCountryException(String.join(" ", "unknown country name", countryName));
     }
 
-    public static Country getCountryByMember(final CountryInfo member)
+    public static Country getCountry(final CountryInfo member) throws NoJsonFileException
     {
         return countryPool.computeIfAbsent(member, newMember -> new Country(newMember));
     }

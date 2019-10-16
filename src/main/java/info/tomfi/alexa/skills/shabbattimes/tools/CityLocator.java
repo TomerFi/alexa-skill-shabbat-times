@@ -37,7 +37,7 @@ public final class CityLocator
     {
         for (CountryInfo member : CountryInfo.values())
         {
-            final Country country = CountryFactory.getCountryByMember(member);
+            final Country country = CountryFactory.getCountry(member);
             final Optional<City> cityOpt = findCityInCountry(country, citySlot.getValue());
             if (cityOpt.isPresent())
             {
