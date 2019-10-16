@@ -20,7 +20,7 @@ public final class ResponseLocationTest
         ResponseLocation location;
         try (
             BufferedReader breader = Files.newBufferedReader(
-                Paths.get(ResponseLocationTest.class.getClassLoader().getResource("response_location.json").toURI())
+                Paths.get(ResponseLocationTest.class.getClassLoader().getResource("api-responses/response_location.json").toURI())
             )
         )
         {

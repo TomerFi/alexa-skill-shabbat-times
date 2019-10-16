@@ -20,7 +20,7 @@ public final class APIResponseTest {
         try
         (
             BufferedReader breader = Files.newBufferedReader(
-                Paths.get(APIResponse.class.getClassLoader().getResource("response_minimal.json").toURI())
+                Paths.get(APIResponse.class.getClassLoader().getResource("api-responses/response_minimal.json").toURI())
             )
         )
         {

@@ -12,7 +12,7 @@ import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 
 public final class SetLocaleBundleResource implements GenericRequestInterceptor<HandlerInput>
 {
-    private static final String L10N_BASE_NAME = "Responses";
+    private static final String L10N_BASE_NAME = "locales/Responses";
 
     @Override
     public void process(final HandlerInput input)

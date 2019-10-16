@@ -22,7 +22,7 @@ public final class LocalizationUtilsTest
     @BeforeAll
     public static void initialize()
     {
-        bundle = ResourceBundle.getBundle("TestResponses");
+        bundle = ResourceBundle.getBundle("locales/TestResponses");
     }
 
     @Test

@@ -30,7 +30,7 @@ public final class Country implements Iterable<City>
     {
         abbreviation = country.abbreviation;
         name = country.name;
-        citiesList = cityListFromJsonFile(String.format("%s_Cities.json", country.abbreviation));
+        citiesList = cityListFromJsonFile(String.format("cities/%s_Cities.json", country.abbreviation));
     }
 
     public String getAbbreviation()

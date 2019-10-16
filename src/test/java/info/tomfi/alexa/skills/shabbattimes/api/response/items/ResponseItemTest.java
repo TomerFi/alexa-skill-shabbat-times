@@ -32,7 +32,7 @@ public final class ResponseItemTest
         ResponseItem item;
         try (
             BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("response_item_mandatory.json").toURI())
+                Paths.get(loader.getResource("api-responses/response_item_mandatory.json").toURI())
             )
         )
         {
@@ -56,7 +56,7 @@ public final class ResponseItemTest
         ResponseItem item;
         try (
             BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("response_item_optional.json").toURI())
+                Paths.get(loader.getResource("api-responses/response_item_optional.json").toURI())
             )
         )
         {
@@ -80,7 +80,7 @@ public final class ResponseItemTest
         ResponseItem item;
         try (
             BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("response_item_full.json").toURI())
+                Paths.get(loader.getResource("api-responses/response_item_full.json").toURI())
             )
         )
         {

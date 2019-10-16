@@ -72,7 +72,7 @@ public final class APIRequestMakerTest {
         String responesText;
         try
         (
-            Stream<String> lines = Files.lines(Paths.get(APIRequestMakerTest.class.getClassLoader().getResource("response_full.json").toURI()))
+            Stream<String> lines = Files.lines(Paths.get(APIRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI()))
         )
         {
             responesText = lines.collect(joining(System.lineSeparator()));
