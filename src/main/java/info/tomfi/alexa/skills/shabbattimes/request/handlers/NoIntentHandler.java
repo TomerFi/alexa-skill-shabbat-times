@@ -2,7 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.CountryInfo;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Intents;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
@@ -16,6 +15,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
+import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 
 @IncludeRequestHandler
 public final class NoIntentHandler implements IntentRequestHandler
@@ -37,15 +37,15 @@ public final class NoIntentHandler implements IntentRequestHandler
             {
                 final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.name);
                 String speechMiddle = "";
-                if (attribValue.equals(CountryInfo.UNITED_STATES.abbreviation))
+                if (attribValue.equals(CountryInfo.UNITED_STATES.getAbbreviation()))
                 {
                     speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_US);
                 }
-                else if (attribValue.equals(CountryInfo.ISRAEL.abbreviation))
+                else if (attribValue.equals(CountryInfo.ISRAEL.getAbbreviation()))
                 {
                     speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_ISRAEL);
                 }
-                else if (attribValue.equals(CountryInfo.UNITED_KINGDOM.abbreviation))
+                else if (attribValue.equals(CountryInfo.UNITED_KINGDOM.getAbbreviation()))
                 {
                     speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_UK);
                 }

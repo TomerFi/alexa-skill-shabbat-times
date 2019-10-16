@@ -8,9 +8,9 @@ import com.amazon.ask.model.Slot;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
+import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
-import info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.CountryInfo;
 
 public final class CityLocator
 {

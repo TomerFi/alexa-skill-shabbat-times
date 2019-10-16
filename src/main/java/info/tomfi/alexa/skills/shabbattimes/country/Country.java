@@ -1,7 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.country;
 
 import static java.util.stream.Collectors.joining;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.CountryInfo;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import info.tomfi.alexa.skills.shabbattimes.city.City;
+import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
@@ -28,9 +28,9 @@ public final class Country implements Iterable<City>
 
     protected Country(final CountryInfo country) throws NoJsonFileException
     {
-        abbreviation = country.abbreviation;
-        name = country.name;
-        citiesList = cityListFromJsonFile(String.format("cities/%s_Cities.json", country.abbreviation));
+        abbreviation = country.getAbbreviation();
+        name = country.getName();
+        citiesList = cityListFromJsonFile(String.format("cities/%s_Cities.json", abbreviation));
     }
 
     public String getAbbreviation()
@@ -53,7 +53,7 @@ public final class Country implements Iterable<City>
         return citiesList.stream().map(cityObj -> cityObj.getCityName()).collect(joining(", "));
     }
 
-    public List<City> cityListFromJsonFile(final String jsonFileName) throws NoJsonFileException
+    private List<City> cityListFromJsonFile(final String jsonFileName) throws NoJsonFileException
     {
         try (
             BufferedReader breader = Files.newBufferedReader(

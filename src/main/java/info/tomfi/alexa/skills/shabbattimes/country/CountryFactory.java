@@ -1,12 +1,11 @@
 package info.tomfi.alexa.skills.shabbattimes.country;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.CountryInfo;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
