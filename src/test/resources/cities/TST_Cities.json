@@ -1,0 +1,16 @@
+[
+    {
+        "cityName": "testCity1",
+        "geoName": "TST-testCity1",
+        "geoId" : "1234567",
+        "countryAbbreviation": "TST",
+        "aliases": ["city1", "firstcity"]
+    },
+    {
+        "cityName": "testCity2",
+        "geoName": "TST-testCity2",
+        "geoId" : "7654321",
+        "countryAbbreviation": "TST",
+        "aliases": ["city2", "secondcity"]
+    }
+]
