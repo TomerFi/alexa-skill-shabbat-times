@@ -41,22 +41,6 @@ public final class GlobalEnums
         }
     }
 
-    public static enum CountryInfo
-    {
-        ISRAEL("IL", "Israel"),
-        UNITED_STATES("US", "the United States"),
-        UNITED_KINGDOM("GB", "the United Kingdom");
-
-        public final String abbreviation;
-        public final String name;
-
-        CountryInfo(final String setAbbreviation, final String setName)
-        {
-            abbreviation = setAbbreviation;
-            name = setName;
-        }
-    }
-
     public static enum Attributes
     {
         CITY("city"),
