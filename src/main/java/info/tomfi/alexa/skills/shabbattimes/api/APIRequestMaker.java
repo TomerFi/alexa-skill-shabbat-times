@@ -19,17 +19,16 @@ import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
 public final class APIRequestMaker
 {
-    private static String BASE_URL = "https://www.hebcal.com/shabbat/";
     private static String DEFAULT_HAVDALAH = "50";
     private static String DEFAULT_CANDLE_LIGHTING = "18";
 
     private final HttpTransport transport;
-    private final String selectedUrl;
+    private final String baseUrl;
     private Map<String, String> queryParams;
 
-    public APIRequestMaker(String... args)
+    public APIRequestMaker(final String setBaseUrl)
     {
-        selectedUrl = args.length > 0 ? args[0] : BASE_URL;
+        baseUrl = setBaseUrl;
         transport = new NetHttpTransport();
 
         queryParams = new ConcurrentHashMap<>();
@@ -90,7 +89,7 @@ public final class APIRequestMaker
             throw new IllegalStateException("we need the requested city geo id for build the request.");
         }
         final HttpRequestFactory requestFactory = transport.createRequestFactory(new APIRequestInitializer());
-        final GenericUrl url = new GenericUrl(selectedUrl);
+        final GenericUrl url = new GenericUrl(baseUrl);
         url.putAll(queryParams);
         final HttpRequest request = requestFactory.buildGetRequest(url);
         return request.execute().parseAs(APIResponse.class);

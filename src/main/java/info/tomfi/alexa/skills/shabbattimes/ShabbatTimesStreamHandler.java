@@ -25,8 +25,10 @@ import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandl
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.UnknownCountryHandler;
 import info.tomfi.alexa.skills.shabbattimes.request.interceptors.SetLocaleBundleResource;
 import info.tomfi.alexa.skills.shabbattimes.response.interceptors.PersistSessionAttributes;
+import info.tomfi.alexa.skills.shabbattimes.tools.DIConfiguration;
 
 import org.reflections.Reflections;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ShabbatTimesStreamHandler extends SkillStreamHandler
 {
@@ -39,10 +41,20 @@ public class ShabbatTimesStreamHandler extends SkillStreamHandler
         final Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(IncludeRequestHandler.class);
 
         final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers = new ArrayList<>();
-        for (Class<?> clazz : annotated)
+        try
+        (
+            AnnotationConfigApplicationContext context =
+                new AnnotationConfigApplicationContext(DIConfiguration.class)
+        )
         {
-            requestHandlers.add((GenericRequestHandler<HandlerInput, Optional<Response>>) clazz.newInstance());
+            for (Class<?> clazz : annotated)
+            {
+                requestHandlers.add(
+                    (GenericRequestHandler<HandlerInput, Optional<Response>>) context.getBean(clazz)
+                );
+            }
         }
+
 
         final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers = new ArrayList<>();
         exceptionHandlers.add(new NoCountrySlotHandler());

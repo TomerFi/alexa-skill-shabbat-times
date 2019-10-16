@@ -27,6 +27,9 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
@@ -43,8 +46,17 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
 
 @IncludeRequestHandler
+@Component
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
+    private final APIRequestMaker maker;
+
+    @Autowired
+    public GetCityIntentHandler(final APIRequestMaker setMaker)
+    {
+        maker = setMaker;
+    }
+
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
@@ -67,7 +79,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         final APIResponse response;
         try
         {
-            response = new APIRequestMaker().setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
+            response = maker.setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
         } catch (IllegalStateException | IOException exc)
         {
             throw new NoResponseFromAPIException("no response from hebcal's shabbat api");
