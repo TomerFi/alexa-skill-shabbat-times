@@ -1,6 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.DEFAULT_OK;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -29,7 +29,7 @@ public final class CancelIntentHandler implements IntentRequestHandler
     {
         final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(bundle, BundleKeys.DEFAULT_OK))
+            .withSpeech(getFromBundle(bundle, DEFAULT_OK))
             .withShouldEndSession(true)
             .build();
     }

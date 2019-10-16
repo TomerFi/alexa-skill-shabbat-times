@@ -1,10 +1,11 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 
 import java.util.Map;
 import java.util.ResourceBundle;
+
+import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
 public final class LocalizationUtils
 {

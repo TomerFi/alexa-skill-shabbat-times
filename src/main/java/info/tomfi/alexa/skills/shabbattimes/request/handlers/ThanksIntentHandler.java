@@ -1,6 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.THANKS_AND_BYE;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -29,7 +29,7 @@ public final class ThanksIntentHandler implements IntentRequestHandler
     {
         final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(bundle, BundleKeys.THANKS_AND_BYE))
+            .withSpeech(getFromBundle(bundle, THANKS_AND_BYE))
             .withShouldEndSession(true)
             .build();
     }

@@ -1,6 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.DEFAULT_ERROR;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
@@ -28,7 +28,7 @@ public final class FallbackIntentHandler implements IntentRequestHandler
     {
         final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(bundle, BundleKeys.DEFAULT_ERROR))
+            .withSpeech(getFromBundle(bundle, DEFAULT_ERROR))
             .withShouldEndSession(true)
             .build();
     }

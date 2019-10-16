@@ -3,7 +3,7 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys.DEFAULT_OK;
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.DEFAULT_OK;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 

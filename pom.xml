@@ -85,7 +85,7 @@
     <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.coverage.minimum>30%</jacoco.coverage.minimum>
+    <jacoco.coverage.minimum>45%</jacoco.coverage.minimum>
   </properties>
 
   <name>Shabbat Times</name>
@@ -165,11 +165,6 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <version>0.8.4</version>
-        <configuration>
-          <excludes>
-            <exclude>info/tomfi/mancala/exception/*</exclude>
-          </excludes>
-        </configuration>
         <executions>
           <execution>
             <id>prepare-jacoco-agent</id>
