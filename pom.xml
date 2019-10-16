@@ -85,7 +85,7 @@
     <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.coverage.minimum>45%</jacoco.coverage.minimum>
+    <jacoco.coverage.minimum>50%</jacoco.coverage.minimum>
   </properties>
 
   <name>Shabbat Times</name>
