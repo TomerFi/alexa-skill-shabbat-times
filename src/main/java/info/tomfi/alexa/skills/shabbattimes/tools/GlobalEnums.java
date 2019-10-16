@@ -6,21 +6,6 @@ public final class GlobalEnums
     {
     }
 
-    public static enum Attributes
-    {
-        CITY("city"),
-        COUNTRY("country"),
-        L10N_BUNDLE("l10nBunble"),
-        LAST_INTENT("lastIntent");
-
-        public final String name;
-
-        Attributes(final String setName)
-        {
-            name = setName;
-        }
-    }
-
     public static enum BundleKeys
     {
         ASK_FOR_ANOTHER_REPROMPT,

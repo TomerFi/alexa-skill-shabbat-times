@@ -2,7 +2,7 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes.L10N_BUNDLE;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys.DEFAULT_OK;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
@@ -30,7 +30,7 @@ public final class LocalizationUtilsTest
     public void getBundleFromAttribures_fakeAttributes_getBundle()
     {
         final Map<String, Object> attributes = new HashMap<>();
-        attributes.put(L10N_BUNDLE.name, bundle);
+        attributes.put(L10N_BUNDLE.getName(), bundle);
         assertThat(getBundleFromAttribures(attributes).hashCode()).isEqualTo(bundle.hashCode());
     }
 

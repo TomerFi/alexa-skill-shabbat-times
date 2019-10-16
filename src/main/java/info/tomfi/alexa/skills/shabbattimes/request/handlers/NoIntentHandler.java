@@ -1,6 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
@@ -14,6 +13,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
 import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
+import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
@@ -33,9 +33,9 @@ public final class NoIntentHandler implements IntentRequestHandler
         String speechOutput = bundle.getString(BundleKeys.DEFAULT_OK.toString());
         try
         {
-            if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.name).equals(Intents.COUNTRY_SELECTED.getName()))
+            if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName()))
             {
-                final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.name);
+                final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.getName());
                 String speechMiddle = "";
                 if (attribValue.equals(CountryInfo.UNITED_STATES.getAbbreviation()))
                 {

@@ -1,6 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.interceptors;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes.L10N_BUNDLE;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 
 import java.util.Locale;
 import java.util.Map;
@@ -27,7 +27,7 @@ public final class SetLocaleBundleResource implements GenericRequestInterceptor<
         }
 
         final Map<String, Object> attribs = input.getAttributesManager().getRequestAttributes();
-        attribs.put(L10N_BUNDLE.name, bundle);
+        attribs.put(L10N_BUNDLE.getName(), bundle);
         input.getAttributesManager().setRequestAttributes(attribs);
     }
 }

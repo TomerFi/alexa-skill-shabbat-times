@@ -6,7 +6,6 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatNow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsToday;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
 import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.BundleKeys;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
@@ -34,6 +33,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
+import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
@@ -59,8 +59,8 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlot(slots));
 
         final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
-        attribs.put(Attributes.COUNTRY.name, selectedCity.getCountryAbbreviation());
-        attribs.put(Attributes.CITY.name, selectedCity.getCityName());
+        attribs.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
+        attribs.put(Attributes.CITY.getName(), selectedCity.getCityName());
         input.getAttributesManager().setSessionAttributes(attribs);
 
         final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());

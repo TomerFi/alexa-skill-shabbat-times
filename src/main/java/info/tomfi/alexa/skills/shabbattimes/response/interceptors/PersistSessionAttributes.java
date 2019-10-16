@@ -1,6 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.response.interceptors;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.GlobalEnums.Attributes;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.LAST_INTENT;
+
 import static com.amazon.ask.request.Predicates.requestType;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -18,7 +19,7 @@ public final class PersistSessionAttributes implements ResponseInterceptor
         if (input.matches(requestType(IntentRequest.class)) && !response.get().getShouldEndSession())
         {
             final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
-            attribs.put(Attributes.LAST_INTENT.name, ((IntentRequest) input.getRequest()).getIntent().getName());
+            attribs.put(LAST_INTENT.getName(), ((IntentRequest) input.getRequest()).getIntent().getName());
             input.getAttributesManager().setSessionAttributes(attribs);
         }
     }
