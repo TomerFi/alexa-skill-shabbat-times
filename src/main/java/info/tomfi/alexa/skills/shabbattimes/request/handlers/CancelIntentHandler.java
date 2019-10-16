@@ -12,10 +12,8 @@ import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
-import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
-@IncludeRequestHandler
 public final class CancelIntentHandler implements IntentRequestHandler
 {
     @Override

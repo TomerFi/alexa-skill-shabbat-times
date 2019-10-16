@@ -13,7 +13,6 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
-import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
@@ -23,7 +22,6 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 
-@IncludeRequestHandler
 public final class CountrySelectedIntentHandler implements IntentRequestHandler
 {
     @Override

@@ -7,9 +7,6 @@ import com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 
-import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
-
-@IncludeRequestHandler
 public final class SessionEndHandler implements SessionEndedRequestHandler
 {
     @Override

@@ -3,7 +3,6 @@ package info.tomfi.alexa.skills.shabbattimes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
@@ -13,7 +12,6 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.SkillStreamHandler;
 
-import info.tomfi.alexa.skills.shabbattimes.annotation.IncludeRequestHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityFoundHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityInCountryHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCitySlotHandler;
@@ -23,23 +21,27 @@ import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoJsonFileHandler
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoResponseFromAPIHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandler;
 import info.tomfi.alexa.skills.shabbattimes.exception.handlers.UnknownCountryHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.CancelIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.CountrySelectedIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.FallbackIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.GetCityIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.HelpIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.NoIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.SessionEndHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.SessionStartHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.StopIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.ThanksIntentHandler;
+import info.tomfi.alexa.skills.shabbattimes.request.handlers.YesIntentHandler;
 import info.tomfi.alexa.skills.shabbattimes.request.interceptors.SetLocaleBundleResource;
 import info.tomfi.alexa.skills.shabbattimes.response.interceptors.PersistSessionAttributes;
 import info.tomfi.alexa.skills.shabbattimes.tools.DIConfiguration;
 
-import org.reflections.Reflections;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class ShabbatTimesStreamHandler extends SkillStreamHandler
 {
-    private static final String HANDLERS_PACKAGE_NAME = "info.tomfi.alexa.skills.shabbattimes.request.handlers";
-
-    @SuppressWarnings("unchecked")
     private static Skill getSkill() throws IllegalAccessException, InstantiationException
     {
-        final Reflections reflections = new Reflections(HANDLERS_PACKAGE_NAME);
-        final Set<Class<?>> annotated = reflections.getTypesAnnotatedWith(IncludeRequestHandler.class);
-
         final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers = new ArrayList<>();
         try
         (
@@ -47,13 +49,18 @@ public class ShabbatTimesStreamHandler extends SkillStreamHandler
                 new AnnotationConfigApplicationContext(DIConfiguration.class)
         )
         {
-            for (Class<?> clazz : annotated)
-            {
-                requestHandlers.add(
-                    (GenericRequestHandler<HandlerInput, Optional<Response>>) context.getBean(clazz)
-                );
-            }
+            requestHandlers.add(context.getBean(GetCityIntentHandler.class));
         }
+        requestHandlers.add(new CancelIntentHandler());
+        requestHandlers.add(new CountrySelectedIntentHandler());
+        requestHandlers.add(new FallbackIntentHandler());
+        requestHandlers.add(new HelpIntentHandler());
+        requestHandlers.add(new NoIntentHandler());
+        requestHandlers.add(new SessionEndHandler());
+        requestHandlers.add(new SessionStartHandler());
+        requestHandlers.add(new StopIntentHandler());
+        requestHandlers.add(new ThanksIntentHandler());
+        requestHandlers.add(new YesIntentHandler());
 
 
         final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers = new ArrayList<>();
