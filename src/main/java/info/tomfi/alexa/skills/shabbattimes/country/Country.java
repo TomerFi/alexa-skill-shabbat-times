@@ -64,7 +64,7 @@ public final class Country implements Iterable<City>
             final Gson gson = new GsonBuilder().create();
             City[] cityArray = gson.fromJson(breader, City[].class);
             return Arrays.asList(cityArray);
-        } catch (IOException | URISyntaxException exc)
+        } catch (IOException | NullPointerException | URISyntaxException exc)
         {
             throw new NoJsonFileException("No json file found", exc);
         }

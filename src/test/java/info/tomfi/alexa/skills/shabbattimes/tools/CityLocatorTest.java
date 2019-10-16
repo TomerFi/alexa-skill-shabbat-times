@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -10,9 +12,32 @@ import org.junit.jupiter.api.Test;
 
 import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.city.CityAssert;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 
 public final class CityLocatorTest
 {
+    @Test
+    @DisplayName("test exception thrown when trying to locate a non-existing city with a correct country")
+    public void getByCityAndCountry_getUnknownCityWithCountry_throwsExcption()
+    {
+        final Slot countrySlot = mock(Slot.class);
+        when(countrySlot.getValue()).thenReturn("israel");
+        final Slot citySlot = mock(Slot.class);
+        when(citySlot.getValue()).thenReturn("unknown city");
+        assertThatExceptionOfType(NoCityInCountryException.class).isThrownBy(() -> CityLocator.getByCityAndCountry(countrySlot, citySlot));
+    }
+
+    @Test
+    @DisplayName("test exception thrown when trying to locate a non-existing city with a correct country")
+    public void getByCityAndCountry_getUnknownCityWithoutCountry_throwsExcption()
+    {
+        final Slot countrySlot = mock(Slot.class);
+        final Slot citySlot = mock(Slot.class);
+        when(citySlot.getValue()).thenReturn("unknown city");
+        assertThatExceptionOfType(NoCityFoundException.class).isThrownBy(() -> CityLocator.getByCityAndCountry(countrySlot, citySlot));
+    }
+
     @Test
     @DisplayName("test the retrieval of a city in israel with selecting israel as the country")
     public void getByCityAndCountry_getIsraelCityWithCountry_validateReturn()

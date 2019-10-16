@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
@@ -52,5 +53,16 @@ public final class CountryFactoryTest
     public void getCountry_unknownCountryName_throwsExceptions()
     {
         assertThatExceptionOfType(UnknownCountryException.class).isThrownBy(() -> CountryFactory.getCountry("fake country"));
+    }
+
+    @Test
+    @DisplayName("test exception thrown when no country json found")
+    public void getCountry_noJsonFile_throwsExcetption()
+    {
+        final CountryInfo mockedMember = mock(CountryInfo.class);
+        when(mockedMember.getAbbreviation()).thenReturn("NonExisting");
+        when(mockedMember.getName()).thenReturn("someValue");
+
+        assertThatExceptionOfType(NoJsonFileException.class).isThrownBy(() -> CountryFactory.getCountry(mockedMember));
     }
 }
