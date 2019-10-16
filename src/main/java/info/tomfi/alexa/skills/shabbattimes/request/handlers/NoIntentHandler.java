@@ -3,6 +3,7 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -33,21 +34,18 @@ public final class NoIntentHandler implements IntentRequestHandler
         String speechOutput = bundle.getString(BundleKeys.DEFAULT_OK.toString());
         try
         {
-            if (input.getAttributesManager().getPersistentAttributes().get(Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName()))
+            final Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
+            if (sessionAttributes.get(Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName()))
             {
-                final String attribValue = (String) input.getAttributesManager().getSessionAttributes().get(Attributes.COUNTRY.getName());
+                final String attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
                 String speechMiddle = "";
-                if (attribValue.equals(CountryInfo.UNITED_STATES.getAbbreviation()))
+                for (CountryInfo current : CountryInfo.values())
                 {
-                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_US);
-                }
-                else if (attribValue.equals(CountryInfo.ISRAEL.getAbbreviation()))
-                {
-                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_ISRAEL);
-                }
-                else if (attribValue.equals(CountryInfo.UNITED_KINGDOM.getAbbreviation()))
-                {
-                    speechMiddle = getFromBundle(bundle, BundleKeys.NOT_FOUND_IN_UK);
+                    if (attribValue.equals(current.getAbbreviation()))
+                    {
+                        speechMiddle = getFromBundle(bundle, current.getBundleKey());
+                        break;
+                    }
                 }
                 speechOutput = String.format(getFromBundle(bundle, BundleKeys.NOT_FOUND_FMT), speechMiddle);
             }
