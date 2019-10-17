@@ -8,12 +8,16 @@ import static org.mockito.Mockito.when;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.Arrays;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -24,9 +28,9 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
+import com.google.gson.GsonBuilder;
 
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -36,7 +40,6 @@ import org.springframework.context.annotation.Configuration;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 
@@ -54,20 +57,22 @@ public class GetCityIntentHandlerTest {
     private static GetCityIntentHandler handlerInTest;
 
     @Bean
-    public APIRequestMaker getAPIRequestMaker() throws IllegalStateException, IOException
+    public APIRequestMaker getAPIRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
-        final List<ResponseItem> listItems = Arrays.asList(
-            mock(ResponseItem.class),
-            mock(ResponseItem.class)
-        );
-
-        final APIResponse mockedResponse = mock(APIResponse.class);
-        when(mockedResponse.getItems()).thenReturn(listItems);
+        APIResponse fakeResponse;
+        try (
+            BufferedReader breader = Files.newBufferedReader(
+                Paths.get(GetCityIntentHandler.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
+            )
+        )
+        {
+            fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
+        }
 
         final APIRequestMaker mockedMaker = mock(APIRequestMaker.class);
         when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
         when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-        when(mockedMaker.send()).thenReturn(mockedResponse);
+        when(mockedMaker.send()).thenReturn(fakeResponse);
         return mockedMaker;
     }
 
@@ -81,7 +86,9 @@ public class GetCityIntentHandlerTest {
             .putSlotsItem(Slots.COUNTRY.getName(), fakeCountrySlot)
             .putSlotsItem(Slots.CITY_IL.getName(), fakeCitySlot)
             .build();
-        fakeRequest = IntentRequest.builder().withIntent(fakeIntent).withTimestamp(OffsetDateTime.now()).build();
+
+        final OffsetDateTime fakeDateTime = LocalDate.parse("2019-10-01", DateTimeFormatter.ISO_LOCAL_DATE).atStartOfDay().atOffset(ZoneOffset.ofHours(3));
+        fakeRequest = IntentRequest.builder().withIntent(fakeIntent).withTimestamp(fakeDateTime).build();
         fakeSession = Session.builder().build();
         fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).withSession(fakeSession).build();
         fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
@@ -111,7 +118,6 @@ public class GetCityIntentHandlerTest {
 
     @Test
     @DisplayName("test handle method implementation")
-    @Disabled
     public void handle_fakeArgs_validateResponse()
     {
         assertThat(handlerInTest.handle(fakeInput, fakeRequest).isPresent()).isTrue();
