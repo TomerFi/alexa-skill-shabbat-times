@@ -7,6 +7,9 @@ import com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public final class SessionEndHandler implements SessionEndedRequestHandler
 {
     @Override

@@ -13,6 +13,8 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
@@ -22,6 +24,7 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 
+@Component
 public final class CountrySelectedIntentHandler implements IntentRequestHandler
 {
     @Override

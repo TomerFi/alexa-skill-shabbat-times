@@ -11,8 +11,11 @@ import com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
+@Component
 public class SessionStartHandler implements LaunchRequestHandler {
 
     @Override

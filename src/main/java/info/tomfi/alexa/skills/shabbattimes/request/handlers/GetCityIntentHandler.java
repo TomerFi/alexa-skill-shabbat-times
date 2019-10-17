@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getCandlesAndHavdalahItems;
+import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatCandlesItem;
 import static info.tomfi.alexa.skills.shabbattimes.tools.CityLocator.getByCityAndCountry;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.getShabbatStartLocalDate;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatEndsToday;
@@ -8,9 +10,6 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
-
-import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getCandlesAndHavdalahItems;
-import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatCandlesItem;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,7 +26,6 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
@@ -43,17 +41,13 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
+import lombok.RequiredArgsConstructor;
 
 @Component
+@RequiredArgsConstructor
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
-    private final APIRequestMaker maker;
-
-    @Autowired
-    public GetCityIntentHandler(final APIRequestMaker setMaker)
-    {
-        maker = setMaker;
-    }
+    private final APIRequestMaker requestMaker;
 
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
@@ -77,7 +71,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         final APIResponse response;
         try
         {
-            response = maker.setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
+            response = requestMaker.setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
         } catch (IllegalStateException | IOException exc)
         {
             throw new NoResponseFromAPIException("no response from hebcal's shabbat api");

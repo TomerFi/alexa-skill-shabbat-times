@@ -28,7 +28,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 public class DITestingConfiguration
 {
     @Bean
-    public APIRequestMaker getAPIRequestMaker() throws IllegalStateException, IOException, URISyntaxException
+    public APIRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
         APIResponse fakeResponse;
         try (

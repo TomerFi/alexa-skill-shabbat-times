@@ -11,9 +11,12 @@ import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
+@Component
 public final class YesIntentHandler implements IntentRequestHandler
 {
     @Override

@@ -49,17 +49,6 @@ public class DIConfiguration implements ApplicationContextAware
 {
     private ApplicationContext context;
 
-    public void setApplicationContext(ApplicationContext setContext)
-    {
-        context = setContext;
-    }
-
-    @Bean
-    public APIRequestMaker getAPIRequestMaker()
-    {
-        return new APIRequestMaker("https://www.hebcal.com/shabbat/");
-    }
-
     @Bean
     public List<GenericRequestHandler<HandlerInput, Optional<Response>>> getRequestHandlers()
     {
@@ -104,5 +93,16 @@ public class DIConfiguration implements ApplicationContextAware
     public List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> getResponseInterceptors()
     {
         return Arrays.asList(new PersistSessionAttributes());
+    }
+
+    @Bean
+    public APIRequestMaker getRequestMaker()
+    {
+        return new APIRequestMaker("https://www.hebcal.com/shabbat/");
+    }
+
+    public void setApplicationContext(final ApplicationContext setContext)
+    {
+        context = setContext;
     }
 }

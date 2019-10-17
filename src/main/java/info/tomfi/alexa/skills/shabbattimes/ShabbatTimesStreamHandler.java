@@ -1,9 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes;
 
 import com.amazon.ask.SkillStreamHandler;
-
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
 import info.tomfi.alexa.skills.shabbattimes.tools.DIConfiguration;
 
 public class ShabbatTimesStreamHandler extends SkillStreamHandler
