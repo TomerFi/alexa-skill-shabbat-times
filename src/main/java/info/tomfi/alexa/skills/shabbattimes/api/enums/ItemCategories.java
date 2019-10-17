@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ItemCategories
 {
     CANDLES("candles"),
@@ -7,10 +11,10 @@ public enum ItemCategories
     HOLIDAY("holiday"),
     PARASHAT("parashat");
 
-    public final String value;
+    private final String value;
 
-    ItemCategories(final String setValue)
+    public String getValue()
     {
-        value = setValue;
+        return value;
     }
 }

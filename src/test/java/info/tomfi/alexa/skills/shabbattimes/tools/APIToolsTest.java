@@ -1,14 +1,11 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
-
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
-
+import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 import static org.assertj.core.api.Assertions.assertThat;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -36,23 +33,23 @@ public final class APIToolsTest
     public static void initialize()
     {
         holidayItem = mock(ResponseItem.class);
-        when(holidayItem.getCategory()).thenReturn(HOLIDAY.value);
+        when(holidayItem.getCategory()).thenReturn(HOLIDAY.getValue());
         when(holidayItem.getDate()).thenReturn("2019-10-13");
 
         candlesHolidayItem = mock(ResponseItem.class);
-        when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.value);
+        when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.getValue());
         when(candlesHolidayItem.getDate()).thenReturn("2019-10-13T17:53:00+03:00");
 
         havdalaHolidayItem = mock(ResponseItem.class);
-        when(havdalaHolidayItem.getCategory()).thenReturn(HAVDALAH.value);
+        when(havdalaHolidayItem.getCategory()).thenReturn(HAVDALAH.getValue());
         when(havdalaHolidayItem.getDate()).thenReturn("2019-10-14T19:00:00+03:00");
 
         candlesShabbatItem = mock(ResponseItem.class);
-        when(candlesShabbatItem.getCategory()).thenReturn(CANDLES.value);
+        when(candlesShabbatItem.getCategory()).thenReturn(CANDLES.getValue());
         when(candlesShabbatItem.getDate()).thenReturn("2019-10-18T17:47:00+03:00");
 
         havdalaShabbatItem = mock(ResponseItem.class);
-        when(havdalaShabbatItem.getCategory()).thenReturn(HAVDALAH.value);
+        when(havdalaShabbatItem.getCategory()).thenReturn(HAVDALAH.getValue());
         when(havdalaShabbatItem.getDate()).thenReturn("2019-10-19T18:54:00+03:00");
     }
 

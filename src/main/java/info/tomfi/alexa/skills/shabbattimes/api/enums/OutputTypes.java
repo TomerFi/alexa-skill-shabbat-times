@@ -1,14 +1,18 @@
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum OutputTypes
 {
     JSON("json"),
     RSS("r");
 
-    public final String type;
+    private final String type;
 
-    OutputTypes(final String setType)
+    public String getType()
     {
-        type = setType;
+        return type;
     }
 }

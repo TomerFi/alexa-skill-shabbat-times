@@ -1,14 +1,18 @@
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum FlagStates
 {
     OFF("off"),
     ON("on");
 
-    public final String state;
+    private final String state;
 
-    FlagStates(final String setState)
+    public String getState()
     {
-        state = setState;
+        return state;
     }
 }

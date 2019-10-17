@@ -24,7 +24,7 @@ public final class APITools
     public static List<ResponseItem> getCandlesAndHavdalahItems(final APIResponse response)
     {
         return response.getItems().stream()
-            .filter(item -> Arrays.asList(CANDLES.value, HAVDALAH.value).contains(item.getCategory()))
+            .filter(item -> Arrays.asList(CANDLES.getValue(), HAVDALAH.getValue()).contains(item.getCategory()))
             .sorted(
                 (prevItem, currentItem) ->
                 ZonedDateTime.parse(prevItem.getDate(), ISO_OFFSET_DATE_TIME).compareTo(
@@ -36,7 +36,7 @@ public final class APITools
     public static Optional<ResponseItem> getShabbatCandlesItem(final List<ResponseItem> items, final LocalDate shabbatDate)
     {
         return items.stream()
-            .filter(item -> item.getCategory().equals(CANDLES.value))
+            .filter(item -> item.getCategory().equals(CANDLES.getValue()))
             .filter(item -> ZonedDateTime.parse(item.getDate(), ISO_OFFSET_DATE_TIME).toLocalDate().equals(shabbatDate))
             .findFirst();
     }

@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum ParamKeys
 {
     ASHKENAZIS_TRANSLITERATIONS("a"),
@@ -18,10 +22,10 @@ public enum ParamKeys
     TZID("tzid"), // used with GeoTypes.POSITIONAL
     ZIP("zip"); // used with GeoTypes.ZIP
 
-    public final String key;
+    private final String key;
 
-    ParamKeys(final String setKey)
+    public String getKey()
     {
-        key = setKey;
+        return key;
     }
 }

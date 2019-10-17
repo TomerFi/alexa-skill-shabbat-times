@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum GeoTypes
 {
     CITY("city"),
@@ -7,10 +11,10 @@ public enum GeoTypes
     POSITIONAL("pos"),
     ZIP("zip");
 
-    public final String type;
+    private final String type;
 
-    GeoTypes(final String setType)
+    public String getType()
     {
-        type = setType;
+        return type;
     }
 }

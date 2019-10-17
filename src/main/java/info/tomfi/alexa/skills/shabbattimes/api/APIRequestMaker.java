@@ -11,10 +11,7 @@ import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 
-import info.tomfi.alexa.skills.shabbattimes.api.enums.FlagStates;
-import info.tomfi.alexa.skills.shabbattimes.api.enums.GeoTypes;
-import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
-import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
+import info.tomfi.alexa.skills.shabbattimes.api.enums.*;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
 public final class APIRequestMaker
@@ -24,7 +21,7 @@ public final class APIRequestMaker
 
     private final HttpTransport transport;
     private final String baseUrl;
-    private Map<String, String> queryParams;
+    private final Map<String, String> queryParams;
 
     public APIRequestMaker(final String setBaseUrl)
     {
@@ -32,12 +29,12 @@ public final class APIRequestMaker
         transport = new NetHttpTransport();
 
         queryParams = new ConcurrentHashMap<>();
-        queryParams.put(ParamKeys.OUTPUT_FORMAT.key, OutputTypes.JSON.type);
-        queryParams.put(ParamKeys.INCLUDE_TURAH_HAFTARAH.key, FlagStates.OFF.state);
-        queryParams.put(ParamKeys.ASHKENAZIS_TRANSLITERATIONS.key, FlagStates.OFF.state);
-        queryParams.put(ParamKeys.GEO_TYPE.key, GeoTypes.GEO_NAME.type);
-        queryParams.put(ParamKeys.HAVDALAH.key, DEFAULT_HAVDALAH);
-        queryParams.put(ParamKeys.CANDLE_LIGHTING.key, DEFAULT_CANDLE_LIGHTING);
+        queryParams.put(ParamKeys.OUTPUT_FORMAT.getKey(), OutputTypes.JSON.getType());
+        queryParams.put(ParamKeys.INCLUDE_TURAH_HAFTARAH.getKey(), FlagStates.OFF.getState());
+        queryParams.put(ParamKeys.ASHKENAZIS_TRANSLITERATIONS.getKey(), FlagStates.OFF.getState());
+        queryParams.put(ParamKeys.GEO_TYPE.getKey(), GeoTypes.GEO_NAME.getType());
+        queryParams.put(ParamKeys.HAVDALAH.getKey(), DEFAULT_HAVDALAH);
+        queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), DEFAULT_CANDLE_LIGHTING);
     }
 
     public APIRequestMaker setHavdalahMinutesAfterSundown(final int minutes) throws IllegalArgumentException
@@ -46,7 +43,7 @@ public final class APIRequestMaker
         {
             throw new IllegalArgumentException("havdalah minutes should be bigger the 0, otherwise we can't calculate the shabbat end time.");
         }
-        queryParams.put(ParamKeys.HAVDALAH.key, String.valueOf(minutes));
+        queryParams.put(ParamKeys.HAVDALAH.getKey(), String.valueOf(minutes));
         return this;
     }
 
@@ -56,7 +53,7 @@ public final class APIRequestMaker
         {
             throw new IllegalArgumentException("candle lighting time before sunset should a positive integer.");
         }
-        queryParams.put(ParamKeys.CANDLE_LIGHTING.key, String.valueOf(minutes));
+        queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), String.valueOf(minutes));
         return this;
     }
 
@@ -66,7 +63,7 @@ public final class APIRequestMaker
         {
             throw new IllegalArgumentException("geo id should a positive integer.");
         }
-        queryParams.put(ParamKeys.GEO_ID.key, String.valueOf(setGeoId));
+        queryParams.put(ParamKeys.GEO_ID.getKey(), String.valueOf(setGeoId));
         return this;
     }
 
@@ -76,15 +73,15 @@ public final class APIRequestMaker
         final String month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
         final String day = String.format("0%s", String.valueOf(dateTime.getDayOfMonth()));
 
-        queryParams.put(ParamKeys.GREGORIAN_YEAR.key, year);
-        queryParams.put(ParamKeys.GREGORIAN_MONTH.key, month.substring(month.length() - 2));
-        queryParams.put(ParamKeys.GREGORIAN_DAY.key, day.substring(month.length() - 2));
+        queryParams.put(ParamKeys.GREGORIAN_YEAR.getKey(), year);
+        queryParams.put(ParamKeys.GREGORIAN_MONTH.getKey(), month.substring(month.length() - 2));
+        queryParams.put(ParamKeys.GREGORIAN_DAY.getKey(), day.substring(month.length() - 2));
         return this;
     }
 
     public APIResponse send() throws IllegalStateException, IOException
     {
-        if (!queryParams.containsKey(ParamKeys.GEO_ID.key))
+        if (!queryParams.containsKey(ParamKeys.GEO_ID.getKey()))
         {
             throw new IllegalStateException("we need the requested city geo id for build the request.");
         }
