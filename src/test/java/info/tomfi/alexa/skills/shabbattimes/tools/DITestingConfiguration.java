@@ -17,10 +17,12 @@ import com.google.gson.GsonBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
+@Lazy
 @Configuration
 @ComponentScan(basePackages = "info.tomfi.alexa.skills.shabbattimes")
 public class DITestingConfiguration
