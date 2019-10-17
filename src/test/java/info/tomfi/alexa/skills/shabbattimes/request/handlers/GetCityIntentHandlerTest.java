@@ -3,16 +3,7 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -28,24 +19,17 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
-import com.google.gson.GsonBuilder;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
+import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
 
-@Configuration
-@ComponentScan(value = "info.tomfi.alexa.skills.shabbattimes.request.handlers")
-public class GetCityIntentHandlerTest {
+public final class GetCityIntentHandlerTest {
     private static Slot fakeCountrySlot;
     private static Slot fakeCitySlot;
     private static Intent fakeIntent;
@@ -55,26 +39,6 @@ public class GetCityIntentHandlerTest {
     private static HandlerInput fakeInput;
 
     private static GetCityIntentHandler handlerInTest;
-
-    @Bean
-    public APIRequestMaker getAPIRequestMaker() throws IllegalStateException, IOException, URISyntaxException
-    {
-        APIResponse fakeResponse;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(GetCityIntentHandler.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
-            )
-        )
-        {
-            fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
-        }
-
-        final APIRequestMaker mockedMaker = mock(APIRequestMaker.class);
-        when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
-        when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-        when(mockedMaker.send()).thenReturn(fakeResponse);
-        return mockedMaker;
-    }
 
     @BeforeAll
     public static void initialize()
@@ -102,7 +66,7 @@ public class GetCityIntentHandlerTest {
         try
         (
             AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(GetCityIntentHandlerTest.class)
+                new AnnotationConfigApplicationContext(DITestingConfiguration.class)
         )
         {
             handlerInTest = context.getBean(GetCityIntentHandler.class);
