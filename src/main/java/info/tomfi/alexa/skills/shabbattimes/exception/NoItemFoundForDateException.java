@@ -2,15 +2,15 @@ package info.tomfi.alexa.skills.shabbattimes.exception;
 
 import com.amazon.ask.exception.AskSdkException;
 
-public final class NoItemFoundForDateExepion extends AskSdkException
+public final class NoItemFoundForDateException extends AskSdkException
 {
     private final static long serialVersionUID = 26L;
 
-    public NoItemFoundForDateExepion(final String message) {
+    public NoItemFoundForDateException(final String message) {
         super(message);
     }
 
-    public NoItemFoundForDateExepion(final String message, final Throwable cause) {
+    public NoItemFoundForDateException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

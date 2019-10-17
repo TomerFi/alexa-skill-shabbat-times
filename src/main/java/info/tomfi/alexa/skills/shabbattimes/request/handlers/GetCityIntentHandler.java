@@ -40,9 +40,8 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
-
 import lombok.Setter;
 
 @Component
@@ -58,7 +57,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
-        throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateExepion, NoResponseFromAPIException
+        throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateException, NoResponseFromAPIException
     {
         final Map<String, Slot> slots = intent.getIntent().getSlots();
         final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlot(slots));

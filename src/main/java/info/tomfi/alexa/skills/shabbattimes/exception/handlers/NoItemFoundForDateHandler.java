@@ -6,13 +6,13 @@ import com.amazon.ask.dispatcher.exception.ExceptionHandler;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 
-import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 
 public final class NoItemFoundForDateHandler implements ExceptionHandler
 {
     @Override
     public boolean canHandle(final HandlerInput input, final Throwable throwable) {
-        return throwable instanceof NoItemFoundForDateExepion;
+        return throwable instanceof NoItemFoundForDateException;
     }
 
     @Override
