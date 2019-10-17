@@ -81,7 +81,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         final Optional<ResponseItem> shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);
         if (!shabbatStartItem.isPresent())
         {
-            throw new NoItemFoundForDateExepion("no candles item found for requested date");
+            throw new NoItemFoundForDateException("no candles item found for requested date");
         }
         final ResponseItem shabbatEndItem = items.get(items.indexOf(shabbatStartItem.get()) + 1);
 
