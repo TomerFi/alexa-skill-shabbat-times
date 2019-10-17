@@ -8,26 +8,31 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
+import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 
-import info.tomfi.alexa.skills.shabbattimes.api.enums.*;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import info.tomfi.alexa.skills.shabbattimes.api.enums.FlagStates;
+import info.tomfi.alexa.skills.shabbattimes.api.enums.GeoTypes;
+import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
+import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import lombok.Setter;
 
 public final class APIRequestMaker
 {
     private static String DEFAULT_HAVDALAH = "50";
     private static String DEFAULT_CANDLE_LIGHTING = "18";
 
-    private final HttpTransport transport;
-    private final String baseUrl;
     private final Map<String, String> queryParams;
 
-    public APIRequestMaker(final String setBaseUrl)
-    {
-        baseUrl = setBaseUrl;
-        transport = new NetHttpTransport();
+    @Setter @Autowired private GenericUrl apiUrl;
+    @Setter @Autowired private HttpTransport transport;
+    @Setter @Autowired private HttpRequestInitializer initializer;
 
+    public APIRequestMaker()
+    {
         queryParams = new ConcurrentHashMap<>();
         queryParams.put(ParamKeys.OUTPUT_FORMAT.getKey(), OutputTypes.JSON.getType());
         queryParams.put(ParamKeys.INCLUDE_TURAH_HAFTARAH.getKey(), FlagStates.OFF.getState());
@@ -85,10 +90,10 @@ public final class APIRequestMaker
         {
             throw new IllegalStateException("we need the requested city geo id for build the request.");
         }
-        final HttpRequestFactory requestFactory = transport.createRequestFactory(new APIRequestInitializer());
-        final GenericUrl url = new GenericUrl(baseUrl);
-        url.putAll(queryParams);
-        final HttpRequest request = requestFactory.buildGetRequest(url);
+        final HttpRequestFactory requestFactory = transport.createRequestFactory(initializer);
+        //final GenericUrl url = new GenericUrl(baseApiUrl);
+        apiUrl.putAll(queryParams);
+        final HttpRequest request = requestFactory.buildGetRequest(apiUrl);
         return request.execute().parseAs(APIResponse.class);
     }
 }

@@ -1,108 +1,111 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.amazon.ask.dispatcher.exception.ExceptionHandler;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
+import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequestInitializer;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
+import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
+import info.tomfi.alexa.skills.shabbattimes.api.APIRequestInitializer;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityFoundHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCityInCountryHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCitySlotHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoCountrySlotHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoItemFoundForDateHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoJsonFileHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.NoResponseFromAPIHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.SdkExceptionHandler;
-import info.tomfi.alexa.skills.shabbattimes.exception.handlers.UnknownCountryHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.CancelIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.CountrySelectedIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.FallbackIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.GetCityIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.HelpIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.NoIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.SessionEndHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.SessionStartHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.StopIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.ThanksIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.handlers.YesIntentHandler;
-import info.tomfi.alexa.skills.shabbattimes.request.interceptors.SetLocaleBundleResource;
-import info.tomfi.alexa.skills.shabbattimes.response.interceptors.PersistSessionAttributes;
 
 @Lazy
 @Configuration
 @ComponentScan(basePackages = "info.tomfi.alexa.skills.shabbattimes")
-public class DIConfiguration implements ApplicationContextAware
+public class DIConfiguration
 {
-    private ApplicationContext context;
+    @Bean
+    public APIRequestMaker getRequestMaker()
+    {
+        return new APIRequestMaker();
+    }
+
+    @Bean
+    public GenericUrl getApiUrl()
+    {
+        return new GenericUrl("https://www.hebcal.com/shabbat/");
+    }
+
+    @Bean
+    public HttpTransport getTransport()
+    {
+        return new NetHttpTransport();
+    }
+
+    @Bean
+    public HttpRequestInitializer getInitializer()
+    {
+        return new APIRequestInitializer();
+    }
 
     @Bean
     public List<GenericRequestHandler<HandlerInput, Optional<Response>>> getRequestHandlers()
+        throws InstantiationException, IllegalAccessException
     {
-        return Arrays.asList(
-            context.getBean(GetCityIntentHandler.class),
-            new CancelIntentHandler(),
-            new CountrySelectedIntentHandler(),
-            new FallbackIntentHandler(),
-            new HelpIntentHandler(),
-            new NoIntentHandler(),
-            new SessionEndHandler(),
-            new SessionStartHandler(),
-            new StopIntentHandler(),
-            new ThanksIntentHandler(),
-            new YesIntentHandler()
-        );
+        final Reflections reflections = new Reflections("info.tomfi.alexa.skills.shabbattimes.request.handlers");
+        final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers = new ArrayList<>();
+        for (Class<? extends RequestHandler> currentHandler : reflections.getSubTypesOf(RequestHandler.class))
+        {
+            requestHandlers.add(currentHandler.newInstance());
+        }
+        return requestHandlers;
     }
 
     @Bean
     public List<GenericExceptionHandler<HandlerInput, Optional<Response>>> getExceptionHandlers()
+        throws InstantiationException, IllegalAccessException
     {
-        return Arrays.asList(
-            new NoCountrySlotHandler(),
-            new NoJsonFileHandler(),
-            new UnknownCountryHandler(),
-            new NoCitySlotHandler(),
-            new NoCityInCountryHandler(),
-            new NoCityFoundHandler(),
-            new NoResponseFromAPIHandler(),
-            new NoItemFoundForDateHandler(),
-            new SdkExceptionHandler() // keep last
-        );
+        final Reflections reflections = new Reflections("info.tomfi.alexa.skills.shabbattimes.exception.handlers");
+        final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers = new ArrayList<>();
+        for (Class<? extends ExceptionHandler> currentHandler : reflections.getSubTypesOf(ExceptionHandler.class))
+        {
+            exceptionHandlers.add(currentHandler.newInstance());
+        }
+        return exceptionHandlers;
     }
 
     @Bean
     public List<GenericRequestInterceptor<HandlerInput>> getRequestInterceptors()
+        throws InstantiationException, IllegalAccessException
     {
-        return Arrays.asList(new SetLocaleBundleResource());
+        final Reflections reflections = new Reflections("info.tomfi.alexa.skills.shabbattimes.request.interceptors");
+        final List<GenericRequestInterceptor<HandlerInput>> requestInterceptors = new ArrayList<>();
+        for (Class<? extends RequestInterceptor> currentHandler : reflections.getSubTypesOf(RequestInterceptor.class))
+        {
+            requestInterceptors.add(currentHandler.newInstance());
+        }
+        return requestInterceptors;
     }
 
     @Bean
     public List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> getResponseInterceptors()
+        throws InstantiationException, IllegalAccessException
     {
-        return Arrays.asList(new PersistSessionAttributes());
-    }
-
-    @Bean
-    public APIRequestMaker getRequestMaker()
-    {
-        return new APIRequestMaker("https://www.hebcal.com/shabbat/");
-    }
-
-    public void setApplicationContext(final ApplicationContext setContext)
-    {
-        context = setContext;
+        final Reflections reflections = new Reflections("info.tomfi.alexa.skills.shabbattimes.response.interceptors");
+        final List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors = new ArrayList<>();
+        for (Class<? extends ResponseInterceptor> currentHandler : reflections.getSubTypesOf(ResponseInterceptor.class))
+        {
+            responseInterceptors.add(currentHandler.newInstance());
+        }
+        return responseInterceptors;
     }
 }

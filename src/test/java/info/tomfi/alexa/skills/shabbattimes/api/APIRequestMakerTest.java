@@ -8,8 +8,10 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-
 import java.util.stream.Stream;
+
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.javanet.NetHttpTransport;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +33,10 @@ public final class APIRequestMakerTest {
 
     @BeforeEach
     public void initialize() {
-        requestMaker = new APIRequestMaker("http://localhost:1234/shabbat");
+        requestMaker = new APIRequestMaker();
+        requestMaker.setApiUrl(new GenericUrl("http://localhost:1234/shabbat"));
+        requestMaker.setTransport(new NetHttpTransport());
+        requestMaker.setInitializer(new APIRequestInitializer());
     }
 
     @Test

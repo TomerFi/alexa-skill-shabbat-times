@@ -8,9 +8,9 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
+import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 
-public final class SetLocaleBundleResource implements GenericRequestInterceptor<HandlerInput>
+public final class SetLocaleBundleResource implements RequestInterceptor
 {
     private static final String L10N_BASE_NAME = "locales/Responses";
 

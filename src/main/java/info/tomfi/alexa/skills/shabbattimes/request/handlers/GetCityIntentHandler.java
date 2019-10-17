@@ -26,6 +26,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
@@ -41,13 +42,13 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExepion;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
-import lombok.RequiredArgsConstructor;
+
+import lombok.Setter;
 
 @Component
-@RequiredArgsConstructor
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
-    private final APIRequestMaker requestMaker;
+    @Setter @Autowired private APIRequestMaker requestMaker;
 
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)

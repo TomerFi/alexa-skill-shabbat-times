@@ -10,7 +10,7 @@ import com.google.api.client.json.gson.GsonFactory;
 public final class APIRequestInitializer implements HttpRequestInitializer
 {
     @Override
-    public void initialize(HttpRequest request) throws IOException {
+    public void initialize(final HttpRequest request) throws IOException {
         request.setParser(new JsonObjectParser(new GsonFactory()));
     }
 }
