@@ -4,7 +4,8 @@ public enum ItemCategories
 {
     CANDLES("candles"),
     HAVDALAH("havdalah"),
-    HOLIDAY("holiday");
+    HOLIDAY("holiday"),
+    PARASHAT("parashat");
 
     public final String value;
 
