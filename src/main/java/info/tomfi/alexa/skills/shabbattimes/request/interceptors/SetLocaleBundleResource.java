@@ -3,12 +3,13 @@ package info.tomfi.alexa.skills.shabbattimes.request.interceptors;
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 
 import java.util.Locale;
-import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
+
+import lombok.val;
 
 public final class SetLocaleBundleResource implements RequestInterceptor
 {
@@ -26,7 +27,7 @@ public final class SetLocaleBundleResource implements RequestInterceptor
             bundle = ResourceBundle.getBundle(L10N_BASE_NAME, Locale.US);
         }
 
-        final Map<String, Object> attribs = input.getAttributesManager().getRequestAttributes();
+        val attribs = input.getAttributesManager().getRequestAttributes();
         attribs.put(L10N_BUNDLE.getName(), bundle);
         input.getAttributesManager().setRequestAttributes(attribs);
     }

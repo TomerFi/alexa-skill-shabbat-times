@@ -9,6 +9,7 @@ import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CountryFactory
@@ -17,8 +18,8 @@ public final class CountryFactory
 
     public static Country getCountry(final String countryName) throws NoJsonFileException, UnknownCountryException
     {
-        final String lowerCountry = countryName.toLowerCase();
-        for (CountryInfo current : CountryInfo.values())
+        val lowerCountry = countryName.toLowerCase();
+        for (val current : CountryInfo.values())
         {
             if (current.getUtterances().contains(lowerCountry))
             {

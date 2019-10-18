@@ -1,10 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
+import lombok.val;
 
 @Component
 public final class HelpIntentHandler implements IntentRequestHandler
@@ -28,10 +27,10 @@ public final class HelpIntentHandler implements IntentRequestHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
-        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
+        val attributes = input.getAttributesManager().getRequestAttributes();
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(bundle, BundleKeys.HELP_SPEECH))
-            .withReprompt(getFromBundle(bundle, BundleKeys.HELP_REPROMPT))
+            .withSpeech(getFromBundle(attributes, BundleKeys.HELP_SPEECH))
+            .withReprompt(getFromBundle(attributes, BundleKeys.HELP_REPROMPT))
             .withShouldEndSession(false)
             .build();
     }

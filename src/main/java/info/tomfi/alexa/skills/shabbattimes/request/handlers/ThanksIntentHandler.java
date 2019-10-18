@@ -1,11 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.THANKS_AND_BYE;
-import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -28,9 +26,8 @@ public final class ThanksIntentHandler implements IntentRequestHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
-        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(bundle, THANKS_AND_BYE))
+            .withSpeech(getFromBundle(input.getAttributesManager().getRequestAttributes(), THANKS_AND_BYE))
             .withShouldEndSession(true)
             .build();
     }

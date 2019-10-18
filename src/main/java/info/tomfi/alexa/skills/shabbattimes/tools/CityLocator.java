@@ -1,6 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import java.util.Iterator;
 import java.util.Optional;
 
 import com.amazon.ask.model.Slot;
@@ -14,18 +13,20 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CityLocator
 {
-    public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot) throws NoCityFoundException, NoCityInCountryException
+    public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot)
+        throws NoCityFoundException, NoCityInCountryException
     {
         if (countrySlot.getValue() == null)
         {
             return getByCity(citySlot);
         }
-        final Country country = CountryFactory.getCountry(countrySlot.getValue());
-        final Optional<City> cityOpt = findCityInCountry(country, citySlot.getValue());
+        val country = CountryFactory.getCountry(countrySlot.getValue());
+        val cityOpt = findCityInCountry(country, citySlot.getValue());
         if (cityOpt.isPresent())
         {
             return cityOpt.get();
@@ -35,10 +36,10 @@ public final class CityLocator
 
     private static City getByCity(final Slot citySlot)
     {
-        for (CountryInfo member : CountryInfo.values())
+        for (val member : CountryInfo.values())
         {
-            final Country country = CountryFactory.getCountry(member);
-            final Optional<City> cityOpt = findCityInCountry(country, citySlot.getValue());
+            val country = CountryFactory.getCountry(member);
+            val cityOpt = findCityInCountry(country, citySlot.getValue());
             if (cityOpt.isPresent())
             {
                 return cityOpt.get();
@@ -49,14 +50,14 @@ public final class CityLocator
 
     private static Optional<City> findCityInCountry(final Country country, final String cityName)
     {
-        final Iterator<City> cities = country.iterator();
+        val cities = country.iterator();
         while (cities.hasNext())
         {
-            final City currentCity = cities.next();
-            final Iterator<String> aliases = currentCity.iterator();
+            val currentCity = cities.next();
+            val aliases = currentCity.iterator();
             while (aliases.hasNext())
             {
-                final String currentAlias = aliases.next();
+                val currentAlias = aliases.next();
                 if (currentAlias.equalsIgnoreCase(cityName))
                 {
                     return Optional.of(currentCity);

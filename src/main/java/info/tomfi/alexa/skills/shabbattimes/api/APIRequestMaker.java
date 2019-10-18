@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 
@@ -20,6 +18,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
 import lombok.Setter;
+import lombok.val;
 
 public final class APIRequestMaker
 {
@@ -75,9 +74,9 @@ public final class APIRequestMaker
 
     public APIRequestMaker setSpecificDate(final LocalDate dateTime)
     {
-        final String year = String.valueOf(dateTime.getYear());
-        final String month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
-        final String day = String.format("0%s", String.valueOf(dateTime.getDayOfMonth()));
+        val year = String.valueOf(dateTime.getYear());
+        val month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
+        val day = String.format("0%s", String.valueOf(dateTime.getDayOfMonth()));
 
         queryParams.put(ParamKeys.GREGORIAN_YEAR.getKey(), year);
         queryParams.put(ParamKeys.GREGORIAN_MONTH.getKey(), month.substring(month.length() - 2));
@@ -91,10 +90,9 @@ public final class APIRequestMaker
         {
             throw new IllegalStateException("we need the requested city geo id for build the request.");
         }
-        final HttpRequestFactory requestFactory = transport.createRequestFactory(initializer);
-        //final GenericUrl url = new GenericUrl(baseApiUrl);
+        val requestFactory = transport.createRequestFactory(initializer);
         apiUrl.putAll(queryParams);
-        final HttpRequest request = requestFactory.buildGetRequest(apiUrl);
+        val request = requestFactory.buildGetRequest(apiUrl);
         return request.execute().parseAs(APIResponse.class);
     }
 }

@@ -8,31 +8,23 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatNow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsToday;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
-import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 import static info.tomfi.alexa.skills.shabbattimes.tools.SkillTools.getCitySlotFromMap;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
-import com.amazon.ask.model.Slot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
-import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
@@ -44,6 +36,7 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExceptio
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
 
 import lombok.Setter;
+import lombok.val;
 
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler
@@ -60,15 +53,15 @@ public final class GetCityIntentHandler implements IntentRequestHandler
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
         throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateException, NoResponseFromAPIException
     {
-        final Map<String, Slot> slots = intent.getIntent().getSlots();
-        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlotFromMap(slots));
+        val slots = intent.getIntent().getSlots();
+        val selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlotFromMap(slots));
 
-        final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
-        attribs.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
-        attribs.put(Attributes.CITY.getName(), selectedCity.getCityName());
-        input.getAttributesManager().setSessionAttributes(attribs);
+        val sessionAttributes = input.getAttributesManager().getSessionAttributes();
+        sessionAttributes.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
+        sessionAttributes.put(Attributes.CITY.getName(), selectedCity.getCityName());
+        input.getAttributesManager().setSessionAttributes(sessionAttributes);
 
-        final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
+        val shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
         final APIResponse response;
         try
         {
@@ -78,43 +71,42 @@ public final class GetCityIntentHandler implements IntentRequestHandler
             throw new NoResponseFromAPIException("no response from hebcal's shabbat api");
         }
 
-        final List<ResponseItem> items = getCandlesAndHavdalahItems(response);
-        final Optional<ResponseItem> shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);
+        val items = getCandlesAndHavdalahItems(response);
+        val shabbatStartItem = getShabbatCandlesItem(items, shabbatDate);
         if (!shabbatStartItem.isPresent())
         {
             throw new NoItemFoundForDateException("no candles item found for requested date");
         }
-        final ResponseItem shabbatEndItem = items.get(items.indexOf(shabbatStartItem.get()) + 1);
+        val shabbatEndItem = items.get(items.indexOf(shabbatStartItem.get()) + 1);
 
-        final ZonedDateTime shabbatStartDateTime = ZonedDateTime.parse(shabbatStartItem.get().getDate());
-        final ZonedDateTime shabbatEndDateTime = ZonedDateTime.parse(shabbatEndItem.getDate());
-        final ZonedDateTime currentDateTime = intent.getTimestamp().toZonedDateTime();
+        val shabbatStartDateTime = ZonedDateTime.parse(shabbatStartItem.get().getDate());
+        val shabbatEndDateTime = ZonedDateTime.parse(shabbatEndItem.getDate());
+        val currentDateTime = intent.getTimestamp().toZonedDateTime();
 
-        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
-
-        String speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_FRIDAY);
-        String speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_SATURDAY);
+        val requestAttributes = input.getAttributesManager().getRequestAttributes();
+        String speechPart1 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_START_FRIDAY);
+        String speechPart2 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_END_SATURDAY);
 
         if (isShabbatNow(shabbatStartDateTime, currentDateTime, shabbatEndDateTime))
         {
             if (isShabbatStartsToday(shabbatStartDateTime, currentDateTime))
             {
-                speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_TODAY);
-                speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_TOMORROW);
+                speechPart1 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_START_TODAY);
+                speechPart2 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_END_TOMORROW);
             }
             else if (isShabbatEndsToday(currentDateTime, shabbatEndDateTime))
             {
-                speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_YESTERDAY);
-                speechPart2 = getFromBundle(bundle, BundleKeys.SHABBAT_END_TODAY);
+                speechPart1 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_START_YESTERDAY);
+                speechPart2 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_END_TODAY);
             }
         }
         else if (isShabbatStartsTommorow(shabbatStartDateTime, currentDateTime))
         {
-            speechPart1 = getFromBundle(bundle, BundleKeys.SHABBAT_START_TOMORROW);
+            speechPart1 = getFromBundle(requestAttributes, BundleKeys.SHABBAT_START_TOMORROW);
         }
 
-        final String speechOutput = String.format(
-            getFromBundle(bundle, BundleKeys.SHABBAT_INFORMATION_FMT),
+        val speechOutput = String.format(
+            getFromBundle(requestAttributes, BundleKeys.SHABBAT_INFORMATION_FMT),
             response.getLocation().getCity(),
             speechPart1,
             shabbatStartDateTime.toLocalDate().toString(),
@@ -126,7 +118,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
 
         return input.getResponseBuilder()
             .withSpeech(speechOutput)
-            .withReprompt(getFromBundle(bundle, BundleKeys.ASK_FOR_ANOTHER_REPROMPT))
+            .withReprompt(getFromBundle(requestAttributes, BundleKeys.ASK_FOR_ANOTHER_REPROMPT))
             .withSimpleCard(String.format("Shabbat times: %s", selectedCity.getGeoName()), speechOutput)
             .withShouldEndSession(false)
             .build();

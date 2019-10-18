@@ -6,14 +6,15 @@ import java.time.ZonedDateTime;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateTimeUtils
 {
     public static LocalDate getShabbatStartLocalDate(final LocalDate requestDate)
     {
-        final DayOfWeek requestDow = requestDate.getDayOfWeek();
-        final int daysToAdd =
+        val requestDow = requestDate.getDayOfWeek();
+        val daysToAdd =
             requestDow == DayOfWeek.FRIDAY ? 0 :
             requestDow == DayOfWeek.SATURDAY ? -1 :
             DayOfWeek.FRIDAY.minus(requestDow.getValue()).getValue();

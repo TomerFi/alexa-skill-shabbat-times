@@ -9,17 +9,14 @@ import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.val;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LocalizationUtils
 {
-    public static ResourceBundle getBundleFromAttribures(final Map<String, Object> attributes)
+    public static String getFromBundle(final Map<String, Object> attributes, final BundleKeys key)
     {
-        return (ResourceBundle) attributes.get(L10N_BUNDLE.getName());
-    }
-
-    public static String getFromBundle(final ResourceBundle bundle, final BundleKeys key)
-    {
+        val bundle = (ResourceBundle) attributes.get(L10N_BUNDLE.getName());
         return bundle.getString(key.toString());
     }
 }

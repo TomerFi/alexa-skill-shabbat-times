@@ -1,11 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -19,6 +17,8 @@ import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 
+import lombok.val;
+
 @Component
 public final class NoIntentHandler implements IntentRequestHandler
 {
@@ -31,24 +31,24 @@ public final class NoIntentHandler implements IntentRequestHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
-        final ResourceBundle bundle = getBundleFromAttribures(input.getAttributesManager().getRequestAttributes());
-        String speechOutput = bundle.getString(BundleKeys.DEFAULT_OK.toString());
+        val requestAttributes = input.getAttributesManager().getRequestAttributes();
+        String speechOutput = getFromBundle(requestAttributes, BundleKeys.DEFAULT_OK);
         try
         {
-            final Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
+            val sessionAttributes = input.getAttributesManager().getSessionAttributes();
             if (sessionAttributes.get(Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName()))
             {
-                final String attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
+                val attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
                 String speechMiddle = "";
-                for (CountryInfo current : CountryInfo.values())
+                for (val current : CountryInfo.values())
                 {
                     if (attribValue.equals(current.getAbbreviation()))
                     {
-                        speechMiddle = getFromBundle(bundle, current.getBundleKey());
+                        speechMiddle = getFromBundle(requestAttributes, current.getBundleKey());
                         break;
                     }
                 }
-                speechOutput = String.format(getFromBundle(bundle, BundleKeys.NOT_FOUND_FMT), speechMiddle);
+                speechOutput = String.format(getFromBundle(requestAttributes, BundleKeys.NOT_FOUND_FMT), speechMiddle);
             }
         } catch (IllegalStateException exc)
         {
