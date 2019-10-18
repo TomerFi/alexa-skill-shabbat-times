@@ -14,41 +14,44 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 
+@ExtendWith(MockitoExtension.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
 public final class APIToolsTest
 {
-    private static ResponseItem holidayItem;
-    private static ResponseItem candlesHolidayItem;
-    private static ResponseItem havdalaHolidayItem;
-    private static ResponseItem candlesShabbatItem;
-    private static ResponseItem havdalaShabbatItem;
+    @Mock private ResponseItem holidayItem;
+    @Mock private ResponseItem candlesHolidayItem;
+    @Mock private ResponseItem havdalaHolidayItem;
+    @Mock private ResponseItem candlesShabbatItem;
+    @Mock private ResponseItem havdalaShabbatItem;
 
-    @BeforeAll
-    public static void initialize()
+    @BeforeEach
+    public void initialize()
     {
-        holidayItem = mock(ResponseItem.class);
         when(holidayItem.getCategory()).thenReturn(HOLIDAY.getValue());
         when(holidayItem.getDate()).thenReturn("2019-10-13");
 
-        candlesHolidayItem = mock(ResponseItem.class);
         when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.getValue());
         when(candlesHolidayItem.getDate()).thenReturn("2019-10-13T17:53:00+03:00");
 
-        havdalaHolidayItem = mock(ResponseItem.class);
         when(havdalaHolidayItem.getCategory()).thenReturn(HAVDALAH.getValue());
         when(havdalaHolidayItem.getDate()).thenReturn("2019-10-14T19:00:00+03:00");
 
-        candlesShabbatItem = mock(ResponseItem.class);
         when(candlesShabbatItem.getCategory()).thenReturn(CANDLES.getValue());
         when(candlesShabbatItem.getDate()).thenReturn("2019-10-18T17:47:00+03:00");
 
-        havdalaShabbatItem = mock(ResponseItem.class);
         when(havdalaShabbatItem.getCategory()).thenReturn(HAVDALAH.getValue());
         when(havdalaShabbatItem.getDate()).thenReturn("2019-10-19T18:54:00+03:00");
     }
