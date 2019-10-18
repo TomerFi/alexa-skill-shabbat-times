@@ -4,15 +4,13 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public final class DynTypeIterator<E> implements Iterator<E>
 {
     private final List<E> list;
     private int idx;
-
-    public DynTypeIterator(final List<E> setList)
-    {
-        list = setList;
-    }
 
     @Override
     public boolean hasNext()

@@ -10,11 +10,11 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbat
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.isShabbatStartsTommorow;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBundleFromAttribures;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
+import static info.tomfi.alexa.skills.shabbattimes.tools.SkillTools.getCitySlotFromMap;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,6 +42,7 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
+
 import lombok.Setter;
 
 @Component
@@ -60,7 +61,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
         throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateException, NoResponseFromAPIException
     {
         final Map<String, Slot> slots = intent.getIntent().getSlots();
-        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlot(slots));
+        final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY.getName()), getCitySlotFromMap(slots));
 
         final Map<String, Object> attribs = input.getAttributesManager().getSessionAttributes();
         attribs.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
@@ -129,21 +130,5 @@ public final class GetCityIntentHandler implements IntentRequestHandler
             .withSimpleCard(String.format("Shabbat times: %s", selectedCity.getGeoName()), speechOutput)
             .withShouldEndSession(false)
             .build();
-    }
-
-    private Slot getCitySlot(final Map<String, Slot> slots) throws NoCitySlotException
-    {
-        final List<String> cityKeys = Arrays.asList(Slots.CITY_IL.getName(), Slots.CITY_GB.getName(), Slots.CITY_US.getName());
-        final Optional<String> slotKey = slots.keySet()
-            .stream()
-            .filter(key -> cityKeys.contains(key))
-            .filter(key -> slots.get(key).getValue() != null)
-            .findFirst();
-
-        if (!slotKey.isPresent())
-        {
-            throw new NoCitySlotException("No city slot found.");
-        }
-        return slots.get(slotKey.get());
     }
 }

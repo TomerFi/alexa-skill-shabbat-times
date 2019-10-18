@@ -7,13 +7,13 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CountryFactory
 {
-    private static Map<CountryInfo, Country> countryPool = new ConcurrentHashMap<>();
-
-    private CountryFactory()
-    {
-    }
+    private static final Map<CountryInfo, Country> countryPool = new ConcurrentHashMap<>();
 
     public static Country getCountry(final String countryName) throws NoJsonFileException, UnknownCountryException
     {

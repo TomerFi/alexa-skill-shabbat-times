@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public enum Slots
 {
     CITY_GB("City_GB"),
@@ -7,15 +11,5 @@ public enum Slots
     CITY_US("City_US"),
     COUNTRY("Country");
 
-    private final String name;
-
-    Slots(final String setName)
-    {
-        name = setName;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
+    @Getter private final String name;
 }

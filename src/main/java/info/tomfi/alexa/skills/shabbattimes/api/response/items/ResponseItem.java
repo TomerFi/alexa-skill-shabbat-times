@@ -4,38 +4,20 @@ import java.util.Optional;
 
 import com.google.api.client.util.Key;
 
+import lombok.Getter;
+
 public final class ResponseItem
 {
-    @Key("hebrew") private String hebrew;
-    @Key("date") private String date;
-    @Key("title") private String title;
-    @Key("category") private String category;
+    @Key @Getter private String hebrew;
+    @Key @Getter private String date;
+    @Key @Getter private String title;
+    @Key @Getter private String category;
 
-    @Key("link") private String link;
-    @Key("memo") private String memo;
-    @Key("subcat") private String subcat;
+    @Key private String link;
+    @Key private String memo;
+    @Key private String subcat;
 
-    @Key("yomtov") private boolean yomtov;
-
-    public String getHebrew()
-    {
-        return hebrew;
-    }
-
-    public String getDate()
-    {
-        return date;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public String getCategory()
-    {
-        return category;
-    }
+    @Key @Getter private boolean yomtov;
 
     public Optional<String> getLink()
     {
@@ -50,10 +32,5 @@ public final class ResponseItem
     public Optional<String> getSubcat()
     {
         return Optional.ofNullable(subcat);
-    }
-
-    public boolean isYomtov()
-    {
-        return yomtov;
     }
 }

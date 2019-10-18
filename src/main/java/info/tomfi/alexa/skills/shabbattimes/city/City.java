@@ -7,34 +7,16 @@ import java.util.List;
 
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
+import lombok.Getter;
+
 public final class City implements Iterable<String>
 {
-    private String cityName;
-    private String geoName;
-    private int geoId;
-    private String countryAbbreviation;
+    @Getter private String cityName;
+    @Getter private String geoName;
+    @Getter private int geoId;
+    @Getter private String countryAbbreviation;
 
     private String[] aliases;
-
-    public String getCityName()
-    {
-        return cityName;
-    }
-
-    public String getGeoName()
-    {
-        return geoName;
-    }
-
-    public int getGeoId()
-    {
-        return geoId;
-    }
-
-    public String getCountryAbbreviation()
-    {
-        return countryAbbreviation;
-    }
 
     public Iterator<String> iterator()
     {

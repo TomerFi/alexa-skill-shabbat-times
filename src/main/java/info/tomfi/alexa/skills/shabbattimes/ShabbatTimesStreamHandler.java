@@ -5,6 +5,7 @@ import com.amazon.ask.SkillStreamHandler;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.tools.DIConfiguration;
+
 import lombok.Cleanup;
 import lombok.var;
 

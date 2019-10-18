@@ -4,12 +4,12 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class DateTimeUtils
 {
-    private DateTimeUtils()
-    {
-    }
-
     public static LocalDate getShabbatStartLocalDate(final LocalDate requestDate)
     {
         final DayOfWeek requestDow = requestDate.getDayOfWeek();

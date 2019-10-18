@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.enums;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 public enum Intents
 {
     CANCEL("AMAZON.CancelIntent"),
@@ -12,15 +16,5 @@ public enum Intents
     THANKS("ThanksIntent"),
     YES("AMAZON.YesIntent");
 
-    private final String name;
-
-    Intents(final String setName)
-    {
-        name = setName;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
+    @Getter private final String name;
 }

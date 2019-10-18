@@ -2,66 +2,18 @@ package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
 import com.google.api.client.util.Key;
 
+import lombok.Getter;
+
 public final class ResponseLocation
 {
-    @Key("admin1") private String admin1;
-    @Key("asciiname") private String asciiname;
-    @Key("city") private String city;
-    @Key("country") private String country;
-    @Key("geo") private String geo;
-    @Key("geonameid") private int geonameid;
-    @Key("latitude") private Double latitude;
-    @Key("longitude") private Double longitude;
-    @Key("title") private String title;
-    @Key("tzid") private String tzid;
-
-    public String getAdmin1()
-    {
-        return admin1;
-    }
-
-    public String getAsciiname()
-    {
-        return asciiname;
-    }
-
-    public String getCity()
-    {
-        return city;
-    }
-
-    public String getCountry()
-    {
-        return country;
-    }
-
-    public String getGeo()
-    {
-        return geo;
-    }
-
-    public int getGeonameid()
-    {
-        return geonameid;
-    }
-
-    public Double getLatitude()
-    {
-        return latitude;
-    }
-
-    public Double getLongitude()
-    {
-        return longitude;
-    }
-
-    public String getTitle()
-    {
-        return title;
-    }
-
-    public String getTzid()
-    {
-        return tzid;
-    }
+    @Key @Getter private String admin1;
+    @Key @Getter private String asciiname;
+    @Key @Getter private String city;
+    @Key @Getter private String country;
+    @Key @Getter private String geo;
+    @Key @Getter private int geonameid;
+    @Key @Getter private Double latitude;
+    @Key @Getter private Double longitude;
+    @Key @Getter private String title;
+    @Key @Getter private String tzid;
 }

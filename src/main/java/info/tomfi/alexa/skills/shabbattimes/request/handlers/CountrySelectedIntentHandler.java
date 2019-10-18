@@ -34,7 +34,8 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler
     }
 
     @Override
-    public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) throws NoCountrySlotException, NoJsonFileException
+    public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
+        throws NoCountrySlotException, NoJsonFileException
     {
         final Slot countrySlot = intent.getIntent().getSlots().get(Slots.COUNTRY.getName());
         if (countrySlot.getValue() == null)

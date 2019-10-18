@@ -18,6 +18,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.enums.GeoTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+
 import lombok.Setter;
 
 public final class APIRequestMaker

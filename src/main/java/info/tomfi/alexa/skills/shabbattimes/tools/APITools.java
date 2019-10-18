@@ -1,10 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-import static java.util.stream.Collectors.toList;
-
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
+import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+import static java.util.stream.Collectors.toList;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -15,12 +14,12 @@ import java.util.Optional;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class APITools
 {
-    private APITools()
-    {
-    }
-
     public static List<ResponseItem> getCandlesAndHavdalahItems(final APIResponse response)
     {
         return response.getItems().stream()

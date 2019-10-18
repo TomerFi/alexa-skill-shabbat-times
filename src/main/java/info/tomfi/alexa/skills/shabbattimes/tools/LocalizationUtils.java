@@ -7,12 +7,12 @@ import java.util.ResourceBundle;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class LocalizationUtils
 {
-    private LocalizationUtils()
-    {
-    }
-
     public static ResourceBundle getBundleFromAttribures(final Map<String, Object> attributes)
     {
         return (ResourceBundle) attributes.get(L10N_BUNDLE.getName());

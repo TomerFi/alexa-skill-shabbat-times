@@ -12,12 +12,12 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class CityLocator
 {
-    private CityLocator()
-    {
-    }
-
     public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot) throws NoCityFoundException, NoCityInCountryException
     {
         if (countrySlot.getValue() == null)

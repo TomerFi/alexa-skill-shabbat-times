@@ -20,10 +20,12 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 
+import lombok.Getter;
+
 public final class Country implements Iterable<City>
 {
-    public final String abbreviation;
-    public final String name;
+    @Getter private final String abbreviation;
+    @Getter private final String name;
     private final List<City> citiesList;
 
     protected Country(final CountryInfo country) throws NoJsonFileException
@@ -31,16 +33,6 @@ public final class Country implements Iterable<City>
         abbreviation = country.getAbbreviation();
         name = country.getName();
         citiesList = cityListFromJsonFile(String.format("cities/%s_Cities.json", abbreviation));
-    }
-
-    public String getAbbreviation()
-    {
-        return abbreviation;
-    }
-
-    public String getName()
-    {
-        return name;
     }
 
     public Iterator<City> iterator()

@@ -9,7 +9,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
-import com.amazon.ask.request.interceptor.*;
+import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
+import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
 
 import org.springframework.stereotype.Component;
 
