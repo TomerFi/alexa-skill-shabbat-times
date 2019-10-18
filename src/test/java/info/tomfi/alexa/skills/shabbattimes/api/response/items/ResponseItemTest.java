@@ -1,6 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -12,6 +11,9 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lombok.Cleanup;
+import lombok.val;
 
 public final class ResponseItemTest
 {
@@ -29,15 +31,12 @@ public final class ResponseItemTest
     @DisplayName("test response item json to object with mandatory values only")
     public void itemJsonToObject_mandatoryKeys_success() throws IOException, URISyntaxException
     {
-        ResponseItem item;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("api-responses/response_item_mandatory.json").toURI())
-            )
-        )
-        {
-            item = gson.fromJson(breader, ResponseItem.class);
-        }
+        @Cleanup val breader = Files.newBufferedReader(
+            Paths.get(loader.getResource("api-responses/response_item_mandatory.json").toURI())
+        );
+
+        val item = gson.fromJson(breader, ResponseItem.class);
+
         ResponseItemAssert.assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")
@@ -53,15 +52,12 @@ public final class ResponseItemTest
     @DisplayName("test response item json to object with mandatory and optional values")
     public void itemJsonToObject_optionalKeys_success() throws IOException, URISyntaxException
     {
-        ResponseItem item;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("api-responses/response_item_optional.json").toURI())
-            )
-        )
-        {
-            item = gson.fromJson(breader, ResponseItem.class);
-        }
+        @Cleanup val breader = Files.newBufferedReader(
+            Paths.get(loader.getResource("api-responses/response_item_optional.json").toURI())
+        );
+
+        val item = gson.fromJson(breader, ResponseItem.class);
+
         ResponseItemAssert.assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")
@@ -77,15 +73,12 @@ public final class ResponseItemTest
     @DisplayName("test response item json to object with mandatory, optional and yomtov values")
     public void itemJsonToObject_fullKeys_success() throws IOException, URISyntaxException
     {
-        ResponseItem item;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(loader.getResource("api-responses/response_item_full.json").toURI())
-            )
-        )
-        {
-            item = gson.fromJson(breader, ResponseItem.class);
-        }
+        @Cleanup val breader = Files.newBufferedReader(
+            Paths.get(loader.getResource("api-responses/response_item_full.json").toURI())
+        );
+
+        val item = gson.fromJson(breader, ResponseItem.class);
+
         ResponseItemAssert.assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")

@@ -10,10 +10,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lombok.val;
+
 public final class SessionEndHandlerTest
 {
     private static SessionEndedRequest fakeRequest;
-    private static RequestEnvelope fakeEnvelope;
     private static HandlerInput fakeInput;
 
     private static SessionEndHandler handlerInTest;
@@ -22,7 +23,7 @@ public final class SessionEndHandlerTest
     public static void initialize()
     {
         fakeRequest = SessionEndedRequest.builder().build();
-        fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
+        val fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
         fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
         handlerInTest = new SessionEndHandler();

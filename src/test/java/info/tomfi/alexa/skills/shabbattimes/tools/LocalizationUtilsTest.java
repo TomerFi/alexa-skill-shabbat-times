@@ -8,12 +8,13 @@ import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getBu
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import lombok.val;
 
 public final class LocalizationUtilsTest
 {
@@ -29,7 +30,7 @@ public final class LocalizationUtilsTest
     @DisplayName("test the retrieval of the bundle object from a the attributes map")
     public void getBundleFromAttribures_fakeAttributes_getBundle()
     {
-        final Map<String, Object> attributes = new HashMap<>();
+        val attributes = new HashMap<String, Object>();
         attributes.put(L10N_BUNDLE.getName(), bundle);
         assertThat(getBundleFromAttribures(attributes).hashCode()).isEqualTo(bundle.hashCode());
     }

@@ -1,6 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -11,21 +10,21 @@ import com.google.gson.GsonBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lombok.Cleanup;
+import lombok.val;
+
 public final class ResponseLocationTest
 {
     @Test
     @DisplayName("test response location json to object")
     public void jsonToObject_location_success() throws IOException, URISyntaxException
     {
-        ResponseLocation location;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(ResponseLocationTest.class.getClassLoader().getResource("api-responses/response_location.json").toURI())
-            )
-        )
-        {
-            location = new GsonBuilder().create().fromJson(breader, ResponseLocation.class);
-        }
+        @Cleanup val breader = Files.newBufferedReader(
+            Paths.get(ResponseLocationTest.class.getClassLoader().getResource("api-responses/response_location.json").toURI())
+        );
+
+        val location = new GsonBuilder().create().fromJson(breader, ResponseLocation.class);
+
         ResponseLocationAssert.assertThat(location)
             .latitudeIs(25.25)
             .longitudeIs(26.26)

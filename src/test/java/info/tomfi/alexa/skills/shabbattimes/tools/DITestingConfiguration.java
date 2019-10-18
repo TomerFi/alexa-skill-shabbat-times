@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -21,6 +20,8 @@ import org.springframework.context.annotation.Lazy;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import lombok.Cleanup;
+import lombok.val;
 
 @Lazy
 @Configuration
@@ -30,17 +31,13 @@ public class DITestingConfiguration
     @Bean
     public APIRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
-        APIResponse fakeResponse;
-        try (
-            BufferedReader breader = Files.newBufferedReader(
-                Paths.get(DITestingConfiguration.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
-            )
-        )
-        {
-            fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
-        }
+        @Cleanup val breader = Files.newBufferedReader(
+            Paths.get(DITestingConfiguration.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
+        );
 
-        final APIRequestMaker mockedMaker = mock(APIRequestMaker.class);
+        val fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
+
+        val mockedMaker = mock(APIRequestMaker.class);
         when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
         when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
         when(mockedMaker.send()).thenReturn(fakeResponse);

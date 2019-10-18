@@ -8,7 +8,6 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.stream.Stream;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -22,13 +21,15 @@ import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
 import org.mockserver.model.JsonBody;
 
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponseAssert;
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItemAssert;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseLocationAssert;
 
-public final class APIRequestMakerTest {
+import lombok.Cleanup;
+import lombok.val;
+
+public final class APIRequestMakerTest
+{
     private APIRequestMaker requestMaker;
 
     @BeforeEach
@@ -74,17 +75,14 @@ public final class APIRequestMakerTest {
         requestMaker.setGeoId(1);
         requestMaker.setSpecificDate(LocalDate.now());
 
-        String responesText;
-        try
-        (
-            Stream<String> lines = Files.lines(Paths.get(APIRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI()))
-        )
-        {
-            responesText = lines.collect(joining(System.lineSeparator()));
-        }
+        @Cleanup val lines =
+            Files.lines(Paths.get(APIRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI())
+        );
+        val responesText = lines.collect(joining(System.lineSeparator()));
 
-        final ClientAndServer mockServer = ClientAndServer.startClientAndServer(1234);
-        final MockServerClient mockClient = new MockServerClient("localhost", mockServer.getLocalPort());
+        val mockServer = ClientAndServer.startClientAndServer(1234);
+        @Cleanup val mockClient = new MockServerClient("localhost", mockServer.getLocalPort());
+
         mockClient
         .when(
             HttpRequest.request()
@@ -97,7 +95,7 @@ public final class APIRequestMakerTest {
                 .withBody(JsonBody.json(responesText))
         );
 
-        final APIResponse response = requestMaker.send();
+        val response = requestMaker.send();
 
         APIResponseAssert.assertThat(response)
             .titleIs("testTitle")
@@ -116,7 +114,7 @@ public final class APIRequestMakerTest {
             .countryIs("testCountry")
             .geoIs("testGeo");
 
-        for (ResponseItem item : response.getItems())
+        for (val item : response.getItems())
         {
             ResponseItemAssert.assertThat(item)
                 .titleIs("testTitle")
@@ -125,7 +123,6 @@ public final class APIRequestMakerTest {
                 .hebrewIs("testHebrew");
         }
 
-        mockClient.close();
         mockServer.stop();
     }
 }
