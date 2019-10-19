@@ -15,7 +15,6 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
-
 import lombok.val;
 
 @Component
@@ -49,7 +48,7 @@ public final class NoIntentHandler implements IntentRequestHandler
                 }
                 speechOutput = String.format(getFromBundle(requestAttributes, BundleKeys.NOT_FOUND_FMT), speechMiddle);
             }
-        } catch (IllegalStateException exc)
+        } catch (IllegalStateException | NullPointerException exc)
         {
         }
         return input.getResponseBuilder()
