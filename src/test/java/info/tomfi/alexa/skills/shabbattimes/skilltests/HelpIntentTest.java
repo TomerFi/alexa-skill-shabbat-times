@@ -32,7 +32,7 @@ public final class HelpIntentTest
     }
 
     @Test
-    @DisplayName("customer reply 'no thank you'")
+    @DisplayName("customer ask 'help'")
     public void testThanksIntent() throws IOException, URISyntaxException
     {
         val input = Files.readAllBytes(Paths.get(HelpIntentTest.class.getClassLoader()
