@@ -10,7 +10,6 @@
 		"type": "LaunchRequest",
 		"requestId": "amzn1.echo-api.request.fake-request-id",
 		"timestamp": "2019-10-01T10:20:30Z",
-		"locale": "en-US",
-		"shouldLinkResultBeReturned": false
+		"locale": "en-US"
 	}
 }
