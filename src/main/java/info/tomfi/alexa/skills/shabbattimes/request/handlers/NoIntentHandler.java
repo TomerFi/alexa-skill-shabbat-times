@@ -2,7 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
-import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
