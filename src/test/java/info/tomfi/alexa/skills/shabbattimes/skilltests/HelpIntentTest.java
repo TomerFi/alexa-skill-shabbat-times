@@ -19,7 +19,7 @@ import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
 import lombok.Cleanup;
 import lombok.val;
 
-public final class SessionStartTest
+public final class HelpIntentTest
 {
     private static Skill skillInTest;
 
@@ -32,20 +32,20 @@ public final class SessionStartTest
     }
 
     @Test
-    @DisplayName("customer ask 'start shabbat times'")
-    public void testSessionStart() throws IOException, URISyntaxException
+    @DisplayName("customer reply 'no thank you'")
+    public void testThanksIntent() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(SessionStartTest.class.getClassLoader()
-                .getResource("skill-tests/session_start.json").toURI())
+        val input = Files.readAllBytes(Paths.get(HelpIntentTest.class.getClassLoader()
+                .getResource("skill-tests/help_intent.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
 
         SkillResponseAssert.assertThat(response)
             .isPresent()
             .sessionIsStillOn()
-            .sessionAttributesAreAbsent()
             .cardIsAbsent()
-            .outputSpeechIs("Welcome to shabbat times! What is your city name?")
-            .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
+            .sessionAttributesHasKeyWithValue("lastIntent", "AMAZON.HelpIntent")
+            .outputSpeechIs("I can list all the city names i know in the United States, the United Kingdom, and in Israel. Which country would you like to hear about?")
+            .repromptSpeechIs("Please tell me your country! United States, United Kingdom, or Israel.");
     }
 }
