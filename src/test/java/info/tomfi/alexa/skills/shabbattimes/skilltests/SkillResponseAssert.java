@@ -72,10 +72,17 @@ public final class SkillResponseAssert extends AbstractAssert<SkillResponseAsser
         return this;
     }
 
-        public SkillResponseAssert sessionIsStillOn()
+    public SkillResponseAssert sessionIsStillOn()
     {
         isNotNull();
         Assertions.assertThat(actual.getResponse().getResponse().getShouldEndSession()).isFalse();
+        return this;
+    }
+
+    public SkillResponseAssert responseIsAbsent()
+    {
+        isNotNull();
+        Assertions.assertThat(actual.getResponse().getResponse()).isNull();
         return this;
     }
 
