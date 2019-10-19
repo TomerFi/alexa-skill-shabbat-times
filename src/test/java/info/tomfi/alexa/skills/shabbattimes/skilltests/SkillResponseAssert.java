@@ -49,6 +49,34 @@ public final class SkillResponseAssert extends AbstractAssert<SkillResponseAsser
         return this;
     }
 
+    public SkillResponseAssert outputSpeechStartsWith(final String testSpeech)
+    {
+        isNotNull();
+        val optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
+        if (optText.isPresent())
+        {
+            Assertions.assertThat(optText.get()).startsWith(testSpeech);
+        } else
+        {
+            Assertions.fail("Unknown text or speech object type.");
+        }
+        return this;
+    }
+
+    public SkillResponseAssert outputSpeechEndsWith(final String testSpeech)
+    {
+        isNotNull();
+        val optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
+        if (optText.isPresent())
+        {
+            Assertions.assertThat(optText.get()).endsWith(testSpeech);
+        } else
+        {
+            Assertions.fail("Unknown text or speech object type.");
+        }
+        return this;
+    }
+
     public SkillResponseAssert repromptSpeechIs(final String testSpeech)
     {
         isNotNull();
