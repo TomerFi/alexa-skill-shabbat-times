@@ -1,14 +1,15 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public final class DateTimeUtils
 {
     public static LocalDate getShabbatStartLocalDate(final LocalDate requestDate)

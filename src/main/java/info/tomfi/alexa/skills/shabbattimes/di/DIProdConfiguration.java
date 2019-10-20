@@ -1,6 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes.di;
 
-
 import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
 
 import java.io.IOException;
@@ -18,6 +17,7 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
+
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -27,6 +27,7 @@ import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
 
 import org.reflections.Reflections;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,7 @@ import org.springframework.core.annotation.Order;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
+
 import lombok.val;
 
 @Lazy
@@ -46,7 +48,6 @@ import lombok.val;
 @Order(LOWEST_PRECEDENCE)
 public class DIProdConfiguration
 {
-
     @Bean ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
     {
         return new ShabbatTimesSkillCreator();

@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 import java.io.IOException;
@@ -11,7 +12,6 @@ import java.net.URISyntaxException;
 import java.time.LocalDate;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
@@ -24,10 +24,6 @@ import lombok.val;
 @Lazy
 @Configuration
 @Import(DIMockAPIConfiguration.class)
-@ComponentScan(basePackages = {
-    "info.tomfi.alexa.skills.shabbattimes.api",
-    "info.tomfi.alexa.skills.shabbattimes.request.handlers"
-})
 @Order(HIGHEST_PRECEDENCE)
 public class DIBreakAPIConfiguration
 {

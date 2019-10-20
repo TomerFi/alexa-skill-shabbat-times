@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.util.Optional;
 
 import com.amazon.ask.model.Slot;
@@ -10,12 +12,10 @@ import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
-
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public final class CityLocator
 {
     public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot)

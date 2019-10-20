@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.country;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -7,11 +9,10 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public final class CountryFactory
 {
     private static final Map<CountryInfo, Country> countryPool = new ConcurrentHashMap<>();

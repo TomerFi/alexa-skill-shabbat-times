@@ -2,16 +2,17 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import java.util.Map;
 import java.util.ResourceBundle;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
-import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = PRIVATE)
 public final class LocalizationUtils
 {
     public static String getFromBundle(final Map<String, Object> attributes, final BundleKeys key)
