@@ -1,5 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.exception.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.EXC_UNRECOVERABLE_ERROR;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
+
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.exception.ExceptionHandler;
@@ -21,7 +24,7 @@ public final class NoJsonFileHandler implements ExceptionHandler
     @Override
     public Optional<Response> handle(final HandlerInput input, final Throwable throwable) {
         return input.getResponseBuilder()
-            .withSpeech("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. goodbye.")
+            .withSpeech(getFromBundle(input.getAttributesManager().getRequestAttributes(), EXC_UNRECOVERABLE_ERROR))
             .withShouldEndSession(true)
             .build();
     }

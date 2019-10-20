@@ -1,5 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.exception.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.EXC_PLEASE_TRY_AGAIN;
+import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.EXC_UNKNOWN_COUNTRY;
+import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
+
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.exception.ExceptionHandler;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
+import lombok.val;
 
 @Component
 public final class UnknownCountryHandler implements ExceptionHandler
@@ -22,17 +27,20 @@ public final class UnknownCountryHandler implements ExceptionHandler
 
     @Override
     public Optional<Response> handle(final HandlerInput input, final Throwable throwable) {
+
+        val requestAttributes = input.getAttributesManager().getRequestAttributes();
+        val outputSpeech = String.format(
+            getFromBundle(requestAttributes, EXC_UNKNOWN_COUNTRY),
+            ((IntentRequest) input.getRequest())
+                .getIntent()
+                .getSlots()
+                .get(Slots.COUNTRY.getName())
+                .getValue()
+        );
+
         return input.getResponseBuilder()
-            .withSpeech(
-                String.format(
-                    "I'm sorry. I haven't heard of %s. Please try again.",
-                    ((IntentRequest) input.getRequest())
-                        .getIntent()
-                        .getSlots()
-                        .get(Slots.COUNTRY.getName())
-                        .getValue()
-                )
-            ).withReprompt("Please try again, if you want, you can ask me for help.")
+            .withSpeech(outputSpeech)
+            .withReprompt(getFromBundle(requestAttributes, EXC_PLEASE_TRY_AGAIN))
             .withShouldEndSession(false)
             .build();
     }
