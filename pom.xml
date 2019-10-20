@@ -7,6 +7,51 @@
   <packaging>jar</packaging>
   <version>3.0.0</version>
 
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.install.skip>true</maven.install.skip>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <jacoco.coverage.minimum>90%</jacoco.coverage.minimum>
+  </properties>
+
+  <name>Shabbat Times</name>
+  <description>Alexa skill for retrieving the Shabbat start and stop times in various cities around the world.</description>
+  <url>https://www.amazon.com/Tomer-Figenblat-Shabbat-Times/dp/B072PRCHRD</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>tomerfi</id>
+      <name>Tomer Figenblat</name>
+      <email>tomer.figenblat@gmail.com</email>
+      <url>https://portfolio.tomfi.info</url>
+      <roles>
+        <role>Java developer</role>
+      </roles>
+      <timezone>Asia/Jerusalem</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/TomerFi/alexa-skill-shabbat-times/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/TomerFialexa-skill-shabbat-times</url>
+    <connection>scm:git:https://github.com/TomerFi/alexa-skill-shabbat-times.git</connection>
+    <developerConnection>scm:git:https://github.com:TomerFi/alexa-skill-shabbat-times.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <dependencies>
     <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
     <dependency>
@@ -101,51 +146,6 @@
     </dependency>
   </dependencies>
 
-  <properties>
-    <java.version>1.8</java.version>
-    <maven.install.skip>true</maven.install.skip>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
-  </properties>
-
-  <name>Shabbat Times</name>
-  <description>Alexa skill for retrieving the Shabbat start and stop times in various cities around the world.</description>
-  <url>https://www.amazon.com/Tomer-Figenblat-Shabbat-Times/dp/B072PRCHRD</url>
-  <inceptionYear>2017</inceptionYear>
-
-  <licenses>
-    <license>
-      <name>The Apache License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>manual</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <id>tomerfi</id>
-      <name>Tomer Figenblat</name>
-      <email>tomer.figenblat@gmail.com</email>
-      <url>https://portfolio.tomfi.info</url>
-      <roles>
-        <role>Java developer</role>
-      </roles>
-      <timezone>Asia/Jerusalem</timezone>
-    </developer>
-  </developers>
-
-  <issueManagement>
-    <system>GitHub Issues</system>
-    <url>https://github.com/TomerFi/alexa-skill-shabbat-times/issues</url>
-  </issueManagement>
-
-  <scm>
-    <url>https://github.com/TomerFialexa-skill-shabbat-times</url>
-    <connection>scm:git:https://github.com/TomerFi/alexa-skill-shabbat-times.git</connection>
-    <developerConnection>scm:git:https://github.com:TomerFi/alexa-skill-shabbat-times.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
-
   <build>
     <defaultGoal>verify</defaultGoal>
     <finalName>${project.artifactId}</finalName>
@@ -199,6 +199,9 @@
               <goal>report</goal>
             </goals>
             <configuration>
+              <excludes>
+                <exclude>info/tomfi/alexa/skills/shabbattimes/tools/DIConfiguration.class</exclude>
+              </excludes>
               <rules>
                 <rule>
                   <element>BUNDLE</element>

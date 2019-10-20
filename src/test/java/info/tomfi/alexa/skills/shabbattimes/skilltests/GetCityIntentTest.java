@@ -19,7 +19,8 @@ import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
 import lombok.Cleanup;
 import lombok.val;
 
-public final class GetCityIntentTest {
+public final class GetCityIntentTest
+{
     private static Skill skillInTest;
 
     @BeforeAll

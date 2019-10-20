@@ -25,6 +25,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 
+import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestInitializer;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 
@@ -32,9 +33,18 @@ import lombok.val;
 
 @Lazy
 @Configuration
-@ComponentScan(basePackages = "info.tomfi.alexa.skills.shabbattimes")
+@ComponentScan(basePackages = {
+    "info.tomfi.alexa.skills.shabbattimes.api",
+    "info.tomfi.alexa.skills.shabbattimes.request.handlers"
+})
 public class DIConfiguration
 {
+
+    @Bean ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
+    {
+        return new ShabbatTimesSkillCreator();
+    }
+
     @Bean
     public APIRequestMaker getRequestMaker()
     {

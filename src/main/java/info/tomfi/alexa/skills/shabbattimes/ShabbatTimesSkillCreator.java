@@ -12,18 +12,17 @@ import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Component
-@RequiredArgsConstructor
+@NoArgsConstructor
 public final class ShabbatTimesSkillCreator
 {
-    private final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
-    private final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
-    private final List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
-    private final List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
+    @Autowired private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
+    @Autowired private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
+    @Autowired private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
+    @Autowired private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
 
     public Skill getSkill() throws IllegalAccessException, InstantiationException
     {
