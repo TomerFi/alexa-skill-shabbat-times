@@ -116,10 +116,19 @@ public final class GetCityIntentHandler implements IntentRequestHandler
             shabbatEndDateTime.toLocalTime().toString()
         );
 
+        val cardTitle = String.format(getFromBundle(requestAttributes, BundleKeys.SIMPLE_CARD_TITLE_FMT), selectedCity.getGeoName());
+        val cardContent = String.format(
+            getFromBundle(requestAttributes, BundleKeys.SIMPLE_CARD_CONTENT_FMT),
+            shabbatStartDateTime.toLocalDate().toString(),
+            shabbatStartDateTime.toLocalTime().toString(),
+            shabbatEndDateTime.toLocalDate().toString(),
+            shabbatEndDateTime.toLocalTime().toString()
+        );
+
         return input.getResponseBuilder()
             .withSpeech(speechOutput)
             .withReprompt(getFromBundle(requestAttributes, BundleKeys.ASK_FOR_ANOTHER_REPROMPT))
-            .withSimpleCard(String.format("Shabbat times: %s", selectedCity.getGeoName()), speechOutput)
+            .withSimpleCard(cardTitle, cardContent)
             .withShouldEndSession(false)
             .build();
     }

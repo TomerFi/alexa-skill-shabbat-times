@@ -3,6 +3,8 @@ package info.tomfi.alexa.skills.shabbattimes.enums;
 public enum BundleKeys
 {
     ASK_FOR_ANOTHER_REPROMPT,
+    SIMPLE_CARD_TITLE_FMT,
+    SIMPLE_CARD_CONTENT_FMT,
     CITIES_IN_COUNTRY_FMT,
     DEFAULT_ASK_FOR_CITY,
     DEFAULT_ERROR,
