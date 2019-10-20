@@ -35,13 +35,12 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException;
 
-import lombok.Setter;
 import lombok.val;
 
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
-    @Setter @Autowired private APIRequestMaker requestMaker;
+    @Autowired private APIRequestMaker requestMaker;
 
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)

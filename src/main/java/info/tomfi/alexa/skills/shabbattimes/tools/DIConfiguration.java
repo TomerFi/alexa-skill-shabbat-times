@@ -1,5 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
+
+import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +27,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.core.annotation.Order;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestInitializer;
@@ -37,6 +41,7 @@ import lombok.val;
     "info.tomfi.alexa.skills.shabbattimes.api",
     "info.tomfi.alexa.skills.shabbattimes.request.handlers"
 })
+@Order(LOWEST_PRECEDENCE)
 public class DIConfiguration
 {
 
