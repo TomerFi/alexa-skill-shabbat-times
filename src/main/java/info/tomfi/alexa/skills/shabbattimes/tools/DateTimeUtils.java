@@ -23,7 +23,11 @@ public final class DateTimeUtils
 
     public static boolean isShabbatNow(final ZonedDateTime start, final ZonedDateTime current, final ZonedDateTime end)
     {
-        return current.equals(start) || current.equals(end) || (current.isAfter(start) && current.isBefore(end));
+        return current.equals(start)
+            || current.equals(end)
+            || (current.isAfter(start) && current.isBefore(end))
+            || start.getDayOfWeek().equals(current.getDayOfWeek())
+            || current.getDayOfWeek().equals(end.getDayOfWeek());
     }
 
     public static boolean isShabbatStartsTommorow(final ZonedDateTime start, final ZonedDateTime current)

@@ -49,7 +49,7 @@ public final class DateTimeUtilsTest
     @DisplayName("test the evaluation of a current date that is before the shabbat start datetime")
     public void isShabbatNow_currentIsBeforeShabbat_returnFalse()
     {
-        val currentDateTime = SHABBAT_START.minus(1, HALF_DAYS);
+        val currentDateTime = SHABBAT_START.minusDays(1);
         assertThat(isShabbatNow(SHABBAT_START, currentDateTime, SHABBAT_END)).isFalse();
     }
 
