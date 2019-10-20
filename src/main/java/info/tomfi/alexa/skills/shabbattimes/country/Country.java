@@ -11,6 +11,7 @@ import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
+
 import lombok.Getter;
 
 public final class Country implements Iterable<City>
