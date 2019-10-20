@@ -11,11 +11,14 @@ import com.amazon.ask.request.impl.BaseSkillRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
+import info.tomfi.alexa.skills.shabbattimes.tools.DIBreakAPIConfiguration;
 import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
+
 import lombok.Cleanup;
 import lombok.val;
 
@@ -24,7 +27,8 @@ public final class GetCityIntentTest
     private static Skill skillInTest;
 
     @BeforeAll
-    public static void initialize() throws BeansException, IllegalAccessException, InstantiationException {
+    public static void initialize() throws BeansException, IllegalAccessException, InstantiationException
+    {
         @Cleanup val context = new AnnotationConfigApplicationContext(DITestingConfiguration.class);
         skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
     }
@@ -143,6 +147,29 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
+        SkillResponseAssert.assertThat(response)
+            .isPresent()
+            .sessionIsOver()
+            .cardIsAbsent()
+            .repromptIsAbsent()
+            .sessionAttributesHasKeyWithValue("country", "IL")
+            .sessionAttributesHasKeyWithValue("city", "rishon lezion")
+            .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. goodbye.");
+    }
+
+    @Test
+    @DisplayName("test exception handling when hebcal api is not responding")
+    public void testGetCityIntent_hebcalApi_notResponding()
+        throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
+    {
+        @Cleanup val breakApiContext = new AnnotationConfigApplicationContext(DIBreakAPIConfiguration.class);
+        val breakApiSkill = breakApiContext.getBean(ShabbatTimesSkillCreator.class).getSkill();
+
+        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+            .getResource("skill-tests/get_city_intent_tuesday_israel_city_no_country.json").toURI())
+        );
+
+        val response = breakApiSkill.execute(new BaseSkillRequest(input));
         SkillResponseAssert.assertThat(response)
             .isPresent()
             .sessionIsOver()

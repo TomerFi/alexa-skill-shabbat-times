@@ -199,9 +199,6 @@
               <goal>report</goal>
             </goals>
             <configuration>
-              <excludes>
-                <exclude>info/tomfi/alexa/skills/shabbattimes/tools/DIConfiguration.class</exclude>
-              </excludes>
               <rules>
                 <rule>
                   <element>BUNDLE</element>
