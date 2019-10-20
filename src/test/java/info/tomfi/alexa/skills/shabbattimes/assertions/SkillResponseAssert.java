@@ -1,4 +1,4 @@
-package info.tomfi.alexa.skills.shabbattimes.skilltests;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import java.util.Optional;
 
@@ -18,14 +18,9 @@ import lombok.val;
 
 public final class SkillResponseAssert extends AbstractAssert<SkillResponseAssert, SkillResponse<ResponseEnvelope>>
 {
-    public SkillResponseAssert(final SkillResponse<ResponseEnvelope> actual)
+    protected SkillResponseAssert(final SkillResponse<ResponseEnvelope> actual)
     {
         super(actual, SkillResponseAssert.class);
-    }
-
-    public static SkillResponseAssert assertThat(final SkillResponse<ResponseEnvelope> actual)
-    {
-        return new SkillResponseAssert(actual);
     }
 
     public SkillResponseAssert isPresent()

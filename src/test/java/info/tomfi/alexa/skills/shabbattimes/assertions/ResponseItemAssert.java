@@ -1,18 +1,15 @@
-package info.tomfi.alexa.skills.shabbattimes.api.response.items;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
+
 public final class ResponseItemAssert extends AbstractAssert<ResponseItemAssert, ResponseItem>
 {
-    public ResponseItemAssert(final ResponseItem actual)
+    protected ResponseItemAssert(final ResponseItem actual)
     {
         super(actual, ResponseItemAssert.class);
-    }
-
-    public static ResponseItemAssert assertThat(final ResponseItem actual)
-    {
-        return new ResponseItemAssert(actual);
     }
 
     public ResponseItemAssert hebrewIs(final String testHebrew)

@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -24,7 +26,7 @@ public final class APIResponseTest {
 
         val response = new GsonBuilder().create().fromJson(breader, APIResponse.class);
 
-        APIResponseAssert.assertThat(response)
+        assertThat(response)
             .titleIs("testTitle")
             .dateIs("testDate")
             .linkIs("testLink");

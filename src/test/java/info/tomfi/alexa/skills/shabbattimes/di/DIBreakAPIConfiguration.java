@@ -1,21 +1,14 @@
-package info.tomfi.alexa.skills.shabbattimes.tools;
+package info.tomfi.alexa.skills.shabbattimes.di;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
-
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.gson.GsonBuilder;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,46 +18,26 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
-import lombok.Cleanup;
 import lombok.val;
 
 @Lazy
 @Configuration
-@Import(DIConfiguration.class)
+@Import(DIMockAPIConfiguration.class)
 @ComponentScan(basePackages = {
     "info.tomfi.alexa.skills.shabbattimes.api",
     "info.tomfi.alexa.skills.shabbattimes.request.handlers"
 })
-@Order(2)
-public class DITestingConfiguration
+@Order(HIGHEST_PRECEDENCE)
+public class DIBreakAPIConfiguration
 {
     @Bean
     public APIRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
-        @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(DITestingConfiguration.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
-        );
-
-        val fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
-
         val mockedMaker = mock(APIRequestMaker.class);
         when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
         when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-        when(mockedMaker.send()).thenReturn(fakeResponse);
+        when(mockedMaker.send()).thenThrow(new IOException("mocking exception throwing"));
         return mockedMaker;
-    }
-
-    @Bean
-    public GenericUrl getApiUrl()
-    {
-        return mock(GenericUrl.class);
-    }
-
-    @Bean
-    public HttpTransport getTransport()
-    {
-        return mock(NetHttpTransport.class);
     }
 }

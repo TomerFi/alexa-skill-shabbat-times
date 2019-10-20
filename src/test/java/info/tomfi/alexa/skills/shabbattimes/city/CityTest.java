@@ -1,6 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.city;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -27,7 +27,7 @@ public final class CityTest
 
         val city = new GsonBuilder().create().fromJson(breader, City.class);
 
-        CityAssert.assertThat(city)
+        assertThat(city)
             .cityNameIs("testCity1")
             .geoNameIs("TST-testCity1")
             .geoIdIs(1234567)

@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -25,7 +27,7 @@ public final class ResponseLocationTest
 
         val location = new GsonBuilder().create().fromJson(breader, ResponseLocation.class);
 
-        ResponseLocationAssert.assertThat(location)
+        assertThat(location)
             .latitudeIs(25.25)
             .longitudeIs(26.26)
             .geonameidIs(2526)

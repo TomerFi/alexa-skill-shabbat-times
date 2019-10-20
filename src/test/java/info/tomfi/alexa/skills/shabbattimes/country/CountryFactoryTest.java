@@ -1,7 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.country;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -29,7 +29,7 @@ public final class CountryFactoryTest
         when(mockedMember.getName()).thenReturn("test country");
 
         val countryTest = CountryFactory.getCountry(mockedMember);
-        CountryAssert.assertThat(countryTest)
+        assertThat(countryTest)
             .abbreviationIs("TST")
             .nameIs("test country")
             .prettyCityNamesIs("testCity1, testCity2");

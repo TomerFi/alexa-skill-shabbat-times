@@ -1,8 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.SkillTools.getCitySlotFromMap;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
+
 import static org.mockito.Mockito.when;
 
 import java.util.HashMap;

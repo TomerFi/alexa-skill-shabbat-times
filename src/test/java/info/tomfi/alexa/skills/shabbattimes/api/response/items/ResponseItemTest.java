@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -37,7 +39,7 @@ public final class ResponseItemTest
 
         val item = gson.fromJson(breader, ResponseItem.class);
 
-        ResponseItemAssert.assertThat(item)
+        assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")
             .dateIs("testDate")
@@ -58,7 +60,7 @@ public final class ResponseItemTest
 
         val item = gson.fromJson(breader, ResponseItem.class);
 
-        ResponseItemAssert.assertThat(item)
+        assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")
             .dateIs("testDate")
@@ -79,7 +81,7 @@ public final class ResponseItemTest
 
         val item = gson.fromJson(breader, ResponseItem.class);
 
-        ResponseItemAssert.assertThat(item)
+        assertThat(item)
             .titleIs("testTitle")
             .categoryIs("testCategory")
             .dateIs("testDate")

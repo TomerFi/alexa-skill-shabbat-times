@@ -1,18 +1,15 @@
-package info.tomfi.alexa.skills.shabbattimes.country;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
+import info.tomfi.alexa.skills.shabbattimes.country.Country;
+
 public final class CountryAssert extends AbstractAssert<CountryAssert, Country>
 {
-    public CountryAssert(final Country actual)
+    protected CountryAssert(final Country actual)
     {
         super(actual, CountryAssert.class);
-    }
-
-    public static CountryAssert assertThat(final Country actual)
-    {
-        return new CountryAssert(actual);
     }
 
     public CountryAssert abbreviationIs(final String testAbbreviation)

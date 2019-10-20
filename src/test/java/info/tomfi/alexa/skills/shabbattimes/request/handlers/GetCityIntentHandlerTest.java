@@ -24,7 +24,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
-import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -58,7 +58,7 @@ public final class GetCityIntentHandlerTest
         attributes.put(L10N_BUNDLE.getName(), bundle);
         fakeInput.getAttributesManager().setRequestAttributes(attributes);
 
-        @Cleanup val context = new AnnotationConfigApplicationContext(DITestingConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
         handlerInTest = context.getBean(GetCityIntentHandler.class);
     }
 

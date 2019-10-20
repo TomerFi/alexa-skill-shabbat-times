@@ -17,7 +17,6 @@ import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 
-import lombok.Setter;
 import lombok.val;
 
 public final class APIRequestMaker
@@ -27,9 +26,9 @@ public final class APIRequestMaker
 
     private final Map<String, String> queryParams;
 
-    @Setter @Autowired private GenericUrl apiUrl;
-    @Setter @Autowired private HttpTransport transport;
-    @Setter @Autowired private HttpRequestInitializer initializer;
+    @Autowired private GenericUrl apiUrl;
+    @Autowired private HttpTransport transport;
+    @Autowired private HttpRequestInitializer initializer;
 
     public APIRequestMaker()
     {

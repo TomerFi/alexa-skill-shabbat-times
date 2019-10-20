@@ -1,23 +1,19 @@
-package info.tomfi.alexa.skills.shabbattimes.api.response;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import java.util.List;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
+import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseLocation;
 
 public final class APIResponseAssert extends AbstractAssert<APIResponseAssert, APIResponse>
 {
-    public APIResponseAssert(final APIResponse actual)
+    protected APIResponseAssert(final APIResponse actual)
     {
         super(actual, APIResponseAssert.class);
-    }
-
-    public static APIResponseAssert assertThat(final APIResponse actual)
-    {
-        return new APIResponseAssert(actual);
     }
 
     public APIResponseAssert dateIs(final String testDate)

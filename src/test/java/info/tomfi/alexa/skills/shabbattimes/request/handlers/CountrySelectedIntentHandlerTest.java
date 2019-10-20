@@ -1,8 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
 
 import java.util.HashMap;
 import java.util.Locale;

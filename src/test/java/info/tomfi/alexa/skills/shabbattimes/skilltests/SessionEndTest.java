@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.skilltests;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -13,7 +15,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
+
 import lombok.Cleanup;
 import lombok.val;
 
@@ -23,7 +26,7 @@ public final class SessionEndTest
     @DisplayName("session ended")
     public void testSessionEnd() throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DITestingConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
         val skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
         val input = Files.readAllBytes(Paths.get(SessionEndTest.class.getClassLoader()
@@ -31,6 +34,6 @@ public final class SessionEndTest
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
 
-        SkillResponseAssert.assertThat(response).isPresent().responseIsAbsent();
+        assertThat(response).isPresent().responseIsAbsent();
     }
 }

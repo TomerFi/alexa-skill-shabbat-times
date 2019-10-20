@@ -1,8 +1,9 @@
-package info.tomfi.alexa.skills.shabbattimes.tools;
+package info.tomfi.alexa.skills.shabbattimes.di;
 
 
 import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,9 +19,12 @@ import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonObjectParser;
+import com.google.api.client.json.gson.GsonFactory;
 
 import org.reflections.Reflections;
 import org.springframework.context.annotation.Bean;
@@ -30,9 +34,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestInitializer;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
-
 import lombok.val;
 
 @Lazy
@@ -42,7 +44,7 @@ import lombok.val;
     "info.tomfi.alexa.skills.shabbattimes.request.handlers"
 })
 @Order(LOWEST_PRECEDENCE)
-public class DIConfiguration
+public class DIProdConfiguration
 {
 
     @Bean ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
@@ -71,7 +73,14 @@ public class DIConfiguration
     @Bean
     public HttpRequestInitializer getInitializer()
     {
-        return new APIRequestInitializer();
+        return new HttpRequestInitializer()
+        {
+            @Override
+            public void initialize(final HttpRequest request) throws IOException
+            {
+                request.setParser(new JsonObjectParser(new GsonFactory()));
+            }
+        };
     }
 
     @Bean

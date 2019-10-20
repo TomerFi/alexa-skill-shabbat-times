@@ -1,18 +1,15 @@
-package info.tomfi.alexa.skills.shabbattimes.api.response.items;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseLocation;
+
 public final class ResponseLocationAssert extends AbstractAssert<ResponseLocationAssert, ResponseLocation>
 {
-    public ResponseLocationAssert(final ResponseLocation actual)
+    protected ResponseLocationAssert(final ResponseLocation actual)
     {
         super(actual, ResponseLocationAssert.class);
-    }
-
-    public static ResponseLocationAssert assertThat(final ResponseLocation actual)
-    {
-        return new ResponseLocationAssert(actual);
     }
 
     public ResponseLocationAssert admin1Is(final String testAdmin1)

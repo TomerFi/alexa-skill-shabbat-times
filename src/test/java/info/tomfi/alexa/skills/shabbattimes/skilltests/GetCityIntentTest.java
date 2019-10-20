@@ -1,5 +1,7 @@
 package info.tomfi.alexa.skills.shabbattimes.skilltests;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -11,13 +13,12 @@ import com.amazon.ask.request.impl.BaseSkillRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.tools.DIBreakAPIConfiguration;
-import info.tomfi.alexa.skills.shabbattimes.tools.DITestingConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DIBreakAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -29,7 +30,7 @@ public final class GetCityIntentTest
     @BeforeAll
     public static void initialize() throws BeansException, IllegalAccessException, InstantiationException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DITestingConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
         skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
     }
 
@@ -42,7 +43,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsStillOn()
             .cardTitleIs("Shabbat times: IL-Rishon LeZion")
@@ -63,7 +64,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsStillOn()
             .cardTitleIs("Shabbat times: IL-Rishon LeZion")
@@ -84,7 +85,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsStillOn()
             .cardTitleIs("Shabbat times: IL-Rishon LeZion")
@@ -105,7 +106,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsStillOn()
             .cardTitleIs("Shabbat times: IL-Rishon LeZion")
@@ -126,7 +127,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsStillOn()
             .cardTitleIs("Shabbat times: IL-Rishon LeZion")
@@ -147,7 +148,7 @@ public final class GetCityIntentTest
         );
 
         val response = skillInTest.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsOver()
             .cardIsAbsent()
@@ -170,7 +171,7 @@ public final class GetCityIntentTest
         );
 
         val response = breakApiSkill.execute(new BaseSkillRequest(input));
-        SkillResponseAssert.assertThat(response)
+        assertThat(response)
             .isPresent()
             .sessionIsOver()
             .cardIsAbsent()

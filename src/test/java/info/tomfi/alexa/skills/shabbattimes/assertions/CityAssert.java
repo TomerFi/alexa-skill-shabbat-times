@@ -1,18 +1,15 @@
-package info.tomfi.alexa.skills.shabbattimes.city;
+package info.tomfi.alexa.skills.shabbattimes.assertions;
 
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
+import info.tomfi.alexa.skills.shabbattimes.city.City;
+
 public final class CityAssert extends AbstractAssert<CityAssert, City>
 {
-    public CityAssert(final City actual)
+    protected CityAssert(final City actual)
     {
         super(actual, CityAssert.class);
-    }
-
-    public static CityAssert assertThat(final City actual)
-    {
-        return new CityAssert(actual);
     }
 
     public CityAssert cityNameIs(final String testCityName)

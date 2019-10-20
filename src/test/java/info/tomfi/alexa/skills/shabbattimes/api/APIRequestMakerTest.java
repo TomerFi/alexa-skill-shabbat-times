@@ -1,16 +1,15 @@
 package info.tomfi.alexa.skills.shabbattimes.api;
 
 import static java.util.stream.Collectors.joining;
-import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.javanet.NetHttpTransport;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,10 +19,9 @@ import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
 import org.mockserver.model.JsonBody;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponseAssert;
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItemAssert;
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseLocationAssert;
+import info.tomfi.alexa.skills.shabbattimes.di.DILocalAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -33,11 +31,10 @@ public final class APIRequestMakerTest
     private APIRequestMaker requestMaker;
 
     @BeforeEach
-    public void initialize() {
-        requestMaker = new APIRequestMaker();
-        requestMaker.setApiUrl(new GenericUrl("http://localhost:1234/shabbat"));
-        requestMaker.setTransport(new NetHttpTransport());
-        requestMaker.setInitializer(new APIRequestInitializer());
+    public void initialize()
+    {
+        @Cleanup val context = new AnnotationConfigApplicationContext(DILocalAPIConfiguration.class);
+        requestMaker = context.getBean(APIRequestMaker.class);
     }
 
     @Test
@@ -97,12 +94,12 @@ public final class APIRequestMakerTest
 
         val response = requestMaker.send();
 
-        APIResponseAssert.assertThat(response)
+        assertThat(response)
             .titleIs("testTitle")
             .dateIs("testDate")
             .linkIs("testLink");
 
-        ResponseLocationAssert.assertThat(response.getLocation())
+        assertThat(response.getLocation())
             .latitudeIs(25.25)
             .longitudeIs(26.26)
             .geonameidIs(2526)
@@ -116,7 +113,7 @@ public final class APIRequestMakerTest
 
         for (val item : response.getItems())
         {
-            ResponseItemAssert.assertThat(item)
+            assertThat(item)
                 .titleIs("testTitle")
                 .categoryIs("testCategory")
                 .dateIs("testDate")
