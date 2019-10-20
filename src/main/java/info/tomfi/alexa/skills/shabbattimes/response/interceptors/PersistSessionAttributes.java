@@ -10,8 +10,11 @@ import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
+import org.springframework.stereotype.Component;
+
 import lombok.val;
 
+@Component
 public final class PersistSessionAttributes implements ResponseInterceptor
 {
     @Override

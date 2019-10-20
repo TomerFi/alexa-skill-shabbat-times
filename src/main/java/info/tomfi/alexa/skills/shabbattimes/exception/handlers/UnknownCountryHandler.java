@@ -7,9 +7,12 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
+@Component
 public final class UnknownCountryHandler implements ExceptionHandler
 {
     @Override

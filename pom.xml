@@ -11,7 +11,7 @@
     <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <jacoco.coverage.minimum>90%</jacoco.coverage.minimum>
+    <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
   </properties>
 
   <name>Shabbat Times</name>
@@ -199,6 +199,9 @@
               <goal>report</goal>
             </goals>
             <configuration>
+              <excludes>
+                <exclude>info/tomfi/alexa/skills/shabbattimes/exception/*</exclude>
+              </excludes>
               <rules>
                 <rule>
                   <element>BUNDLE</element>

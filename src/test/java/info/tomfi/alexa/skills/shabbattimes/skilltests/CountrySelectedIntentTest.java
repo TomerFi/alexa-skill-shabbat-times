@@ -18,7 +18,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
-
 import lombok.Cleanup;
 import lombok.val;
 
@@ -94,11 +93,11 @@ public final class CountrySelectedIntentTest
     }
 
     @Test
-    @DisplayName("test error case when not country value was supplied")
-    public void testCountrySelectedIntentNullValue() throws IOException, URISyntaxException
+    @DisplayName("test exception handling when no country value was provided with the request")
+    public void testCountrySelectedIntent_nullValue() throws IOException, URISyntaxException
     {
         val input = Files.readAllBytes(Paths.get(CountrySelectedIntentTest.class.getClassLoader()
-                .getResource("skill-tests/country_selected_intent_null_value.json").toURI())
+                .getResource("skill-tests/country_selected_intent_null_country.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
 
@@ -109,5 +108,23 @@ public final class CountrySelectedIntentTest
             .sessionAttributesAreAbsent()
             .outputSpeechIs("I'm sorry. The only countries I know are the United States, the United Kingdom, and Israel. Please repeat the country name. For a list of all the possible city names, just ask me for help.")
             .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
+    }
+
+    @Test
+    @DisplayName("test exception handling when unknown country value was provided with the request")
+    public void testCountrySelectedIntent_unknownCountry() throws IOException, URISyntaxException
+    {
+        val input = Files.readAllBytes(Paths.get(CountrySelectedIntentTest.class.getClassLoader()
+                .getResource("skill-tests/country_selected_intent_unknown_country.json").toURI())
+        );
+        val response = skillInTest.execute(new BaseSkillRequest(input));
+
+        assertThat(response)
+            .isPresent()
+            .sessionIsStillOn()
+            .cardIsAbsent()
+            .sessionAttributesAreAbsent()
+            .outputSpeechIs("I'm sorry. I haven't heard of Fakeland. Please try again.")
+            .repromptSpeechIs("Please try again, if you want, you can ask me for help.");
     }
 }

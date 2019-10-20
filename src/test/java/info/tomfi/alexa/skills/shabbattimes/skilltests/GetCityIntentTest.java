@@ -19,7 +19,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.di.DIBreakAPIConfiguration;
 import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
-
 import lombok.Cleanup;
 import lombok.val;
 
@@ -156,6 +155,60 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. goodbye.");
+    }
+
+    @Test
+    @DisplayName("test exception handling when unknown city and no country selcted")
+    public void testGetCityIntent_unknownCityNoCountry() throws IOException, URISyntaxException
+    {
+        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+            .getResource("skill-tests/get_city_intent_tuesday_unknown_city_no_country.json").toURI())
+        );
+
+        val response = skillInTest.execute(new BaseSkillRequest(input));
+        assertThat(response)
+            .isPresent()
+            .sessionIsStillOn()
+            .cardIsAbsent()
+            .sessionAttributesAreAbsent()
+            .outputSpeechIs("I'm sorry. I can't seem to find your requested city. Please repeat the city name. For a list of all the possible city names, just ask me for help.")
+            .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
+    }
+
+    @Test
+    @DisplayName("test exception handling when unknown city and  a selected country")
+    public void testGetCityIntent_unknownCityWithCountry() throws IOException, URISyntaxException
+    {
+        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+            .getResource("skill-tests/get_city_intent_tuesday_unknown_city_with_country.json").toURI())
+        );
+
+        val response = skillInTest.execute(new BaseSkillRequest(input));
+        assertThat(response)
+            .isPresent()
+            .sessionIsStillOn()
+            .cardIsAbsent()
+            .sessionAttributesAreAbsent()
+            .outputSpeechIs("I'm sorry. I can't seem to find your requested city. Please repeat the city name. For a list of all the possible city names, just ask me for help.")
+            .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
+    }
+
+    @Test
+    @DisplayName("test exception handling when no city slot was provided with the request")
+    public void testGetCityIntent_noCitySlot() throws IOException, URISyntaxException
+    {
+        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+            .getResource("skill-tests/get_city_intent_tuesday_no_city_slot.json").toURI())
+        );
+
+        val response = skillInTest.execute(new BaseSkillRequest(input));
+        assertThat(response)
+            .isPresent()
+            .sessionIsStillOn()
+            .cardIsAbsent()
+            .sessionAttributesAreAbsent()
+            .outputSpeechIs("I'm sorry. I can't seem to find your requested city. Please repeat the city name. For a list of all the possible city names, just ask me for help.")
+            .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
     }
 
     @Test

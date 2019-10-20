@@ -23,6 +23,7 @@ import org.springframework.context.annotation.Lazy;
 
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+
 import lombok.Cleanup;
 import lombok.val;
 

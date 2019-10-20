@@ -9,8 +9,11 @@ import java.util.ResourceBundle;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 
+import org.springframework.stereotype.Component;
+
 import lombok.val;
 
+@Component
 public final class SetLocaleBundleResource implements RequestInterceptor
 {
     private static final String L10N_BASE_NAME = "locales/Responses";

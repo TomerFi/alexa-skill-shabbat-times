@@ -6,8 +6,11 @@ import com.amazon.ask.dispatcher.exception.ExceptionHandler;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 
+import org.springframework.stereotype.Component;
+
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 
+@Component
 public final class NoJsonFileHandler implements ExceptionHandler
 {
     @Override
