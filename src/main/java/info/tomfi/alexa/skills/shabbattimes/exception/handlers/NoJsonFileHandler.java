@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 
+/**
+ * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler.
+ * Used for handling {@link info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException} exceptions.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class NoJsonFileHandler implements ExceptionHandler
 {

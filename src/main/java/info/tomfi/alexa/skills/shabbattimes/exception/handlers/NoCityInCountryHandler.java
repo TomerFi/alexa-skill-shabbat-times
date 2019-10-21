@@ -15,6 +15,12 @@ import org.springframework.stereotype.Component;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import lombok.val;
 
+/**
+ * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler.
+ * Used for handling {@link info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException} exceptions.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class NoCityInCountryHandler implements ExceptionHandler
 {

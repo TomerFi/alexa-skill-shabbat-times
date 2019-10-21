@@ -15,6 +15,12 @@ import org.springframework.stereotype.Component;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import lombok.val;
 
+/**
+ * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler.
+ * Used for handling {@link info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException} exceptions.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class NoCityFoundHandler implements ExceptionHandler
 {
