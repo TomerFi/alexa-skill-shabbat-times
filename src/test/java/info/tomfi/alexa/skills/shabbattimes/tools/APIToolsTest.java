@@ -3,9 +3,11 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
+
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-import static org.assertj.core.api.Assertions.assertThat;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -72,6 +74,24 @@ public final class APIToolsTest
         val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
         val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
         assertThat(APITools.getShabbatCandlesItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
+    }
+
+    @Test
+    @DisplayName("test the retrieval of the correct shabbat havdalah item by local date")
+    public void getShabbatHavdalaItem_listContainingCorrectItem_getCorrectItem()
+    {
+        val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
+        val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+        assertThat(APITools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).get()).isEqualTo(havdalaShabbatItem);
+    }
+
+    @Test
+    @DisplayName("test the empty optional value when trying to retrieve a non-existing havdalah item by local date")
+    public void getShabbatHavdalaItem_listNotContainingCorrectItem_optionalEmpty()
+    {
+        val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
+        val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+        assertThat(APITools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
     }
 
     @Test
