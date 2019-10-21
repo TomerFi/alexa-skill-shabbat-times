@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.val;
 
+/**
+ * Implemenation of com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor,
+ * intercept requests prior to their handling and plant the reference for the appropriate resource bundle object based on the requests' locale.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class SetLocaleBundleResource implements RequestInterceptor
 {

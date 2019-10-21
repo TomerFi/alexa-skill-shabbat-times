@@ -1,5 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.COUNTRY_SELECTED;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import java.util.Optional;
@@ -14,19 +15,24 @@ import org.springframework.stereotype.Component;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
-import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import lombok.val;
 
+/**
+ * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler,
+ * handles {#value info.tomfi.alexa.skills.shabbattimes.enums.Intents.COUNTRY_SELECTED} intent requests.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class CountrySelectedIntentHandler implements IntentRequestHandler
 {
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.COUNTRY_SELECTED.getName());
+        return intent.getIntent().getName().equals(COUNTRY_SELECTED.getName());
     }
 
     @Override

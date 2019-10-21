@@ -14,6 +14,12 @@ import org.springframework.stereotype.Component;
 
 import lombok.val;
 
+/**
+ * Implemenation of com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor,
+ * intercept response object on their way out and manipulate the session attributes.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class PersistSessionAttributes implements ResponseInterceptor
 {

@@ -1,5 +1,6 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.GET_CITY;
 import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getCandlesAndHavdalahItems;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.getEndDateTime;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.getShabbatStartLocalDate;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Component;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
-import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
@@ -33,6 +33,12 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromAPIException
 
 import lombok.val;
 
+/**
+ * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler,
+ * handles {#value info.tomfi.alexa.skills.shabbattimes.enums.Intents.GET_CITY} intent requests.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
@@ -41,7 +47,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler
     @Override
     public boolean canHandle(final HandlerInput input, final IntentRequest intent)
     {
-        return intent.getIntent().getName().equals(Intents.GET_CITY.getName());
+        return intent.getIntent().getName().equals(GET_CITY.getName());
     }
 
     @Override

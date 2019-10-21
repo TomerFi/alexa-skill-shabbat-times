@@ -9,6 +9,12 @@ import com.amazon.ask.model.SessionEndedRequest;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * Implementation of com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler
+ * handles requests of type com.amazon.ask.model.SessionEndedRequest.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class SessionEndHandler implements SessionEndedRequestHandler
 {

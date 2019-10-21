@@ -15,6 +15,12 @@ import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
 import lombok.val;
 
+/**
+ * Implementation of com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler,
+ * handles requests of type com.amazon.ask.model.LaunchRequest.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public class SessionStartHandler implements LaunchRequestHandler {
 

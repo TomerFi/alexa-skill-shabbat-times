@@ -17,6 +17,12 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import lombok.val;
 
+/**
+ * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler,
+ * handles {#value info.tomfi.alexa.skills.shabbattimes.enums.Intents.NO} intent requests.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Component
 public final class NoIntentHandler implements IntentRequestHandler
 {
