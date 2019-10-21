@@ -24,7 +24,6 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 @Lazy
 @Configuration
 @ComponentScan(basePackages = {
-    "info.tomfi.alexa.skills.shabbattimes.api",
     "info.tomfi.alexa.skills.shabbattimes.exception.handlers",
     "info.tomfi.alexa.skills.shabbattimes.request.handlers",
     "info.tomfi.alexa.skills.shabbattimes.request.interceptors",
@@ -33,7 +32,8 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 @Order(LOWEST_PRECEDENCE)
 public class DIProdConfiguration
 {
-    @Bean ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
+    @Bean
+    public ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
     {
         return new ShabbatTimesSkillCreator();
     }
