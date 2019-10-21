@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
+/**
+ * Pojo for creatign City objects from the backend json files.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @NoArgsConstructor(access = PROTECTED)
 public final class City implements Iterable<String>
 {
@@ -21,6 +26,9 @@ public final class City implements Iterable<String>
 
     private String[] aliases;
 
+    /**
+     * Get an iterator containing all of the city aliases and unique name.
+     */
     public Iterator<String> iterator()
     {
         val nameList = new ArrayList<>(Arrays.asList(aliases));

@@ -21,6 +21,20 @@ import org.springframework.core.annotation.Order;
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 
+/**
+ * Main Spring-Context dependency injection annotated configuration class.
+ *
+ * This configuration class takes the lowest precedence for multiple configuration classes.
+ * Component scaning is based on:
+ * <ul>
+ *     <li>info.tomfi.alexa.skills.shabbattimes.exception.handlers</li>
+ *     <li>info.tomfi.alexa.skills.shabbattimes.request.handlers</li>
+ *     <li>info.tomfi.alexa.skills.shabbattimes.request.interceptors</li>
+ *     <li>info.tomfi.alexa.skills.shabbattimes.response.interceptors</li>
+ * </ul>
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @Lazy
 @Configuration
 @ComponentScan(basePackages = {

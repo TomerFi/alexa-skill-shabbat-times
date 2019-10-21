@@ -12,6 +12,11 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 import lombok.Getter;
 
+/**
+ * Pojo for constructing the Country object from the backend json files.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 public final class Country implements Iterable<City>
 {
     @Getter private final String abbreviation;
@@ -19,17 +24,27 @@ public final class Country implements Iterable<City>
 
     private final List<City> citiesList;
 
-    protected Country(final CountryInfo country) throws NoJsonFileException {
+    protected Country(final CountryInfo country) throws NoJsonFileException
+    {
         abbreviation = country.getAbbreviation();
         name = country.getName();
         citiesList = getCityListFromJsonFile(abbreviation);
     }
 
-    public Iterator<City> iterator() {
+    /**
+     * Get an iterator containing all the {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects for this country object.
+     */
+    public Iterator<City> iterator()
+    {
         return new DynTypeIterator<City>(citiesList);
     }
 
-    public String getPrettyCityNames() {
+    /**
+     * Get a string represnting all the city names in to this country.
+     * @return a string containg the cities list joined by a comma.
+     */
+    public String getPrettyCityNames()
+    {
         return citiesList.stream().map(cityObj -> cityObj.getCityName()).collect(joining(", "));
     }
 }

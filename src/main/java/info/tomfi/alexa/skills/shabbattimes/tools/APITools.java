@@ -1,11 +1,9 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
-import static java.util.stream.Collectors.toList;
-
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
-
+import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+import static java.util.stream.Collectors.toList;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.time.LocalDate;
@@ -16,12 +14,24 @@ import java.util.Optional;
 
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
-
 import lombok.NoArgsConstructor;
 
+/**
+ * Utility class hosting static helpers for using the api response items.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @NoArgsConstructor(access = PRIVATE)
 public final class APITools
 {
+    /**
+     * A static tool for reducing a {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} list
+     * to its {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} and
+     * {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} items only.
+     *
+     * @param response the original {@link info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse} object.
+     * @return a sorted by date list of {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} objects.
+     */
     public static List<ResponseItem> getCandlesAndHavdalahItems(final APIResponse response)
     {
         return response.getItems().stream()
@@ -34,10 +44,32 @@ public final class APITools
             ).collect(toList());
     }
 
+    /**
+     * A static tool for retrieving the {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item for a specific date.
+     *
+     * @param items a list of {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}
+     * @param shabbatDate the date object for looking up the {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item.
+     * @return an Optional {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} corresponding to the requested date.
+     */
     public static Optional<ResponseItem> getShabbatCandlesItem(final List<ResponseItem> items, final LocalDate shabbatDate)
     {
         return items.stream()
             .filter(item -> item.getCategory().equals(CANDLES.getValue()))
+            .filter(item -> ZonedDateTime.parse(item.getDate(), ISO_OFFSET_DATE_TIME).toLocalDate().equals(shabbatDate))
+            .findFirst();
+    }
+
+    /**
+     * A static tool for retrieving the {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item for a specific date.
+     *
+     * @param items a list of {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}
+     * @param shabbatDate the date object for looking up the {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item.
+     * @return an Optional {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} corresponding to the requested date.
+     */
+    public static Optional<ResponseItem> getShabbatHavdalahItem(final List<ResponseItem> items, final LocalDate shabbatDate)
+    {
+        return items.stream()
+            .filter(item -> item.getCategory().equals(HAVDALAH.getValue()))
             .filter(item -> ZonedDateTime.parse(item.getDate(), ISO_OFFSET_DATE_TIME).toLocalDate().equals(shabbatDate))
             .findFirst();
     }

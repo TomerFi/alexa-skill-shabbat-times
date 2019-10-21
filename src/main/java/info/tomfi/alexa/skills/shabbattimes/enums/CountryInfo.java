@@ -5,6 +5,11 @@ import java.util.List;
 
 import lombok.Getter;
 
+/**
+ * Enum helper for creating {@link info.tomfi.alexa.skills.shabbattimes.country.Country} objects.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 public enum CountryInfo
 {
     ISRAEL("IL", "Israel", BundleKeys.NOT_FOUND_IN_ISRAEL, "israel"),

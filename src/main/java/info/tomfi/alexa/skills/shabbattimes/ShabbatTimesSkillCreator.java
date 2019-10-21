@@ -16,6 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.NoArgsConstructor;
 
+/**
+ * Class for constructing a Skill object with the injected handlers and interceptors.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @NoArgsConstructor
 public final class ShabbatTimesSkillCreator
 {
@@ -24,7 +29,11 @@ public final class ShabbatTimesSkillCreator
     @Autowired private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
     @Autowired private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
 
-    public Skill getSkill() throws IllegalAccessException, InstantiationException
+    /**
+     * Build the Shabbat Times Skill object.
+     * @return the Shabbat Time Skill object.
+     */
+    public Skill getSkill()
     {
         return Skills.standard()
             .addRequestInterceptors(requestInterceptors)

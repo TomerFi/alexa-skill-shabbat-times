@@ -16,9 +16,13 @@ import info.tomfi.alexa.skills.shabbattimes.api.enums.GeoTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
 import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
-
 import lombok.val;
 
+/**
+ * Builder class for constructing and sending API requests.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 public final class APIRequestMaker
 {
     private static String DEFAULT_HAVDALAH = "50";
@@ -30,6 +34,9 @@ public final class APIRequestMaker
     @Autowired private HttpTransport transport;
     @Autowired private HttpRequestInitializer initializer;
 
+    /**
+     * Main and only constructor, instantiates the query param map with the param default values.
+     */
     public APIRequestMaker()
     {
         queryParams = new ConcurrentHashMap<>();
@@ -41,6 +48,15 @@ public final class APIRequestMaker
         queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), DEFAULT_CANDLE_LIGHTING);
     }
 
+    /**
+     * Set the the minutes after sundown of the shabbat end for calculation of the shabbat end time.
+     *
+     * Default mintues if not set is {@value #DEFAULT_HAVDALAH}.
+     *
+     * @param minutes integer representing the minutes to set.
+     * @return this builder object.
+     * @throws IllegalArgumentException when the minutes value is smaller then 1.
+     */
     public APIRequestMaker setHavdalahMinutesAfterSundown(final int minutes) throws IllegalArgumentException
     {
         if (minutes <= 0)
@@ -51,6 +67,15 @@ public final class APIRequestMaker
         return this;
     }
 
+    /**
+     * Set the the minutes before sundown of the shabbat start for calculation of the shabbat start time.
+     *
+     * Default mintues if not set is {@value #DEFAULT_CANDLE_LIGHTING}.
+     *
+     * @param minutes integer representing the minutes to set.
+     * @return this builder object.
+     * @throws IllegalArgumentException when the minutes value is smaller then 0.
+     */
     public APIRequestMaker setCandleLightingMinutesBeforeSunset(final int minutes) throws IllegalArgumentException
     {
         if (minutes < 0)
@@ -61,6 +86,13 @@ public final class APIRequestMaker
         return this;
     }
 
+    /**
+     * Set the the geoid of the requested city.
+     *
+     * @param setGeoId integer representing the geoid to set.
+     * @return this builder object.
+     * @throws IllegalArgumentException when the geoid value is smaller then 1.
+     */
     public APIRequestMaker setGeoId(final int setGeoId) throws IllegalArgumentException
     {
         if (setGeoId <= 0)
@@ -71,6 +103,12 @@ public final class APIRequestMaker
         return this;
     }
 
+    /**
+     * Set the LocalDate object for the request.
+     *
+     * @param dateTime the date object to set.
+     * @return this builder object.
+     */
     public APIRequestMaker setSpecificDate(final LocalDate dateTime)
     {
         val year = String.valueOf(dateTime.getYear());
@@ -83,6 +121,13 @@ public final class APIRequestMaker
         return this;
     }
 
+    /**
+     * Send the api http request.
+     *
+     * @return the {@link info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse} represnting the response consumed from the api.
+     * @throws IllegalStateException if the geod id is no set prior to this method invoking.
+     * @throws IOException when failed to execute the http request.
+     */
     public APIResponse send() throws IllegalStateException, IOException
     {
         if (!queryParams.containsKey(ParamKeys.GEO_ID.getKey()))

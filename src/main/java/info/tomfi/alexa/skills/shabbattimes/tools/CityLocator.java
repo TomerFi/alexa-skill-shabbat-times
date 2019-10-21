@@ -15,9 +15,23 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
+/**
+ * Utility class for locating a city within the backend country and cities data.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @NoArgsConstructor(access = PRIVATE)
 public final class CityLocator
 {
+    /**
+     * A static tool for creating the country and city objects.
+     *
+     * @param countrySlot the Slot holding the country value collected from the customer.
+     * @param citySlot the Slot holding the city value collected from the customer.
+     * @return the {@link info.tomfi.alexa.skills.shabbattimes.city.City} object.
+     * @throws NoCityFoundException when an unknown city was provided with no country specification.
+     * @throws NoCityInCountryException when an unknown city within a country was encountered.
+     */
     public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot)
         throws NoCityFoundException, NoCityInCountryException
     {

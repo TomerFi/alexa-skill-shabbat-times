@@ -4,6 +4,11 @@ import com.google.api.client.util.Key;
 
 import lombok.Getter;
 
+/**
+ * Pojo for consuming a json location from the api response location object.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 public final class ResponseLocation
 {
     @Key @Getter private String admin1;

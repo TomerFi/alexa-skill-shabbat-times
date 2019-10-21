@@ -3,6 +3,11 @@ package info.tomfi.alexa.skills.shabbattimes.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * Enum helper for identifying the incoming request types.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 @RequiredArgsConstructor
 public enum Intents
 {

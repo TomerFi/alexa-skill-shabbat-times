@@ -1,5 +1,10 @@
 package info.tomfi.alexa.skills.shabbattimes.enums;
 
+/**
+ * Enum helper representing the keys of the resource bundle properties file holding the text to construct responses from.
+ *
+ * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+ */
 public enum BundleKeys
 {
     ASK_FOR_ANOTHER_REPROMPT,
