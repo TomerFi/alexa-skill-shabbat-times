@@ -55,7 +55,7 @@ public final class HelpIntentTest
             .sessionIsStillOn()
             .cardIsAbsent()
             .sessionAttributesHasKeyWithValue("lastIntent", "AMAZON.HelpIntent")
-            .outputSpeechIs("I can list all the city names i know in the United States, the United Kingdom, and in Israel. Which country would you like to hear about?")
-            .repromptSpeechIs("Please tell me your country! United States, United Kingdom, or Israel.");
+            .outputSpeechIs("I can list all the city names I know in the United States, the United Kingdom, and Israel. Which country would you like to hear about?")
+            .repromptSpeechIs("Please tell me the country name! United States, United Kingdom, or Israel.");
     }
 }

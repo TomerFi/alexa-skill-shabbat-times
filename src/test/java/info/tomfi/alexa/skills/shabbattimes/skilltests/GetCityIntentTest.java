@@ -67,7 +67,7 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .sessionAttributesHasKeyWithValue("lastIntent", "GetCityIntent")
-            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts on friday. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the shabbat times in another city?")
+            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts on friday. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the Shabbat times in another city?")
             .repromptSpeechIs("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.");
     }
 
@@ -88,7 +88,7 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .sessionAttributesHasKeyWithValue("lastIntent", "GetCityIntent")
-            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts on friday. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the shabbat times in another city?")
+            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts on friday. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the Shabbat times in another city?")
             .repromptSpeechIs("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.");
     }
 
@@ -109,7 +109,7 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .sessionAttributesHasKeyWithValue("lastIntent", "GetCityIntent")
-            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts tomorrow. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the shabbat times in another city?")
+            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts tomorrow. 2019-10-04, at 18:04. and ends on saturday. 2019-10-05, at 19:11.Would you like me to get the Shabbat times in another city?")
             .repromptSpeechIs("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.");
     }
 
@@ -130,7 +130,7 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .sessionAttributesHasKeyWithValue("lastIntent", "GetCityIntent")
-            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts today. 2019-10-04, at 18:04. and ends tomorrow. 2019-10-05, at 19:11.Would you like me to get the shabbat times in another city?")
+            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: starts today. 2019-10-04, at 18:04. and ends tomorrow. 2019-10-05, at 19:11.Would you like me to get the Shabbat times in another city?")
             .repromptSpeechIs("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.");
     }
 
@@ -151,7 +151,7 @@ public final class GetCityIntentTest
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
             .sessionAttributesHasKeyWithValue("lastIntent", "GetCityIntent")
-            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: started yesterday. 2019-10-04, at 18:04. and ends today. 2019-10-05, at 19:11.Would you like me to get the shabbat times in another city?")
+            .outputSpeechIs("Shabbat times in Rishon LeẔiyyon: started yesterday. 2019-10-04, at 18:04. and ends today. 2019-10-05, at 19:11.Would you like me to get the Shabbat times in another city?")
             .repromptSpeechIs("If you're interested in another city, please tell me the city name. For a list of all the possible city names, just ask me for help.");
     }
 
@@ -171,7 +171,7 @@ public final class GetCityIntentTest
             .repromptIsAbsent()
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
-            .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. goodbye.");
+            .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. Goodbye.");
     }
 
     @Test
@@ -248,6 +248,6 @@ public final class GetCityIntentTest
             .repromptIsAbsent()
             .sessionAttributesHasKeyWithValue("country", "IL")
             .sessionAttributesHasKeyWithValue("city", "rishon lezion")
-            .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. goodbye.");
+            .outputSpeechIs("I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. Goodbye.");
     }
 }

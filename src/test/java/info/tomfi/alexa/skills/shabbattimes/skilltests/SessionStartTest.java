@@ -55,7 +55,7 @@ public final class SessionStartTest
             .sessionIsStillOn()
             .sessionAttributesAreAbsent()
             .cardIsAbsent()
-            .outputSpeechIs("Welcome to shabbat times! What is your city name?")
+            .outputSpeechIs("Welcome to Shabbat Times! What is your city name?")
             .repromptSpeechIs("Please tell me the requested city name. For a list of all the possible city names, just ask me for help.");
     }
 }
