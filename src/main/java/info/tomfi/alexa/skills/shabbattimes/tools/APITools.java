@@ -43,8 +43,8 @@ public final class ApiTools
     /**
      * A static tool for reducing a
      * {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} list to its
-     * {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} and
-     * {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} items only.
+     * {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} and
+     * {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} items only.
      *
      * @param response the original
      *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse} object.
@@ -68,13 +68,13 @@ public final class ApiTools
 
     /**
      * A static tool for retrieving the
-     * {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item for a
+     * {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item for a
      * specific date.
      *
      * @param items a list of
      *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}.
      * @param shabbatDate the date object for looking up the
-     *     {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item.
+     *     {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#CANDLES} item.
      * @return an Optional
      *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}
      *     corresponding to the requested date.
@@ -95,13 +95,13 @@ public final class ApiTools
 
     /**
      * A static tool for retrieving the
-     * {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item for a
+     * {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item for a
      * specific date.
      *
      * @param items a list of
      *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}.
      * @param shabbatDate the date object for looking up the
-     *     {@value info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item.
+     *     {@linkplain info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories#HAVDALAH} item.
      * @return an Optional
      *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem}
      *     corresponding to the requested date.

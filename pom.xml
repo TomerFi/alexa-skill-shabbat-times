@@ -194,7 +194,6 @@
             <id>check-jacoco-metrics</id>
             <goals>
               <goal>check</goal>
-              <goal>report</goal>
             </goals>
             <configuration>
               <excludes>
@@ -327,6 +326,22 @@ limitations under the License.
           <detectDuplicateKeys>false</detectDuplicateKeys>
           <allowEmptyFiles>false</allowEmptyFiles>
           <allowJsonComments>false</allowJsonComments>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <bottom><![CDATA[
+            Copyright &copy; ${project.inceptionYear} <a href=${project.developers[0].url}>${project.developers[0].name}</a>. All rights reserved.
+          ]]></bottom>
+          <doclint>all</doclint>
+          <doctitle>${project.name} ${project.version}</doctitle>
+          <quiet>true</quiet>
+          <show>private</show>
+          <validateLinks>true</validateLinks>
+          <windowtitle>${project.name} ${project.version}</windowtitle>
         </configuration>
       </plugin>
 

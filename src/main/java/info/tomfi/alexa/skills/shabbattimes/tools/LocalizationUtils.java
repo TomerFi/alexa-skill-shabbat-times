@@ -40,7 +40,7 @@ public final class LocalizationUtils
      * attributes.
      *
      * @param attributes attributes storing the bundle resource object with the key of
-     *     {@value info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
+     *     {@linkplain info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
      * @param key a {@link info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys} member
      *     corresponding to the locale properties file key.
      * @return the text retrieved as String.
@@ -56,7 +56,7 @@ public final class LocalizationUtils
      * file based on the current day of week.
      *
      * @param requestAttributes attributes storing the bundle resource object with the key of
-     *     {@value info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
+     *     {@linkplain info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
      * @param dow the day of week memeber to retrieve the text for.
      * @return the text retrieved as String.
      */
@@ -77,7 +77,7 @@ public final class LocalizationUtils
      * based on the current day of week.
      *
      * @param requestAttributes attributes storing the bundle resource object with the key of
-     *     {@value info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
+     *     {@linkplain info.tomfi.alexa.skills.shabbattimes.enums.Attributes#L10N_BUNDLE}.
      * @param dow the day of week memeber to retrieve the text for.
      * @return the text retrieved as String.
      */

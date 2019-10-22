@@ -67,7 +67,7 @@ public final class ApiRequestMaker
     /**
      * Set the the minutes after sundown of the shabbat end for calculation of the shabbat end time.
      *
-     * Default mintues if not set is {@value #DEFAULT_HAVDALAH}.
+     * Default mintues if not set is {@linkplain #DEFAULT_HAVDALAH}.
      *
      * @param minutes integer representing the minutes to set.
      * @return this builder object.
@@ -92,7 +92,7 @@ public final class ApiRequestMaker
      * Set the the minutes before sundown of the shabbat start for calculation
      * of the shabbat start time.
      *
-     * Default mintues if not set is {@value #DEFAULT_CANDLE_LIGHTING}.
+     * Default mintues if not set is {@linkplain #DEFAULT_CANDLE_LIGHTING}.
      *
      * @param minutes integer representing the minutes to set.
      * @return this builder object.
