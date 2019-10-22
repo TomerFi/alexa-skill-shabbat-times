@@ -9,3 +9,5 @@ update_configs:
       - "TomerFi"
     default_assignees:
       - "TomerFi"
+    default_labels:
+      - "dependabot"
