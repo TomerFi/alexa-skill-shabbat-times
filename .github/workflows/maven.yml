@@ -40,5 +40,3 @@ jobs:
     #  with:
     #    name: mvnrepo
     #    path: /home/runner/.m2/repository
-    - name: Upload reports to Sonar Cloud
-      run: mvn sonar:sonar -B -ff
