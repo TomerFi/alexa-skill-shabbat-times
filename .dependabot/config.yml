@@ -5,6 +5,6 @@ update_configs:
     update_schedule: "weekly"
     target_branch: "master"
     default_reviewers:
-      - "tomerfi"
+      - "TomerFi"
     default_assignees:
-      - "tomerfi"
+      - "TomerFi"
