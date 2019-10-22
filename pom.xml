@@ -312,6 +312,24 @@ limitations under the License.
         </configuration>
       </plugin>
 
+      <plugin>
+        <groupId>com.github.sylvainlaurent.maven</groupId>
+        <artifactId>yaml-json-validator-maven-plugin</artifactId>
+        <version>1.0.3</version>
+        <configuration>
+          <validationSets>
+            <validationSet>
+              <includes>
+                <include>**/*.json</include>
+              </includes>
+            </validationSet>
+          </validationSets>
+          <detectDuplicateKeys>false</detectDuplicateKeys>
+          <allowEmptyFiles>false</allowEmptyFiles>
+          <allowJsonComments>false</allowJsonComments>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
