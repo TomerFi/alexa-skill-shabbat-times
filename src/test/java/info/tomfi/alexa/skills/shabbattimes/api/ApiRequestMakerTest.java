@@ -38,7 +38,7 @@ import org.mockserver.model.JsonBody;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import info.tomfi.alexa.skills.shabbattimes.di.DiLocalAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiLocalApiConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -50,7 +50,7 @@ public final class ApiRequestMakerTest
     @BeforeEach
     public void initialize()
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DiLocalAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiLocalApiConfiguration.class);
         requestMaker = context.getBean(ApiRequestMaker.class);
     }
 

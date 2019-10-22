@@ -25,7 +25,7 @@ import org.springframework.context.annotation.Lazy;
 @Lazy
 @Configuration
 @Import(DiProdConfiguration.class)
-public class DiLocalAPIConfiguration
+public class DiLocalApiConfiguration
 {
     @Bean
     public GenericUrl getApiUrl()

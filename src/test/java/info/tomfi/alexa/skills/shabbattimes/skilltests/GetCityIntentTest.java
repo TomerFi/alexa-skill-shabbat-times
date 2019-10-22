@@ -21,8 +21,8 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.request.impl.BaseSkillRequest;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DiBreakAPIConfiguration;
-import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiBreakApiConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -46,7 +46,7 @@ public final class GetCityIntentTest
     @BeforeAll
     public static void initialize() throws BeansException, IllegalAccessException, InstantiationException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
         skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
     }
 
@@ -233,7 +233,7 @@ public final class GetCityIntentTest
     public void testGetCityIntent_hebcalApi_notResponding()
         throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val breakApiContext = new AnnotationConfigApplicationContext(DiBreakAPIConfiguration.class);
+        @Cleanup val breakApiContext = new AnnotationConfigApplicationContext(DiBreakApiConfiguration.class);
         val breakApiSkill = breakApiContext.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
         val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()

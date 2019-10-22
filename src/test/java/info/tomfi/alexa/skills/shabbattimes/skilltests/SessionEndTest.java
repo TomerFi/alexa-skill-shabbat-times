@@ -20,7 +20,7 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 import com.amazon.ask.request.impl.BaseSkillRequest;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -42,7 +42,7 @@ public final class SessionEndTest
     @DisplayName("session ended")
     public void testSessionEnd() throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
         val skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
         val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()

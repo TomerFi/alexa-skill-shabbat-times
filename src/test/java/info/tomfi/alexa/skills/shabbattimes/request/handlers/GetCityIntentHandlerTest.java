@@ -27,7 +27,7 @@ import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
 
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
-import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 
 import java.time.LocalDate;
 import java.time.ZoneOffset;
@@ -74,7 +74,7 @@ public final class GetCityIntentHandlerTest
         attributes.put(L10N_BUNDLE.getName(), bundle);
         fakeInput.getAttributesManager().setRequestAttributes(attributes);
 
-        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
         handlerInTest = context.getBean(GetCityIntentHandler.class);
     }
 

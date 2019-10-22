@@ -25,7 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -42,7 +42,7 @@ public final class StopIntentTest
     @DisplayName("customer say 'stop'")
     public void testStopIntent() throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
         val skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
         val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
