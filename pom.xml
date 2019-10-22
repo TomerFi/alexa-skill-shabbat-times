@@ -12,6 +12,8 @@
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
+    <sonar.sources>src/main/java</sonar.sources>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
   </properties>
 
   <name>Shabbat Times</name>
@@ -144,6 +146,145 @@
     <defaultGoal>verify</defaultGoal>
     <finalName>${project.artifactId}</finalName>
 
+    <pluginManagement>
+      <plugins>
+
+        <plugin>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <cacheFile>checkstyle.cache</cacheFile>
+            <configLocation>checkstyle-conf.xml</configLocation>
+            <linkXRef>false</linkXRef>
+            <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
+            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>8.25</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>3.12.0</version>
+          <dependencies>
+            <dependency>
+              <groupId>net.sourceforge.pmd</groupId>
+              <artifactId>pmd-core</artifactId>
+              <version>6.18.0</version>
+            </dependency>
+            <dependency>
+              <groupId>net.sourceforge.pmd</groupId>
+              <artifactId>pmd-java</artifactId>
+              <version>6.18.0</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <analysisCache>true</analysisCache>
+            <analysisCacheLocation>pmd.cache</analysisCacheLocation>
+            <linkXRef>false</linkXRef>
+            <skipEmptyReport>false</skipEmptyReport>
+            <rulesets>
+              <ruleset>pmd-conf.xml</ruleset>
+            </rulesets>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>com.github.spotbugs</groupId>
+          <artifactId>spotbugs-maven-plugin</artifactId>
+          <version>3.1.12.2</version>
+          <configuration>
+            <effort>Max</effort>
+            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
+            <threshold>Low</threshold>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>com.github.spotbugs</groupId>
+              <artifactId>spotbugs</artifactId>
+              <version>3.1.12</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>3.0</version>
+          <configuration>
+            <inlineHeader><![CDATA[Copyright 2019 Tomer Figenblat
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.]]>
+            </inlineHeader>
+            <excludes>
+              <exclude>**/package-info.java</exclude>
+            </excludes>
+            <includes>
+              <include>**/*.java</include>
+              <!--<include>**/*.properties</include>-->
+            </includes>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>com.github.sylvainlaurent.maven</groupId>
+          <artifactId>yaml-json-validator-maven-plugin</artifactId>
+          <version>1.0.3</version>
+          <configuration>
+            <validationSets>
+              <validationSet>
+                <includes>
+                  <include>**/*.json</include>
+                </includes>
+              </validationSet>
+            </validationSets>
+            <detectDuplicateKeys>false</detectDuplicateKeys>
+            <allowEmptyFiles>false</allowEmptyFiles>
+            <allowJsonComments>false</allowJsonComments>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.1.1</version>
+          <configuration>
+            <bottom><![CDATA[
+              Copyright &copy; ${project.inceptionYear} <a href=${project.developers[0].url}>${project.developers[0].name}</a>. All rights reserved.
+            ]]></bottom>
+            <doclint>all</doclint>
+            <doctitle>${project.name} ${project.version}</doctitle>
+            <quiet>true</quiet>
+            <show>private</show>
+            <validateLinks>true</validateLinks>
+            <windowtitle>${project.name} ${project.version}</windowtitle>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.6.0.1398</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -214,135 +355,6 @@
             </configuration>
           </execution>
         </executions>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <cacheFile>checkstyle.cache</cacheFile>
-          <configLocation>checkstyle-conf.xml</configLocation>
-          <linkXRef>false</linkXRef>
-          <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
-          <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-          <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>8.25</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-pmd-plugin</artifactId>
-        <version>3.12.0</version>
-        <dependencies>
-          <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-core</artifactId>
-            <version>6.18.0</version>
-          </dependency>
-          <dependency>
-            <groupId>net.sourceforge.pmd</groupId>
-            <artifactId>pmd-java</artifactId>
-            <version>6.18.0</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <analysisCache>true</analysisCache>
-          <analysisCacheLocation>pmd.cache</analysisCacheLocation>
-          <linkXRef>false</linkXRef>
-          <skipEmptyReport>false</skipEmptyReport>
-          <rulesets>
-            <ruleset>pmd-conf.xml</ruleset>
-          </rulesets>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>3.1.12.2</version>
-        <configuration>
-          <effort>Max</effort>
-          <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
-          <threshold>Low</threshold>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>com.github.spotbugs</groupId>
-            <artifactId>spotbugs</artifactId>
-            <version>3.1.12</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-
-      <plugin>
-        <groupId>com.mycila</groupId>
-        <artifactId>license-maven-plugin</artifactId>
-        <version>3.0</version>
-        <configuration>
-          <inlineHeader><![CDATA[
-            Copyright 2019 Tomer Figenblat
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-            ]]>
-          </inlineHeader>
-          <excludes>
-            <exclude>**/package-info.java</exclude>
-          </excludes>
-          <includes>
-            <include>**/*.java</include>
-            <!--<include>**/*.properties</include>-->
-          </includes>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>com.github.sylvainlaurent.maven</groupId>
-        <artifactId>yaml-json-validator-maven-plugin</artifactId>
-        <version>1.0.3</version>
-        <configuration>
-          <validationSets>
-            <validationSet>
-              <includes>
-                <include>**/*.json</include>
-              </includes>
-            </validationSet>
-          </validationSets>
-          <detectDuplicateKeys>false</detectDuplicateKeys>
-          <allowEmptyFiles>false</allowEmptyFiles>
-          <allowJsonComments>false</allowJsonComments>
-        </configuration>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.1</version>
-        <configuration>
-          <bottom><![CDATA[
-            Copyright &copy; ${project.inceptionYear} <a href=${project.developers[0].url}>${project.developers[0].name}</a>. All rights reserved.
-          ]]></bottom>
-          <doclint>all</doclint>
-          <doctitle>${project.name} ${project.version}</doctitle>
-          <quiet>true</quiet>
-          <show>private</show>
-          <validateLinks>true</validateLinks>
-          <windowtitle>${project.name} ${project.version}</windowtitle>
-        </configuration>
       </plugin>
 
     </plugins>
