@@ -1,8 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
-import java.util.Optional;
-
 import com.google.api.client.util.Key;
+
+import java.util.Optional;
 
 import lombok.Getter;
 

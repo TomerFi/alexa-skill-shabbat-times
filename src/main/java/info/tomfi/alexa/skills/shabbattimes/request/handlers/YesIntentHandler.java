@@ -3,18 +3,18 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.YES;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
-import java.util.Optional;
-
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
-import org.springframework.stereotype.Component;
-
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 
+import java.util.Optional;
+
 import lombok.val;
+
+import org.springframework.stereotype.Component;
 
 /**
  * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler,

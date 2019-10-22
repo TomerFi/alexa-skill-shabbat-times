@@ -2,11 +2,12 @@ package info.tomfi.alexa.skills.shabbattimes.city;
 
 import static lombok.AccessLevel.PROTECTED;
 
+import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.val;
@@ -28,6 +29,8 @@ public final class City implements Iterable<String>
 
     /**
      * Get an iterator containing all of the city aliases and unique name.
+     *
+     * @return an iterator of Strings.
      */
     public Iterator<String> iterator()
     {

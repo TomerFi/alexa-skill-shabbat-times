@@ -1,29 +1,30 @@
 package info.tomfi.alexa.skills.shabbattimes.api;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import info.tomfi.alexa.skills.shabbattimes.api.enums.FlagStates;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.GeoTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.OutputTypes;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.ParamKeys;
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
+
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import lombok.val;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Builder class for constructing and sending API requests.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-public final class APIRequestMaker
+public final class ApiRequestMaker
 {
     private static String DEFAULT_HAVDALAH = "50";
     private static String DEFAULT_CANDLE_LIGHTING = "18";
@@ -37,7 +38,7 @@ public final class APIRequestMaker
     /**
      * Main and only constructor, instantiates the query param map with the param default values.
      */
-    public APIRequestMaker()
+    public ApiRequestMaker()
     {
         queryParams = new ConcurrentHashMap<>();
         queryParams.put(ParamKeys.OUTPUT_FORMAT.getKey(), OutputTypes.JSON.getType());
@@ -57,18 +58,24 @@ public final class APIRequestMaker
      * @return this builder object.
      * @throws IllegalArgumentException when the minutes value is smaller then 1.
      */
-    public APIRequestMaker setHavdalahMinutesAfterSundown(final int minutes) throws IllegalArgumentException
+    public ApiRequestMaker setHavdalahMinutesAfterSundown(final int minutes)
+        throws IllegalArgumentException
     {
         if (minutes <= 0)
         {
-            throw new IllegalArgumentException("havdalah minutes should be bigger the 0, otherwise we can't calculate the shabbat end time.");
+            throw new IllegalArgumentException(String.join(", ",
+                "havdalah minutes should be bigger the 0",
+                "otherwise we can't calculate the shabbat end time."
+                )
+            );
         }
         queryParams.put(ParamKeys.HAVDALAH.getKey(), String.valueOf(minutes));
         return this;
     }
 
     /**
-     * Set the the minutes before sundown of the shabbat start for calculation of the shabbat start time.
+     * Set the the minutes before sundown of the shabbat start for calculation
+     * of the shabbat start time.
      *
      * Default mintues if not set is {@value #DEFAULT_CANDLE_LIGHTING}.
      *
@@ -76,11 +83,14 @@ public final class APIRequestMaker
      * @return this builder object.
      * @throws IllegalArgumentException when the minutes value is smaller then 0.
      */
-    public APIRequestMaker setCandleLightingMinutesBeforeSunset(final int minutes) throws IllegalArgumentException
+    public ApiRequestMaker setCandleLightingMinutesBeforeSunset(final int minutes)
+        throws IllegalArgumentException
     {
         if (minutes < 0)
         {
-            throw new IllegalArgumentException("candle lighting time before sunset should a positive integer.");
+            throw new IllegalArgumentException(
+                "candle lighting time before sunset should a positive integer."
+            );
         }
         queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), String.valueOf(minutes));
         return this;
@@ -93,7 +103,7 @@ public final class APIRequestMaker
      * @return this builder object.
      * @throws IllegalArgumentException when the geoid value is smaller then 1.
      */
-    public APIRequestMaker setGeoId(final int setGeoId) throws IllegalArgumentException
+    public ApiRequestMaker setGeoId(final int setGeoId) throws IllegalArgumentException
     {
         if (setGeoId <= 0)
         {
@@ -109,7 +119,7 @@ public final class APIRequestMaker
      * @param dateTime the date object to set.
      * @return this builder object.
      */
-    public APIRequestMaker setSpecificDate(final LocalDate dateTime)
+    public ApiRequestMaker setSpecificDate(final LocalDate dateTime)
     {
         val year = String.valueOf(dateTime.getYear());
         val month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
@@ -124,19 +134,22 @@ public final class APIRequestMaker
     /**
      * Send the api http request.
      *
-     * @return the {@link info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse} represnting the response consumed from the api.
+     * @return the {@link info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse}
+     *     represnting the response consumed from the api.
      * @throws IllegalStateException if the geod id is no set prior to this method invoking.
      * @throws IOException when failed to execute the http request.
      */
-    public APIResponse send() throws IllegalStateException, IOException
+    public ApiResponse send() throws IllegalStateException, IOException
     {
         if (!queryParams.containsKey(ParamKeys.GEO_ID.getKey()))
         {
-            throw new IllegalStateException("we need the requested city geo id for build the request.");
+            throw new IllegalStateException(
+                "we need the requested city geo id for build the request."
+            );
         }
         val requestFactory = transport.createRequestFactory(initializer);
         apiUrl.putAll(queryParams);
         val request = requestFactory.buildGetRequest(apiUrl);
-        return request.execute().parseAs(APIResponse.class);
+        return request.execute().parseAs(ApiResponse.class);
     }
 }

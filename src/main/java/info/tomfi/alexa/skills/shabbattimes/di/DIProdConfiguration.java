@@ -2,8 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.di;
 
 import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
 
-import java.io.IOException;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestInitializer;
@@ -12,14 +10,16 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonObjectParser;
 import com.google.api.client.json.gson.GsonFactory;
 
+import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
+import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
+
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
-
-import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
 
 /**
  * Main Spring-Context dependency injection annotated configuration class.
@@ -44,7 +44,7 @@ import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
     "info.tomfi.alexa.skills.shabbattimes.response.interceptors"
 })
 @Order(LOWEST_PRECEDENCE)
-public class DIProdConfiguration
+public class DiProdConfiguration
 {
     @Bean
     public ShabbatTimesSkillCreator getShabbatTimesSkillCreator()
@@ -53,9 +53,9 @@ public class DIProdConfiguration
     }
 
     @Bean
-    public APIRequestMaker getRequestMaker()
+    public ApiRequestMaker getRequestMaker()
     {
-        return new APIRequestMaker();
+        return new ApiRequestMaker();
     }
 
     @Bean

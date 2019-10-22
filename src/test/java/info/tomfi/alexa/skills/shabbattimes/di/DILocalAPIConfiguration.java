@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Lazy;
 
 @Lazy
 @Configuration
-@Import(DIProdConfiguration.class)
+@Import(DiProdConfiguration.class)
 public class DILocalAPIConfiguration
 {
     @Bean

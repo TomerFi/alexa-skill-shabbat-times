@@ -21,27 +21,27 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
+import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
 
 import lombok.Cleanup;
 import lombok.val;
 
 @Lazy
 @Configuration
-@Import(DIProdConfiguration.class)
+@Import(DiProdConfiguration.class)
 public class DIMockAPIConfiguration
 {
     @Bean
-    public APIRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
+    public ApiRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
             Paths.get(DIMockAPIConfiguration.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
         );
 
-        val fakeResponse = new GsonBuilder().create().fromJson(breader, APIResponse.class);
+        val fakeResponse = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
 
-        val mockedMaker = mock(APIRequestMaker.class);
+        val mockedMaker = mock(ApiRequestMaker.class);
         when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
         when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
         when(mockedMaker.send()).thenReturn(fakeResponse);

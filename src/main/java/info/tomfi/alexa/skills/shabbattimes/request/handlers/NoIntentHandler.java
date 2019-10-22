@@ -2,20 +2,21 @@ package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
-import java.util.Optional;
-
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
-import org.springframework.stereotype.Component;
-
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
+
+import java.util.Optional;
+
 import lombok.val;
+
+import org.springframework.stereotype.Component;
 
 /**
  * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler,
@@ -40,7 +41,9 @@ public final class NoIntentHandler implements IntentRequestHandler
         try
         {
             val sessionAttributes = input.getAttributesManager().getSessionAttributes();
-            if (sessionAttributes.get(Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName()))
+            if (sessionAttributes.get(
+                Attributes.LAST_INTENT.getName()).equals(Intents.COUNTRY_SELECTED.getName())
+            )
             {
                 val attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
                 String speechMiddle = "";
@@ -52,11 +55,16 @@ public final class NoIntentHandler implements IntentRequestHandler
                         break;
                     }
                 }
-                speechOutput = String.format(getFromBundle(requestAttributes, BundleKeys.NOT_FOUND_FMT), speechMiddle);
+                speechOutput = String.format(
+                    getFromBundle(requestAttributes, BundleKeys.NOT_FOUND_FMT),
+                    speechMiddle
+                );
             }
+        // CHECKSTYLE.OFF: EmptyCatchBlock
         } catch (IllegalStateException | NullPointerException exc)
         {
         }
+        // CHECKSTYLE.ON: EmptyCatchBlock
         return input.getResponseBuilder()
             .withSpeech(speechOutput)
             .withShouldEndSession(true)

@@ -1,11 +1,11 @@
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import java.util.Optional;
-
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
+
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,8 @@ public final class SessionEndHandler implements SessionEndedRequestHandler
     }
 
     @Override
-    public Optional<Response> handle(final HandlerInput input, final SessionEndedRequest request) {
+    public Optional<Response> handle(final HandlerInput input, final SessionEndedRequest request)
+    {
         return Optional.empty();
     }
 }

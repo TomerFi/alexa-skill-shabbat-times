@@ -26,15 +26,15 @@ import info.tomfi.alexa.skills.shabbattimes.di.DILocalAPIConfiguration;
 import lombok.Cleanup;
 import lombok.val;
 
-public final class APIRequestMakerTest
+public final class ApiRequestMakerTest
 {
-    private APIRequestMaker requestMaker;
+    private ApiRequestMaker requestMaker;
 
     @BeforeEach
     public void initialize()
     {
         @Cleanup val context = new AnnotationConfigApplicationContext(DILocalAPIConfiguration.class);
-        requestMaker = context.getBean(APIRequestMaker.class);
+        requestMaker = context.getBean(ApiRequestMaker.class);
     }
 
     @Test
@@ -73,7 +73,7 @@ public final class APIRequestMakerTest
         requestMaker.setSpecificDate(LocalDate.now());
 
         @Cleanup val lines =
-            Files.lines(Paths.get(APIRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI())
+            Files.lines(Paths.get(ApiRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI())
         );
         val responesText = lines.collect(joining(System.lineSeparator()));
 

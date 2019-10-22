@@ -2,20 +2,21 @@ package info.tomfi.alexa.skills.shabbattimes.request.interceptors;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
+
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
+import lombok.val;
 
 import org.springframework.stereotype.Component;
 
-import lombok.val;
-
 /**
  * Implemenation of com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor,
- * intercept requests prior to their handling and plant the reference for the appropriate resource bundle object based on the requests' locale.
+ * intercept requests prior to their handling and plant the reference for the appropriate resource
+ * bundle object based on the requests' locale.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
@@ -30,8 +31,10 @@ public final class SetLocaleBundleResource implements RequestInterceptor
         ResourceBundle bundle;
         try
         {
-            bundle = ResourceBundle.getBundle(L10N_BASE_NAME, new Locale(input.getRequest().getLocale()));
-        } catch(MissingResourceException exc)
+            bundle = ResourceBundle.getBundle(
+                L10N_BASE_NAME, new Locale(input.getRequest().getLocale())
+            );
+        } catch (MissingResourceException exc)
         {
             bundle = ResourceBundle.getBundle(L10N_BASE_NAME, Locale.US);
         }

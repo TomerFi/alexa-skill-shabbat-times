@@ -2,8 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static lombok.AccessLevel.PRIVATE;
 
-import java.util.Optional;
-
 import com.amazon.ask.model.Slot;
 
 import info.tomfi.alexa.skills.shabbattimes.city.City;
@@ -12,6 +10,9 @@ import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
+
+import java.util.Optional;
+
 import lombok.NoArgsConstructor;
 import lombok.val;
 
@@ -45,7 +46,9 @@ public final class CityLocator
         {
             return cityOpt.get();
         }
-        throw new NoCityInCountryException(String.format("no city %s in %s.", citySlot.getValue(), countrySlot.getValue()));
+        throw new NoCityInCountryException(
+            String.format("no city %s in %s.", citySlot.getValue(), countrySlot.getValue())
+        );
     }
 
     private static City getByCity(final Slot citySlot)

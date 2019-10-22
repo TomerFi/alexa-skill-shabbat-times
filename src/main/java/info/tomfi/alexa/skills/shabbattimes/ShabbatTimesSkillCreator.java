@@ -1,8 +1,5 @@
 package info.tomfi.alexa.skills.shabbattimes;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.amazon.ask.Skill;
 import com.amazon.ask.Skills;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -12,9 +9,12 @@ import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+import java.util.Optional;
 
 import lombok.NoArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Class for constructing a Skill object with the injected handlers and interceptors.
@@ -24,10 +24,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public final class ShabbatTimesSkillCreator
 {
-    @Autowired private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
-    @Autowired private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
-    @Autowired private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
-    @Autowired private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
+    @Autowired
+    private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
+    @Autowired
+    private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
+    @Autowired
+    private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
+    @Autowired
+    private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
 
     /**
      * Build the Shabbat Times Skill object.

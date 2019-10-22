@@ -1,17 +1,18 @@
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatCandlesItem;
-import static info.tomfi.alexa.skills.shabbattimes.tools.APITools.getShabbatHavdalahItem;
+import static info.tomfi.alexa.skills.shabbattimes.tools.ApiTools.getShabbatCandlesItem;
+import static info.tomfi.alexa.skills.shabbattimes.tools.ApiTools.getShabbatHavdalahItem;
 
 import static lombok.AccessLevel.PRIVATE;
+
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 import lombok.NoArgsConstructor;
 import lombok.val;
 
@@ -40,15 +41,19 @@ public final class DateTimeUtils
     }
 
     /**
-     * Get the Shabbat start date time object by retrieving the candles item for a specific date from the response items list and parsing it.
+     * Get the Shabbat start date time object by retrieving the candles item for a specific date
+     * from the response items list and parsing it.
      *
-     * @param items a list of {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} to retrieve the item from.
+     * @param items a list of
+     *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} to retrieve
+     *     the item from.
      * @param date the specific date to look for a candles item for.
      * @return a ZonedDateTime object represnting the start date time of the Shabbat.
      * @throws NoItemFoundForDateException when no corresponding candles item was found.
      */
-    public static ZonedDateTime getStartDateTime(final List<ResponseItem> items, final LocalDate date)
-        throws NoItemFoundForDateException
+    public static ZonedDateTime getStartDateTime(
+        final List<ResponseItem> items, final LocalDate date
+    ) throws NoItemFoundForDateException
     {
         val shabbatStartItem = getShabbatCandlesItem(items, date);
         if (!shabbatStartItem.isPresent())
@@ -59,9 +64,12 @@ public final class DateTimeUtils
     }
 
     /**
-     * Get the Shabbat end date time object by retrieving the havdalah item for a specific date from the response items list and parsing it.
+     * Get the Shabbat end date time object by retrieving the havdalah item for a specific date
+     * from the response items list and parsing it.
      *
-     * @param items a list of {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} to retrieve the item from.
+     * @param items a list of
+     *     {@link info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} to retrieve
+     *     the item from.
      * @param date the specific date to look for a havdalah item for.
      * @return a ZonedDateTime object represnting the end date time of the Shabbat.
      * @throws NoItemFoundForDateException when no corresponding candles item was found.

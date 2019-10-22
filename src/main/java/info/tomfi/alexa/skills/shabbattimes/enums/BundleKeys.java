@@ -1,7 +1,8 @@
 package info.tomfi.alexa.skills.shabbattimes.enums;
 
 /**
- * Enum helper representing the keys of the resource bundle properties file holding the text to construct responses from.
+ * Enum helper representing the keys of the resource bundle properties file holding the text
+ * to construct responses from.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
@@ -35,5 +36,5 @@ public enum BundleKeys
     SHABBAT_START_TOMORROW,
     SHABBAT_START_YESTERDAY,
     THANKS_AND_BYE,
-    WELCOME_SPEECH;
+    WELCOME_SPEECH
 }

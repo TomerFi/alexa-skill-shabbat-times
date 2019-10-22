@@ -3,7 +3,7 @@ package info.tomfi.alexa.skills.shabbattimes.assertions;
 import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.response.SkillResponse;
 
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseLocation;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
@@ -11,9 +11,9 @@ import info.tomfi.alexa.skills.shabbattimes.country.Country;
 
 public final class Assertions extends org.assertj.core.api.Assertions
 {
-    public static APIResponseAssert assertThat(final APIResponse actual)
+    public static ApiResponseAssert assertThat(final ApiResponse actual)
     {
-        return new APIResponseAssert(actual);
+        return new ApiResponseAssert(actual);
     }
 
     public static CityAssert assertThat(final City actual)

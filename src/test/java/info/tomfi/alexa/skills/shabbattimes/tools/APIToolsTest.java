@@ -24,14 +24,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
-import info.tomfi.alexa.skills.shabbattimes.api.response.APIResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 
 import lombok.val;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-public final class APIToolsTest
+public final class ApiToolsTest
 {
     @Mock private ResponseItem holidayItem;
     @Mock private ResponseItem candlesHolidayItem;
@@ -64,7 +64,7 @@ public final class APIToolsTest
     {
         val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
         val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
-        assertThat(APITools.getShabbatCandlesItem(listOfItems, shabbatStartDate).get()).isEqualTo(candlesShabbatItem);
+        assertThat(ApiTools.getShabbatCandlesItem(listOfItems, shabbatStartDate).get()).isEqualTo(candlesShabbatItem);
     }
 
     @Test
@@ -73,7 +73,7 @@ public final class APIToolsTest
     {
         val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
         val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
-        assertThat(APITools.getShabbatCandlesItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
+        assertThat(ApiTools.getShabbatCandlesItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
     }
 
     @Test
@@ -82,7 +82,7 @@ public final class APIToolsTest
     {
         val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
         val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
-        assertThat(APITools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).get()).isEqualTo(havdalaShabbatItem);
+        assertThat(ApiTools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).get()).isEqualTo(havdalaShabbatItem);
     }
 
     @Test
@@ -91,17 +91,17 @@ public final class APIToolsTest
     {
         val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
         val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
-        assertThat(APITools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
+        assertThat(ApiTools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
     }
 
     @Test
     @DisplayName("test the reducing and sorting of the response items list")
     public void getCandlesAndHavdalahItems_unsortedFullList_sortedMinmizedList()
     {
-        val response = mock(APIResponse.class);
+        val response = mock(ApiResponse.class);
         when(response.getItems()).thenReturn(Arrays.asList(havdalaShabbatItem, candlesShabbatItem, havdalaHolidayItem, candlesHolidayItem, holidayItem));
 
-        assertThat(APITools.getCandlesAndHavdalahItems(response))
+        assertThat(ApiTools.getCandlesAndHavdalahItems(response))
             .containsExactly(candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem)
             .isSortedAccordingTo(
                 (prevItem, currentItem) ->

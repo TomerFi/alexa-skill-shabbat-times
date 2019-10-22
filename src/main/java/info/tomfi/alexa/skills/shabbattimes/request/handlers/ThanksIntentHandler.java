@@ -4,12 +4,12 @@ import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.THANKS_AND_B
 import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.THANKS;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
-import java.util.Optional;
-
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -32,7 +32,9 @@ public final class ThanksIntentHandler implements IntentRequestHandler
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
         return input.getResponseBuilder()
-            .withSpeech(getFromBundle(input.getAttributesManager().getRequestAttributes(), THANKS_AND_BYE))
+            .withSpeech(getFromBundle(
+                input.getAttributesManager().getRequestAttributes(), THANKS_AND_BYE)
+            )
             .withShouldEndSession(true)
             .build();
     }

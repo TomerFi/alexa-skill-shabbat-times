@@ -2,7 +2,6 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CANDLES;
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
-import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HOLIDAY;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
 import static info.tomfi.alexa.skills.shabbattimes.tools.DateTimeUtils.getShabbatStartLocalDate;
@@ -33,7 +32,6 @@ import lombok.val;
 @MockitoSettings(strictness = Strictness.LENIENT)
 public final class DateTimeUtilsTest
 {
-    @Mock private ResponseItem holidayItem;
     @Mock private ResponseItem candlesHolidayItem;
     @Mock private ResponseItem havdalaHolidayItem;
     @Mock private ResponseItem candlesShabbatItem;
@@ -45,9 +43,6 @@ public final class DateTimeUtilsTest
     @BeforeEach
     public void initialize()
     {
-        when(holidayItem.getCategory()).thenReturn(HOLIDAY.getValue());
-        when(holidayItem.getDate()).thenReturn("2019-10-13");
-
         when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.getValue());
         when(candlesHolidayItem.getDate()).thenReturn("2019-10-13T17:53:00+03:00");
 

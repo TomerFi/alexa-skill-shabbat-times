@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.core.annotation.Order;
 
-import info.tomfi.alexa.skills.shabbattimes.api.APIRequestMaker;
+import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
 
 import lombok.val;
 
@@ -27,9 +27,9 @@ import lombok.val;
 public class DIBreakAPIConfiguration
 {
     @Bean
-    public APIRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
+    public ApiRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
-        val mockedMaker = mock(APIRequestMaker.class);
+        val mockedMaker = mock(ApiRequestMaker.class);
         when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
         when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
         when(mockedMaker.send()).thenThrow(new IOException("mocking exception throwing"));

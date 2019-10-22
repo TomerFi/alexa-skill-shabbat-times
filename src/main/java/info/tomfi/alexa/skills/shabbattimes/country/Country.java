@@ -3,13 +3,14 @@ package info.tomfi.alexa.skills.shabbattimes.country;
 import static info.tomfi.alexa.skills.shabbattimes.tools.SkillTools.getCityListFromJsonFile;
 import static java.util.stream.Collectors.joining;
 
-import java.util.Iterator;
-import java.util.List;
-
 import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
+
+import java.util.Iterator;
+import java.util.List;
+
 import lombok.Getter;
 
 /**
@@ -24,6 +25,12 @@ public final class Country implements Iterable<City>
 
     private final List<City> citiesList;
 
+    /**
+     * Main and only constructor, call for the static tool creating the list of cities.
+     * @param country the {@link info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo} member
+     *     describing the country.
+     * @throws NoJsonFileException when a country corresponding backend json file was not found.
+     */
     protected Country(final CountryInfo country) throws NoJsonFileException
     {
         abbreviation = country.getAbbreviation();
@@ -32,7 +39,10 @@ public final class Country implements Iterable<City>
     }
 
     /**
-     * Get an iterator containing all the {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects for this country object.
+     * Get an iterator containing all the {@link info.tomfi.alexa.skills.shabbattimes.city.City}
+     * objects for this country object.
+     *
+     * @return and iterator of {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects.
      */
     public Iterator<City> iterator()
     {

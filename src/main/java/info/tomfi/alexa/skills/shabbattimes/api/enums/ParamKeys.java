@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Enum helper for constructing the api request, used for setting the various keys in the param query.
+ * Enum helper for constructing api requests, used for setting the various keys in the param query.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */

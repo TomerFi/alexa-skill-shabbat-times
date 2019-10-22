@@ -143,6 +143,7 @@
   <build>
     <defaultGoal>verify</defaultGoal>
     <finalName>${project.artifactId}</finalName>
+
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -155,6 +156,7 @@
           <target>${java.version}</target>
         </configuration>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -171,10 +173,12 @@
           </execution>
         </executions>
       </plugin>
+
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M3</version>
       </plugin>
+
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -212,6 +216,27 @@
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.0</version>
+        <configuration>
+          <cacheFile>checkstyle.cache</cacheFile>
+          <configLocation>checkstyle-conf.xml</configLocation>
+          <linkXRef>false</linkXRef>
+          <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
+          <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+          <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>8.25</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
     </plugins>
   </build>
 

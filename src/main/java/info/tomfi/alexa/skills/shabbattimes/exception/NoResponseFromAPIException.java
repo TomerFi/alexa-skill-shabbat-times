@@ -7,15 +7,17 @@ import com.amazon.ask.exception.AskSdkException;
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-public final class NoResponseFromAPIException extends AskSdkException
+public final class NoResponseFromApiException extends AskSdkException
 {
-    private final static long serialVersionUID = 24L;
+    private static final long serialVersionUID = 24L;
 
-    public NoResponseFromAPIException(final String message) {
+    public NoResponseFromApiException(final String message)
+    {
         super(message);
     }
 
-    public NoResponseFromAPIException(final String message, final Throwable cause) {
+    public NoResponseFromApiException(final String message, final Throwable cause)
+    {
         super(message, cause);
     }
 }

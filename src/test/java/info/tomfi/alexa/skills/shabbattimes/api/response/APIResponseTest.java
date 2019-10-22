@@ -15,16 +15,16 @@ import org.junit.jupiter.api.Test;
 import lombok.Cleanup;
 import lombok.val;
 
-public final class APIResponseTest {
+public final class ApiResponseTest {
     @Test
     @DisplayName("test the api json response with minimal values")
     public void responseJson_minimalValues_success() throws IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(APIResponse.class.getClassLoader().getResource("api-responses/response_minimal.json").toURI())
+            Paths.get(ApiResponse.class.getClassLoader().getResource("api-responses/response_minimal.json").toURI())
         );
 
-        val response = new GsonBuilder().create().fromJson(breader, APIResponse.class);
+        val response = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
 
         assertThat(response)
             .titleIs("testTitle")
