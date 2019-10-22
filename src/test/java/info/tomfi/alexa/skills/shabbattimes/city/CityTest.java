@@ -22,7 +22,7 @@ public final class CityTest
     public void cityJsonToObject_testJsonFile_validateValues() throws IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(CityTest.class.getClassLoader().getResource("cities/TST_City1.json").toURI())
+            Paths.get(Thread.currentThread().getContextClassLoader().getResource("cities/TST_City1.json").toURI())
         );
 
         val city = new GsonBuilder().create().fromJson(breader, City.class);

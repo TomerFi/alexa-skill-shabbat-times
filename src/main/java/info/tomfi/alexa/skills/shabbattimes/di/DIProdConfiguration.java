@@ -15,6 +15,8 @@ import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
 
 import java.io.IOException;
 
+import lombok.NoArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +46,7 @@ import org.springframework.core.annotation.Order;
     "info.tomfi.alexa.skills.shabbattimes.response.interceptors"
 })
 @Order(LOWEST_PRECEDENCE)
+@NoArgsConstructor
 public class DiProdConfiguration
 {
     @Bean

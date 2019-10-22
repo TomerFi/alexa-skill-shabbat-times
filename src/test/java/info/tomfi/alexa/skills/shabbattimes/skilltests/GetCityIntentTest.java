@@ -17,8 +17,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DIBreakAPIConfiguration;
-import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiBreakAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
 import lombok.Cleanup;
 import lombok.val;
 
@@ -29,7 +29,7 @@ public final class GetCityIntentTest
     @BeforeAll
     public static void initialize() throws BeansException, IllegalAccessException, InstantiationException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
         skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
     }
 
@@ -37,7 +37,7 @@ public final class GetCityIntentTest
     @DisplayName("customer select israel city 'rishon lezion' on Tuesday without stating the origin country, start on $ end on $")
     public void testGetCityIntent_Tuesday_IsraelCity_NoCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_israel_city_no_country.json").toURI())
         );
 
@@ -58,7 +58,7 @@ public final class GetCityIntentTest
     @DisplayName("customer select city on Tuesday while stating the country 'rishon lezion, israel', start on $ end on $")
     public void testGetCityIntent_Tuesday_IsraelCity_WithCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_israel_city_with_country.json").toURI())
         );
 
@@ -79,7 +79,7 @@ public final class GetCityIntentTest
     @DisplayName("customer select israel city 'rishon lezion' on Thursday without stating the origin country, start tommorow end on $")
     public void testGetCityIntent_Thursday_IsraelCity_NoCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_thursday_israel_city_no_country.json").toURI())
         );
 
@@ -100,7 +100,7 @@ public final class GetCityIntentTest
     @DisplayName("customer select israel city 'rishon lezion' on Friday without stating the origin country, start today end tomorrow")
     public void testGetCityIntent_Friday_IsraelCity_NoCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_friday_israel_city_no_country.json").toURI())
         );
 
@@ -121,7 +121,7 @@ public final class GetCityIntentTest
     @DisplayName("customer select israel city 'rishon lezion' on Saturday without stating the origin country, start yesterday end today")
     public void testGetCityIntent_Saturday_IsraelCity_NoCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_saturday_israel_city_no_country.json").toURI())
         );
 
@@ -142,7 +142,7 @@ public final class GetCityIntentTest
     @DisplayName("test exception handling with a requested date that is later then the date in the mocked response")
     public void testGetCityIntent_requesteDate_after_responseDate() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_request_date_after_response_date.json").toURI())
         );
 
@@ -161,7 +161,7 @@ public final class GetCityIntentTest
     @DisplayName("test exception handling when unknown city and no country selcted")
     public void testGetCityIntent_unknownCityNoCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_unknown_city_no_country.json").toURI())
         );
 
@@ -179,7 +179,7 @@ public final class GetCityIntentTest
     @DisplayName("test exception handling when unknown city and  a selected country")
     public void testGetCityIntent_unknownCityWithCountry() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_unknown_city_with_country.json").toURI())
         );
 
@@ -197,7 +197,7 @@ public final class GetCityIntentTest
     @DisplayName("test exception handling when no city slot was provided with the request")
     public void testGetCityIntent_noCitySlot() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_no_city_slot.json").toURI())
         );
 
@@ -216,10 +216,10 @@ public final class GetCityIntentTest
     public void testGetCityIntent_hebcalApi_notResponding()
         throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val breakApiContext = new AnnotationConfigApplicationContext(DIBreakAPIConfiguration.class);
+        @Cleanup val breakApiContext = new AnnotationConfigApplicationContext(DiBreakAPIConfiguration.class);
         val breakApiSkill = breakApiContext.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
-        val input = Files.readAllBytes(Paths.get(GetCityIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
             .getResource("skill-tests/get_city_intent_tuesday_israel_city_no_country.json").toURI())
         );
 

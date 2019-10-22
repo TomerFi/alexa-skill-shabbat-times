@@ -22,7 +22,7 @@ public final class ResponseLocationTest
     public void jsonToObject_location_success() throws IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(ResponseLocationTest.class.getClassLoader().getResource("api-responses/response_location.json").toURI())
+            Paths.get(Thread.currentThread().getContextClassLoader().getResource("api-responses/response_location.json").toURI())
         );
 
         val location = new GsonBuilder().create().fromJson(breader, ResponseLocation.class);

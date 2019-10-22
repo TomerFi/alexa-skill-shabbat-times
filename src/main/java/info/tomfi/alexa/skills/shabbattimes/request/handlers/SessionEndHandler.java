@@ -7,6 +7,8 @@ import com.amazon.ask.model.SessionEndedRequest;
 
 import java.util.Optional;
 
+import lombok.NoArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
+@NoArgsConstructor
 public final class SessionEndHandler implements SessionEndedRequestHandler
 {
     @Override

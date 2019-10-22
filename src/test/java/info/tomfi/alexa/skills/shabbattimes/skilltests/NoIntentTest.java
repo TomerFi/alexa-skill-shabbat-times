@@ -17,7 +17,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -29,7 +29,7 @@ public final class NoIntentTest
     @BeforeAll
     public static void initialize() throws BeansException, IllegalAccessException, InstantiationException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
         skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
     }
 
@@ -37,7 +37,7 @@ public final class NoIntentTest
     @DisplayName("customer reply 'no'")
     public void testNoIntent() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(NoIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/no_intent.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
@@ -55,7 +55,7 @@ public final class NoIntentTest
     @DisplayName("customer reply 'no' after selecting israel as the country to list the cities from")
     public void testNoIntentAfterCountrySelectedIntentIL() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(NoIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/no_intent_after_country_selected_il.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
@@ -74,7 +74,7 @@ public final class NoIntentTest
     @DisplayName("customer reply 'no' after selecting the united states as the country to list the cities from")
     public void testNoIntentAfterCountrySelectedIntentUS() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(NoIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/no_intent_after_country_selected_us.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
@@ -93,7 +93,7 @@ public final class NoIntentTest
     @DisplayName("customer reply 'no' after selecting england as the country to list the cities from")
     public void testNoIntentAfterCountrySelectedIntentGB() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(NoIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/no_intent_after_country_selected_gb.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));
@@ -112,7 +112,7 @@ public final class NoIntentTest
     @DisplayName("customer reply 'no' after selecting an unknown as the country to list the cities from")
     public void testNoIntentAfterCountrySelectedIntentUknown() throws IOException, URISyntaxException
     {
-        val input = Files.readAllBytes(Paths.get(NoIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/no_intent_after_country_selected_er.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));

@@ -3,12 +3,14 @@ package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 import com.google.api.client.util.Key;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Pojo for consuming a json location from the api response location object.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
+@NoArgsConstructor
 public final class ResponseLocation
 {
     @Key @Getter private String admin1;

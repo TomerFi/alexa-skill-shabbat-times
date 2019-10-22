@@ -5,12 +5,14 @@ import com.google.api.client.util.Key;
 import java.util.Optional;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * Pojo for consuming a json item from the api response items list.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
+@NoArgsConstructor
 public final class ResponseItem
 {
     @Key @Getter private String hebrew;

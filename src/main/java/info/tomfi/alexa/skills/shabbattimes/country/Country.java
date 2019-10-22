@@ -23,7 +23,7 @@ public final class Country implements Iterable<City>
     @Getter private final String abbreviation;
     @Getter private final String name;
 
-    private final List<City> citiesList;
+    private final transient List<City> citiesList;
 
     /**
      * Main and only constructor, call for the static tool creating the list of cities.
@@ -38,12 +38,7 @@ public final class Country implements Iterable<City>
         citiesList = getCityListFromJsonFile(abbreviation);
     }
 
-    /**
-     * Get an iterator containing all the {@link info.tomfi.alexa.skills.shabbattimes.city.City}
-     * objects for this country object.
-     *
-     * @return and iterator of {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects.
-     */
+    @Override
     public Iterator<City> iterator()
     {
         return new DynTypeIterator<City>(citiesList);

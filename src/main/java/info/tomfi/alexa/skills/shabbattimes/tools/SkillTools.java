@@ -10,7 +10,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import info.tomfi.alexa.skills.shabbattimes.city.City;
-import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
@@ -71,6 +70,7 @@ public final class SkillTools
      * @return a List of {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects.
      * @throws NoJsonFileException when the backend json file was not found.
      */
+    @SuppressWarnings({"PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE"})
     public static List<City> getCityListFromJsonFile(final String countryAbbreviation)
         throws NoJsonFileException
     {
@@ -79,7 +79,11 @@ public final class SkillTools
         {
             @Cleanup val breader =
                 Files.newBufferedReader(
-                    Paths.get(Country.class.getClassLoader().getResource(jsonFileName).toURI()
+                    Paths.get(
+                        Thread.currentThread()
+                            .getContextClassLoader()
+                            .getResource(jsonFileName)
+                            .toURI()
                 )
             );
             val cityArray = GSNO_PARSER.fromJson(breader, City[].class);
@@ -106,17 +110,10 @@ public final class SkillTools
         val selectedCity = getByCityAndCountry(
             slots.get(Slots.COUNTRY.getName()), getCitySlotFromMap(slots)
         );
-        setCitySessionAttributes(attribManager, selectedCity);
-        return selectedCity;
-    }
-
-    private static void setCitySessionAttributes(
-        final AttributesManager attribManager, final City selectedCity
-    )
-    {
         val sessionAttributes = attribManager.getSessionAttributes();
         sessionAttributes.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
         sessionAttributes.put(Attributes.CITY.getName(), selectedCity.getCityName());
         attribManager.setSessionAttributes(sessionAttributes);
+        return selectedCity;
     }
 }

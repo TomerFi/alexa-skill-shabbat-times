@@ -29,7 +29,7 @@ public final class ApiRequestMaker
     private static String DEFAULT_HAVDALAH = "50";
     private static String DEFAULT_CANDLE_LIGHTING = "18";
 
-    private final Map<String, String> queryParams;
+    private final transient Map<String, String> queryParams;
 
     @Autowired private GenericUrl apiUrl;
     @Autowired private HttpTransport transport;

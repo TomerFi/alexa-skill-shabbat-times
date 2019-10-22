@@ -14,14 +14,16 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.mockserver.client.MockServerClient;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.HttpRequest;
 import org.mockserver.model.HttpResponse;
 import org.mockserver.model.JsonBody;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import info.tomfi.alexa.skills.shabbattimes.di.DILocalAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiLocalAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -33,7 +35,7 @@ public final class ApiRequestMakerTest
     @BeforeEach
     public void initialize()
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DILocalAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiLocalAPIConfiguration.class);
         requestMaker = context.getBean(ApiRequestMaker.class);
     }
 
@@ -73,7 +75,7 @@ public final class ApiRequestMakerTest
         requestMaker.setSpecificDate(LocalDate.now());
 
         @Cleanup val lines =
-            Files.lines(Paths.get(ApiRequestMakerTest.class.getClassLoader().getResource("api-responses/response_full.json").toURI())
+            Files.lines(Paths.get(Thread.currentThread().getContextClassLoader().getResource("api-responses/response_full.json").toURI())
         );
         val responesText = lines.collect(joining(System.lineSeparator()));
 

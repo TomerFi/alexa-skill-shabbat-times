@@ -33,6 +33,7 @@ public final class CityLocator
      * @throws NoCityFoundException when an unknown city was provided with no country specification.
      * @throws NoCityInCountryException when an unknown city within a country was encountered.
      */
+    @SuppressWarnings("PMD.OnlyOneReturn")
     public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot)
         throws NoCityFoundException, NoCityInCountryException
     {
@@ -65,6 +66,7 @@ public final class CityLocator
         throw new NoCityFoundException(String.format("city %s not found", citySlot.getValue()));
     }
 
+    @SuppressWarnings({"PMD.OnlyOneReturn", "PMD.UnusedPrivateMethod"})
     private static Optional<City> findCityInCountry(final Country country, final String cityName)
     {
         val cities = country.iterator();

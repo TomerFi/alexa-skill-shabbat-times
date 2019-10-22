@@ -6,6 +6,7 @@ import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -41,7 +42,7 @@ public final class CountryFactory
     public static Country getCountry(final String countryName)
         throws NoJsonFileException, UnknownCountryException
     {
-        val lowerCountry = countryName.toLowerCase();
+        val lowerCountry = countryName.toLowerCase(Locale.ENGLISH);
         for (val current : CountryInfo.values())
         {
             if (current.getUtterances().contains(lowerCountry))

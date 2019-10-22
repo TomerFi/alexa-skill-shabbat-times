@@ -25,9 +25,9 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExceptio
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromApiException;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Optional;
 
+import lombok.NoArgsConstructor;
 import lombok.val;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +40,7 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
+@NoArgsConstructor
 public final class GetCityIntentHandler implements IntentRequestHandler
 {
     @Autowired private ApiRequestMaker requestMaker;
@@ -59,7 +60,17 @@ public final class GetCityIntentHandler implements IntentRequestHandler
             intent.getIntent().getSlots(), input.getAttributesManager()
         );
         val shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
-        val response = getApiResponse(selectedCity.getGeoId(), shabbatDate);
+        final ApiResponse response;
+        try
+        {
+            response = requestMaker
+                .setGeoId(selectedCity.getGeoId())
+                .setSpecificDate(shabbatDate)
+                .send();
+        } catch (IllegalStateException | IOException exc)
+        {
+            throw new NoResponseFromApiException("no response from hebcal's shabbat api", exc);
+        }
 
         val items = getCandlesAndHavdalahItems(response);
         val shabbatStartDateTime = getStartDateTime(items, shabbatDate);
@@ -103,17 +114,5 @@ public final class GetCityIntentHandler implements IntentRequestHandler
             .withSimpleCard(cardTitle, cardContent)
             .withShouldEndSession(false)
             .build();
-    }
-
-    private ApiResponse getApiResponse(final int setGeoId, final LocalDate shabbatDate)
-        throws NoResponseFromApiException
-    {
-        try
-        {
-            return requestMaker.setGeoId(setGeoId).setSpecificDate(shabbatDate).send();
-        } catch (IllegalStateException | IOException exc)
-        {
-            throw new NoResponseFromApiException("no response from hebcal's shabbat api");
-        }
     }
 }

@@ -21,7 +21,7 @@ public final class ApiResponseTest {
     public void responseJson_minimalValues_success() throws IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(ApiResponse.class.getClassLoader().getResource("api-responses/response_minimal.json").toURI())
+            Paths.get(Thread.currentThread().getContextClassLoader().getResource("api-responses/response_minimal.json").toURI())
         );
 
         val response = new GsonBuilder().create().fromJson(breader, ApiResponse.class);

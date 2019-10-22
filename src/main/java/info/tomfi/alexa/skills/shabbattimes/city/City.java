@@ -18,6 +18,7 @@ import lombok.val;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @NoArgsConstructor(access = PROTECTED)
+@SuppressWarnings("PMD.ShortClassName")
 public final class City implements Iterable<String>
 {
     @Getter private String cityName;
@@ -27,11 +28,7 @@ public final class City implements Iterable<String>
 
     private String[] aliases;
 
-    /**
-     * Get an iterator containing all of the city aliases and unique name.
-     *
-     * @return an iterator of Strings.
-     */
+    @Override
     public Iterator<String> iterator()
     {
         val nameList = new ArrayList<>(Arrays.asList(aliases));

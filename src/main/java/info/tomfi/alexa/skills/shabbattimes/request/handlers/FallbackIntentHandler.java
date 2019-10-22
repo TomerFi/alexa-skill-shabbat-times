@@ -11,6 +11,8 @@ import com.amazon.ask.model.Response;
 
 import java.util.Optional;
 
+import lombok.NoArgsConstructor;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
+@NoArgsConstructor
 public final class FallbackIntentHandler implements IntentRequestHandler
 {
     @Override

@@ -22,9 +22,9 @@ import lombok.val;
 
 @Lazy
 @Configuration
-@Import(DIMockAPIConfiguration.class)
+@Import(DiMockAPIConfiguration.class)
 @Order(HIGHEST_PRECEDENCE)
-public class DIBreakAPIConfiguration
+public class DiBreakAPIConfiguration
 {
     @Bean
     public ApiRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException

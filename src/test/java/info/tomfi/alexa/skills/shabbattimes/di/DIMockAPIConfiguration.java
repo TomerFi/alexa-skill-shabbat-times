@@ -30,13 +30,13 @@ import lombok.val;
 @Lazy
 @Configuration
 @Import(DiProdConfiguration.class)
-public class DIMockAPIConfiguration
+public class DiMockAPIConfiguration
 {
     @Bean
     public ApiRequestMaker getRequestMaker() throws IllegalStateException, IOException, URISyntaxException
     {
         @Cleanup val breader = Files.newBufferedReader(
-            Paths.get(DIMockAPIConfiguration.class.getClassLoader().getResource("api-responses/response_real.json").toURI())
+            Paths.get(Thread.currentThread().getContextClassLoader().getResource("api-responses/response_real.json").toURI())
         );
 
         val fakeResponse = new GsonBuilder().create().fromJson(breader, ApiResponse.class);

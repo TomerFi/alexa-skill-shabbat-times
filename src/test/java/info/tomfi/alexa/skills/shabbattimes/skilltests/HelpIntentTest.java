@@ -15,7 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DIMockAPIConfiguration;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
 
 import lombok.Cleanup;
 import lombok.val;
@@ -26,10 +26,10 @@ public final class HelpIntentTest
     @DisplayName("customer ask 'help'")
     public void testHelpIntent() throws BeansException, IllegalAccessException, InstantiationException, IOException, URISyntaxException
     {
-        @Cleanup val context = new AnnotationConfigApplicationContext(DIMockAPIConfiguration.class);
+        @Cleanup val context = new AnnotationConfigApplicationContext(DiMockAPIConfiguration.class);
         val skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
-        val input = Files.readAllBytes(Paths.get(HelpIntentTest.class.getClassLoader()
+        val input = Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader()
                 .getResource("skill-tests/help_intent.json").toURI())
         );
         val response = skillInTest.execute(new BaseSkillRequest(input));

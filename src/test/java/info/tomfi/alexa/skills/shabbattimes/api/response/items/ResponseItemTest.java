@@ -26,7 +26,7 @@ public final class ResponseItemTest
     public static void initialize()
     {
         gson = new GsonBuilder().create();
-        loader = ResponseItemTest.class.getClassLoader();
+        loader = Thread.currentThread().getContextClassLoader();
     }
 
     @Test

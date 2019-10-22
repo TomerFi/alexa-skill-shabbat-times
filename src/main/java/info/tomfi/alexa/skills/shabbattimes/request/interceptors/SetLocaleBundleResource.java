@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import lombok.NoArgsConstructor;
 import lombok.val;
 
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
+@NoArgsConstructor
 public final class SetLocaleBundleResource implements RequestInterceptor
 {
     private static final String L10N_BASE_NAME = "locales/Responses";
