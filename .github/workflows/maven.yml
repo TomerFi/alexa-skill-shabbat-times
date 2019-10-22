@@ -1,12 +1,16 @@
 ---
 name: Shabbat Times Alexa Skill Java CI
 
-on: [push, pull_request]
+on:
+  push:
+    branch: "master"
+  pull_request:
+    branch: "master"
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
