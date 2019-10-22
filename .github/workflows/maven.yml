@@ -40,7 +40,7 @@ jobs:
     #  with:
     #    name: mvnrepo
     #    path: /home/runner/.m2/repository
-    - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@v1.1
+    - name: SonarCloud scan and report
+      run: mvn sonar:sonar -B -ff
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
