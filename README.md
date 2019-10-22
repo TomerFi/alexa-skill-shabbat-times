@@ -8,5 +8,5 @@
 [0]: https://github.com/TomerFi/alexa-skill-shabbat-times/actions
 [1]: https://sonarcloud.io/dashboard?id=info.tomfi%3Aalexa-skill-shabbat-times
 <!-- Badges Links -->
-[gh-actions-ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Shabbat%20Times%20Alexa%20Skill%20Java%20CI/badge.svg?branch=master
+[gh-actions-ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Shabbat%20Times%20Alexa%20Skill%20Java%20CI/badge.svg
 [sonarcloud-code-coverage]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=coverage
