@@ -31,7 +31,7 @@ jobs:
       run: mvn pmd:cpd-check -B -ff
     - name: Validate json files
       run: mvn yaml-json-validator:validate -B -ff
-    - name: Test, build and verify JaCoCo metrics
+    - name: Test, compile and verify JaCoCo metrics
       run: mvn verify -B -ff
     - name: Create javadoc files
       run: mvn javadoc:javadoc -B -ff
