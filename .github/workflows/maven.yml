@@ -1,3 +1,4 @@
+---
 name: Shabbat Times Alexa Skill Java CI
 
 on: [push, pull_request]
