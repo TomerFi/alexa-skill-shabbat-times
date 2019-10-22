@@ -15,13 +15,11 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
-
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.COUNTRY_SELECTED;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Slots.COUNTRY;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Intent;
@@ -30,14 +28,17 @@ import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
 
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+import lombok.val;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
-import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
-import lombok.val;
 
 public final class CountrySelectedIntentHandlerTest
 {
@@ -51,8 +52,8 @@ public final class CountrySelectedIntentHandlerTest
     {
         val fakeCountrySlot = Slot.builder().withValue("great britain").build();
         val fakeIntent = Intent.builder()
-            .withName(Intents.COUNTRY_SELECTED.getName())
-            .putSlotsItem(Slots.COUNTRY.getName(), fakeCountrySlot)
+            .withName(COUNTRY_SELECTED.getName())
+            .putSlotsItem(COUNTRY.getName(), fakeCountrySlot)
             .build();
         fakeRequest = IntentRequest.builder().withIntent(fakeIntent).build();
 
@@ -81,8 +82,8 @@ public final class CountrySelectedIntentHandlerTest
     {
         val emptyCountrySlot = Slot.builder().build();
         val noCountrySlotIntent = Intent.builder()
-            .withName(Intents.COUNTRY_SELECTED.getName())
-            .putSlotsItem(Slots.COUNTRY.getName(), emptyCountrySlot)
+            .withName(COUNTRY_SELECTED.getName())
+            .putSlotsItem(COUNTRY.getName(), emptyCountrySlot)
             .build();
         val noCountrySlotIntentRequest = IntentRequest.builder().withIntent(noCountrySlotIntent).build();
         val noCountrySlotEnvelope = RequestEnvelope.builder().withRequest(noCountrySlotIntentRequest).build();

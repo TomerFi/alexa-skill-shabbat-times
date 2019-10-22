@@ -1,5 +1,5 @@
 /**
- * Sub package hosting IntentRequestHandler implementations for handling in-skill operations.
+ * Package hosting IntentRequestHandler implementations for handling in-skill operations.
  *
  * This package is scanned by Spring-Context, bean classes should be marked with the Component
  * annotations.

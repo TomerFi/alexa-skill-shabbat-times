@@ -26,22 +26,24 @@ import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 
 import static org.mockito.Mockito.when;
 
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
+
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
+
+import lombok.val;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
-
-import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
-import lombok.val;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)

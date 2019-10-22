@@ -22,15 +22,17 @@ import static org.mockito.Mockito.when;
 
 import com.amazon.ask.model.Slot;
 
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
+
+import lombok.val;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
-import lombok.val;
 
 @ExtendWith(MockitoExtension.class)
 public final class CityLocatorTest

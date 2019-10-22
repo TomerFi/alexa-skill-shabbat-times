@@ -15,15 +15,9 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Intents.GET_CITY;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Intent;
@@ -32,17 +26,24 @@ import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Session;
 import com.amazon.ask.model.Slot;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import lombok.Cleanup;
 import lombok.val;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public final class GetCityIntentHandlerTest
 {
@@ -57,7 +58,7 @@ public final class GetCityIntentHandlerTest
         val fakeCountrySlot = Slot.builder().withValue("israel").build();
         val fakeCitySlot = Slot.builder().withValue("holon").build();
         val fakeIntent = Intent.builder()
-            .withName(Intents.GET_CITY.getName())
+            .withName(GET_CITY.getName())
             .putSlotsItem(Slots.COUNTRY.getName(), fakeCountrySlot)
             .putSlotsItem(Slots.CITY_IL.getName(), fakeCitySlot)
             .build();

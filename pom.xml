@@ -152,14 +152,6 @@
         <plugin>
           <artifactId>maven-checkstyle-plugin</artifactId>
           <version>3.1.0</version>
-          <configuration>
-            <cacheFile>checkstyle.cache</cacheFile>
-            <configLocation>checkstyle-conf.xml</configLocation>
-            <linkXRef>false</linkXRef>
-            <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
-            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
-            <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>
-          </configuration>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
@@ -167,6 +159,15 @@
               <version>8.25</version>
             </dependency>
           </dependencies>
+          <configuration>
+            <cacheFile>checkstyle.cache</cacheFile>
+            <configLocation>checkstyle-conf.xml</configLocation>
+            <consoleOutput>true</consoleOutput>
+            <linkXRef>false</linkXRef>
+            <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
+            <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
+            <violationSeverity>warning</violationSeverity>
+          </configuration>
         </plugin>
 
         <plugin>
@@ -188,7 +189,6 @@
             <analysisCache>true</analysisCache>
             <analysisCacheLocation>pmd.cache</analysisCacheLocation>
             <linkXRef>false</linkXRef>
-            <skipEmptyReport>false</skipEmptyReport>
             <rulesets>
               <ruleset>pmd-conf.xml</ruleset>
             </rulesets>
@@ -199,11 +199,6 @@
           <groupId>com.github.spotbugs</groupId>
           <artifactId>spotbugs-maven-plugin</artifactId>
           <version>3.1.12.2</version>
-          <configuration>
-            <effort>Max</effort>
-            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
-            <threshold>Low</threshold>
-          </configuration>
           <dependencies>
             <dependency>
               <groupId>com.github.spotbugs</groupId>
@@ -211,6 +206,12 @@
               <version>3.1.12</version>
             </dependency>
           </dependencies>
+          <configuration>
+            <effort>Max</effort>
+            <excludeFilterFile>spotbugs-filter.xml</excludeFilterFile>
+            <fork>false</fork>
+            <threshold>Low</threshold>
+          </configuration>
         </plugin>
 
         <plugin>
@@ -218,6 +219,13 @@
           <artifactId>license-maven-plugin</artifactId>
           <version>3.0</version>
           <configuration>
+            <excludes>
+              <exclude>**/package-info.java</exclude>
+            </excludes>
+            <includes>
+              <include>**/*.java</include>
+              <!--<include>**/*.properties</include>-->
+            </includes>
             <inlineHeader><![CDATA[Copyright 2019 Tomer Figenblat
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -232,13 +240,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.]]>
             </inlineHeader>
-            <excludes>
-              <exclude>**/package-info.java</exclude>
-            </excludes>
-            <includes>
-              <include>**/*.java</include>
-              <!--<include>**/*.properties</include>-->
-            </includes>
+            <skipExistingHeaders>true</skipExistingHeaders>
           </configuration>
         </plugin>
 
@@ -279,11 +281,11 @@ limitations under the License.]]>
         <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
-          <version>3.6.0.1398</version>
+          <version>3.7.0.1746</version>
         </plugin>
+
       </plugins>
     </pluginManagement>
-
 
     <plugins>
       <plugin>

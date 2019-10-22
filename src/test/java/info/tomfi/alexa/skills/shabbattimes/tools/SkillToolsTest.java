@@ -21,20 +21,21 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 
 import static org.mockito.Mockito.when;
 
+import com.amazon.ask.model.Slot;
+
+import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
+import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import com.amazon.ask.model.Slot;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
-import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 
 @ExtendWith(MockitoExtension.class)
 public final class SkillToolsTest

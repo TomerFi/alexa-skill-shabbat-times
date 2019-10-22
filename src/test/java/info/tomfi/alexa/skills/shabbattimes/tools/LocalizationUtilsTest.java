@@ -17,7 +17,8 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.Attributes.L10N_BUNDLE;
 import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.DEFAULT_OK;
-import static org.assertj.core.api.Assertions.assertThat;
+
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import java.time.DayOfWeek;
 import java.util.HashMap;

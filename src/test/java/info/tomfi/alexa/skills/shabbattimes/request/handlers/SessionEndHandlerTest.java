@@ -15,17 +15,17 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.request.handlers;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.SessionEndedRequest;
 
+import lombok.val;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import lombok.val;
 
 public final class SessionEndHandlerTest
 {

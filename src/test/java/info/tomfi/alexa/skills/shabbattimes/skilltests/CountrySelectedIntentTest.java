@@ -17,24 +17,26 @@ package info.tomfi.alexa.skills.shabbattimes.skilltests;
 
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
+import com.amazon.ask.Skill;
+import com.amazon.ask.request.impl.BaseSkillRequest;
+
+import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
+import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import com.amazon.ask.Skill;
-import com.amazon.ask.request.impl.BaseSkillRequest;
+import lombok.Cleanup;
+import lombok.val;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
-import info.tomfi.alexa.skills.shabbattimes.di.DiMockAPIConfiguration;
-import lombok.Cleanup;
-import lombok.val;
 
 public final class CountrySelectedIntentTest
 {
