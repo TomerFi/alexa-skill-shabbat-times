@@ -165,6 +165,7 @@
             <cacheFile>checkstyle.cache</cacheFile>
             <configLocation>checkstyle-conf.xml</configLocation>
             <consoleOutput>true</consoleOutput>
+            <enableRSS>false</enableRSS>
             <linkXRef>false</linkXRef>
             <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
@@ -191,6 +192,7 @@
             <analysisCache>true</analysisCache>
             <analysisCacheLocation>pmd.cache</analysisCacheLocation>
             <linkXRef>false</linkXRef>
+            <skipEmptyReport>false</skipEmptyReport>
             <rulesets>
               <ruleset>pmd-conf.xml</ruleset>
             </rulesets>
@@ -339,6 +341,7 @@ limitations under the License.]]>
             <id>check-jacoco-metrics</id>
             <goals>
               <goal>check</goal>
+              <goal>report</goal>
             </goals>
             <configuration>
               <excludes>
