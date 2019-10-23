@@ -25,11 +25,14 @@ jobs:
     #  with:
     #    name: mvnrepo
 
-    - name: Test, compile and verify JaCoCo metrics
-      run: mvn verify -B -ff
-
     - name: Check source files License header
       run: mvn license:check -B -ff
+
+    - name: Validate json files
+      run: mvn yaml-json-validator:validate -B -ff
+
+    - name: Test, compile and verify JaCoCo metrics
+      run: mvn verify -B -ff
 
     - name: Checkstyle checker
       run: mvn checkstyle:check -B -ff
@@ -42,9 +45,6 @@ jobs:
 
     - name: SpotBugs checker
       run: mvn spotbugs:check -B -ff
-
-    - name: Validate json files
-      run: mvn yaml-json-validator:validate -B -ff
 
     - name: Create javadoc files
       run: mvn javadoc:javadoc -B -ff

@@ -166,6 +166,7 @@
             <configLocation>checkstyle-conf.xml</configLocation>
             <enableRSS>false</enableRSS>
             <failsOnError>true</failsOnError>
+            <includeTestResources>false</includeTestResources>
             <linkXRef>false</linkXRef>
             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
             <violationSeverity>warning</violationSeverity>
