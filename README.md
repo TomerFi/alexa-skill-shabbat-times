@@ -6,7 +6,7 @@
 [2]: https://sonarcloud.io/dashboard?id=info.tomfi%3Aalexa-skill-shabbat-times
 [3]: https://app.fossa.io/projects/git%2Bgithub.com%2FTomerFi%2Falexa-skill-shabbat-times
 <!-- Badges Links -->
-[ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Build/badge.svg
+[ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Build/badge.svg?branch=master
 [code-coverage]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=coverage
 [license-scan-status]: https://app.fossa.io/api/projects/git%2Bgithub.com%2FTomerFi%2Falexa-skill-shabbat-times.svg?type=shield
 [maintainability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=sqale_rating
