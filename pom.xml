@@ -145,7 +145,7 @@
   </dependencies>
 
   <build>
-    <defaultGoal>package</defaultGoal>
+    <defaultGoal>verify</defaultGoal>
     <finalName>${project.artifactId}</finalName>
 
     <pluginManagement>
@@ -231,13 +231,10 @@
               <!--<include>**/*.properties</include>-->
             </includes>
             <inlineHeader><![CDATA[Copyright 2019 Tomer Figenblat
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -283,29 +280,6 @@ limitations under the License.]]>
         </plugin>
 
         <plugin>
-          <groupId>org.jacoco</groupId>
-          <artifactId>jacoco-maven-plugin</artifactId>
-          <version>0.8.5</version>
-          <configuration>
-            <excludes>
-              <exclude>info/tomfi/alexa/skills/shabbattimes/exception/*</exclude>
-            </excludes>
-            <rules>
-              <rule>
-                <element>BUNDLE</element>
-                <limits>
-                  <limit>
-                    <counter>INSTRUCTION</counter>
-                    <value>COVEREDRATIO</value>
-                    <minimum>${jacoco.coverage.minimum}</minimum>
-                  </limit>
-                </limits>
-              </rule>
-            </rules>
-          </configuration>
-        </plugin>
-
-        <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.7.0.1746</version>
@@ -315,19 +289,6 @@ limitations under the License.]]>
     </pluginManagement>
 
     <plugins>
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -360,6 +321,41 @@ limitations under the License.]]>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M3</version>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.5</version>
+        <executions>
+          <execution>
+            <id>prepare-jacoco-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>check-jacoco-metrics</id>
+            <goals>
+              <goal>check</goal>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${jacoco.coverage.minimum}</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
 
     </plugins>

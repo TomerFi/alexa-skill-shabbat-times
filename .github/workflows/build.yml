@@ -37,11 +37,8 @@ jobs:
     - name: Validate testing json files
       run: mvn yaml-json-validator:validate -B -ff
 
-    - name: Execute maven package goal
-      run: mvn package -B -ff
-
-    - name: Jacoco metrics check and report
-      run: mvn jacoco:check jacoco:report -B -ff
+    - name: Test, compile, package, and verify
+      run: mvn verify -B -ff
 
     - name: Checkstyle checker
       run: mvn checkstyle:check -B -ff
