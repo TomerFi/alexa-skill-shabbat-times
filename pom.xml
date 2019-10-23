@@ -164,10 +164,9 @@
           <configuration>
             <cacheFile>checkstyle.cache</cacheFile>
             <configLocation>checkstyle-conf.xml</configLocation>
-            <consoleOutput>true</consoleOutput>
             <enableRSS>false</enableRSS>
+            <failsOnError>true</failsOnError>
             <linkXRef>false</linkXRef>
-            <outputFile>${project.build.directory}/checkstyle.xml</outputFile>
             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
             <violationSeverity>warning</violationSeverity>
           </configuration>
