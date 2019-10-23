@@ -1,0 +1,11 @@
+---
+name: WipPR
+
+on: pull_request
+
+jobs:
+  set-pr-status:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set WIP PR to pending
+      uses: wip/action@v1.0.0
