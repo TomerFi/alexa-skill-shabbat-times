@@ -1,5 +1,5 @@
 ---
-name: Shabbat Times Alexa Skill Java CI
+name: Alexa Shabbat Times Skill
 
 on:
   push:
