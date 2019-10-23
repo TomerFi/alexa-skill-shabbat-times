@@ -8,55 +8,79 @@ on:
     branch: master
 
 jobs:
-  run-maven-goals:
+
+  checkout-and-set-up-jdk1.8:
     runs-on: ubuntu-latest
     steps:
-
     - name: Source checkout
       uses: actions/checkout@v1
-
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
 
+  #restore-cache:
+    #runs-on: ubuntu-latest
+    #needs: checkout-and-set-up-jdk1.8
+    #steps:
     #- name: Download maven repository
     #  uses: actions/download-artifact@v1
     #  with:
     #    name: mvnrepo
 
+  validate-testing-and-config-files:
+    runs-on: ubuntu-latest
+    needs: checkout-and-set-up-jdk1.8
+    steps:
     - name: Check source files License header
       run: mvn license:check -B -ff
-
-    - name: Validate json files
+    - name: Validate testing json files
       run: mvn yaml-json-validator:validate -B -ff
 
-    - name: Test, compile and verify JaCoCo metrics
-      run: mvn verify -B -ff
+  test-compile-and-package:
+    runs-on: ubuntu-latest
+    needs: validate-testing-and-config-files
+    steps:
+    - name: Execute maven package goal
+      run: mvn package -B -ff
 
+  code-checkers-coverage-and-safety:
+    runs-on: ubuntu-latest
+    needs: test-compile-and-package
+    steps:
+    - name: Jacoco metrics check and report
+      run: mvn jacoco:check jacoco:report -B -ff
     - name: Checkstyle checker
       run: mvn checkstyle:check -B -ff
-
     - name: PMD checker
       run: mvn pmd:check -B -ff
-
     - name: CPD checker
       run: mvn pmd:cpd-check -B -ff
-
     - name: SpotBugs checker
       run: mvn spotbugs:check -B -ff
 
+  create-javadoc-site:
+    runs-on: ubuntu-latest
+    needs: test-compile-and-package
+    steps:
     - name: Create javadoc files
       run: mvn javadoc:javadoc -B -ff
 
-    #- name: Upload maven repository
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: mvnrepo
-    #    path: /home/runner/.m2/repository
-
+  sonarcloud-scan-and-report:
+    runs-on: ubuntu-latest
+    needs: code-checkers-coverage-and-safety
     - name: SonarCloud scan and report
       run: mvn sonar:sonar -B -ff
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  #save-cache:
+    #runs-on: ubuntu-latest
+    #needs: [create-javadoc-site, sonarcloud-scan-and-report]
+    #steps:
+    #- name: Upload maven repository
+    #  uses: actions/upload-artifact@v1
+    #  with:
+    #    name: mvnrepo
+    #    path: /home/runner/.m2/repository

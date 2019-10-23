@@ -145,7 +145,7 @@
   </dependencies>
 
   <build>
-    <defaultGoal>verify</defaultGoal>
+    <defaultGoal>package</defaultGoal>
     <finalName>${project.artifactId}</finalName>
 
     <pluginManagement>
@@ -283,6 +283,29 @@ limitations under the License.]]>
         </plugin>
 
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>0.8.5</version>
+          <configuration>
+            <excludes>
+              <exclude>info/tomfi/alexa/skills/shabbattimes/exception/*</exclude>
+            </excludes>
+            <rules>
+              <rule>
+                <element>BUNDLE</element>
+                <limits>
+                  <limit>
+                    <counter>INSTRUCTION</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>${jacoco.coverage.minimum}</minimum>
+                  </limit>
+                </limits>
+              </rule>
+            </rules>
+          </configuration>
+        </plugin>
+
+        <plugin>
           <groupId>org.sonarsource.scanner.maven</groupId>
           <artifactId>sonar-maven-plugin</artifactId>
           <version>3.7.0.1746</version>
@@ -292,6 +315,19 @@ limitations under the License.]]>
     </pluginManagement>
 
     <plugins>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
@@ -324,44 +360,6 @@ limitations under the License.]]>
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.0.0-M3</version>
-      </plugin>
-
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.5</version>
-        <executions>
-          <execution>
-            <id>prepare-jacoco-agent</id>
-            <goals>
-              <goal>prepare-agent</goal>
-            </goals>
-          </execution>
-          <execution>
-            <id>check-jacoco-metrics</id>
-            <goals>
-              <goal>check</goal>
-              <goal>report</goal>
-            </goals>
-            <configuration>
-              <excludes>
-                <exclude>info/tomfi/alexa/skills/shabbattimes/exception/*</exclude>
-              </excludes>
-              <rules>
-                <rule>
-                  <element>BUNDLE</element>
-                  <limits>
-                    <limit>
-                      <counter>INSTRUCTION</counter>
-                      <value>COVEREDRATIO</value>
-                      <minimum>${jacoco.coverage.minimum}</minimum>
-                    </limit>
-                  </limits>
-                </rule>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
 
     </plugins>
