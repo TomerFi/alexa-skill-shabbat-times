@@ -1,12 +1,14 @@
-# WIP
-
-[![gh-actions-ci-status]][0]
-
-[![sonarcloud-code-coverage]][1]
+# Gitea SonarQube Plugin</br>[![ci-status]][1] [![code-coverage]][2] [![maintenance]][0]</br>[![quality-gate-status]][2] [![maintainability-rating]][2] [![reliability-rating]][2] [![security-rating]][2]
 
 <!-- Real Links -->
-[0]: https://github.com/TomerFi/alexa-skill-shabbat-times/actions
-[1]: https://sonarcloud.io/dashboard?id=info.tomfi%3Aalexa-skill-shabbat-times
+[0]: https://github.com/TomerFi/alexa-skill-shabbat-times
+[1]: https://github.com/TomerFi/alexa-skill-shabbat-times/actions
+[2]: https://sonarcloud.io/dashboard?id=info.tomfi%3Aalexa-skill-shabbat-times
 <!-- Badges Links -->
-[gh-actions-ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Alexa%20Shabbat%20Times%20Skill/badge.svg
-[sonarcloud-code-coverage]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=coverage
+[ci-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Alexa%20Shabbat%20Times%20Skill/badge.svg
+[code-coverage]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=coverage
+[maintainability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=sqale_rating
+[maintenance]: https://img.shields.io/badge/Maintained%3F-yes-green.svg
+[reliability-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=reliability_rating
+[security-rating]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=security_rating
+[quality-gate-status]: https://sonarcloud.io/api/project_badges/measure?project=info.tomfi%3Aalexa-skill-shabbat-times&metric=alert_status
