@@ -67,8 +67,8 @@ jobs:
     - name: Persist to S3 Bucket
       shell: bash
       run: |
-        tar -czvf mvnrepo.tar.gz /home/runner/.m2/repository
-        tar -czvf sonarcache.tar.gz /home/runner/.sonar/cache
+        tar -uzvf mvnrepo.tar.gz /home/runner/.m2/repository
+        tar -uzvf sonarcache.tar.gz /home/runner/.sonar/cache
         aws s3 cp . s3://shabbat-times/wfpersistence --recursive --exclude "*" --include "*.tar.gz"
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
