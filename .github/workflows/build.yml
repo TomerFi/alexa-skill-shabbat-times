@@ -61,14 +61,14 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-    #- name: Upload maven repository
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: mvnrepo
-    #    path: /home/runner/.m2/repository
+    - name: Upload maven repository
+      uses: actions/upload-artifact@v1
+      with:
+        name: mvnrepo
+        path: /home/runner/.m2/repository
 
-    #- name: Upload maven repository
-    #  uses: actions/upload-artifact@v1
-    #  with:
-    #    name: sonarcache
-    #    path: /home/runner/.sonar/cache
+    - name: Upload maven repository
+      uses: actions/upload-artifact@v1
+      with:
+        name: sonarcache
+        path: /home/runner/.sonar/cache
