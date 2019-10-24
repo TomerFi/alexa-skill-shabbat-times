@@ -61,8 +61,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-    - name: Persist to S3 Bucket
+    - name: Use aws cli
       uses: chrislennon/action-aws-cli@v1.1
+
+    - name: Persist to S3 Bucket
       shell: bash
       run: |
         tar -czvf mvnrepo.tar.gz /home/runner/.m2/repository
