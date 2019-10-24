@@ -1,0 +1,637 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "shabbat times",
+      "intents": [
+        {
+          "name": "GetCityIntent",
+          "slots": [
+            {
+              "name": "City_IL",
+              "type": "LIST_OF_CITIES_IL"
+            },
+            {
+              "name": "City_GB",
+              "type": "LIST_OF_CITIES_GB"
+            },
+            {
+              "name": "City_US",
+              "type": "LIST_OF_CITIES_US"
+            },
+            {
+              "name": "Country",
+              "type": "LIST_OF_COUNTRIES"
+            }
+          ],
+          "samples": [
+            "{City_IL}",
+            "yes {City_IL}",
+            "for {City_IL}",
+            "for candle lighting time in {City_IL}",
+            "for shabbat times in {City_IL}",
+            "information about {City_IL}",
+            "for information about {City_IL}",
+            "about {City_IL}",
+            "{Country} {City_IL}",
+            "yes {Country} {City_IL}",
+            "for {Country} {City_IL}",
+            "for candle lighting time in {Country} {City_IL}",
+            "for shabbat times in {Country} {City_IL}",
+            "information about {Country} {City_IL}",
+            "for information about {Country} {City_IL}",
+            "about {Country} {City_IL}",
+            "{City_IL} {Country}",
+            "yes {City_IL} {Country}",
+            "for {City_IL} {Country}",
+            "for candle lighting time in {City_IL} {Country}",
+            "for shabbat times in {City_IL} {Country}",
+            "information about {City_IL} {Country}",
+            "for information about {City_IL} {Country}",
+            "about {City_IL} {Country}",
+            "{City_US}",
+            "yes {City_US}",
+            "for {City_US}",
+            "for candle lighting time in {City_US}",
+            "for shabbat times in {City_US}",
+            "information about {City_US}",
+            "for information about {City_US}",
+            "about {City_US}",
+            "{Country} {City_US}",
+            "yes {Country} {City_US}",
+            "for {Country} {City_US}",
+            "for candle lighting time in {Country} {City_US}",
+            "for shabbat times in {Country} {City_US}",
+            "information about {Country} {City_US}",
+            "for information about {Country} {City_US}",
+            "about {Country} {City_US}",
+            "{City_US} {Country}",
+            "yes {City_US} {Country}",
+            "for {City_US} {Country}",
+            "for candle lighting time in {City_US} {Country}",
+            "for shabbat times in {City_US} {Country}",
+            "information about {City_US} {Country}",
+            "for information about {City_US} {Country}",
+            "about {City_US} {Country}",
+            "{City_GB}",
+            "yes {City_GB}",
+            "for {City_GB}",
+            "for candle lighting time in {City_GB}",
+            "for shabbat times in {City_GB}",
+            "information about {City_GB}",
+            "for information about {City_GB}",
+            "about {City_GB}",
+            "{Country} {City_GB}",
+            "yes {Country} {City_GB}",
+            "for {Country} {City_GB}",
+            "for candle lighting time in {Country} {City_GB}",
+            "for shabbat times in {Country} {City_GB}",
+            "information about {Country} {City_GB}",
+            "for information about {Country} {City_GB}",
+            "about {Country} {City_GB}",
+            "{City_GB} {Country}",
+            "yes {City_GB} {Country}",
+            "for {City_GB} {Country}",
+            "for candle lighting time in {City_GB} {Country}",
+            "for shabbat times in {City_GB} {Country}",
+            "information about {City_GB} {Country}",
+            "for information about {City_GB} {Country}",
+            "about {City_GB} {Country}"
+          ]
+        },
+        {
+          "name": "CountrySelected",
+          "slots": [
+            {
+              "name": "Country",
+              "type": "LIST_OF_COUNTRIES"
+            }
+          ],
+          "samples": [
+            "{Country}",
+            "what are the city names you know in {Country}",
+            "list the city names in {Country}",
+            "what city names do you know in {Country}",
+            "list all the city names in {Country}",
+            "what are the cities you know in {Country}",
+            "what cities can you tell me about in {Country}",
+            "do you know any cities in {Country}",
+            "do you know any city names in {Country}",
+            "can you tell me about cities in {Country}",
+            "can you tell me about city names in {Country}",
+            "what are the city names you know in the {Country}",
+            "list the city names in the {Country}",
+            "what city names do you know in the {Country}",
+            "list all the city names in the {Country}",
+            "what are the cities you know in the {Country}",
+            "what cities can you tell me about in the {Country}",
+            "do you know any cities in the {Country}",
+            "do you know any city names in the {Country}",
+            "can you tell me about cities in the {Country}",
+            "can you tell me about city names in the {Country}",
+            "for city names in {Country}",
+            "for city names in the {Country}"
+          ]
+        },
+        {
+          "name": "ThanksIntent",
+          "samples": [
+            "no thank you",
+            "no thanks"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "yes please"
+          ]
+        },
+        {
+          "name": "AMAZON.NoIntent"
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": [
+            "what are the city names you know",
+            "list the city names",
+            "to list the city names",
+            "what city names do you know",
+            "list all the city names",
+            "what are the cities you know",
+            "what cities can you tell me about",
+            "what are the country names you know",
+            "list the country names",
+            "to list the country names",
+            "what country names do you know",
+            "list all the country names",
+            "what are the countries you know",
+            "what countries can you tell me about"
+          ]
+        },
+        {
+          "name": "AMAZON.StopIntent"
+        },
+        {
+          "name": "AMAZON.CancelIntent"
+        }
+      ],
+      "types": [
+        {
+          "values": [
+            {
+              "name": {
+                "value": "ashdod"
+              }
+            },
+            {
+              "name": {
+                "value": "ashkelon"
+              }
+            },
+            {
+              "name": {
+                "value": "bat yam"
+              }
+            },
+            {
+              "name": {
+                "value": "beer sheva"
+              }
+            },
+            {
+              "name": {
+                "value": "beit shemesh"
+              }
+            },
+            {
+              "name": {
+                "value": "bnei brak"
+              }
+            },
+            {
+              "name": {
+                "value": "eilat"
+              }
+            },
+            {
+              "name": {
+                "value": "hadera"
+              }
+            },
+            {
+              "name": {
+                "value": "haifa"
+              }
+            },
+            {
+              "name": {
+                "value": "herzliya"
+              }
+            },
+            {
+              "name": {
+                "value": "holon"
+              }
+            },
+            {
+              "name": {
+                "value": "jerusalem"
+              }
+            },
+            {
+              "name": {
+                "value": "yerushalaim"
+              }
+            },
+            {
+              "name": {
+                "value": "kefar saba"
+              }
+            },
+            {
+              "name": {
+                "value": "lod"
+              }
+            },
+            {
+              "name": {
+                "value": "modiin"
+              }
+            },
+            {
+              "name": {
+                "value": "nazareth"
+              }
+            },
+            {
+              "name": {
+                "value": "netanya"
+              }
+            },
+            {
+              "name": {
+                "value": "petach tikvah"
+              }
+            },
+            {
+              "name": {
+                "value": "raanana"
+              }
+            },
+            {
+              "name": {
+                "value": "ramat gan"
+              }
+            },
+            {
+              "name": {
+                "value": "ramla"
+              }
+            },
+            {
+              "name": {
+                "value": "rishon lezion"
+              }
+            },
+            {
+              "name": {
+                "value": "tel aviv"
+              }
+            },
+            {
+              "name": {
+                "value": "tiberias"
+              }
+            },
+            {
+              "name": {
+                "value": "tveria"
+              }
+            }
+          ],
+          "name": "LIST_OF_CITIES_IL"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "atlanta"
+              }
+            },
+            {
+              "name": {
+                "value": "austin"
+              }
+            },
+            {
+              "name": {
+                "value": "baltimore"
+              }
+            },
+            {
+              "name": {
+                "value": "boston"
+              }
+            },
+            {
+              "name": {
+                "value": "buffalo"
+              }
+            },
+            {
+              "name": {
+                "value": "chicago"
+              }
+            },
+            {
+              "name": {
+                "value": "cincinnati"
+              }
+            },
+            {
+              "name": {
+                "value": "cleveland"
+              }
+            },
+            {
+              "name": {
+                "value": "columbus"
+              }
+            },
+            {
+              "name": {
+                "value": "dallas"
+              }
+            },
+            {
+              "name": {
+                "value": "denver"
+              }
+            },
+            {
+              "name": {
+                "value": "detroit"
+              }
+            },
+            {
+              "name": {
+                "value": "hartford"
+              }
+            },
+            {
+              "name": {
+                "value": "honolulu"
+              }
+            },
+            {
+              "name": {
+                "value": "houston"
+              }
+            },
+            {
+              "name": {
+                "value": "lakewood"
+              }
+            },
+            {
+              "name": {
+                "value": "las vegas"
+              }
+            },
+            {
+              "name": {
+                "value": "livingston"
+              }
+            },
+            {
+              "name": {
+                "value": "los angeles"
+              }
+            },
+            {
+              "name": {
+                "value": "memphis"
+              }
+            },
+            {
+              "name": {
+                "value": "miami"
+              }
+            },
+            {
+              "name": {
+                "value": "milwaukee"
+              }
+            },
+            {
+              "name": {
+                "value": "monsey"
+              }
+            },
+            {
+              "name": {
+                "value": "new haven"
+              }
+            },
+            {
+              "name": {
+                "value": "new york"
+              }
+            },
+            {
+              "name": {
+                "value": "omaha"
+              }
+            },
+            {
+              "name": {
+                "value": "orlando"
+              }
+            },
+            {
+              "name": {
+                "value": "passaic"
+              }
+            },
+            {
+              "name": {
+                "value": "philadelphia"
+              }
+            },
+            {
+              "name": {
+                "value": "phoenix"
+              }
+            },
+            {
+              "name": {
+                "value": "pittsburgh"
+              }
+            },
+            {
+              "name": {
+                "value": "portland"
+              }
+            },
+            {
+              "name": {
+                "value": "providence"
+              }
+            },
+            {
+              "name": {
+                "value": "richmond"
+              }
+            },
+            {
+              "name": {
+                "value": "rochester"
+              }
+            },
+            {
+              "name": {
+                "value": "saint louis"
+              }
+            },
+            {
+              "name": {
+                "value": "saint paul"
+              }
+            },
+            {
+              "name": {
+                "value": "san diego"
+              }
+            },
+            {
+              "name": {
+                "value": "san francisco"
+              }
+            },
+            {
+              "name": {
+                "value": "seattle"
+              }
+            },
+            {
+              "name": {
+                "value": "silver spring"
+              }
+            },
+            {
+              "name": {
+                "value": "teaneck"
+              }
+            },
+            {
+              "name": {
+                "value": "washington"
+              }
+            },
+            {
+              "name": {
+                "value": "white plains"
+              }
+            }
+          ],
+          "name": "LIST_OF_CITIES_US"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "israel"
+              }
+            },
+            {
+              "name": {
+                "value": "united states"
+              }
+            },
+            {
+              "name": {
+                "value": "great britain"
+              }
+            },
+            {
+              "name": {
+                "value": "britain"
+              }
+            },
+            {
+              "name": {
+                "value": "united kingdom"
+              }
+            },
+            {
+              "name": {
+                "value": "england"
+              }
+            }
+          ],
+          "name": "LIST_OF_COUNTRIES"
+        },
+        {
+          "values": [
+            {
+              "name": {
+                "value": "belfast"
+              }
+            },
+            {
+              "name": {
+                "value": "birmingham"
+              }
+            },
+            {
+              "name": {
+                "value": "bristol"
+              }
+            },
+            {
+              "name": {
+                "value": "cardiff"
+              }
+            },
+            {
+              "name": {
+                "value": "edinburgh"
+              }
+            },
+            {
+              "name": {
+                "value": "glasgow"
+              }
+            },
+            {
+              "name": {
+                "value": "leeds"
+              }
+            },
+            {
+              "name": {
+                "value": "liverpool"
+              }
+            },
+            {
+              "name": {
+                "value": "london"
+              }
+            },
+            {
+              "name": {
+                "value": "manchester"
+              }
+            },
+            {
+              "name": {
+                "value": "sheffield"
+              }
+            }
+          ],
+          "name": "LIST_OF_CITIES_GB"
+        }
+      ]
+    }
+  },
+  "version": "1"
+}

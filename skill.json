@@ -1,0 +1,54 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "target\\alexa-shabbat-times-skill.jar"
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "usesPersonalInfo": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "containsAds": false
+    },
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Shabbat Times",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20191003T144807Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20191003%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=89a6e08d2964f4bcecd367b68059791e6d02deb8405fc3b998c3c314a976fe8a",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20191003T144807Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAJFEYRBGIHK2BBYKA%2F20191003%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=97015cec57a3e1ed654ac488f1a1160cada2d3ad1ccd765c154898e13f907ed6",
+          "summary": "Would you like to know the Shabbat times in your city?",
+          "description": "Ask Alexa for the Shabbat start and end times for cities in Israel, the United States, or the United Kingdom.",
+          "examplePhrases": [
+            "Alexa start shabbat times",
+            "Alexa ask shabbat times for shabbat times in new-york",
+            "Alexa ask shabbat times to list all the city names in israel"
+          ],
+          "keywords": [
+            "shabbat",
+            "saturday",
+            "candles",
+            "candle",
+            "jewish",
+            "judaism",
+            "israel",
+            "religion",
+            "united",
+            "states",
+            "united",
+            "kingdom"
+          ]
+        }
+      },
+      "isAvailableWorldwide": true,
+      "testingInstructions": "You can ask alexa for shabbat times in the all the main cities in the united states, the united kingdom or in israel.\n\nFor a list of all the known cities you say ask shabbat times to list all the cities in israel/the unites states/the united kingdom.\n\nFor each city alexa will tell you the start and end time of the shabbat.\n\nWhen asking alexa for help, she will ask you to choose a country, after choosing she will list all the city names in the chosen country. If stop intent is requested within the help intent alexa will ask for the chosen city name.\nIf help intent is done, alexa will ask if you found your requested city on the list, If no intent will be triggerred at this point, alexa will apologize and tell you those are all the city names she knows.",
+      "category": "EDUCATION_AND_REFERENCE",
+      "distributionCountries": []
+    }
+  }
+}
