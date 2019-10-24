@@ -23,7 +23,7 @@ As of the time of the writing of this document, this skill supports:
 - The United States (US)
 - Great Britain (GB)
 
-Each file is a `Json Array` which is basically contains a list of supported cities for a specific country by abbreviation. Each object in that array looks like this:
+Each file is a json array which is basically contains a list of supported cities for a specific country by abbreviation. Each object in that array looks like this:
 
 ``` json
     {
@@ -41,10 +41,16 @@ For this example, either `new york` or `the big apple` can be called to retrieve
 
 ## Adding a locale
 
+### Backend
+
 Adding a locale to the skill is pretty strieght-forward and it requieres adding a `properties` file to be used as a [Resource Bundle](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html).</br>
 Locale bundle files are stored in [src/main/resources/locales](src/main/resources/locales), copy an existing file, e.g. [Responses_en_US.properties](src/main/resources/locales/Responses_en_US.properties), edit the new file name with the chosen language and country abbreviations and update the values inside the new file.</br>
 
-The bundle file is selected based on the locale property in the original request, so there's no point in adding a bundle file for a locale that is not supported by [Alexa](https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#request-locale).
+The bundle file is selected based on the locale property in the original request, so there's no point in adding a bundle file for a locale that is not supported by [Alexa](https://developer.amazon.com/docs/custom-skills/request-and-response-json-reference.html#request-locale).</br>
+
+### Skill interface
+
+For updating the skill interface with the new locale, add the appropriate json object to the `manifest.publishingInformation.locales` json array in [skill.json](skill.json).</br>
 
 ## Adding a new country
 
