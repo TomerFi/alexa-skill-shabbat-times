@@ -3,9 +3,9 @@ name: Build
 
 on:
   push:
-    branch: "master"
+    branch: master
   pull_request:
-    branch: "master"
+    branch: master
 
 jobs:
 
