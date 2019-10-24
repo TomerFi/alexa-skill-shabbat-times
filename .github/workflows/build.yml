@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  execute-maven-goals:
+  build-validate-and-persist:
     runs-on: ubuntu-latest
     steps:
 
