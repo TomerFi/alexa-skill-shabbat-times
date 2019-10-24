@@ -27,8 +27,9 @@ jobs:
     - name: Get persistance from S3 Bucket
       shell: bash
       run: |
-        aws s3 cp s3://shabbat-times/wfpersistence/ .
-        ls
+        aws s3 cp s3://shabbat-times/wfpersistence/ . --recursive
+        tar -xzvf mvnrepo.tar.gz
+        tar -xzvf sonarcache.tar.gz
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
