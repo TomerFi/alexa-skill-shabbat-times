@@ -59,8 +59,8 @@ public final class GetCityIntentHandlerTest
         val fakeCitySlot = Slot.builder().withValue("holon").build();
         val fakeIntent = Intent.builder()
             .withName(GET_CITY.getName())
-            .putSlotsItem(Slots.COUNTRY.getName(), fakeCountrySlot)
-            .putSlotsItem(Slots.CITY_IL.getName(), fakeCitySlot)
+            .putSlotsItem(Slots.COUNTRY, fakeCountrySlot)
+            .putSlotsItem(Slots.City.IL.getName(), fakeCitySlot)
             .build();
 
         val fakeDateTime = LocalDate.parse("2019-10-01", DateTimeFormatter.ISO_LOCAL_DATE).atStartOfDay().atOffset(ZoneOffset.ofHours(3));

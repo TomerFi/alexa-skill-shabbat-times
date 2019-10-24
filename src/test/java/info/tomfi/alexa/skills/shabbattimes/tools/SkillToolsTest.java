@@ -50,9 +50,9 @@ public final class SkillToolsTest
     public void initialize()
     {
         slots = new HashMap<>();
-        slots.put(Slots.CITY_IL.getName(), slotIL);
-        slots.put(Slots.CITY_US.getName(), slotUS);
-        slots.put(Slots.CITY_GB.getName(), slotGB);
+        slots.put(Slots.City.IL.getName(), slotIL);
+        slots.put(Slots.City.US.getName(), slotUS);
+        slots.put(Slots.City.GB.getName(), slotGB);
     }
 
     @Test

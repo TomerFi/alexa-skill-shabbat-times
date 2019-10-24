@@ -17,6 +17,8 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.CityLocator.getByCityAndCountry;
 
+import static java.util.stream.Collectors.toList;
+
 import static lombok.AccessLevel.PRIVATE;
 
 import com.amazon.ask.attributes.AttributesManager;
@@ -60,8 +62,8 @@ public final class SkillTools
      */
     public static Slot getCitySlotFromMap(final Map<String, Slot> slots) throws NoCitySlotException
     {
-        val cityKeys = Arrays.asList(
-            Slots.CITY_IL.getName(), Slots.CITY_GB.getName(), Slots.CITY_US.getName()
+        val cityKeys = Arrays.stream(
+            Slots.City.values()).map(memebr -> memebr.getName()).collect(toList()
         );
         val slotKey = slots.keySet()
             .stream()
@@ -123,7 +125,7 @@ public final class SkillTools
     )
     {
         val selectedCity = getByCityAndCountry(
-            slots.get(Slots.COUNTRY.getName()), getCitySlotFromMap(slots)
+            slots.get(Slots.COUNTRY), getCitySlotFromMap(slots)
         );
         val sessionAttributes = attribManager.getSessionAttributes();
         sessionAttributes.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());

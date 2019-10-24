@@ -53,7 +53,7 @@ public final class CountrySelectedIntentHandlerTest
         val fakeCountrySlot = Slot.builder().withValue("great britain").build();
         val fakeIntent = Intent.builder()
             .withName(COUNTRY_SELECTED.getName())
-            .putSlotsItem(COUNTRY.getName(), fakeCountrySlot)
+            .putSlotsItem(COUNTRY, fakeCountrySlot)
             .build();
         fakeRequest = IntentRequest.builder().withIntent(fakeIntent).build();
 
@@ -83,7 +83,7 @@ public final class CountrySelectedIntentHandlerTest
         val emptyCountrySlot = Slot.builder().build();
         val noCountrySlotIntent = Intent.builder()
             .withName(COUNTRY_SELECTED.getName())
-            .putSlotsItem(COUNTRY.getName(), emptyCountrySlot)
+            .putSlotsItem(COUNTRY, emptyCountrySlot)
             .build();
         val noCountrySlotIntentRequest = IntentRequest.builder().withIntent(noCountrySlotIntent).build();
         val noCountrySlotEnvelope = RequestEnvelope.builder().withRequest(noCountrySlotIntentRequest).build();

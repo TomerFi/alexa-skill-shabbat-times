@@ -15,21 +15,38 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.enums;
 
+import static lombok.AccessLevel.PRIVATE;
+
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Enum helper for identifying the request slots.
+ * Helper class for identifying the request slots.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@RequiredArgsConstructor
-public enum Slots
+@NoArgsConstructor(access = PRIVATE)
+@SuppressWarnings("PMD.ClassNamingConventions")
+public final class Slots
 {
-    CITY_GB("City_GB"),
-    CITY_IL("City_IL"),
-    CITY_US("City_US"),
-    COUNTRY("Country");
+    /**
+     * Constant String for identifying the country slot.
+     */
+    public static final String COUNTRY = "Country";
 
-    @Getter private final String name;
+    /**
+     * Enum helper for identifying the city slots.
+     *
+     * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
+     */
+    @RequiredArgsConstructor
+    public enum City
+    {
+        GB("City_GB"),
+        IL("City_IL"),
+        US("City_US");
+
+        @Getter private final String name;
+    }
 }

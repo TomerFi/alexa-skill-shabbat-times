@@ -17,6 +17,7 @@ package info.tomfi.alexa.skills.shabbattimes.exception.handlers;
 
 import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.EXC_PLEASE_TRY_AGAIN;
 import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.EXC_UNKNOWN_COUNTRY;
+import static info.tomfi.alexa.skills.shabbattimes.enums.Slots.COUNTRY;
 import static info.tomfi.alexa.skills.shabbattimes.tools.LocalizationUtils.getFromBundle;
 
 import com.amazon.ask.dispatcher.exception.ExceptionHandler;
@@ -24,7 +25,6 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 
-import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 
 import java.util.Optional;
@@ -61,7 +61,7 @@ public final class UnknownCountryHandler implements ExceptionHandler
             ((IntentRequest) input.getRequest())
                 .getIntent()
                 .getSlots()
-                .get(Slots.COUNTRY.getName())
+                .get(COUNTRY)
                 .getValue()
         );
 
