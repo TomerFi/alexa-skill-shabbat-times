@@ -209,11 +209,11 @@
   <rule ref="category/java/errorprone.xml/AvoidMultipleUnaryOperators"/>
   <rule ref="category/java/errorprone.xml/AvoidUsingOctalValues"/>
   <rule ref="category/java/errorprone.xml/BadComparison"/>
-  <rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
+  <!--<rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
     <properties>
       <property name="ignoredAnnotations" value="lombok.Data|lombok.Getter|lombok.Value|org.springframework.beans.factory.annotation.Autowired"/>
     </properties>
-  </rule>
+  </rule>-->
   <rule ref="category/java/errorprone.xml/BrokenNullCheck"/>
   <rule ref="category/java/errorprone.xml/CallSuperFirst"/>
   <rule ref="category/java/errorprone.xml/CallSuperLast"/>

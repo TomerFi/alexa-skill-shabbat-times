@@ -45,7 +45,8 @@ public final class PersistSessionAttributes implements ResponseInterceptor
     {
         if (
             input.matches(requestType(IntentRequest.class))
-            && !response.get().getShouldEndSession()
+            && response.isPresent()
+                && Boolean.FALSE.equals(response.get().getShouldEndSession())
         )
         {
             val attribs = input.getAttributesManager().getSessionAttributes();

@@ -51,13 +51,11 @@ public final class NoIntentHandler implements IntentRequestHandler
     }
 
     @Override
-    @SuppressWarnings({
-        "PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE", "PMD.EmptyCatchBlock"
-    })
+    @SuppressWarnings({"PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE"})
     public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
     {
         val requestAttributes = input.getAttributesManager().getRequestAttributes();
-        String speechOutput = getFromBundle(requestAttributes, BundleKeys.DEFAULT_OK);
+        String speechOutput = "";
         try
         {
             val sessionAttributes = input.getAttributesManager().getSessionAttributes();
@@ -80,11 +78,10 @@ public final class NoIntentHandler implements IntentRequestHandler
                     speechMiddle
                 );
             }
-        // CHECKSTYLE.OFF: EmptyCatchBlock
         } catch (IllegalStateException | NullPointerException exc)
         {
+            speechOutput = getFromBundle(requestAttributes, BundleKeys.DEFAULT_OK);
         }
-        // CHECKSTYLE.ON: EmptyCatchBlock
         return input.getResponseBuilder()
             .withSpeech(speechOutput)
             .withShouldEndSession(true)
