@@ -48,6 +48,6 @@ public final class City implements Iterable<String>
     {
         val nameList = new ArrayList<>(Arrays.asList(aliases));
         nameList.add(cityName);
-        return new DynTypeIterator<String>(nameList);
+        return new DynTypeIterator<>(nameList);
     }
 }

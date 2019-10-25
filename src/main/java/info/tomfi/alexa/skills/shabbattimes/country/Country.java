@@ -38,7 +38,7 @@ public final class Country implements Iterable<City>
     @Getter private final String abbreviation;
     @Getter private final String name;
 
-    private final transient List<City> citiesList;
+    private final List<City> citiesList;
 
     /**
      * Main and only constructor, call for the static tool creating the list of cities.
@@ -56,7 +56,7 @@ public final class Country implements Iterable<City>
     @Override
     public Iterator<City> iterator()
     {
-        return new DynTypeIterator<City>(citiesList);
+        return new DynTypeIterator<>(citiesList);
     }
 
     /**
