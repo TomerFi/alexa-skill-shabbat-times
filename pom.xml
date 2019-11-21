@@ -16,6 +16,7 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
     <sonar.organization>tomerfi</sonar.organization>
+    <mockserver.version>5.7.2</mockserver.version>
   </properties>
 
   <name>Shabbat Times</name>
@@ -89,14 +90,14 @@
     <dependency>
       <groupId>org.mock-server</groupId>
       <artifactId>mockserver-client-java</artifactId>
-      <version>5.7.1</version>
+      <version>${mockserver.version}</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.mock-server/mockserver-netty -->
     <dependency>
       <groupId>org.mock-server</groupId>
       <artifactId>mockserver-netty</artifactId>
-      <version>5.7.1</version>
+      <version>${mockserver.version}</version>
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
