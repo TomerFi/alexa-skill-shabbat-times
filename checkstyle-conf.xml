@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN" "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--Suitable for Release 8.26-->
+<!--Suitable for Release 8.28-->
 
 <module name="Checker">
   <!--Main module start: Checker-->
@@ -15,7 +15,7 @@
   <module name="JavadocPackage"/>
   <module name="LineLength">
     <property name="max" value="100"/>
-    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://"/>
+    <property name="ignorePattern" value="^package.*|^import.*|a href|href|http://|https://|ftp://|@Around"/>
   </module>
   <module name="NewlineAtEndOfFile"/>
   <!--<module name="OrderedProperties"/>-->
@@ -43,7 +43,8 @@
     </module>
     <module name="ArrayTypeStyle"/>
     <module name="AtclauseOrder">
-      <property name="violateExecutionOnNonTightHtml" value="true"/>
+      <property name="tagOrder" value="@param, @return, @throws, @deprecated"/>
+      <property name="target" value="CLASS_DEF, INTERFACE_DEF, ENUM_DEF, METHOD_DEF, CTOR_DEF, VARIABLE_DEF"/>
     </module>
     <module name="AvoidEscapedUnicodeCharacters">
       <property name="allowEscapesForControlCharacters" value="true"/>
@@ -67,10 +68,13 @@
     </module>
     <module name="CustomImportOrder">
       <property name="sortImportsInGroupAlphabetically" value="true"/>
-      <property name="separateLineBetweenGroups" value="true"/>
+      <property name="separateLineBetweenGroups" value="false"/>
       <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE"/>
     </module>
-    <module name="DesignForExtension"/>
+    <module name="DesignForExtension">
+      <property name="ignoredAnnotations"
+                value="Override, Test, Before, After, BeforeClass, AfterClass, Component, Configuration, RestController"/>
+    </module>
     <module name="EmptyBlock">
       <property name="option" value="TEXT"/>
       <property name="tokens" value="LITERAL_TRY, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_SWITCH"/>
@@ -98,7 +102,14 @@
     </module>
     <module name="HiddenField"/>
     <!--<module name="HideUtilityClassConstructor"/>-->
-    <module name="Indentation"/>
+    <module name="Indentation">
+      <property name="basicOffset" value="2"/>
+      <property name="braceAdjustment" value="0"/>
+      <property name="caseIndent" value="2"/>
+      <property name="throwsIndent" value="4"/>
+      <property name="lineWrappingIndentation" value="4"/>
+      <property name="arrayInitIndent" value="2"/>
+    </module>
     <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
     <module name="IllegalInstantiation"/>
     <module name="IllegalTokenText">
@@ -114,24 +125,25 @@
     </module>
     <module name="InvalidJavadocPosition"/>
     <module name="JavadocBlockTagLocation"/>
+    <module name="JavadocContentLocation"/>
     <module name="JavadocMethod">
       <property name="scope" value="package"/>
     </module>
     <!--<module name="JavadocParagraph"/>-->
     <module name="JavadocStyle">
-      <property name="scope" value="package"/>
+      <property name="scope" value="protected"/>
     </module>
     <module name="JavadocTagContinuationIndentation"/>
     <module name="JavadocType">
-      <property name="scope" value="package"/>
+      <property name="scope" value="protected"/>
+      <property name="allowUnknownTags" value="true" />
     </module>
     <module name="JavadocVariable">
-      <property name="scope" value="package"/>
+      <property name="scope" value="protected"/>
       <property name="tokens" value="VARIABLE_DEF"/>
     </module>
-    <module name="LeftCurly">
-      <property name="option" value="nl" />
-    </module>
+    <module name="LambdaParameterName"/>
+    <module name="LeftCurly"/>
     <module name="LocalFinalVariableName">
       <property name="format" value="^[a-z][a-zA-Z0-9]*$|^Func_*" />
     </module>
@@ -163,6 +175,7 @@
     <module name="MissingSwitchDefault"/>
     <module name="MultipleVariableDeclarations"/>
     <module name="NeedBraces"/>
+    <module name="NoArrayTrailingComma"/>
     <module name="NoFinalizer"/>
     <module name="NoLineWrap"/>
     <module name="NonEmptyAtclauseDescription"/>
@@ -192,13 +205,13 @@
     <module name="RedundantImport"/>
     <module name="RedundantModifier"/>
     <module name="RightCurly">
-      <property name="id" value="RightCurlyAlone"/>
-      <property name="option" value="alone"/>
-      <property name="tokens" value="CLASS_DEF, METHOD_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT"/>
+      <property name="id" value="RightCurlySame"/>
+      <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_DO, METHOD_DEF"/>
     </module>
     <module name="RightCurly">
-      <property name="id" value="RightCurlySame"/>
-      <property name="tokens" value="LITERAL_TRY, LITERAL_CATCH, LITERAL_FINALLY, LITERAL_IF, LITERAL_ELSE, LITERAL_DO"/>
+      <property name="id" value="RightCurlyAlone"/>
+      <property name="option" value="alone"/>
+      <property name="tokens" value="CLASS_DEF, CTOR_DEF, LITERAL_FOR, LITERAL_WHILE, STATIC_INIT, INSTANCE_INIT"/>
     </module>
     <module name="SeparatorWrap">
       <property name="id" value="SeparatorWrapComma"/>
@@ -230,7 +243,7 @@
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
     <module name="SingleLineJavadoc">
-      <property name="ignoreInlineTags" value="false"/>
+      <property name="ignoreInlineTags" value="true"/>
     </module>
     <module name="StaticVariableName">
       <property name="applyToPrivate" value="false" />
