@@ -1,16 +1,14 @@
 /**
  * Copyright 2019 Tomer Figenblat
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * <p>Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+ * except in compliance with the License. You may obtain a copy of the License at
  *
- *     http://www.apache.org/licenses/LICENSE-2.0
+ * <p>http://www.apache.org/licenses/LICENSE-2.0
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
+ * <p>Unless required by applicable law or agreed to in writing, software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+ * express or implied. See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package info.tomfi.alexa.skills.shabbattimes;
@@ -23,12 +21,9 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
-
 import java.util.List;
 import java.util.Optional;
-
 import lombok.NoArgsConstructor;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -37,28 +32,28 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @NoArgsConstructor
-public final class ShabbatTimesSkillCreator
-{
-    @Autowired
-    private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
-    @Autowired
-    private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
-    @Autowired
-    private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
-    @Autowired
-    private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
+public final class ShabbatTimesSkillCreator {
+  @Autowired private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
 
-    /**
-     * Build the Shabbat Times Skill object.
-     * @return the Shabbat Time Skill object.
-     */
-    public Skill getSkill()
-    {
-        return Skills.standard()
-            .addRequestInterceptors(requestInterceptors)
-            .addResponseInterceptors(responseInterceptors)
-            .addRequestHandlers(requestHandlers)
-            .addExceptionHandlers(exceptionHandlers)
-            .build();
-    }
+  @Autowired
+  private List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers;
+
+  @Autowired private List<GenericRequestInterceptor<HandlerInput>> requestInterceptors;
+
+  @Autowired
+  private List<GenericResponseInterceptor<HandlerInput, Optional<Response>>> responseInterceptors;
+
+  /**
+   * Build the Shabbat Times Skill object.
+   *
+   * @return the Shabbat Time Skill object.
+   */
+  public Skill getSkill() {
+    return Skills.standard()
+        .addRequestInterceptors(requestInterceptors)
+        .addResponseInterceptors(responseInterceptors)
+        .addRequestHandlers(requestHandlers)
+        .addExceptionHandlers(exceptionHandlers)
+        .build();
+  }
 }
