@@ -5,7 +5,7 @@
   <groupId>info.tomfi</groupId>
   <artifactId>alexa-shabbat-times-skill</artifactId>
   <packaging>jar</packaging>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
 
   <properties>
     <java.version>1.8</java.version>
