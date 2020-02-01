@@ -1,11 +1,4 @@
 <?xml version="1.0"?>
-<!--
-
-    Copyright (c) Bynet Communication, LTD. - All Rights Reserved Unauthorized copying of this file,
-    via any medium is strictly prohibited. Licensed under the GNU GPLv3.0. See LICENSE file in the
-    project root for full license information.
-
--->
 <ruleset name="pmdrules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
