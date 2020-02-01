@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
-<ruleset name="pmdrules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ruleset name="pmdrules" xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
-  <!--Suitable for Release 6.19.0-->
+  <!--Suitable for Release 6.21.0-->
 
   <description>PMD rules configuration</description>
 
@@ -38,7 +39,7 @@
   <rule ref="category/java/bestpractices.xml/PreserveStackTrace"/>
   <rule ref="category/java/bestpractices.xml/ReplaceEnumerationWithIterator"/>
   <rule ref="category/java/bestpractices.xml/ReplaceHashtableWithMap"/>
-  <rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>
+  <!--<rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>-->
   <rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault"/>
   <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
   <rule ref="category/java/bestpractices.xml/UnusedFormalParameter"/>
@@ -65,7 +66,7 @@
   <rule ref="category/java/codestyle.xml/FormalParameterNamingConventions"/>
   <rule ref="category/java/codestyle.xml/ClassNamingConventions">
     <properties>
-      <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]+(Tools|Factory|Utils)"/>
+      <property name="utilityClassPattern" value="[A-Z][a-zA-Z0-9]+(Tools|Factory|Utils|Creator|Helpers)"/>
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/LocalVariableNamingConventions">
@@ -80,6 +81,7 @@
       <property name="publicConstantPattern" value="^[A-Z][A-Z_0-9]*$|^Func_.*$"/>
       <property name="constantPattern" value="^[A-Z][A-Z_0-9]*$|^Func_.*$"/>
       <property name="staticFieldPattern" value="^[a-zA-Z0-9_]*"/>
+      <property name="violationSuppressXPath" value="//FieldDeclaration/Type/ReferenceType/ClassOrInterfaceType[matches(@Image, 'Function.*')]"/>
     </properties>
   </rule>
   <rule ref="category/java/codestyle.xml/GenericsNaming"/>
@@ -88,16 +90,32 @@
       <property name="minimum" value="25"/>
     </properties>
   </rule>
-  <rule ref="category/java/codestyle.xml/ShortClassName"/>
+  <rule ref="category/java/codestyle.xml/ShortClassName">
+    <properties>
+        <property name="violationSuppressXPath" value="./ancestor::ClassOrInterfaceDeclaration[not(Annotation//Name[ends-with(@Image, 'Data')])]"/>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/ShortMethodName"/>
-  <rule ref="category/java/codestyle.xml/ShortVariable"/>
+  <rule ref="category/java/codestyle.xml/ShortVariable">
+    <properties>
+      <property name="violationSuppressRegex" value=".*(id|ip)$"/>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/AvoidUsingNativeCode"/>
   <rule ref="category/java/codestyle.xml/BooleanGetMethodName"/>
-  <rule ref="category/java/codestyle.xml/CallSuperInConstructor"/>
-  <rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier"/>
+  <!--<rule ref="category/java/codestyle.xml/CallSuperInConstructor"/>-->
+  <rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier">
+    <properties>
+      <property name="violationSuppressXPath" value="./ancestor::ClassOrInterfaceDeclaration[not(Annotation//Name[ends-with(@Image, 'Value')])]"/>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/ConfusingTernary"/>
   <rule ref="category/java/codestyle.xml/ControlStatementBraces"/>
-  <rule ref="category/java/codestyle.xml/DefaultPackage"/>
+  <rule ref="category/java/codestyle.xml/DefaultPackage">
+    <properties>
+      <property name="violationSuppressXPath" value="./ancestor::ClassOrInterfaceDeclaration[not(Annotation//Name[ends-with(@Image, 'Value')])]"/>
+    </properties>
+  </rule>
   <rule ref="category/java/codestyle.xml/DontImportJavaLang"/>
   <rule ref="category/java/codestyle.xml/DuplicateImports"/>
   <rule ref="category/java/codestyle.xml/EmptyMethodInAbstractClassShouldBeAbstract"/>
@@ -146,7 +164,11 @@
   <rule ref="category/java/design.xml/ExcessiveImports"/>
   <rule ref="category/java/design.xml/ExcessiveMethodLength"/>
   <rule ref="category/java/design.xml/ExcessiveParameterList"/>
-  <rule ref="category/java/design.xml/ExcessivePublicCount"/>
+  <rule ref="category/java/design.xml/ExcessivePublicCount">
+    <properties>
+      <property name="minimum" value="60.0" />
+    </properties>
+  </rule>
   <rule ref="category/java/design.xml/FinalFieldCouldBeStatic"/>
   <rule ref="category/java/design.xml/GodClass"/>
   <rule ref="category/java/design.xml/ImmutableField"/>
@@ -167,11 +189,18 @@
   <rule ref="category/java/design.xml/TooManyMethods">
     <properties>
       <property name="maxmethods" value="15"/>
+      <property name="violationSuppressXPath" value="
+        ./ancestor::ClassOrInterfaceDeclaration[contains(@Image, 'Creator')] |
+        ./ancestor::ClassOrInterfaceDeclaration[contains(@Image, 'Listener')]"/>
     </properties>
   </rule>
   <rule ref="category/java/design.xml/UselessOverridingMethod"/>
   <rule ref="category/java/design.xml/UseObjectForClearerAPI"/>
-  <rule ref="category/java/design.xml/UseUtilityClass"/>
+  <rule ref="category/java/design.xml/UseUtilityClass">
+    <properties>
+      <property name="ignoredAnnotations" value="org.springframework.boot.autoconfigure.SpringBootApplication | lombok.experimental.UtilityClass"></property>
+    </properties>
+  </rule>
 
   <!--Documentation rules-->
   <rule ref="category/java/documentation.xml/CommentContent"/>
@@ -179,7 +208,7 @@
   <rule ref="category/java/documentation.xml/CommentSize">
     <properties>
       <property name="maxLineLength" value="100"/>
-      <property name="maxLines" value="21"/>
+      <property name="maxLines" value="18"/>
     </properties>
   </rule>
   <rule ref="category/java/documentation.xml/UncommentedEmptyConstructor"/>
@@ -199,7 +228,11 @@
   <rule ref="category/java/errorprone.xml/AvoidCatchingNPE"/>
   <rule ref="category/java/errorprone.xml/AvoidCatchingThrowable"/>
   <rule ref="category/java/errorprone.xml/AvoidDecimalLiteralsInBigDecimalConstructor"/>
-  <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals"/>
+  <rule ref="category/java/errorprone.xml/AvoidDuplicateLiterals">
+    <properties>
+      <property name="minimumLength" value="5"/>
+    </properties>
+  </rule>
   <rule ref="category/java/errorprone.xml/AvoidEnumAsIdentifier"/>
   <rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingMethodName"/>
   <rule ref="category/java/errorprone.xml/AvoidFieldNameMatchingTypeName"/>
@@ -209,11 +242,7 @@
   <rule ref="category/java/errorprone.xml/AvoidMultipleUnaryOperators"/>
   <rule ref="category/java/errorprone.xml/AvoidUsingOctalValues"/>
   <rule ref="category/java/errorprone.xml/BadComparison"/>
-  <!--<rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize">
-    <properties>
-      <property name="ignoredAnnotations" value="lombok.Data|lombok.Getter|lombok.Value|org.springframework.beans.factory.annotation.Autowired"/>
-    </properties>
-  </rule>-->
+  <!--<rule ref="category/java/errorprone.xml/BeanMembersShouldSerialize"/>-->
   <rule ref="category/java/errorprone.xml/BrokenNullCheck"/>
   <rule ref="category/java/errorprone.xml/CallSuperFirst"/>
   <rule ref="category/java/errorprone.xml/CallSuperLast"/>
@@ -222,7 +251,7 @@
   <rule ref="category/java/errorprone.xml/CloneMethodMustBePublic"/>
   <rule ref="category/java/errorprone.xml/CloneMethodMustImplementCloneable"/>
   <rule ref="category/java/errorprone.xml/CloneMethodReturnTypeMustMatchClassName"/>
-  <rule ref="category/java/errorprone.xml/CloneThrowsCloneNotSupportedException"/>
+  <!--<rule ref="category/java/errorprone.xml/CloneThrowsCloneNotSupportedException"/>-->
   <rule ref="category/java/errorprone.xml/CloseResource"/>
   <rule ref="category/java/errorprone.xml/CompareObjectsWithEquals"/>
   <rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod"/>
@@ -236,7 +265,6 @@
   <rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices"/>
   <rule ref="category/java/errorprone.xml/EmptyCatchBlock"/>
   <rule ref="category/java/errorprone.xml/ImportFromSamePackage"/>
-  <rule ref="category/java/errorprone.xml/InvalidLogMessageFormat" />
   <rule ref="category/java/errorprone.xml/EmptyFinalizer"/>
   <rule ref="category/java/errorprone.xml/EmptyFinallyBlock"/>
   <rule ref="category/java/errorprone.xml/EmptyIfStmt"/>
@@ -298,7 +326,6 @@
   <rule ref="category/java/multithreading.xml/AvoidUsingVolatile"/>
   <rule ref="category/java/multithreading.xml/DoNotUseThreads"/>
   <rule ref="category/java/multithreading.xml/DontCallThreadRun"/>
-  <rule ref="category/java/multithreading.xml/DoNotUseThreads" />
   <rule ref="category/java/multithreading.xml/DoubleCheckedLocking"/>
   <rule ref="category/java/multithreading.xml/NonThreadSafeSingleton"/>
   <rule ref="category/java/multithreading.xml/UseConcurrentHashMap"/>
