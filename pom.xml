@@ -5,7 +5,7 @@
   <groupId>info.tomfi</groupId>
   <artifactId>alexa-shabbat-times-skill</artifactId>
   <packaging>jar</packaging>
-  <version>3.0.0</version>
+  <version>3.0.1</version>
 
   <properties>
     <java.version>1.8</java.version>
@@ -181,12 +181,12 @@
             <dependency>
               <groupId>net.sourceforge.pmd</groupId>
               <artifactId>pmd-core</artifactId>
-              <version>6.20.0</version>
+              <version>6.21.0</version>
             </dependency>
             <dependency>
               <groupId>net.sourceforge.pmd</groupId>
               <artifactId>pmd-java</artifactId>
-              <version>6.20.0</version>
+              <version>6.21.0</version>
             </dependency>
           </dependencies>
           <configuration>
