@@ -8,7 +8,6 @@
   <version>3.0.1</version>
 
   <properties>
-    <java.version>1.8</java.version>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
@@ -298,8 +297,7 @@ limitations under the License.]]>
           <failOnWarning>true</failOnWarning>
           <forceJavacCompilerUse>true</forceJavacCompilerUse>
           <showWarnings>true</showWarnings>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>8</release>
         </configuration>
       </plugin>
 
