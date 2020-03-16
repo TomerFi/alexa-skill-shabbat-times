@@ -266,7 +266,7 @@ limitations under the License.]]>
 
         <plugin>
           <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.2.0</version>
           <configuration>
             <bottom><![CDATA[
               Copyright &copy; ${project.inceptionYear} <a href=${project.developers[0].url}>${project.developers[0].name}</a>. All rights reserved.
