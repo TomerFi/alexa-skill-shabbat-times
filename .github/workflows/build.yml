@@ -2,8 +2,6 @@
 name: Build
 
 on:
-  push:
-    branch: master
   pull_request:
     branch: master
 
