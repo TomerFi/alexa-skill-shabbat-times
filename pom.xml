@@ -16,7 +16,7 @@
     <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
     <sonar.organization>tomerfi</sonar.organization>
     <mockserver.version>5.9.0</mockserver.version>
-    <mockito.version>3.3.0</mockito.version>
+    <mockito.version>3.3.3</mockito.version>
   </properties>
 
   <name>Shabbat Times</name>
