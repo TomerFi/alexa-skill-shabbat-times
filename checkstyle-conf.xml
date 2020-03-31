@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
                  "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--Suitable for Release 8.29-->
+<!--Suitable for Release 8.31-->
 
 <module name="Checker">
   <!--Main module start: Checker-->
@@ -267,6 +267,7 @@
     <module name="TypeName">
       <message key="name.invalidPattern" value="Type name ''{0}'' must match pattern ''{1}''."/>
     </module>
+    <module name="UnnecessarySemicolonAfterOuterTypeDeclaration"/>
     <module name="UnnecessarySemicolonAfterTypeMemberDeclaration"/>
     <module name="UnnecessarySemicolonInEnumeration"/>
     <module name="UnnecessarySemicolonInTryWithResources"/>
