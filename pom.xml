@@ -250,7 +250,7 @@ limitations under the License.]]>
         <plugin>
           <groupId>com.github.sylvainlaurent.maven</groupId>
           <artifactId>yaml-json-validator-maven-plugin</artifactId>
-          <version>1.0.3</version>
+          <version>1.0.4</version>
           <configuration>
             <validationSets>
               <validationSet>
