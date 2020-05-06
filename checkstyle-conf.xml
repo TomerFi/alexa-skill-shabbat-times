@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
                  "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--Suitable for Release 8.31-->
+<!--Suitable for Release 8.32-->
 
 <module name="Checker">
   <!--Main module start: Checker-->
@@ -133,6 +133,7 @@
     <module name="JavadocMethod">
       <property name="scope" value="package"/>
     </module>
+    <module name="JavadocMissingWhitespaceAfterAsterisk"/>
     <!--<module name="JavadocParagraph"/>-->
     <module name="JavadocStyle">
       <property name="scope" value="protected"/>
