@@ -12,3 +12,21 @@ updates:
       - "TomerFi"
     labels:
       - "dependabot"
+    commit-message:
+      prefix: "Java"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    reviewers:
+      - "TomerFi"
+    assignees:
+      - "TomerFi"
+    labels:
+      - "dependabot"
+    commit-message:
+      prefix: "GHAction"
+      include: "scope"
