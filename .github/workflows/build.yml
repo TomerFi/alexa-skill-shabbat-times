@@ -7,8 +7,9 @@ on:
 
 jobs:
 
-  build-validate-and-persist:
+  build:
     runs-on: ubuntu-latest
+    name: Build code
     steps:
 
     - name: Source checkout
