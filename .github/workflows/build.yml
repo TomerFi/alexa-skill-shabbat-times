@@ -19,18 +19,19 @@ jobs:
       with:
         java-version: 11
 
-    - name: Set up aws cli
-      uses: chrislennon/action-aws-cli@v1.1
+    - name: Cache maven repository
+      uses: actions/cache@v2
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-maven-
 
-    - name: Get persistance from S3 Bucket
-      shell: bash
-      run: |
-        aws s3 cp s3://shabbat-times/wfpersistence/ . --recursive
-        tar -xzf mvnrepo.tar.gz -C /
-        tar -xzf sonarcache.tar.gz -C /
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - name: Cache sonar plugins
+      uses: actions/cache@v2
+      with:
+        path: ~/.sonar/cache
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-sonar-
 
     - name: Check source files License header
       run: mvn license:check -B -ff
@@ -61,13 +62,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-    - name: Persist to S3 Bucket
-      shell: bash
-      run: |
-        tar -czfr mvnrepo.tar.gz /home/runner/.m2/repository
-        tar -czfr sonarcache.tar.gz /home/runner/.sonar/cache
-        aws s3 cp . s3://shabbat-times/wfpersistence --recursive --exclude "*" --include "*.tar.gz"
-      env:
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
