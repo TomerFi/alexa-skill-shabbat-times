@@ -11,7 +11,7 @@
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
-    <pmd.version>6.24.0</pmd.version>
+    <pmd.version>6.25.0</pmd.version>
     <sonar.sources>src/main/java</sonar.sources>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
