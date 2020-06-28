@@ -1,0 +1,14 @@
+---
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    target-branch: "master"
+    reviewers:
+      - "TomerFi"
+    assignees:
+      - "TomerFi"
+    labels:
+      - "dependabot"
