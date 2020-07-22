@@ -16,7 +16,7 @@
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
     <sonar.organization>tomerfi</sonar.organization>
-    <mockserver.version>5.11.0</mockserver.version>
+    <mockserver.version>5.11.1</mockserver.version>
     <mockito.version>3.4.4</mockito.version>
     <google-http-clien.version>1.36.0</google-http-clien.version>
   </properties>
