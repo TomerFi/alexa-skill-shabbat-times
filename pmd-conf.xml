@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
-  <!--Suitable for Release 6.25.0-->
+  <!--Suitable for Release 6.26.0-->
 
   <description>PMD rules configuration</description>
 
@@ -41,6 +41,12 @@
   <!--<rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>-->
   <rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault"/>
   <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
+  <rule ref="category/java/bestpractices.xml/UnusedAssignment">
+    <properties>
+      <property name="checkUnusedPrefixIncrement" value="true" />
+      <property name="reportUnusedVariables" value="true" />
+    </properties>
+  </rule>
   <rule ref="category/java/bestpractices.xml/UnusedFormalParameter"/>
   <rule ref="category/java/bestpractices.xml/UnusedImports"/>
   <rule ref="category/java/bestpractices.xml/UnusedLocalVariable"/>
