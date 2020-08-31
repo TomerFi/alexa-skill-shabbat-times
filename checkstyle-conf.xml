@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
                  "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--Suitable for Release 8.35-->
+<!--Suitable for Release 8.36-->
 
 <module name="Checker">
   <!--Main module start: Checker-->
@@ -114,6 +114,7 @@
       <property name="lineWrappingIndentation" value="4"/>
       <property name="arrayInitIndent" value="2"/>
     </module>
+    <module name="IllegalIdentifierName"/>
     <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
     <module name="IllegalInstantiation"/>
     <module name="IllegalTokenText">
@@ -210,6 +211,9 @@
     </module>
     <module name="ParameterNumber"/>
     <module name="ParenPad"/>
+    <module name="PatternVariableName"/>
+    <module name="RecordComponentNumber"/>
+    <module name="RecordTypeParameterName"/>
     <module name="RedundantImport"/>
     <module name="RedundantModifier"/>
     <module name="RightCurly">
