@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
-  <!--Suitable for Release 6.26.0-->
+  <!--Suitable for Release 6.27.0-->
 
   <description>PMD rules configuration</description>
 
@@ -14,6 +14,8 @@
   <rule ref="category/java/bestpractices.xml/ArrayIsStoredDirectly"/>
   <rule ref="category/java/bestpractices.xml/AvoidMessageDigestField"/>
   <rule ref="category/java/bestpractices.xml/AvoidPrintStackTrace"/>
+  <rule ref="category/java/bestpractices.xml/AvoidReassigningCatchVariables" />
+  <rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables" />
   <rule ref="category/java/bestpractices.xml/AvoidReassigningParameters"/>
   <rule ref="category/java/bestpractices.xml/AvoidStringBufferField"/>
   <rule ref="category/java/bestpractices.xml/AvoidUsingHardCodedIP"/>
@@ -262,7 +264,6 @@
   <rule ref="category/java/errorprone.xml/CloseResource"/>
   <rule ref="category/java/errorprone.xml/CompareObjectsWithEquals"/>
   <rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod"/>
-  <!--<rule ref="category/java/errorprone.xml/DataflowAnomalyAnalysis"/>-->
   <rule ref="category/java/errorprone.xml/DoNotCallGarbageCollectionExplicitly"/>
   <rule ref="category/java/errorprone.xml/DoNotCallSystemExit"/>
   <rule ref="category/java/errorprone.xml/DoNotExtendJavaLangThrowable"/>
