@@ -2,7 +2,7 @@
 <!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
                  "http://checkstyle.sourceforge.net/dtds/configuration_1_3.dtd">
 
-<!--Suitable for Release 8.36-->
+<!--Suitable for Release 8.37-->
 
 <module name="Checker">
   <!--Main module start: Checker-->
@@ -148,6 +148,7 @@
       <property name="scope" value="protected"/>
       <property name="tokens" value="VARIABLE_DEF"/>
     </module>
+    <module name="LambdaBodyLength"/>
     <module name="LambdaParameterName"/>
     <module name="LeftCurly"/>
     <module name="LocalFinalVariableName">
