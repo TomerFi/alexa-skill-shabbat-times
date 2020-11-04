@@ -18,7 +18,7 @@
     <sonar.organization>tomerfi</sonar.organization>
     <mockserver.version>5.11.1</mockserver.version>
     <mockito.version>3.6.0</mockito.version>
-    <google-http-clien.version>1.37.0</google-http-clien.version>
+    <google-http-clien.version>1.38.0</google-http-clien.version>
   </properties>
 
   <name>Shabbat Times</name>
