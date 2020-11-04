@@ -18,7 +18,7 @@
     <sonar.organization>tomerfi</sonar.organization>
     <mockserver.version>5.11.1</mockserver.version>
     <mockito.version>3.6.0</mockito.version>
-    <google-http-clien.version>1.37.0</google-http-clien.version>
+    <google-http-client.version>1.38.0</google-http-client.version>
   </properties>
 
   <name>Shabbat Times</name>
@@ -112,13 +112,13 @@
     <dependency>
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client</artifactId>
-      <version>${google-http-clien.version}</version>
+      <version>${google-http-client.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.google.http-client/google-http-client-gson -->
     <dependency>
       <groupId>com.google.http-client</groupId>
       <artifactId>google-http-client-gson</artifactId>
-      <version>${google-http-clien.version}</version>
+      <version>${google-http-client.version}</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.amazon.alexa/ask-sdk -->
     <dependency>
