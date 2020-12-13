@@ -28,6 +28,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class ShabbatTimesStreamHandler extends SkillStreamHandler {
   private static ShabbatTimesSkillCreator getCreator() {
+    @SuppressWarnings("PMD.CloseResource")
     @Cleanup val context = new AnnotationConfigApplicationContext(DiProdConfiguration.class);
     return context.getBean(ShabbatTimesSkillCreator.class);
   }
