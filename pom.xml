@@ -9,11 +9,14 @@
 
   <properties>
     <maven.install.skip>true</maven.install.skip>
+    <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
     <pmd.version>6.30.0</pmd.version>
     <sonar.sources>src/main/java</sonar.sources>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.java.source>${maven.compiler.release}</sonar.java.source>
+    <sonar.java.target>${maven.compiler.release}</sonar.java.target>
     <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
     <sonar.organization>tomerfi</sonar.organization>
     <mockserver.version>5.11.2</mockserver.version>
@@ -299,7 +302,6 @@ limitations under the License.]]>
           <failOnWarning>true</failOnWarning>
           <forceJavacCompilerUse>true</forceJavacCompilerUse>
           <showWarnings>true</showWarnings>
-          <release>8</release>
         </configuration>
       </plugin>
 
