@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0 https://pmd.sourceforge.io/ruleset_2_0_0.xsd">
 
-  <!--Suitable for Release 6.26.0-->
+  <!--Suitable for Release 6.30.0-->
 
   <description>PMD rules configuration</description>
 
@@ -14,6 +14,8 @@
   <rule ref="category/java/bestpractices.xml/ArrayIsStoredDirectly"/>
   <rule ref="category/java/bestpractices.xml/AvoidMessageDigestField"/>
   <rule ref="category/java/bestpractices.xml/AvoidPrintStackTrace"/>
+  <rule ref="category/java/bestpractices.xml/AvoidReassigningCatchVariables"/>
+  <rule ref="category/java/bestpractices.xml/AvoidReassigningLoopVariables"/>
   <rule ref="category/java/bestpractices.xml/AvoidReassigningParameters"/>
   <rule ref="category/java/bestpractices.xml/AvoidStringBufferField"/>
   <rule ref="category/java/bestpractices.xml/AvoidUsingHardCodedIP"/>
@@ -38,7 +40,7 @@
   <rule ref="category/java/bestpractices.xml/PreserveStackTrace"/>
   <rule ref="category/java/bestpractices.xml/ReplaceEnumerationWithIterator"/>
   <rule ref="category/java/bestpractices.xml/ReplaceHashtableWithMap"/>
-  <!--<rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>-->
+  <rule ref="category/java/bestpractices.xml/ReplaceVectorWithList"/>
   <rule ref="category/java/bestpractices.xml/SwitchStmtsShouldHaveDefault"/>
   <rule ref="category/java/bestpractices.xml/SystemPrintln"/>
   <rule ref="category/java/bestpractices.xml/UnusedAssignment">
@@ -108,7 +110,7 @@
   </rule>
   <rule ref="category/java/codestyle.xml/AvoidUsingNativeCode"/>
   <rule ref="category/java/codestyle.xml/BooleanGetMethodName"/>
-  <!--<rule ref="category/java/codestyle.xml/CallSuperInConstructor"/>-->
+  <rule ref="category/java/codestyle.xml/CallSuperInConstructor"/>
   <rule ref="category/java/codestyle.xml/CommentDefaultAccessModifier">
     <properties>
       <property name="violationSuppressXPath" value="./ancestor::ClassOrInterfaceDeclaration[not(Annotation//Name[ends-with(@Image, 'Value')])]"/>
@@ -258,15 +260,14 @@
   <rule ref="category/java/errorprone.xml/CloneMethodMustBePublic"/>
   <rule ref="category/java/errorprone.xml/CloneMethodMustImplementCloneable"/>
   <rule ref="category/java/errorprone.xml/CloneMethodReturnTypeMustMatchClassName"/>
-  <!--<rule ref="category/java/errorprone.xml/CloneThrowsCloneNotSupportedException"/>-->
+  <rule ref="category/java/errorprone.xml/CloneThrowsCloneNotSupportedException"/>
   <rule ref="category/java/errorprone.xml/CloseResource"/>
   <rule ref="category/java/errorprone.xml/CompareObjectsWithEquals"/>
   <rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod"/>
-  <!--<rule ref="category/java/errorprone.xml/DataflowAnomalyAnalysis"/>-->
   <rule ref="category/java/errorprone.xml/DoNotCallGarbageCollectionExplicitly"/>
-  <rule ref="category/java/errorprone.xml/DoNotCallSystemExit"/>
   <rule ref="category/java/errorprone.xml/DoNotExtendJavaLangThrowable"/>
   <rule ref="category/java/errorprone.xml/DoNotHardCodeSDCard"/>
+  <rule ref="category/java/errorprone.xml/DoNotTerminateVM"/>
   <rule ref="category/java/errorprone.xml/DoNotThrowExceptionInFinally"/>
   <rule ref="category/java/errorprone.xml/DontImportSun"/>
   <rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices"/>
