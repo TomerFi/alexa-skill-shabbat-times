@@ -1,0 +1,347 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>info.tomfi</groupId>
+  <artifactId>shabbat-times-skill-handler</artifactId>
+  <version>3.0.0</version>
+  <packaging>jar</packaging>
+  <name>Shabbat Times</name>
+  <description>Alexa skill for retrieving the Shabbat start and stop times in various cities around the world.</description>
+  <url>https://www.amazon.com/Tomer-Figenblat-Shabbat-Times/dp/B072PRCHRD</url>
+  <inceptionYear>2017</inceptionYear>
+
+  <properties>
+    <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
+    <maven.compiler.release>8</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- SONAR -->
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.java.source>${maven.compiler.release}</sonar.java.source>
+    <sonar.java.target>${maven.compiler.release}</sonar.java.target>
+    <sonar.organization>tomerfi</sonar.organization>
+    <sonar.projectKey>info.tomfi:shabbat-times-skill-handler</sonar.projectKey>
+    <sonar.sources>src/main/java</sonar.sources>
+    <sonar.tests>src/test/java</sonar.tests>
+    <!-- DEPENDENCIES -->
+    <ask-sdk.version>2.37.1</ask-sdk.version>
+    <assertj.version>3.18.1</assertj.version>
+    <google-http-client.version>1.38.0</google-http-client.version>
+    <gson.version>2.8.6</gson.version>
+    <junit-jupiter.version>5.7.0</junit-jupiter.version>
+    <log4j.version>2.8.2</log4j.version>
+    <lombok.version>1.18.16</lombok.version>
+    <mockserver.version>5.11.2</mockserver.version>
+    <mockito.version>3.7.0</mockito.version>
+    <pmd.version>6.30.0</pmd.version>
+    <springframework.version>5.3.3</springframework.version>
+    <!-- Plugins -->
+    <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
+    <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+    <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
+    <maven-project-info-reports-plugin.version>3.1.1</maven-project-info-reports-plugin.version>
+    <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+    <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
+    <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
+    <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
+    <license-maven-plugin.version>3.0</license-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
+    <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
+  </properties>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>manual</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>tomerfi</id>
+      <name>Tomer Figenblat</name>
+      <email>tomer.figenblat@gmail.com</email>
+      <url>https://github.com/TomerFi</url>
+      <roles>
+        <role>Java developer</role>
+      </roles>
+      <timezone>Asia/Jerusalem</timezone>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/TomerFi/alexa-skill-shabbat-times/issues</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/TomerFialexa-skill-shabbat-times</url>
+    <connection>scm:git:https://github.com/TomerFi/alexa-skill-shabbat-times.git</connection>
+  </scm>
+
+  <ciManagement>
+    <system>GitHub Workflows</system>
+    <url>https://github.com/TomerFi/alexa-skill-shabbat-times/actions</url>
+  </ciManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.amazon.alexa</groupId>
+      <artifactId>ask-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.google.http-client</groupId>
+      <artifactId>google-http-client-gson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!-- TESTING DEPENDENCIES -->
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-client-java</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mock-server</groupId>
+      <artifactId>mockserver-netty</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>verify</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>${maven-shade-plugin.version}</version>
+        <configuration>
+          <createDependencyReducedPom>false</createDependencyReducedPom>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>prepare-jacoco-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>check-jacoco-metrics</id>
+            <goals>
+              <goal>check</goal>
+              <goal>report</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <rule>
+                  <element>BUNDLE</element>
+                  <limits>
+                    <limit>
+                      <counter>INSTRUCTION</counter>
+                      <value>COVEREDRATIO</value>
+                      <minimum>${jacoco.coverage.minimum}</minimum>
+                    </limit>
+                  </limits>
+                </rule>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <!-- Apache Plugins -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven-site-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>${maven-project-info-reports-plugin.version}</version>
+        </plugin>
+        <!-- Third-Party Plugins -->
+        <plugin>
+          <groupId>com.mycila</groupId>
+          <artifactId>license-maven-plugin</artifactId>
+          <version>${license-maven-plugin.version}</version>
+          <configuration>
+            <excludes>
+              <exclude>**/package-info.java</exclude>
+            </excludes>
+            <includes>
+              <include>**/*.java</include>
+              <!--<include>**/*.properties</include>-->
+            </includes>
+            <inlineHeader><![CDATA[Copyright 2019 Tomer Figenblat
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.]]>
+            </inlineHeader>
+            <skipExistingHeaders>true</skipExistingHeaders>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>${sonar-maven-plugin.version}</version>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.amazon.alexa</groupId>
+        <artifactId>ask-sdk</artifactId>
+        <version>${ask-sdk.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.http-client</groupId>
+        <artifactId>google-http-client</artifactId>
+        <version>${google-http-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.http-client</groupId>
+        <artifactId>google-http-client-gson</artifactId>
+        <version>${google-http-client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>${log4j.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${springframework.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+      <!-- TESTING DEPENDENCIES -->
+      <dependency>
+        <groupId>org.assertj</groupId>
+        <artifactId>assertj-core</artifactId>
+        <version>${assertj.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${junit-jupiter.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mock-server</groupId>
+        <artifactId>mockserver-client-java</artifactId>
+        <version>${mockserver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mock-server</groupId>
+        <artifactId>mockserver-netty</artifactId>
+        <version>${mockserver.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-junit-jupiter</artifactId>
+        <version>${mockito.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+</project>
