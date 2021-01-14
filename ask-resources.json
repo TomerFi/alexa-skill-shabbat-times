@@ -7,7 +7,7 @@
       },
       "code": {
         "default": {
-          "src": "./shabbat-times-skill-handler"
+          "src": "./skill-handler"
         }
       },
       "skillInfrastructure": {
