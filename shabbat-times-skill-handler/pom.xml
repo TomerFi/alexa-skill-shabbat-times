@@ -1,28 +1,29 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>info.tomfi</groupId>
-  <artifactId>alexa-shabbat-times-skill</artifactId>
+  <artifactId>shabbat-times-skill-handler</artifactId>
   <packaging>jar</packaging>
   <version>3.0.1</version>
 
   <properties>
-    <maven.install.skip>true</maven.install.skip>
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
-    <pmd.version>6.30.0</pmd.version>
+    <!-- SONAR -->
     <sonar.sources>src/main/java</sonar.sources>
     <sonar.tests>src/test/java</sonar.tests>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.java.source>${maven.compiler.release}</sonar.java.source>
     <sonar.java.target>${maven.compiler.release}</sonar.java.target>
-    <sonar.projectKey>info.tomfi:alexa-skill-shabbat-times</sonar.projectKey>
+    <sonar.projectKey>info.tomfi:shabbat-times-skill-handler</sonar.projectKey>
     <sonar.organization>tomerfi</sonar.organization>
+    <!-- DEPENDENCIES -->
     <mockserver.version>5.11.2</mockserver.version>
     <mockito.version>3.7.0</mockito.version>
     <google-http-client.version>1.38.0</google-http-client.version>
+    <pmd.version>6.30.0</pmd.version>
   </properties>
 
   <name>Shabbat Times</name>

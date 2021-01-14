@@ -18,10 +18,23 @@
 .factorypath
 .project
 .settings
-.ask
+*.code-workspace
 
 # Maven
 target
 
 # Cache Files
 *.cache
+
+# Tap files
+*.tap
+
+# Dotnet
+**/bin
+**/obj
+
+# reports (superlinter)
+*.report
+
+# alexa skills kit
+.ask

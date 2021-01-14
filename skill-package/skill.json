@@ -1,0 +1,127 @@
+{
+  "manifest": {
+    "manifestVersion": "1.0",
+    "permissions": [],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "usesPersonalInfo": false
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:482923858314:function:shabbat_time_v300"
+        }
+      }
+    },
+    "publishingInformation": {
+      "isAvailableWorldwide": true,
+      "testingInstructions": "You can ask alexa for shabbat times in various cities in the united states, the united kingdom or in israel.\nNote the skill is very interactive, the follow up questions differ based on the customer's answers.\nIt will, for example, return a different answer for ending a session with 'no', or 'no thank you'.",
+      "category": "RELIGION_AND_SPIRITUALITY",
+      "locales": {
+        "en-US": {
+          "summary": "Would you like to know the shabbat times in your city?",
+          "examplePhrases": [
+            "Alexa ask shabbat times for the shabbat times in new york",
+            "Alexa ask shabbat times to list all the city names in israel",
+            "Alexa ask shabbat times about tel aviv"
+          ],
+          "keywords": [
+            "shabbat",
+            "shabbos",
+            "candles",
+            "jewish",
+            "judaism",
+            "religion"
+          ],
+          "name": "Shabbat Times",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-AU": {
+          "summary": "Would you like to know the shabbat times in your city?",
+          "examplePhrases": [
+            "Alexa ask shabbat times for the shabbat times in new york",
+            "Alexa ask shabbat times to list all the city names in israel",
+            "Alexa ask shabbat times about tel aviv"
+          ],
+          "keywords": [
+            "shabbat",
+            "shabbos",
+            "candles",
+            "jewish",
+            "judaism",
+            "religion"
+          ],
+          "name": "Shabbat Times",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-CA": {
+          "summary": "Would you like to know the shabbat times in your city?",
+          "examplePhrases": [
+            "Alexa ask shabbat times for the shabbat times in new york",
+            "Alexa ask shabbat times to list all the city names in israel",
+            "Alexa ask shabbat times about tel aviv"
+          ],
+          "keywords": [
+            "shabbat",
+            "shabbos",
+            "candles",
+            "jewish",
+            "judaism",
+            "religion"
+          ],
+          "name": "Shabbat Times",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-IN": {
+          "summary": "Would you like to know the shabbat times in your city?",
+          "examplePhrases": [
+            "Alexa ask shabbat times for the shabbat times in new york",
+            "Alexa ask shabbat times to list all the city names in israel",
+            "Alexa ask shabbat times about tel aviv"
+          ],
+          "keywords": [
+            "shabbat",
+            "shabbos",
+            "candles",
+            "jewish",
+            "judaism",
+            "religion"
+          ],
+          "name": "Shabbat Times",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        },
+        "en-GB": {
+          "summary": "Would you like to know the shabbat times in your city?",
+          "examplePhrases": [
+            "Alexa ask shabbat times for the shabbat times in new york",
+            "Alexa ask shabbat times to list all the city names in israel",
+            "Alexa ask shabbat times about tel aviv"
+          ],
+          "keywords": [
+            "shabbat",
+            "shabbos",
+            "candles",
+            "jewish",
+            "judaism",
+            "religion"
+          ],
+          "name": "Shabbat Times",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
+          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+        }
+      }
+    }
+  }
+}
