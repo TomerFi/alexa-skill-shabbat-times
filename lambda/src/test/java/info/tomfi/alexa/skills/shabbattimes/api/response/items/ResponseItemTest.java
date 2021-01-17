@@ -16,12 +16,11 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,63 +38,62 @@ public final class ResponseItemTest {
   @Test
   @DisplayName("test response item json to object with mandatory values only")
   public void itemJsonToObject_mandatoryKeys_success() throws IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try (final BufferedReader breader =
         Files.newBufferedReader(
-            Paths.get(loader.getResource("api-responses/response_item_mandatory.json").toURI()));
+            Paths.get(loader.getResource("api-responses/response_item_mandatory.json").toURI())))
+            {
+              final ResponseItem item = gson.fromJson(breader, ResponseItem.class);
 
-    val item = gson.fromJson(breader, ResponseItem.class);
-
-    assertThat(item)
-        .titleIs("testTitle")
-        .categoryIs("testCategory")
-        .dateIs("testDate")
-        .hebrewIs("testHebrew")
-        .linkIsEmpty()
-        .memoIsEmpty()
-        .subcatIsEmpty()
-        .isNotYomtov();
+              assertThat(item)
+                  .titleIs("testTitle")
+                  .categoryIs("testCategory")
+                  .dateIs("testDate")
+                  .hebrewIs("testHebrew")
+                  .linkIsEmpty()
+                  .memoIsEmpty()
+                  .subcatIsEmpty()
+                  .isNotYomtov();
+            }
   }
 
   @Test
   @DisplayName("test response item json to object with mandatory and optional values")
   public void itemJsonToObject_optionalKeys_success() throws IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try (final BufferedReader breader =
         Files.newBufferedReader(
-            Paths.get(loader.getResource("api-responses/response_item_optional.json").toURI()));
+            Paths.get(loader.getResource("api-responses/response_item_optional.json").toURI())))
+            {
+              final ResponseItem item = gson.fromJson(breader, ResponseItem.class);
 
-    val item = gson.fromJson(breader, ResponseItem.class);
-
-    assertThat(item)
-        .titleIs("testTitle")
-        .categoryIs("testCategory")
-        .dateIs("testDate")
-        .hebrewIs("testHebrew")
-        .linkIs("testLink")
-        .memoIs("testMemo")
-        .subcatIs("testSubcat")
-        .isNotYomtov();
+              assertThat(item)
+                  .titleIs("testTitle")
+                  .categoryIs("testCategory")
+                  .dateIs("testDate")
+                  .hebrewIs("testHebrew")
+                  .linkIs("testLink")
+                  .memoIs("testMemo")
+                  .subcatIs("testSubcat")
+                  .isNotYomtov();
+            }
   }
 
   @Test
   @DisplayName("test response item json to object with mandatory, optional and yomtov values")
   public void itemJsonToObject_fullKeys_success() throws IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try (final BufferedReader breader =
         Files.newBufferedReader(
-            Paths.get(loader.getResource("api-responses/response_item_full.json").toURI()));
+            Paths.get(loader.getResource("api-responses/response_item_full.json").toURI()))) {
+              final ResponseItem item = gson.fromJson(breader, ResponseItem.class);
 
-    val item = gson.fromJson(breader, ResponseItem.class);
-
-    assertThat(item)
-        .titleIs("testTitle")
-        .categoryIs("testCategory")
-        .dateIs("testDate")
-        .hebrewIs("testHebrew")
-        .linkIs("testLink")
-        .memoIs("testMemo")
-        .subcatIs("testSubcat")
-        .isYomtov();
+              assertThat(item)
+                  .titleIs("testTitle")
+                  .categoryIs("testCategory")
+                  .dateIs("testDate")
+                  .hebrewIs("testHebrew")
+                  .linkIs("testLink")
+                  .memoIs("testMemo")
+                  .subcatIs("testSubcat")
+                  .isYomtov();
+            }
   }
 }

@@ -19,15 +19,17 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.model.Slot;
+
+import info.tomfi.alexa.skills.shabbattimes.country.Country;
 import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -37,8 +39,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class CountrySelectedIntentHandler implements IntentRequestHandler {
+  public CountrySelectedIntentHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
     return intent.getIntent().getName().equals(COUNTRY_SELECTED.getName());
@@ -47,17 +52,17 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
       throws NoCountrySlotException, NoJsonFileException {
-    val countrySlot = intent.getIntent().getSlots().get(Slots.COUNTRY);
+    final Slot countrySlot = intent.getIntent().getSlots().get(Slots.COUNTRY);
     if (countrySlot.getValue() == null) {
       throw new NoCountrySlotException("No country slot found.");
     }
-    val country = CountryFactory.getCountry(countrySlot.getValue());
+    final Country country = CountryFactory.getCountry(countrySlot.getValue());
 
-    val sessionAttributes = input.getAttributesManager().getSessionAttributes();
+    final Map<String, Object>  sessionAttributes = input.getAttributesManager().getSessionAttributes();
     sessionAttributes.put(Attributes.COUNTRY.getName(), country.getAbbreviation());
     input.getAttributesManager().setSessionAttributes(sessionAttributes);
 
-    val requestAttributes = input.getAttributesManager().getRequestAttributes();
+    final Map<String, Object>  requestAttributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
         .withSpeech(

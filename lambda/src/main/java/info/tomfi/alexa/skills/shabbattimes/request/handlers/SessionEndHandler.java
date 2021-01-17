@@ -17,7 +17,6 @@ import com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,8 +26,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class SessionEndHandler implements SessionEndedRequestHandler {
+  public SessionEndHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final SessionEndedRequest request) {
     return true;

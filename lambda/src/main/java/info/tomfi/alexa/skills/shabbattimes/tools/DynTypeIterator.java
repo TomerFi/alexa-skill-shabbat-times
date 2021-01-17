@@ -15,7 +15,6 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
-import lombok.RequiredArgsConstructor;
 
 /**
  * Iterator taking a dynamic type.
@@ -23,10 +22,13 @@ import lombok.RequiredArgsConstructor;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  * @param <E> type of iterator.
  */
-@RequiredArgsConstructor
 public final class DynTypeIterator<E> implements Iterator<E> {
   private final List<E> list;
   private int idx;
+
+  public DynTypeIterator(List<E> setList) {
+    list = setList;
+  }
 
   @Override
   public boolean hasNext() {

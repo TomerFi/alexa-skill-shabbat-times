@@ -26,7 +26,8 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateExceptio
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import lombok.val;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,59 +68,59 @@ public final class DateTimeUtilsTest {
   @Test
   @DisplayName("test the retrieval of this week friday when current is sunday")
   public void getShabbatStartLocalDate_currentIsSunday_returnsThisWeekFriday() {
-    val sundayDate = SHABBAT_START.minusDays(5).toLocalDate();
+    final LocalDate sundayDate = SHABBAT_START.minusDays(5).toLocalDate();
     assertThat(getShabbatStartLocalDate(sundayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is monday")
   public void getShabbatStartLocalDate_currentIsMonday_returnsThisWeekFriday() {
-    val mondayDate = SHABBAT_START.minusDays(4).toLocalDate();
+    final LocalDate mondayDate = SHABBAT_START.minusDays(4).toLocalDate();
     assertThat(getShabbatStartLocalDate(mondayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is tuesday")
   public void getShabbatStartLocalDate_currentIsTuesday_returnsThisWeekFriday() {
-    val tuesdayDate = SHABBAT_START.minusDays(3).toLocalDate();
+    final LocalDate tuesdayDate = SHABBAT_START.minusDays(3).toLocalDate();
     assertThat(getShabbatStartLocalDate(tuesdayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is wednesday")
   public void getShabbatStartLocalDate_currentIsWednesday_returnsThisWeekFriday() {
-    val wednesdayDate = SHABBAT_START.minusDays(2).toLocalDate();
+    final LocalDate wednesdayDate = SHABBAT_START.minusDays(2).toLocalDate();
     assertThat(getShabbatStartLocalDate(wednesdayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is thursday")
   public void getShabbatStartLocalDate_currentIsThursday_returnsThisWeekFriday() {
-    val thursdayDate = SHABBAT_START.minusDays(1).toLocalDate();
+    final LocalDate thursdayDate = SHABBAT_START.minusDays(1).toLocalDate();
     assertThat(getShabbatStartLocalDate(thursdayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is friday")
   public void getShabbatStartLocalDate_currentIsFriday_returnsThisWeekFriday() {
-    val fridayDate = SHABBAT_START.toLocalDate();
+    final LocalDate fridayDate = SHABBAT_START.toLocalDate();
     assertThat(getShabbatStartLocalDate(fridayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of this week friday when current is saturday")
   public void getShabbatStartLocalDate_currentIsSaturday_returnsThisWeekFriday() {
-    val saturdayDate = SHABBAT_END.toLocalDate();
+    final LocalDate saturdayDate = SHABBAT_END.toLocalDate();
     assertThat(getShabbatStartLocalDate(saturdayDate)).isEqualTo(SHABBAT_START.toLocalDate());
   }
 
   @Test
   @DisplayName("test the retrieval of the correct shabbat candles item by local date")
   public void getStartDateTime_listContainingCorrectItem_getCorrectItem() {
-    val listOfItems =
+    final List<ResponseItem> listOfItems =
         Arrays.asList(
             candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
     assertThat(DateTimeUtils.getStartDateTime(listOfItems, shabbatStartDate).toString())
         .isEqualTo("2019-10-18T17:47+03:00");
   }
@@ -128,8 +129,8 @@ public final class DateTimeUtilsTest {
   @DisplayName(
       "test exception throwing when the retrieval of the correct shabbat candles item by local date fails due to date incompatibility")
   public void getStartDateTime_listNotContainingCorrectItem_throwsException() {
-    val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
+    final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
     assertThatExceptionOfType(NoItemFoundForDateException.class)
         .isThrownBy(() -> DateTimeUtils.getStartDateTime(listOfItems, shabbatStartDate));
   }
@@ -137,10 +138,10 @@ public final class DateTimeUtilsTest {
   @Test
   @DisplayName("test the retrieval of the correct shabbat havdalah item by local date")
   public void getEndDateTime_listContainingCorrectItem_getCorrectItem() {
-    val listOfItems =
+    final List<ResponseItem> listOfItems =
         Arrays.asList(
             candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
-    val shabbatEndDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+    final LocalDate shabbatEndDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
     assertThat(DateTimeUtils.getEndDateTime(listOfItems, shabbatEndDate).toString())
         .isEqualTo("2019-10-19T18:54+03:00");
   }
@@ -149,8 +150,8 @@ public final class DateTimeUtilsTest {
   @DisplayName(
       "test exception throwing when the retrieval of the correct shabbat havdalah item by local date fails due to date incompatibility")
   public void getEndDateTime_listNotContainingCorrectItem_throwsException() {
-    val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
-    val shabbatEndDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+    final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
+    final LocalDate shabbatEndDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
     assertThatExceptionOfType(NoItemFoundForDateException.class)
         .isThrownBy(() -> DateTimeUtils.getEndDateTime(listOfItems, shabbatEndDate));
   }

@@ -12,8 +12,6 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.tools;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import com.amazon.ask.model.Slot;
 import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.country.Country;
@@ -21,17 +19,19 @@ import info.tomfi.alexa.skills.shabbattimes.country.CountryFactory;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
+import java.util.Iterator;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 
 /**
  * Utility class for locating a city within the backend country and cities data.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor(access = PRIVATE)
 public final class CityLocator {
+  private CityLocator() {
+    //
+  }
+
   /**
    * A static tool for creating the country and city objects.
    *
@@ -41,14 +41,13 @@ public final class CityLocator {
    * @throws NoCityFoundException when an unknown city was provided with no country specification.
    * @throws NoCityInCountryException when an unknown city within a country was encountered.
    */
-  @SuppressWarnings("PMD.OnlyOneReturn")
   public static City getByCityAndCountry(final Slot countrySlot, final Slot citySlot)
       throws NoCityFoundException, NoCityInCountryException {
     if (countrySlot.getValue() == null) {
       return getByCity(citySlot);
     }
-    val country = CountryFactory.getCountry(countrySlot.getValue());
-    val cityOpt = findCityInCountry(country, citySlot.getValue());
+    final Country country = CountryFactory.getCountry(countrySlot.getValue());
+    final Optional<City> cityOpt = findCityInCountry(country, citySlot.getValue());
     if (cityOpt.isPresent()) {
       return cityOpt.get();
     }
@@ -57,9 +56,9 @@ public final class CityLocator {
   }
 
   private static City getByCity(final Slot citySlot) {
-    for (val member : CountryInfo.values()) {
-      val country = CountryFactory.getCountry(member);
-      val cityOpt = findCityInCountry(country, citySlot.getValue());
+    for (final CountryInfo member : CountryInfo.values()) {
+      final Country country = CountryFactory.getCountry(member);
+      final  Optional<City> cityOpt = findCityInCountry(country, citySlot.getValue());
       if (cityOpt.isPresent()) {
         return cityOpt.get();
       }
@@ -67,14 +66,13 @@ public final class CityLocator {
     throw new NoCityFoundException(String.format("city %s not found", citySlot.getValue()));
   }
 
-  @SuppressWarnings({"PMD.OnlyOneReturn", "PMD.UnusedPrivateMethod"})
   private static Optional<City> findCityInCountry(final Country country, final String cityName) {
-    val cities = country.iterator();
+    final Iterator<City> cities = country.iterator();
     while (cities.hasNext()) {
-      val currentCity = cities.next();
-      val aliases = currentCity.iterator();
+      final City currentCity = cities.next();
+      final Iterator<String> aliases = currentCity.iterator();
       while (aliases.hasNext()) {
-        val currentAlias = aliases.next();
+        final String currentAlias = aliases.next();
         if (currentAlias.equalsIgnoreCase(cityName)) {
           return Optional.of(currentCity);
         }

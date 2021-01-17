@@ -26,7 +26,8 @@ import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
-import lombok.val;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -66,10 +67,10 @@ public final class ApiToolsTest {
   @Test
   @DisplayName("test the retrieval of the correct shabbat candles item by local date")
   public void getShabbatCandlesItem_listContainingCorrectItem_getCorrectItem() {
-    val listOfItems =
+    final List<ResponseItem> listOfItems =
         Arrays.asList(
             candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
     assertThat(ApiTools.getShabbatCandlesItem(listOfItems, shabbatStartDate).get())
         .isEqualTo(candlesShabbatItem);
   }
@@ -78,18 +79,18 @@ public final class ApiToolsTest {
   @DisplayName(
       "test the empty optional value when trying to retrieve a non-existing candles item by local date")
   public void getShabbatCandlesItem_listNotContainingCorrectItem_optionalEmpty() {
-    val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
+    final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-18", ISO_LOCAL_DATE);
     assertThat(ApiTools.getShabbatCandlesItem(listOfItems, shabbatStartDate).isPresent()).isFalse();
   }
 
   @Test
   @DisplayName("test the retrieval of the correct shabbat havdalah item by local date")
   public void getShabbatHavdalaItem_listContainingCorrectItem_getCorrectItem() {
-    val listOfItems =
+    final List<ResponseItem> listOfItems =
         Arrays.asList(
             candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
     assertThat(ApiTools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).get())
         .isEqualTo(havdalaShabbatItem);
   }
@@ -98,8 +99,8 @@ public final class ApiToolsTest {
   @DisplayName(
       "test the empty optional value when trying to retrieve a non-existing havdalah item by local date")
   public void getShabbatHavdalaItem_listNotContainingCorrectItem_optionalEmpty() {
-    val listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
-    val shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
+    final List<ResponseItem> listOfItems = Arrays.asList(candlesHolidayItem, havdalaHolidayItem);
+    final LocalDate shabbatStartDate = LocalDate.parse("2019-10-19", ISO_LOCAL_DATE);
     assertThat(ApiTools.getShabbatHavdalahItem(listOfItems, shabbatStartDate).isPresent())
         .isFalse();
   }
@@ -107,7 +108,7 @@ public final class ApiToolsTest {
   @Test
   @DisplayName("test the reducing and sorting of the response items list")
   public void getCandlesAndHavdalahItems_unsortedFullList_sortedMinmizedList() {
-    val response = mock(ApiResponse.class);
+    final ApiResponse response = mock(ApiResponse.class);
     when(response.getItems())
         .thenReturn(
             Arrays.asList(

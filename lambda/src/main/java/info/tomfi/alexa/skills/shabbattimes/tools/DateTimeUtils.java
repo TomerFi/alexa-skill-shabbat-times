@@ -14,7 +14,6 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.ApiTools.getShabbatCandlesItem;
 import static info.tomfi.alexa.skills.shabbattimes.tools.ApiTools.getShabbatHavdalahItem;
-import static lombok.AccessLevel.PRIVATE;
 
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
@@ -22,16 +21,18 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
-import lombok.NoArgsConstructor;
-import lombok.val;
+import java.util.Optional;
 
 /**
  * Utility class for working with date and time objects.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor(access = PRIVATE)
 public final class DateTimeUtils {
+  private DateTimeUtils() {
+    //
+  }
+
   /**
    * Get the date of the Friday occuring in the same week of the requested date.
    *
@@ -39,8 +40,8 @@ public final class DateTimeUtils {
    * @return Friday's date.
    */
   public static LocalDate getShabbatStartLocalDate(final LocalDate requestDate) {
-    val requestDow = requestDate.getDayOfWeek();
-    val daysToAdd =
+    final DayOfWeek requestDow = requestDate.getDayOfWeek();
+    final int daysToAdd =
         requestDow == DayOfWeek.FRIDAY
             ? 0
             : requestDow == DayOfWeek.SATURDAY
@@ -62,7 +63,7 @@ public final class DateTimeUtils {
    */
   public static ZonedDateTime getStartDateTime(final List<ResponseItem> items, final LocalDate date)
       throws NoItemFoundForDateException {
-    val shabbatStartItem = getShabbatCandlesItem(items, date);
+    final Optional<ResponseItem> shabbatStartItem = getShabbatCandlesItem(items, date);
     if (!shabbatStartItem.isPresent()) {
       throw new NoItemFoundForDateException("no candles item found for requested date");
     }
@@ -82,7 +83,7 @@ public final class DateTimeUtils {
    */
   public static ZonedDateTime getEndDateTime(final List<ResponseItem> items, final LocalDate date)
       throws NoItemFoundForDateException {
-    val shabbatEndItem = getShabbatHavdalahItem(items, date);
+    final Optional<ResponseItem> shabbatEndItem = getShabbatHavdalahItem(items, date);
     if (!shabbatEndItem.isPresent()) {
       throw new NoItemFoundForDateException("no havdalah item found for requested date");
     }

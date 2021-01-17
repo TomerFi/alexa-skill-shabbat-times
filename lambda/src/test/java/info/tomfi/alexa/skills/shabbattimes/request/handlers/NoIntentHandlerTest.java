@@ -24,8 +24,8 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,19 +38,19 @@ public final class NoIntentHandlerTest {
 
   @BeforeAll
   public static void initialize() {
-    val fakeIntent = Intent.builder().withName(Intents.NO.getName()).build();
+    final Intent fakeIntent = Intent.builder().withName(Intents.NO.getName()).build();
     fakeRequest = IntentRequest.builder().withIntent(fakeIntent).build();
-    val fakeSession =
+    final Session fakeSession =
         Session.builder()
             .putAttributesItem(Attributes.LAST_INTENT.getName(), Intents.COUNTRY_SELECTED.getName())
             .putAttributesItem(Attributes.COUNTRY.getName(), "IL")
             .build();
-    val fakeEnvelope =
+    final RequestEnvelope fakeEnvelope =
         RequestEnvelope.builder().withRequest(fakeRequest).withSession(fakeSession).build();
     fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
-    val bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
-    val attributes = new HashMap<String, Object>();
+    final ResourceBundle bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
+    final Map<String, Object> attributes = new HashMap<String, Object>();
     attributes.put(L10N_BUNDLE.getName(), bundle);
     fakeInput.getAttributesManager().setRequestAttributes(attributes);
 

@@ -15,15 +15,17 @@ package info.tomfi.alexa.skills.shabbattimes.skilltests;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import com.amazon.ask.Skill;
+import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.request.impl.BaseSkillRequest;
+import com.amazon.ask.response.SkillResponse;
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,24 +35,31 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public final class NoIntentTest {
   private static Skill skillInTest;
 
+  private static AnnotationConfigApplicationContext context;
+
   @BeforeAll
   public static void initialize()
       throws BeansException, IllegalAccessException, InstantiationException {
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
+    context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
     skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
+  }
+
+  @AfterAll
+  public static void cleanup() {
+    context.close();
   }
 
   @Test
   @DisplayName("customer reply 'no'")
   public void testNoIntent() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/no_intent.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()
@@ -64,14 +73,14 @@ public final class NoIntentTest {
   @Test
   @DisplayName("customer reply 'no' after selecting israel as the country to list the cities from")
   public void testNoIntentAfterCountrySelectedIntentIL() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/no_intent_after_country_selected_il.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()
@@ -88,14 +97,14 @@ public final class NoIntentTest {
   @DisplayName(
       "customer reply 'no' after selecting the united states as the country to list the cities from")
   public void testNoIntentAfterCountrySelectedIntentUS() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/no_intent_after_country_selected_us.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()
@@ -111,14 +120,14 @@ public final class NoIntentTest {
   @Test
   @DisplayName("customer reply 'no' after selecting england as the country to list the cities from")
   public void testNoIntentAfterCountrySelectedIntentGB() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/no_intent_after_country_selected_gb.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()
@@ -136,14 +145,14 @@ public final class NoIntentTest {
       "customer reply 'no' after selecting an unknown as the country to list the cities from")
   public void testNoIntentAfterCountrySelectedIntentUknown()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/no_intent_after_country_selected_er.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()

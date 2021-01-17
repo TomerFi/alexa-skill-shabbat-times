@@ -28,6 +28,8 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
+import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
@@ -35,9 +37,11 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoItemFoundForDateException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoResponseFromApiException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -48,9 +52,12 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class GetCityIntentHandler implements IntentRequestHandler {
   @Autowired private ApiRequestMaker requestMaker;
+
+  public GetCityIntentHandler() {
+    //
+  }
 
   @Override
   public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
@@ -61,9 +68,9 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
   public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
       throws NoCityFoundException, NoCityInCountryException, NoCitySlotException,
           NoItemFoundForDateException, NoResponseFromApiException {
-    val selectedCity =
+    final City selectedCity =
         getCityFromSlots(intent.getIntent().getSlots(), input.getAttributesManager());
-    val shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
+    final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
     final ApiResponse response;
     try {
       response = requestMaker.setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
@@ -71,18 +78,18 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
       throw new NoResponseFromApiException("no response from hebcal's shabbat api", exc);
     }
 
-    val items = getCandlesAndHavdalahItems(response);
-    val shabbatStartDateTime = getStartDateTime(items, shabbatDate);
-    val shabbatEndDateTime = getEndDateTime(items, shabbatDate.plusDays(1));
-    val currentDateTime = intent.getTimestamp().toZonedDateTime();
+    final List<ResponseItem> items = getCandlesAndHavdalahItems(response);
+    final ZonedDateTime shabbatStartDateTime = getStartDateTime(items, shabbatDate);
+    final ZonedDateTime shabbatEndDateTime = getEndDateTime(items, shabbatDate.plusDays(1));
+    final ZonedDateTime currentDateTime = intent.getTimestamp().toZonedDateTime();
 
-    val requestAttributes = input.getAttributesManager().getRequestAttributes();
-    val startsAtPresentation =
+    final Map<String, Object>  requestAttributes = input.getAttributesManager().getRequestAttributes();
+    final String startsAtPresentation =
         getStartsAtPresentation(requestAttributes, currentDateTime.getDayOfWeek());
-    val endsAtPresentation =
+    final String endsAtPresentation =
         getEndsAtPresentation(requestAttributes, currentDateTime.getDayOfWeek());
 
-    val speechOutput =
+    final String speechOutput =
         String.format(
             getFromBundle(requestAttributes, BundleKeys.SHABBAT_INFORMATION_FMT),
             response.getLocation().getCity(),
@@ -93,11 +100,11 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
             shabbatEndDateTime.toLocalDate().toString(),
             shabbatEndDateTime.toLocalTime().toString());
 
-    val cardTitle =
+    final String cardTitle =
         String.format(
             getFromBundle(requestAttributes, BundleKeys.SIMPLE_CARD_TITLE_FMT),
             selectedCity.getGeoName());
-    val cardContent =
+    final String cardContent =
         String.format(
             getFromBundle(requestAttributes, BundleKeys.SIMPLE_CARD_CONTENT_FMT),
             shabbatStartDateTime.toLocalDate().toString(),

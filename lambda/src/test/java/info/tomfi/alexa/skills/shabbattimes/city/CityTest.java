@@ -15,12 +15,12 @@ package info.tomfi.alexa.skills.shabbattimes.city;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -29,25 +29,24 @@ public final class CityTest {
   @DisplayName("test the creation of the city pojo from a json file")
   public void cityJsonToObject_testJsonFile_validateValues()
       throws IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try(final BufferedReader breader =
         Files.newBufferedReader(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("cities/TST_City1.json")
-                    .toURI()));
+                    .toURI()))) {
+                      final City city = new GsonBuilder().create().fromJson(breader, City.class);
 
-    val city = new GsonBuilder().create().fromJson(breader, City.class);
+                      assertThat(city)
+                          .cityNameIs("testCity1")
+                          .geoNameIs("TST-testCity1")
+                          .geoIdIs(1234567)
+                          .countryAbbreviationIs("TST");
 
-    assertThat(city)
-        .cityNameIs("testCity1")
-        .geoNameIs("TST-testCity1")
-        .geoIdIs(1234567)
-        .countryAbbreviationIs("TST");
-
-    assertThat(city.iterator())
-        .toIterable()
-        .containsExactlyInAnyOrder("testCity1", "city1", "firstcity");
+                      assertThat(city.iterator())
+                          .toIterable()
+                          .containsExactlyInAnyOrder("testCity1", "city1", "firstcity");
+                    }
   }
 }

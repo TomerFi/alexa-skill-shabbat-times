@@ -14,15 +14,16 @@ package info.tomfi.alexa.skills.shabbattimes.skilltests;
 
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
+import com.amazon.ask.Skill;
+import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.request.impl.BaseSkillRequest;
+import com.amazon.ask.response.SkillResponse;
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeansException;
@@ -34,17 +35,17 @@ public final class HelpIntentTest {
   public void testHelpIntent()
       throws BeansException, IllegalAccessException, InstantiationException, IOException,
           URISyntaxException {
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
-    val skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
+    final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
+    final Skill skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
-    val input =
+    byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("skill-tests/help_intent.json")
                     .toURI()));
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
 
     assertThat(response)
         .isPresent()
@@ -55,5 +56,7 @@ public final class HelpIntentTest {
             "I can list all the city names I know in the United States, the United Kingdom, and Israel. Which country would you like to hear about?")
         .repromptSpeechIs(
             "Please tell me the country name! United States, United Kingdom, or Israel.");
+
+    context.close();
   }
 }

@@ -19,9 +19,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,14 +30,17 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class PersistSessionAttributes implements ResponseInterceptor {
+  public PersistSessionAttributes() {
+    //
+  }
+
   @Override
   public void process(final HandlerInput input, final Optional<Response> response) {
     if (input.matches(requestType(IntentRequest.class))
         && response.isPresent()
         && Boolean.FALSE.equals(response.get().getShouldEndSession())) {
-      val attribs = input.getAttributesManager().getSessionAttributes();
+      final Map<String, Object>  attribs = input.getAttributesManager().getSessionAttributes();
       attribs.put(
           LAST_INTENT.getName(), ((IntentRequest) input.getRequest()).getIntent().getName());
       input.getAttributesManager().setSessionAttributes(attribs);

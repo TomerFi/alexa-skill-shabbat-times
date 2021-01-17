@@ -14,7 +14,6 @@ package info.tomfi.alexa.skills.shabbattimes.tools;
 
 import static info.tomfi.alexa.skills.shabbattimes.tools.CityLocator.getByCityAndCountry;
 import static java.util.stream.Collectors.toList;
-import static lombok.AccessLevel.PRIVATE;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.model.Slot;
@@ -25,6 +24,8 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -32,18 +33,19 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import lombok.Cleanup;
-import lombok.NoArgsConstructor;
-import lombok.val;
+import java.util.Optional;
 
 /**
  * Utility class for working with the skill City objects.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor(access = PRIVATE)
 public final class SkillTools {
-  private static final Gson GSNO_PARSER = new GsonBuilder().create();
+  private static final Gson GSON_PARSER = new GsonBuilder().create();
+
+  private SkillTools() {
+    //
+  }
 
   /**
    * A static tool for retrieving the populated city slot from the request slot map.
@@ -53,9 +55,9 @@ public final class SkillTools {
    * @throws NoCitySlotException when no populated slot was found.
    */
   public static Slot getCitySlotFromMap(final Map<String, Slot> slots) throws NoCitySlotException {
-    val cityKeys =
+    final List<String> cityKeys =
         Arrays.stream(Slots.City.values()).map(memebr -> memebr.getName()).collect(toList());
-    val slotKey =
+    final Optional<String> slotKey =
         slots.keySet().stream()
             .filter(key -> cityKeys.contains(key))
             .filter(key -> slots.get(key).getValue() != null)
@@ -76,20 +78,18 @@ public final class SkillTools {
    * @return a List of {@link info.tomfi.alexa.skills.shabbattimes.city.City} objects.
    * @throws NoJsonFileException when the backend json file was not found.
    */
-  @SuppressWarnings({"PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE"})
   public static List<City> getCityListFromJsonFile(final String countryAbbreviation)
       throws NoJsonFileException {
-    val jsonFileName = String.format("cities/%s_Cities.json", countryAbbreviation);
-    try {
-      @Cleanup
-      val breader =
-          Files.newBufferedReader(
-              Paths.get(
-                  Thread.currentThread()
-                      .getContextClassLoader()
-                      .getResource(jsonFileName)
-                      .toURI()));
-      val cityArray = GSNO_PARSER.fromJson(breader, City[].class);
+    final String jsonFileName = String.format("cities/%s_Cities.json", countryAbbreviation);
+    try (
+      final BufferedReader breader = Files.newBufferedReader(
+        Paths.get(
+            Thread.currentThread()
+                .getContextClassLoader()
+                .getResource(jsonFileName)
+                .toURI()))
+    ) {
+      final City[] cityArray = GSON_PARSER.fromJson(breader, City[].class);
       return Arrays.asList(cityArray);
     } catch (IOException | NullPointerException | URISyntaxException exc) {
       throw new NoJsonFileException("No json file found", exc);
@@ -107,8 +107,8 @@ public final class SkillTools {
    */
   public static City getCityFromSlots(
       final Map<String, Slot> slots, final AttributesManager attribManager) {
-    val selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY), getCitySlotFromMap(slots));
-    val sessionAttributes = attribManager.getSessionAttributes();
+    final City selectedCity = getByCityAndCountry(slots.get(Slots.COUNTRY), getCitySlotFromMap(slots));
+    final Map<String, Object> sessionAttributes = attribManager.getSessionAttributes();
     sessionAttributes.put(Attributes.COUNTRY.getName(), selectedCity.getCountryAbbreviation());
     sessionAttributes.put(Attributes.CITY.getName(), selectedCity.getCityName());
     attribManager.setSessionAttributes(sessionAttributes);

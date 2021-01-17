@@ -15,7 +15,9 @@ package info.tomfi.alexa.skills.shabbattimes.skilltests;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import com.amazon.ask.Skill;
+import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.request.impl.BaseSkillRequest;
+import com.amazon.ask.response.SkillResponse;
 import info.tomfi.alexa.skills.shabbattimes.ShabbatTimesSkillCreator;
 import info.tomfi.alexa.skills.shabbattimes.di.DiBreakApiConfiguration;
 import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
@@ -23,8 +25,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -34,11 +36,18 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public final class GetCityIntentTest {
   private static Skill skillInTest;
 
+  private static AnnotationConfigApplicationContext context;
+
   @BeforeAll
   public static void initialize()
       throws BeansException, IllegalAccessException, InstantiationException {
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
+    context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
     skillInTest = context.getBean(ShabbatTimesSkillCreator.class).getSkill();
+  }
+
+  @AfterAll
+  public static void cleanup() {
+    context.close();
   }
 
   @Test
@@ -46,7 +55,7 @@ public final class GetCityIntentTest {
       "customer select israel city 'rishon lezion' on Tuesday without stating the origin country, start on $ end on $")
   public void testGetCityIntent_Tuesday_IsraelCity_NoCountry()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -54,7 +63,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_tuesday_israel_city_no_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -74,7 +83,7 @@ public final class GetCityIntentTest {
       "customer select city on Tuesday while stating the country 'rishon lezion, israel', start on $ end on $")
   public void testGetCityIntent_Tuesday_IsraelCity_WithCountry()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -83,7 +92,7 @@ public final class GetCityIntentTest {
                         "skill-tests/get_city_intent_tuesday_israel_city_with_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -103,7 +112,7 @@ public final class GetCityIntentTest {
       "customer select israel city 'rishon lezion' on Thursday without stating the origin country, start tommorow end on $")
   public void testGetCityIntent_Thursday_IsraelCity_NoCountry()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -111,7 +120,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_thursday_israel_city_no_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -131,7 +140,7 @@ public final class GetCityIntentTest {
       "customer select israel city 'rishon lezion' on Friday without stating the origin country, start today end tomorrow")
   public void testGetCityIntent_Friday_IsraelCity_NoCountry()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -139,7 +148,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_friday_israel_city_no_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -159,7 +168,7 @@ public final class GetCityIntentTest {
       "customer select israel city 'rishon lezion' on Saturday without stating the origin country, start yesterday end today")
   public void testGetCityIntent_Saturday_IsraelCity_NoCountry()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -167,7 +176,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_saturday_israel_city_no_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -187,7 +196,7 @@ public final class GetCityIntentTest {
       "test exception handling with a requested date that is later then the date in the mocked response")
   public void testGetCityIntent_requesteDate_after_responseDate()
       throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -196,7 +205,7 @@ public final class GetCityIntentTest {
                         "skill-tests/get_city_intent_request_date_after_response_date.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsOver()
@@ -211,7 +220,7 @@ public final class GetCityIntentTest {
   @Test
   @DisplayName("test exception handling when unknown city and no country selcted")
   public void testGetCityIntent_unknownCityNoCountry() throws IOException, URISyntaxException {
-    val input =
+    final byte[]  input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -219,7 +228,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_tuesday_unknown_city_no_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -234,7 +243,7 @@ public final class GetCityIntentTest {
   @Test
   @DisplayName("test exception handling when unknown city and  a selected country")
   public void testGetCityIntent_unknownCityWithCountry() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -243,7 +252,7 @@ public final class GetCityIntentTest {
                         "skill-tests/get_city_intent_tuesday_unknown_city_with_country.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -258,7 +267,7 @@ public final class GetCityIntentTest {
   @Test
   @DisplayName("test exception handling when no city slot was provided with the request")
   public void testGetCityIntent_noCitySlot() throws IOException, URISyntaxException {
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -266,7 +275,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_tuesday_no_city_slot.json")
                     .toURI()));
 
-    val response = skillInTest.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = skillInTest.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsStillOn()
@@ -283,11 +292,10 @@ public final class GetCityIntentTest {
   public void testGetCityIntent_hebcalApi_notResponding()
       throws BeansException, IllegalAccessException, InstantiationException, IOException,
           URISyntaxException {
-    @Cleanup
-    val breakApiContext = new AnnotationConfigApplicationContext(DiBreakApiConfiguration.class);
-    val breakApiSkill = breakApiContext.getBean(ShabbatTimesSkillCreator.class).getSkill();
+    final AnnotationConfigApplicationContext breakApiContext = new AnnotationConfigApplicationContext(DiBreakApiConfiguration.class);
+    final Skill breakApiSkill = breakApiContext.getBean(ShabbatTimesSkillCreator.class).getSkill();
 
-    val input =
+    final byte[] input =
         Files.readAllBytes(
             Paths.get(
                 Thread.currentThread()
@@ -295,7 +303,7 @@ public final class GetCityIntentTest {
                     .getResource("skill-tests/get_city_intent_tuesday_israel_city_no_country.json")
                     .toURI()));
 
-    val response = breakApiSkill.execute(new BaseSkillRequest(input));
+    final SkillResponse<ResponseEnvelope> response = breakApiSkill.execute(new BaseSkillRequest(input));
     assertThat(response)
         .isPresent()
         .sessionIsOver()
@@ -305,5 +313,7 @@ public final class GetCityIntentTest {
         .sessionAttributesHasKeyWithValue("city", "rishon lezion")
         .outputSpeechIs(
             "I'm sorry. Something went wrong. I'm doing my best to resolve this issue. Please try again later. Goodbye.");
+
+    breakApiContext.close();
   }
 }

@@ -20,7 +20,6 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -30,8 +29,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class NoJsonFileHandler implements ExceptionHandler {
+  public NoJsonFileHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final Throwable throwable) {
     return throwable instanceof NoJsonFileException;

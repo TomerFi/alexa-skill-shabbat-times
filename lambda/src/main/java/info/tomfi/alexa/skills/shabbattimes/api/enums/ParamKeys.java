@@ -12,15 +12,11 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.api.enums;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-
 /**
  * Enum helper for constructing api requests, used for setting the various keys in the param query.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@RequiredArgsConstructor
 public enum ParamKeys {
   ASHKENAZIS_TRANSLITERATIONS("a"),
   CANDLE_LIGHTING("b"),
@@ -38,5 +34,13 @@ public enum ParamKeys {
   TZID("tzid"), // used with GeoTypes.POSITIONAL
   ZIP("zip"); // used with GeoTypes.ZIP
 
-  @Getter private final String key;
+  private final String key;
+
+  ParamKeys(final String setKey) {
+    key = setKey;
+  }
+
+  public String getKey() {
+    return key;
+  }
 }

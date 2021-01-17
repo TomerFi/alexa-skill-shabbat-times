@@ -13,6 +13,8 @@
 package info.tomfi.alexa.skills.shabbattimes.api;
 
 import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.HttpRequestInitializer;
 import com.google.api.client.http.HttpTransport;
 import info.tomfi.alexa.skills.shabbattimes.api.enums.FlagStates;
@@ -24,7 +26,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -117,9 +118,9 @@ public final class ApiRequestMaker {
    * @return this builder object.
    */
   public ApiRequestMaker setSpecificDate(final LocalDate dateTime) {
-    val year = String.valueOf(dateTime.getYear());
-    val month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
-    val day = String.format("0%s", String.valueOf(dateTime.getDayOfMonth()));
+    final String year = String.valueOf(dateTime.getYear());
+    final String month = String.format("0%s", String.valueOf(dateTime.getMonthValue()));
+    final String day = String.format("0%s", String.valueOf(dateTime.getDayOfMonth()));
 
     queryParams.put(ParamKeys.GREGORIAN_YEAR.getKey(), year);
     queryParams.put(ParamKeys.GREGORIAN_MONTH.getKey(), month.substring(month.length() - 2));
@@ -139,9 +140,9 @@ public final class ApiRequestMaker {
     if (!queryParams.containsKey(ParamKeys.GEO_ID.getKey())) {
       throw new IllegalStateException("we need the requested city geo id for build the request.");
     }
-    val requestFactory = transport.createRequestFactory(initializer);
+    final HttpRequestFactory requestFactory = transport.createRequestFactory(initializer);
     apiUrl.putAll(queryParams);
-    val request = requestFactory.buildGetRequest(apiUrl);
+    final HttpRequest request = requestFactory.buildGetRequest(apiUrl);
     return request.execute().parseAs(ApiResponse.class);
   }
 }

@@ -13,24 +13,65 @@
 package info.tomfi.alexa.skills.shabbattimes.api.response.items;
 
 import com.google.api.client.util.Key;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * Pojo for consuming a json location from the api response location object.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor
 public final class ResponseLocation {
-  @Key @Getter private String admin1;
-  @Key @Getter private String asciiname;
-  @Key @Getter private String city;
-  @Key @Getter private String country;
-  @Key @Getter private String geo;
-  @Key @Getter private int geonameid;
-  @Key @Getter private Double latitude;
-  @Key @Getter private Double longitude;
-  @Key @Getter private String title;
-  @Key @Getter private String tzid;
+  @Key private String admin1;
+  @Key private String asciiname;
+  @Key private String city;
+  @Key private String country;
+  @Key private String geo;
+  @Key private int geonameid;
+  @Key private Double latitude;
+  @Key private Double longitude;
+  @Key private String title;
+  @Key private String tzid;
+
+  public ResponseLocation() {
+    //
+  }
+
+  public String getAdmin1() {
+    return admin1;
+  }
+
+  public String getAsciiname() {
+    return asciiname;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public String getGeo() {
+    return geo;
+  }
+
+  public int getGeonameid() {
+    return geonameid;
+  }
+
+  public Double getLatitude() {
+    return latitude;
+  }
+
+  public Double getLongitude() {
+    return longitude;
+  }
+
+  public String getTitle() {
+    return this.title;
+  }
+
+  public String getTzid() {
+    return this.tzid;
+  }
 }

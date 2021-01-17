@@ -22,9 +22,8 @@ import info.tomfi.alexa.skills.shabbattimes.enums.Attributes;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.enums.Intents;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -34,8 +33,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class NoIntentHandler implements IntentRequestHandler {
+  public NoIntentHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
     return intent.getIntent().getName().equals(Intents.NO.getName());
@@ -44,16 +46,16 @@ public final class NoIntentHandler implements IntentRequestHandler {
   @Override
   @SuppressWarnings({"PMD.AvoidCatchingGenericException", "PMD.AvoidCatchingNPE"})
   public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
-    val requestAttributes = input.getAttributesManager().getRequestAttributes();
+    final Map<String, Object>  requestAttributes = input.getAttributesManager().getRequestAttributes();
     String speechOutput = "";
     try {
-      val sessionAttributes = input.getAttributesManager().getSessionAttributes();
+      final Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
       if (sessionAttributes
           .get(Attributes.LAST_INTENT.getName())
           .equals(Intents.COUNTRY_SELECTED.getName())) {
-        val attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
+        final String attribValue = (String) sessionAttributes.get(Attributes.COUNTRY.getName());
         String speechMiddle = "";
-        for (val current : CountryInfo.values()) {
+        for (final CountryInfo current : CountryInfo.values()) {
           if (attribValue.equals(current.getAbbreviation())) {
             speechMiddle = getFromBundle(requestAttributes, current.getBundleKey());
             break;

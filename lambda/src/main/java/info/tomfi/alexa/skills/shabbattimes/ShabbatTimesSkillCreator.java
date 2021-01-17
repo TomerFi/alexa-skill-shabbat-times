@@ -22,7 +22,6 @@ import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
 import java.util.List;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -30,8 +29,11 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor
 public final class ShabbatTimesSkillCreator {
+  public ShabbatTimesSkillCreator() {
+    //
+  }
+
   @Autowired private List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers;
 
   @Autowired
