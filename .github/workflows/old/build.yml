@@ -27,13 +27,6 @@ jobs:
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-maven-
 
-    - name: Cache sonar plugins
-      uses: actions/cache@v2
-      with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-sonar-
-
     - name: Check source files License header
       run: mvn license:check -B -ff
 
@@ -57,9 +50,3 @@ jobs:
 
     - name: Create javadoc files
       run: mvn javadoc:javadoc -B -ff
-
-    - name: SonarCloud scan and report
-      run: mvn sonar:sonar -B -ff
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

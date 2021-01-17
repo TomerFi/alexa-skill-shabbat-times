@@ -15,14 +15,6 @@
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
     <maven.compiler.release>8</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <!-- SONAR -->
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.java.source>${maven.compiler.release}</sonar.java.source>
-    <sonar.java.target>${maven.compiler.release}</sonar.java.target>
-    <sonar.organization>tomerfi</sonar.organization>
-    <sonar.projectKey>info.tomfi:shabbat-times-skill-handler</sonar.projectKey>
-    <sonar.sources>src/main/java</sonar.sources>
-    <sonar.tests>src/test/java</sonar.tests>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.37.1</ask-sdk.version>
     <assertj.version>3.18.1</assertj.version>
@@ -48,7 +40,6 @@
     <maven-surefire-plugin.version>3.0.0-M5</maven-surefire-plugin.version>
     <license-maven-plugin.version>3.0</license-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.6</jacoco-maven-plugin.version>
-    <sonar-maven-plugin.version>3.7.0.1746</sonar-maven-plugin.version>
   </properties>
 
   <licenses>
@@ -264,11 +255,6 @@ limitations under the License.]]>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.sonarsource.scanner.maven</groupId>
-          <artifactId>sonar-maven-plugin</artifactId>
-          <version>${sonar-maven-plugin.version}</version>
         </plugin>
 
       </plugins>
