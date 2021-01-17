@@ -20,6 +20,11 @@
     "type": "git",
     "url": "https://github.com/TomerFi/alexa-skill-shabbat-times.git"
   },
+  "scripts": {
+    "test": "mvn clean verify -f lambda/pom.xml",
+    "deploy": "ask deploy",
+    "deploy-force": "ask deploy --ignore-hash"
+  },
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
