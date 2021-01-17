@@ -41,3 +41,6 @@ target
 
 # vscode configuration
 .vscode
+
+# Node
+node_modules
