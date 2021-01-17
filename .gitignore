@@ -38,3 +38,6 @@ target
 
 # alexa skills kit
 .ask
+
+# vscode configuration
+.vscode
