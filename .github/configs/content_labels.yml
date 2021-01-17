@@ -1,0 +1,16 @@
+# https://github.com/marketplace/actions/labeler
+---
+"scope: project":
+  - ./*
+"scope: ci":
+  - .github/**/*
+"scope: skill-infrastructure":
+  - infrastructure/**/*
+"scope: skill-handler":
+  - lambda/**/*
+"scope: skill-package":
+  - skill-package/**/*
+"scope: sources":
+  - lambda/src/**/*
+"scope: tests":
+  - lambda/tests/**/*

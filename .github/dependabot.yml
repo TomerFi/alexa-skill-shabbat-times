@@ -2,16 +2,14 @@
 version: 2
 updates:
   - package-ecosystem: "maven"
-    directory: "/"
+    directory: "/lambda"
     schedule:
       interval: "daily"
     target-branch: "master"
-    reviewers:
-      - "TomerFi"
     assignees:
       - "TomerFi"
     labels:
-      - "dependabot"
+      - "type: dependencies"
     commit-message:
       prefix: "build"
       include: "scope"
@@ -21,12 +19,10 @@ updates:
     schedule:
       interval: "daily"
     target-branch: "master"
-    reviewers:
-      - "TomerFi"
     assignees:
       - "TomerFi"
     labels:
-      - "dependabot"
+      - "type: dependencies"
     commit-message:
       prefix: "ci"
       include: "scope"
