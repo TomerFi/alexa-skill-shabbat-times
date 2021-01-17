@@ -14,8 +14,6 @@ package info.tomfi.alexa.skills.shabbattimes;
 
 import com.amazon.ask.SkillStreamHandler;
 import info.tomfi.alexa.skills.shabbattimes.di.DiProdConfiguration;
-import lombok.Cleanup;
-import lombok.val;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
@@ -27,9 +25,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  */
 public class ShabbatTimesStreamHandler extends SkillStreamHandler {
   private static ShabbatTimesSkillCreator getCreator() {
-    @SuppressWarnings("PMD.CloseResource")
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiProdConfiguration.class);
-    return context.getBean(ShabbatTimesSkillCreator.class);
+    AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DiProdConfiguration.class);
+    try {
+      return context.getBean(ShabbatTimesSkillCreator.class);
+    } finally {
+      context.close();
+    }
   }
 
   /** Main constructor, invokes the skill creation and pass the skill to the super constructor. */

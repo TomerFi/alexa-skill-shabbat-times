@@ -22,7 +22,6 @@ import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.time.LocalDate;
-import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -37,7 +36,7 @@ public class DiBreakApiConfiguration {
   @Bean
   public ApiRequestMaker getRequestMaker()
       throws IllegalStateException, IOException, URISyntaxException {
-    val mockedMaker = mock(ApiRequestMaker.class);
+    final ApiRequestMaker mockedMaker = mock(ApiRequestMaker.class);
     when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
     when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
     when(mockedMaker.send()).thenThrow(new IOException("mocking exception throwing"));

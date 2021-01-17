@@ -27,8 +27,8 @@ import com.amazon.ask.model.Slot;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCountrySlotException;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,21 +41,21 @@ public final class CountrySelectedIntentHandlerTest {
 
   @BeforeAll
   public static void initialize() {
-    val fakeCountrySlot = Slot.builder().withValue("great britain").build();
-    val fakeIntent =
+    final Slot fakeCountrySlot = Slot.builder().withValue("great britain").build();
+    final Intent fakeIntent =
         Intent.builder()
             .withName(COUNTRY_SELECTED.getName())
             .putSlotsItem(COUNTRY, fakeCountrySlot)
             .build();
     fakeRequest = IntentRequest.builder().withIntent(fakeIntent).build();
 
-    val fakeSession = Session.builder().build();
-    val fakeEnvelope =
+    final Session fakeSession = Session.builder().build();
+    final RequestEnvelope fakeEnvelope =
         RequestEnvelope.builder().withRequest(fakeRequest).withSession(fakeSession).build();
     fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
-    val bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
-    val attributes = new HashMap<String, Object>();
+    final ResourceBundle bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
+    final Map<String, Object> attributes = new HashMap<String, Object>();
     attributes.put(L10N_BUNDLE.getName(), bundle);
     fakeInput.getAttributesManager().setRequestAttributes(attributes);
 
@@ -71,17 +71,17 @@ public final class CountrySelectedIntentHandlerTest {
   @Test
   @DisplayName("test thrown exception when no country slot value exist")
   public void handle_noCountrySlot_throwsException() {
-    val emptyCountrySlot = Slot.builder().build();
-    val noCountrySlotIntent =
+    final Slot emptyCountrySlot = Slot.builder().build();
+    final Intent noCountrySlotIntent =
         Intent.builder()
             .withName(COUNTRY_SELECTED.getName())
             .putSlotsItem(COUNTRY, emptyCountrySlot)
             .build();
-    val noCountrySlotIntentRequest =
+    final IntentRequest noCountrySlotIntentRequest =
         IntentRequest.builder().withIntent(noCountrySlotIntent).build();
-    val noCountrySlotEnvelope =
+    final RequestEnvelope noCountrySlotEnvelope =
         RequestEnvelope.builder().withRequest(noCountrySlotIntentRequest).build();
-    val noCountrySlotInput =
+    final HandlerInput noCountrySlotInput =
         HandlerInput.builder().withRequestEnvelope(noCountrySlotEnvelope).build();
 
     assertThatExceptionOfType(NoCountrySlotException.class)

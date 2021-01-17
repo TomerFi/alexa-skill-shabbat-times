@@ -17,9 +17,10 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 import static org.mockito.Mockito.when;
 
 import com.amazon.ask.model.Slot;
+
+import info.tomfi.alexa.skills.shabbattimes.city.City;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityFoundException;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCityInCountryException;
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,7 +57,7 @@ public final class CityLocatorTest {
     when(countrySlot.getValue()).thenReturn("israel");
     when(citySlot.getValue()).thenReturn("ashdod");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("ashdod")
         .geoNameIs("IL-Ashdod")
@@ -69,7 +70,7 @@ public final class CityLocatorTest {
   public void getByCityAndCountry_getIsraelCityWithoutCountry_validateReturn() {
     when(citySlot.getValue()).thenReturn("ashdod");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City  city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("ashdod")
         .geoNameIs("IL-Ashdod")
@@ -84,7 +85,7 @@ public final class CityLocatorTest {
     when(countrySlot.getValue()).thenReturn("united states");
     when(citySlot.getValue()).thenReturn("atlanta");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City  city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("atlanta")
         .geoNameIs("US-Atlanta-GA")
@@ -97,7 +98,7 @@ public final class CityLocatorTest {
   public void getByCityAndCountry_getUSCityWithoutCountry_validateReturn() {
     when(citySlot.getValue()).thenReturn("atlanta");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City  city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("atlanta")
         .geoNameIs("US-Atlanta-GA")
@@ -112,7 +113,7 @@ public final class CityLocatorTest {
     when(countrySlot.getValue()).thenReturn("england");
     when(citySlot.getValue()).thenReturn("belfast");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City  city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("belfast")
         .geoNameIs("GB-Belfast")
@@ -125,7 +126,7 @@ public final class CityLocatorTest {
   public void getByCityAndCountry_getUKCityWithoutCountry_validateReturn() {
     when(citySlot.getValue()).thenReturn("belfast");
 
-    val city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
+    final City  city = CityLocator.getByCityAndCountry(countrySlot, citySlot);
     assertThat(city)
         .cityNameIs("belfast")
         .geoNameIs("GB-Belfast")

@@ -18,7 +18,6 @@ import static info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys.NOT_FOUND_IN
 
 import java.util.Arrays;
 import java.util.List;
-import lombok.Getter;
 
 /**
  * Enum helper for creating {@link info.tomfi.alexa.skills.shabbattimes.country.Country} objects.
@@ -37,10 +36,10 @@ public enum CountryInfo {
       "britain",
       "england");
 
-  @Getter private final String abbreviation;
-  @Getter private final String name;
-  @Getter private final BundleKeys bundleKey;
-  @Getter private final List<String> utterances;
+  private final String abbreviation;
+  private final String name;
+  private final BundleKeys bundleKey;
+  private final List<String> utterances;
 
   // CHECKSTYLE.OFF: MissingJavadocMethod
   CountryInfo(
@@ -53,5 +52,20 @@ public enum CountryInfo {
     bundleKey = setBundleKey;
     utterances = Arrays.asList(setUtterances);
   }
-  // CHECKSTYLE.ON: MissingJavadocMethod
+
+  public String getAbbreviation() {
+    return abbreviation;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public BundleKeys getBundleKey() {
+    return bundleKey;
+  }
+
+  public List<String> getUtterances() {
+    return utterances;
+  }
 }

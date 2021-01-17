@@ -25,13 +25,15 @@ import com.amazon.ask.model.Slot;
 import info.tomfi.alexa.skills.shabbattimes.di.DiMockApiConfiguration;
 import info.tomfi.alexa.skills.shabbattimes.enums.Slots;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-import lombok.Cleanup;
-import lombok.val;
+
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -43,35 +45,42 @@ public final class GetCityIntentHandlerTest {
 
   private static GetCityIntentHandler handlerInTest;
 
+  private static AnnotationConfigApplicationContext context;
+
   @BeforeAll
   public static void initialize() {
-    val fakeCountrySlot = Slot.builder().withValue("israel").build();
-    val fakeCitySlot = Slot.builder().withValue("holon").build();
-    val fakeIntent =
+    final Slot fakeCountrySlot = Slot.builder().withValue("israel").build();
+    final Slot fakeCitySlot = Slot.builder().withValue("holon").build();
+    final Intent fakeIntent =
         Intent.builder()
             .withName(GET_CITY.getName())
             .putSlotsItem(Slots.COUNTRY, fakeCountrySlot)
             .putSlotsItem(Slots.City.IL.getName(), fakeCitySlot)
             .build();
 
-    val fakeDateTime =
+    final OffsetDateTime fakeDateTime =
         LocalDate.parse("2019-10-01", DateTimeFormatter.ISO_LOCAL_DATE)
             .atStartOfDay()
             .atOffset(ZoneOffset.ofHours(3));
     fakeRequest =
         IntentRequest.builder().withIntent(fakeIntent).withTimestamp(fakeDateTime).build();
-    val fakeSession = Session.builder().build();
-    val fakeEnvelope =
+    final Session fakeSession = Session.builder().build();
+    final RequestEnvelope fakeEnvelope =
         RequestEnvelope.builder().withRequest(fakeRequest).withSession(fakeSession).build();
     fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
-    val bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
-    val attributes = new HashMap<String, Object>();
+    final ResourceBundle bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
+    final Map<String, Object> attributes = new HashMap<String, Object>();
     attributes.put(L10N_BUNDLE.getName(), bundle);
     fakeInput.getAttributesManager().setRequestAttributes(attributes);
 
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
+    context = new AnnotationConfigApplicationContext(DiMockApiConfiguration.class);
     handlerInTest = context.getBean(GetCityIntentHandler.class);
+  }
+
+  @AfterAll
+  public static void cleanup() {
+    context.close();
   }
 
   @Test

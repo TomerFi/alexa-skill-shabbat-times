@@ -20,9 +20,8 @@ import com.amazon.ask.dispatcher.exception.ExceptionHandler;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoCitySlotException;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,8 +31,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class NoCitySlotHandler implements ExceptionHandler {
+  public NoCitySlotHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final Throwable throwable) {
     return throwable instanceof NoCitySlotException;
@@ -41,7 +43,7 @@ public final class NoCitySlotHandler implements ExceptionHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final Throwable throwable) {
-    val requestAttributes = input.getAttributesManager().getRequestAttributes();
+    final Map<String, Object>  requestAttributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
         .withSpeech(getFromBundle(requestAttributes, EXC_NO_CITY_FOUND))

@@ -23,13 +23,13 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.gson.GsonBuilder;
 import info.tomfi.alexa.skills.shabbattimes.api.ApiRequestMaker;
 import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import lombok.Cleanup;
-import lombok.val;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -42,22 +42,21 @@ public class DiMockApiConfiguration {
   @Bean
   public ApiRequestMaker getRequestMaker()
       throws IllegalStateException, IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try (final BufferedReader breader =
         Files.newBufferedReader(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("api-responses/response_real.json")
-                    .toURI()));
+                    .toURI()))) {
+                      final ApiResponse fakeResponse = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
 
-    val fakeResponse = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
-
-    val mockedMaker = mock(ApiRequestMaker.class);
-    when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
-    when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-    when(mockedMaker.send()).thenReturn(fakeResponse);
-    return mockedMaker;
+                      final ApiRequestMaker mockedMaker = mock(ApiRequestMaker.class);
+                      when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
+                      when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
+                      when(mockedMaker.send()).thenReturn(fakeResponse);
+                      return mockedMaker;
+                    }
   }
 
   @Bean

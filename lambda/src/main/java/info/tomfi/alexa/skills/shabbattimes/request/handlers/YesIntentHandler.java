@@ -20,9 +20,8 @@ import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,8 +31,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class YesIntentHandler implements IntentRequestHandler {
+  public YesIntentHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
     return intent.getIntent().getName().equals(YES.getName());
@@ -41,7 +43,7 @@ public final class YesIntentHandler implements IntentRequestHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
-    val attributes = input.getAttributesManager().getRequestAttributes();
+    final Map<String, Object>  attributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
         .withSpeech(getFromBundle(attributes, BundleKeys.DEFAULT_ASK_FOR_CITY))

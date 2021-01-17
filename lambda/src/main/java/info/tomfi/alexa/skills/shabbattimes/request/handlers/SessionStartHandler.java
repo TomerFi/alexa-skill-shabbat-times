@@ -19,9 +19,8 @@ import com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.skills.shabbattimes.enums.BundleKeys;
+import java.util.Map;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
-import lombok.val;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,8 +30,10 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class SessionStartHandler implements LaunchRequestHandler {
+  public SessionStartHandler() {
+    //
+  }
 
   @Override
   public boolean canHandle(final HandlerInput input, final LaunchRequest request) {
@@ -41,7 +42,7 @@ public final class SessionStartHandler implements LaunchRequestHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final LaunchRequest request) {
-    val attributes = input.getAttributesManager().getRequestAttributes();
+    final Map<String, Object>  attributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
         .withSpeech(getFromBundle(attributes, BundleKeys.WELCOME_SPEECH))

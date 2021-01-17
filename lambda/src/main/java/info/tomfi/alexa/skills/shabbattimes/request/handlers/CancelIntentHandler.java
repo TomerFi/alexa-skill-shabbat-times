@@ -21,7 +21,6 @@ import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 /**
@@ -31,8 +30,11 @@ import org.springframework.stereotype.Component;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
-@NoArgsConstructor
 public final class CancelIntentHandler implements IntentRequestHandler {
+  public CancelIntentHandler() {
+    //
+  }
+
   @Override
   public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
     return intent.getIntent().getName().equals(CANCEL.getName());

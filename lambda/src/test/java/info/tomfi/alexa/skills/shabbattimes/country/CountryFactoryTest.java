@@ -22,7 +22,6 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 import java.util.Iterator;
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -30,11 +29,11 @@ public final class CountryFactoryTest {
   @Test
   @DisplayName("test country object with a test json file represnting the cities")
   public void countryJsonToObject_testJsonFile_validateValues() {
-    val mockedMember = mock(CountryInfo.class);
+    final CountryInfo mockedMember = mock(CountryInfo.class);
     when(mockedMember.getAbbreviation()).thenReturn("TST");
     when(mockedMember.getName()).thenReturn("test country");
 
-    val countryTest = CountryFactory.getCountry(mockedMember);
+    final Country countryTest = CountryFactory.getCountry(mockedMember);
     assertThat(countryTest)
         .abbreviationIs("TST")
         .nameIs("test country")
@@ -76,7 +75,7 @@ public final class CountryFactoryTest {
   @Test
   @DisplayName("test exception thrown when no country json found")
   public void getCountry_noJsonFile_throwsExcetption() {
-    val mockedMember = mock(CountryInfo.class);
+    final CountryInfo mockedMember = mock(CountryInfo.class);
     when(mockedMember.getAbbreviation()).thenReturn("NonExisting");
     when(mockedMember.getName()).thenReturn("someValue");
 

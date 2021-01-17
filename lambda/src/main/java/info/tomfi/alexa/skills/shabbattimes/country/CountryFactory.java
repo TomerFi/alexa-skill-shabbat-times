@@ -12,17 +12,12 @@
  */
 package info.tomfi.alexa.skills.shabbattimes.country;
 
-import static lombok.AccessLevel.PRIVATE;
-
 import info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo;
 import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.exception.UnknownCountryException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import lombok.NoArgsConstructor;
-import lombok.Synchronized;
-import lombok.val;
 
 /**
  * A factory for managing and creating {@link info.tomfi.alexa.skills.shabbattimes.country.Country}
@@ -30,9 +25,14 @@ import lombok.val;
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor(access = PRIVATE)
 public final class CountryFactory {
   private static final Map<CountryInfo, Country> COUNTRY_POOL = new ConcurrentHashMap<>();
+
+  private static final Object $LOCK = new Object[0];
+
+  private CountryFactory() {
+    //
+  }
 
   /**
    * Factory for creating a {@link info.tomfi.alexa.skills.shabbattimes.country.Country} object from
@@ -47,16 +47,17 @@ public final class CountryFactory {
    * @throws UnknownCountryException when the country requested is not found within the {@link
    *     info.tomfi.alexa.skills.shabbattimes.enums.CountryInfo} enum members.
    */
-  @Synchronized
   public static Country getCountry(final String countryName)
       throws NoJsonFileException, UnknownCountryException {
-    val lowerCountry = countryName.toLowerCase(Locale.ENGLISH);
-    for (val current : CountryInfo.values()) {
-      if (current.getUtterances().contains(lowerCountry)) {
-        return getCountry(current);
+    synchronized($LOCK) {
+      final String lowerCountry = countryName.toLowerCase(Locale.ENGLISH);
+      for (final CountryInfo current : CountryInfo.values()) {
+        if (current.getUtterances().contains(lowerCountry)) {
+          return getCountry(current);
+        }
       }
+      throw new UnknownCountryException(String.join(" ", "unknown country name", countryName));
     }
-    throw new UnknownCountryException(String.join(" ", "unknown country name", countryName));
   }
 
   /**
@@ -68,8 +69,9 @@ public final class CountryFactory {
    * @return the created {@link info.tomfi.alexa.skills.shabbattimes.country.Country} object.
    * @throws NoJsonFileException when the appropriate backend json file was not found.
    */
-  @Synchronized
   public static Country getCountry(final CountryInfo member) throws NoJsonFileException {
-    return COUNTRY_POOL.computeIfAbsent(member, newMember -> new Country(newMember));
+    synchronized($LOCK) {
+      return COUNTRY_POOL.computeIfAbsent(member, newMember -> new Country(newMember));
+    }
   }
 }

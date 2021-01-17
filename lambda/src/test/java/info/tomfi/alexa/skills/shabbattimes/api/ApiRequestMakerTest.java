@@ -16,14 +16,16 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThatExceptionOfType;
 import static java.util.stream.Collectors.joining;
 
+import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
+import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
 import info.tomfi.alexa.skills.shabbattimes.di.DiLocalApiConfiguration;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import lombok.Cleanup;
-import lombok.val;
+import java.util.stream.Stream;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,12 +37,18 @@ import org.mockserver.model.JsonBody;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public final class ApiRequestMakerTest {
+  private AnnotationConfigApplicationContext context;
   private ApiRequestMaker requestMaker;
 
   @BeforeEach
   public void initialize() {
-    @Cleanup val context = new AnnotationConfigApplicationContext(DiLocalApiConfiguration.class);
+    context = new AnnotationConfigApplicationContext(DiLocalApiConfiguration.class);
     requestMaker = context.getBean(ApiRequestMaker.class);
+  }
+
+  @AfterEach
+  public void cleanup() {
+    context.close();
   }
 
   @Test
@@ -79,47 +87,49 @@ public final class ApiRequestMakerTest {
     requestMaker.setGeoId(1);
     requestMaker.setSpecificDate(LocalDate.now());
 
-    @Cleanup
-    val lines =
+    try (final Stream<String> lines =
         Files.lines(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("api-responses/response_full.json")
-                    .toURI()));
-    val responesText = lines.collect(joining(System.lineSeparator()));
+                    .toURI()))
+    ) {
+      final String responesText = lines.collect(joining(System.lineSeparator()));
 
-    val mockServer = ClientAndServer.startClientAndServer(1234);
-    @Cleanup val mockClient = new MockServerClient("localhost", mockServer.getLocalPort());
+      final ClientAndServer mockServer = ClientAndServer.startClientAndServer(1234);
+      final MockServerClient mockClient = new MockServerClient("localhost", mockServer.getLocalPort());
 
-    mockClient
-        .when(HttpRequest.request().withMethod("GET").withPath("/shabbat"))
-        .respond(HttpResponse.response().withStatusCode(200).withBody(JsonBody.json(responesText)));
+      mockClient
+          .when(HttpRequest.request().withMethod("GET").withPath("/shabbat"))
+          .respond(HttpResponse.response().withStatusCode(200).withBody(JsonBody.json(responesText)));
 
-    val response = requestMaker.send();
+      final ApiResponse response = requestMaker.send();
 
-    assertThat(response).titleIs("testTitle").dateIs("testDate").linkIs("testLink");
+      assertThat(response).titleIs("testTitle").dateIs("testDate").linkIs("testLink");
 
-    assertThat(response.getLocation())
-        .latitudeIs(25.25)
-        .longitudeIs(26.26)
-        .geonameidIs(2526)
-        .cityIs("testCity")
-        .asciinameIs("testAsciiname")
-        .titleIs("testTitle")
-        .tzidIs("testTzid")
-        .admin1Is("testAdmin1")
-        .countryIs("testCountry")
-        .geoIs("testGeo");
-
-    for (val item : response.getItems()) {
-      assertThat(item)
+      assertThat(response.getLocation())
+          .latitudeIs(25.25)
+          .longitudeIs(26.26)
+          .geonameidIs(2526)
+          .cityIs("testCity")
+          .asciinameIs("testAsciiname")
           .titleIs("testTitle")
-          .categoryIs("testCategory")
-          .dateIs("testDate")
-          .hebrewIs("testHebrew");
-    }
+          .tzidIs("testTzid")
+          .admin1Is("testAdmin1")
+          .countryIs("testCountry")
+          .geoIs("testGeo");
 
-    mockServer.stop();
+      for (final ResponseItem item : response.getItems()) {
+        assertThat(item)
+            .titleIs("testTitle")
+            .categoryIs("testCategory")
+            .dateIs("testDate")
+            .hebrewIs("testHebrew");
+      }
+
+      mockClient.close();
+      mockServer.stop();
+    }
   }
 }

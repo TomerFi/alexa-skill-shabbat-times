@@ -21,7 +21,6 @@ import info.tomfi.alexa.skills.shabbattimes.exception.NoJsonFileException;
 import info.tomfi.alexa.skills.shabbattimes.tools.DynTypeIterator;
 import java.util.Iterator;
 import java.util.List;
-import lombok.Getter;
 
 /**
  * Pojo for constructing the Country object from the backend json files.
@@ -29,8 +28,8 @@ import lombok.Getter;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 public final class Country implements Iterable<City> {
-  @Getter private final String abbreviation;
-  @Getter private final String name;
+  private final String abbreviation;
+  private final String name;
 
   private final List<City> citiesList;
 
@@ -45,6 +44,14 @@ public final class Country implements Iterable<City> {
     abbreviation = country.getAbbreviation();
     name = country.getName();
     citiesList = getCityListFromJsonFile(abbreviation);
+  }
+
+  public String getAbbreviation() {
+    return abbreviation;
+  }
+
+  public String getName() {
+    return name;
   }
 
   @Override

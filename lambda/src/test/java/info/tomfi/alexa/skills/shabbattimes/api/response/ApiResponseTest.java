@@ -15,12 +15,12 @@ package info.tomfi.alexa.skills.shabbattimes.api.response;
 import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertThat;
 
 import com.google.gson.GsonBuilder;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import lombok.Cleanup;
-import lombok.val;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,17 +28,17 @@ public final class ApiResponseTest {
   @Test
   @DisplayName("test the api json response with minimal values")
   public void responseJson_minimalValues_success() throws IOException, URISyntaxException {
-    @Cleanup
-    val breader =
+    try (final BufferedReader breader =
         Files.newBufferedReader(
             Paths.get(
                 Thread.currentThread()
                     .getContextClassLoader()
                     .getResource("api-responses/response_minimal.json")
-                    .toURI()));
-
-    val response = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
+                    .toURI())))
+  {
+    final ApiResponse response = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
 
     assertThat(response).titleIs("testTitle").dateIs("testDate").linkIs("testLink");
+  }
   }
 }

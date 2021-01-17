@@ -16,7 +16,6 @@ import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.CAND
 import static info.tomfi.alexa.skills.shabbattimes.api.enums.ItemCategories.HAVDALAH;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 import static java.util.stream.Collectors.toList;
-import static lombok.AccessLevel.PRIVATE;
 
 import info.tomfi.alexa.skills.shabbattimes.api.response.ApiResponse;
 import info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem;
@@ -25,15 +24,17 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import lombok.NoArgsConstructor;
 
 /**
  * Utility class hosting static helpers for using the api response items.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
-@NoArgsConstructor(access = PRIVATE)
 public final class ApiTools {
+  private ApiTools() {
+    //
+  }
+
   /**
    * A static tool for reducing a {@link
    * info.tomfi.alexa.skills.shabbattimes.api.response.items.ResponseItem} list to its {@linkplain

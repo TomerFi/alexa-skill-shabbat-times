@@ -16,12 +16,13 @@ import com.amazon.ask.model.ResponseEnvelope;
 import com.amazon.ask.model.ui.Card;
 import com.amazon.ask.model.ui.OutputSpeech;
 import com.amazon.ask.model.ui.PlainTextOutputSpeech;
+import com.amazon.ask.model.ui.Reprompt;
 import com.amazon.ask.model.ui.SimpleCard;
 import com.amazon.ask.model.ui.SsmlOutputSpeech;
 import com.amazon.ask.model.ui.StandardCard;
 import com.amazon.ask.response.SkillResponse;
+import java.util.Map;
 import java.util.Optional;
-import lombok.val;
 import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
 
@@ -39,7 +40,7 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert outputSpeechIs(final String testSpeech) {
     isNotNull();
-    val optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
+    final Optional<String> optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
     if (optText.isPresent()) {
       Assertions.assertThat(optText.get()).isEqualTo(testSpeech);
     } else {
@@ -50,7 +51,7 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert outputSpeechStartsWith(final String testSpeech) {
     isNotNull();
-    val optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
+    final Optional<String> optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
     if (optText.isPresent()) {
       Assertions.assertThat(optText.get()).startsWith(testSpeech);
     } else {
@@ -61,7 +62,7 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert outputSpeechEndsWith(final String testSpeech) {
     isNotNull();
-    val optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
+    final Optional<String> optText = getTextFromOutputSpeech(actual.getResponse().getResponse().getOutputSpeech());
     if (optText.isPresent()) {
       Assertions.assertThat(optText.get()).endsWith(testSpeech);
     } else {
@@ -72,9 +73,9 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert repromptSpeechIs(final String testSpeech) {
     isNotNull();
-    val repromptObject = actual.getResponse().getResponse().getReprompt();
+    final Reprompt repromptObject = actual.getResponse().getResponse().getReprompt();
     Assertions.assertThat(repromptObject).isNotNull();
-    val optText = getTextFromOutputSpeech(repromptObject.getOutputSpeech());
+    final Optional<String> optText = getTextFromOutputSpeech(repromptObject.getOutputSpeech());
     if (optText.isPresent()) {
       Assertions.assertThat(optText.get()).isEqualTo(testSpeech);
     } else {
@@ -115,9 +116,9 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert cardTitleIs(final String testTitle) {
     isNotNull();
-    val card = actual.getResponse().getResponse().getCard();
+    final Card card = actual.getResponse().getResponse().getCard();
     Assertions.assertThat(card).isNotNull();
-    val optTitle = getCardTitle(card);
+    final Optional<String> optTitle = getCardTitle(card);
     if (optTitle.isPresent()) {
       Assertions.assertThat(optTitle.get()).isEqualTo(testTitle);
     } else {
@@ -128,9 +129,9 @@ public final class SkillResponseAssert
 
   public SkillResponseAssert cardTextIs(final String testText) {
     isNotNull();
-    val card = actual.getResponse().getResponse().getCard();
+    final Card card = actual.getResponse().getResponse().getCard();
     Assertions.assertThat(card).isNotNull();
-    val optText = getCardText(card);
+    final Optional<String> optText = getCardText(card);
     if (optText.isPresent()) {
       Assertions.assertThat(optText.get()).isEqualTo(testText);
     } else {
@@ -142,7 +143,7 @@ public final class SkillResponseAssert
   public SkillResponseAssert sessionAttributesHasKeyWithValue(
       final String key, final String value) {
     isNotNull();
-    val attribs = actual.getResponse().getSessionAttributes();
+    final Map<String, Object> attribs = actual.getResponse().getSessionAttributes();
     Assertions.assertThat(attribs).isNotEmpty();
     Assertions.assertThat(attribs).containsKey(key);
     Assertions.assertThat(attribs.get(key)).isEqualTo(value);

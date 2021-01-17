@@ -20,8 +20,8 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.RequestEnvelope;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
-import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,11 +35,11 @@ public final class SessionStartHandlerTest {
   @BeforeAll
   public static void initialize() {
     fakeRequest = LaunchRequest.builder().build();
-    val fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
+    final RequestEnvelope fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
     fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
-    val bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
-    val attributes = new HashMap<String, Object>();
+    final ResourceBundle bundle = ResourceBundle.getBundle("locales/Responses", Locale.US);
+    final Map<String, Object> attributes = new HashMap<String, Object>();
     attributes.put(L10N_BUNDLE.getName(), bundle);
     fakeInput.getAttributesManager().setRequestAttributes(attributes);
 

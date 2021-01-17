@@ -17,7 +17,6 @@ import static info.tomfi.alexa.skills.shabbattimes.assertions.Assertions.assertT
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.SessionEndedRequest;
-import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public final class SessionEndHandlerTest {
   @BeforeAll
   public static void initialize() {
     fakeRequest = SessionEndedRequest.builder().build();
-    val fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
+    final RequestEnvelope fakeEnvelope = RequestEnvelope.builder().withRequest(fakeRequest).build();
     fakeInput = HandlerInput.builder().withRequestEnvelope(fakeEnvelope).build();
 
     handlerInTest = new SessionEndHandler();
