@@ -25,7 +25,6 @@
     <lombok.version>1.18.16</lombok.version>
     <mockserver.version>5.11.2</mockserver.version>
     <mockito.version>3.7.0</mockito.version>
-    <pmd.version>6.30.0</pmd.version>
     <springframework.version>5.3.3</springframework.version>
     <!-- Plugins -->
     <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
