@@ -1,0 +1,8 @@
+/**
+ * Package hosting ResponseInterceptor implementations for intercepting responses prior to their
+ * delivery.
+ *
+ * <p>This package is scanned by Spring-Context, bean classes should be marked with the Component
+ * annotations.
+ */
+package info.tomfi.shabbattimes.skill.response.interceptors;
