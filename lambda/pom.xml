@@ -13,7 +13,7 @@
 
   <properties>
     <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
-    <maven.compiler.release>8</maven.compiler.release>
+    <maven.compiler.release>11</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.37.1</ask-sdk.version>
