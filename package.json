@@ -21,8 +21,10 @@
     "url": "https://github.com/TomerFi/alexa-skill-shabbat-times.git"
   },
   "scripts": {
-    "test": "mvn clean verify -f lambda/pom.xml",
+    "test": "mvn clean test -f lambda/pom.xml",
+    "predeploy": "rimraf .ask/lambda",
     "deploy": "ask deploy",
+    "predeploy-force": "npm run predeploy",
     "deploy-force": "ask deploy --ignore-hash"
   },
   "private": true,
@@ -30,7 +32,8 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "ask-cli": "github:TomerFi/ask-cli#fix-maven-assembly-plugin-too-old",
-    "husky": "^4.3.8"
+    "husky": "^4.3.8",
+    "rimraf": "^2.4.5"
   },
   "husky": {
     "hooks": {
