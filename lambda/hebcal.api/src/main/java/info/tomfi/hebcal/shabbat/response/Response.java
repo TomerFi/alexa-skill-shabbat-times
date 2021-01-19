@@ -17,14 +17,13 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 import java.util.List;
 import java.util.Optional;
-
 import javax.annotation.Nullable;
 
 @AutoValue
 @JsonDeserialize(builder = AutoValue_Response.Builder.class)
 public abstract class Response {
   public abstract String date();
-  public abstract List<ResponseItem> items();
+  public abstract Optional<List<ResponseItem>> items();
   public abstract Optional<String> link();
   public abstract ResponseLocation location();
   public abstract String title();
@@ -32,7 +31,7 @@ public abstract class Response {
   @AutoValue.Builder
   public abstract static class Builder {
     @JsonProperty("date") public abstract Builder date(final String date);
-    @JsonProperty("items") public abstract Builder items(final List<ResponseItem> items);
+    @JsonProperty("items") public abstract Builder items(@Nullable final List<ResponseItem> items);
     @JsonProperty("link") public abstract Builder link(@Nullable final String link);
     @JsonProperty("location") public abstract Builder location(final ResponseLocation location);
     @JsonProperty("title") public abstract Builder title(final String title);

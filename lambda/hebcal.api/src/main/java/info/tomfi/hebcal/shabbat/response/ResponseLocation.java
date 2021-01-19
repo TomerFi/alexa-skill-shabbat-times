@@ -15,6 +15,8 @@ package info.tomfi.hebcal.shabbat.response;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
+import java.util.Optional;
+import javax.annotation.Nullable;
 
 @AutoValue
 @JsonDeserialize(builder = AutoValue_ResponseLocation.Builder.class)
@@ -27,7 +29,7 @@ public abstract class ResponseLocation {
   public abstract int geonameid();
   public abstract Double latitude();
   public abstract Double longitude();
-  public abstract String cc();
+  public abstract Optional<String> cc();
   public abstract String title();
   public abstract String tzid();
 
@@ -41,7 +43,7 @@ public abstract class ResponseLocation {
     @JsonProperty("geonameid") public abstract Builder geonameid(final int geonameid);
     @JsonProperty("latitude") public abstract Builder latitude(final Double latitude);
     @JsonProperty("longitude") public abstract Builder longitude(final Double longitude);
-    @JsonProperty("cc") public abstract Builder cc(final String cc);
+    @JsonProperty("cc") public abstract Builder cc(@Nullable final String cc);
     @JsonProperty("title") public abstract Builder title(final String title);
     @JsonProperty("tzid") public abstract Builder tzid(final String tzid);
 
