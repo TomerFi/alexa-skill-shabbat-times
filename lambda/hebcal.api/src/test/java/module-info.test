@@ -9,6 +9,8 @@
   info.tomfi.hebcal.shabbat=org.junit.jupiter.params
 
 --add-opens
+  info.tomfi.hebcal.shabbat/info.tomfi.hebcal.shabbat=org.junit.platform.commons
+--add-opens
   info.tomfi.hebcal.shabbat/info.tomfi.hebcal.shabbat.impl=org.junit.platform.commons
 --add-opens
   info.tomfi.hebcal.shabbat/info.tomfi.hebcal.shabbat.request=org.junit.platform.commons
