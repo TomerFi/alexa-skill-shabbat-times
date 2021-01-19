@@ -18,12 +18,10 @@ import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenExceptionOfType;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.javafaker.Faker;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.matching.StringValuePattern;
-
 import info.tomfi.hebcal.shabbat.ShabbatAPI;
 import info.tomfi.hebcal.shabbat.request.FlagStates;
 import info.tomfi.hebcal.shabbat.request.GeoTypes;
