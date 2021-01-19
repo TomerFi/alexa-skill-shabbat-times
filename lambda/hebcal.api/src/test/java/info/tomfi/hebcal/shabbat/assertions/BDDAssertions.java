@@ -10,12 +10,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package info.tomfi.hebcal.shabbat;
+package info.tomfi.hebcal.shabbat.assertions;
 
-import info.tomfi.hebcal.shabbat.request.Request;
 import info.tomfi.hebcal.shabbat.response.Response;
-import java.util.concurrent.CompletableFuture;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
+import info.tomfi.hebcal.shabbat.response.ResponseLocation;
 
-public interface ShabbatAPI {
-  CompletableFuture<Response> sendAsync(Request request);
+public final class BDDAssertions {
+  public static ResponseAssert then(final Response actual) {
+    return new ResponseAssert(actual);
+  }
+
+  public static ResponseItemAssert then(final ResponseItem actual) {
+    return new ResponseItemAssert(actual);
+  }
+
+  public static ResponseLocationAssert then(final ResponseLocation actual) {
+    return new ResponseLocationAssert(actual);
+  }
 }

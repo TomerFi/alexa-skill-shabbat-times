@@ -43,7 +43,7 @@ public abstract class Request {
       queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), DEFAULT_CANDLE_LIGHTING);
     }
 
-    public AutoValue_Request build() {
+    public Request build() {
       return new AutoValue_Request(queryParams);
     }
 
