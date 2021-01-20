@@ -24,7 +24,6 @@
     <javafaker.version>1.0.2</javafaker.version>
     <jsr305.version>3.0.2</jsr305.version>
     <junit-jupiter.version>5.7.0</junit-jupiter.version>
-    <mockito.version>3.7.0</mockito.version>
     <slf4j.version>1.7.28</slf4j.version>
     <wiremock.version>2.27.2</wiremock.version>
     <!-- Plugins -->
@@ -112,11 +111,6 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-junit-jupiter</artifactId>
       <scope>test</scope>
     </dependency>
     <!-- wiremock-jre8 uses slf4j and requires an implementaion -->
@@ -333,11 +327,6 @@
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
         <version>${junit-jupiter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-junit-jupiter</artifactId>
-        <version>${mockito.version}</version>
       </dependency>
       <!-- LOGGING DEPENDENCIES -->
       <dependency>

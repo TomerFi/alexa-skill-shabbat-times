@@ -36,14 +36,14 @@ import java.util.Map;
 import java.util.concurrent.CompletionException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("unit-tests")
 final class ShabbatAPIProviderTest {
   private Faker faker;
-
   private int randomGeoId;
   private Map<String, StringValuePattern> quaryParams;
-
   private WireMockServer mockServer;
   private ShabbatAPI sut;
 
@@ -66,7 +66,6 @@ final class ShabbatAPIProviderTest {
 
     mockServer = new WireMockServer(randomPort);
     mockServer.start();
-
     configureFor("localhost", randomPort);
 
     sut = new ShabbatAPIProvider(String.format("http://localhost:%d/shabbat", randomPort));
@@ -78,7 +77,7 @@ final class ShabbatAPIProviderTest {
   }
 
   @Test
-  void testing_mock_api_with_faulty_response_complete_future_exceptionally() {
+  void test_mock_api_by_stubbing_a_faulty_response_makes_the_future_complete_exceptionally() {
     givenThat(
       get(urlPathEqualTo("/shabbat")).withQueryParams(quaryParams)
       .willReturn(aResponse().withStatus(200).withBody("not a json body")));
@@ -94,7 +93,7 @@ final class ShabbatAPIProviderTest {
   }
 
   @Test
-  void testing_mock_api_stubbing_a_minimal_json_response() throws IOException, URISyntaxException {
+  void test_mock_api_by_stubbing_a_minimal_json_response_and_verify_the_serialization() throws IOException, URISyntaxException {
     var responesText = getStringFromResource("api-responses/response_minimal.json");
 
     givenThat(
@@ -127,7 +126,7 @@ final class ShabbatAPIProviderTest {
   }
 
   @Test
-  void testing_mock_api_stubbing_a_full_json_response() throws IOException, URISyntaxException {
+  void test_mock_api_by_stubbing_a_full_json_response_and_verify_the_serialization() throws IOException, URISyntaxException {
     var responesText = getStringFromResource("api-responses/response_full.json");
 
     givenThat(
