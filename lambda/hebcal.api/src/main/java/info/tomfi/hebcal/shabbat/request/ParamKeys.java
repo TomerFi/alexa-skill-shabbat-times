@@ -34,13 +34,13 @@ public enum ParamKeys {
   TZID("tzid"), // used with GeoTypes.POSITIONAL
   ZIP("zip"); // used with GeoTypes.ZIP
 
-  private final String key;
+  private final String privKey;
 
   ParamKeys(final String setKey) {
-    key = setKey;
+    privKey = setKey;
   }
 
-  public String getKey() {
-    return key;
+  public String key() {
+    return privKey;
   }
 }
