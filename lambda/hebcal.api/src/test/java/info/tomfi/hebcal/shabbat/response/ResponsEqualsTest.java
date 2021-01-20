@@ -18,10 +18,12 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
 import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+@Tag("unit-tests")
 final class ResponsEqualsTest {
   @ParameterizedTest
   @MethodSource

@@ -16,8 +16,10 @@ import static nl.jqno.equalsverifier.Warning.INHERITED_DIRECTLY_FROM_OBJECT;
 import static nl.jqno.equalsverifier.Warning.NULL_FIELDS;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Tag("unit-tests")
 final class RequestEqualsTest {
   @Test
   void verify_request_object_equals_and_hashcode_implementations() {

@@ -44,38 +44,32 @@ public abstract class Request {
     }
 
     public Request build() {
-      return new AutoValue_Request(queryParams);
+      if (queryParams.containsKey(ParamKeys.GEO_ID.getKey())) {
+        return new AutoValue_Request(queryParams);
+      }
+      throw new IllegalStateException("geo id is mandatory for this request");
     }
 
-    public Builder withMinutesAfterSundown(final int minutes)
-        throws IllegalArgumentException {
-      requireNonNull(minutes, "Null minutes");
+    public Builder withMinutesAfterSundown(final int minutes) throws IllegalArgumentException {
       if (minutes <= 0) {
-        throw new IllegalArgumentException(
-            String.join(
-                ", ",
-                "havdalah minutes should be bigger the 0",
-                "otherwise we can't calculate the shabbat end time."));
+        throw new IllegalArgumentException("minutes after sundown should be a positive integer");
       }
       queryParams.put(ParamKeys.HAVDALAH.getKey(), String.valueOf(minutes));
       return this;
     }
 
-    public Builder withMinutesBeforeSunset(final int minutes)
-        throws IllegalArgumentException {
-      requireNonNull(minutes, "Null minutes");
+    public Builder withMinutesBeforeSunset(final int minutes) throws IllegalArgumentException {
       if (minutes < 0) {
         throw new IllegalArgumentException(
-            "candle lighting time before sunset should a positive integer.");
+          "minutes before sunset should be a non negative integer");
       }
       queryParams.put(ParamKeys.CANDLE_LIGHTING.getKey(), String.valueOf(minutes));
       return this;
     }
 
     public Builder forGeoId(final int geoId) throws IllegalArgumentException {
-      requireNonNull(geoId, "Null geoId");
       if (geoId <= 0) {
-        throw new IllegalArgumentException("geo id should a positive integer.");
+        throw new IllegalArgumentException("geo id should be a positive integer");
       }
       queryParams.put(ParamKeys.GEO_ID.getKey(), String.valueOf(geoId));
       return this;
