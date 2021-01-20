@@ -55,14 +55,14 @@ final class ShabbatAPIProviderTest {
 
     quaryParams = Map.of(
       // the following are the default query params required by hebcal api
-      ParamKeys.OUTPUT_FORMAT.getKey(), containing(OutputTypes.JSON.getType()),
-      ParamKeys.INCLUDE_TURAH_HAFTARAH.getKey(), containing(FlagStates.OFF.getState()),
-      ParamKeys.ASHKENAZIS_TRANSLITERATIONS.getKey(), containing(FlagStates.OFF.getState()),
-      ParamKeys.GEO_TYPE.getKey(), containing(GeoTypes.GEO_NAME.getType()),
-      ParamKeys.HAVDALAH.getKey(), containing("50"),
-      ParamKeys.CANDLE_LIGHTING.getKey(), containing("18"),
+      ParamKeys.OUTPUT_FORMAT.key(), containing(OutputTypes.JSON.type()),
+      ParamKeys.INCLUDE_TURAH_HAFTARAH.key(), containing(FlagStates.OFF.state()),
+      ParamKeys.ASHKENAZIS_TRANSLITERATIONS.key(), containing(FlagStates.OFF.state()),
+      ParamKeys.GEO_TYPE.key(), containing(GeoTypes.GEO_NAME.type()),
+      ParamKeys.HAVDALAH.key(), containing("50"),
+      ParamKeys.CANDLE_LIGHTING.key(), containing("18"),
       // the following derives from the request
-      ParamKeys.GEO_ID.getKey(), containing(String.valueOf(randomGeoId)));
+      ParamKeys.GEO_ID.key(), containing(String.valueOf(randomGeoId)));
 
     mockServer = new WireMockServer(randomPort);
     mockServer.start();

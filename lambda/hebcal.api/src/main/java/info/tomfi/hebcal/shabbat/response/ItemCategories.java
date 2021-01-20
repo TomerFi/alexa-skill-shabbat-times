@@ -23,13 +23,13 @@ public enum ItemCategories {
   HOLIDAY("holiday"),
   PARASHAT("parashat");
 
-  private final String value;
+  private final String privCategory;
 
-  ItemCategories(final String setValue) {
-    value = setValue;
+  ItemCategories(final String setCategory) {
+    privCategory = setCategory;
   }
 
-  public String getValue() {
-    return value;
+  public String category() {
+    return privCategory;
   }
 }

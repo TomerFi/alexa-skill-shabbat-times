@@ -21,13 +21,13 @@ public enum OutputTypes {
   JSON("json"),
   RSS("r");
 
-  private final String type;
+  private final String privType;
 
   OutputTypes(final String setType) {
-    type = setType;
+    privType = setType;
   }
 
-  public String getType() {
-    return type;
+  public String type() {
+    return privType;
   }
 }

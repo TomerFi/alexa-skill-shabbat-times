@@ -23,13 +23,13 @@ public enum GeoTypes {
   POSITIONAL("pos"),
   ZIP("zip");
 
-  private final String type;
+  private final String privType;
 
   GeoTypes(final String setType) {
-    type = setType;
+    privType = setType;
   }
 
-  public String getType() {
-    return type;
+  public String type() {
+    return privType;
   }
 }

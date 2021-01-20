@@ -21,13 +21,13 @@ public enum FlagStates {
   OFF("off"),
   ON("on");
 
-  private final String state;
+  private final String privState;
 
   FlagStates(final String setState) {
-    state = setState;
+    privState = setState;
   }
 
-  public String getState() {
-    return state;
+  public String state() {
+    return privState;
   }
 }
