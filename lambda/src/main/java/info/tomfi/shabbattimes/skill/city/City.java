@@ -18,18 +18,20 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Pojo for creatign City objects from the backend json files.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 public final class City implements Iterable<String> {
-  private String cityName;
-  private String geoName;
-  private int geoId;
-  private String countryAbbreviation;
+  @JsonProperty private String cityName;
+  @JsonProperty private String geoName;
+  @JsonProperty private int geoId;
+  @JsonProperty private String countryAbbreviation;
 
-  private String[] aliases;
+  @JsonProperty private String[] aliases;
 
   protected City() {
     //

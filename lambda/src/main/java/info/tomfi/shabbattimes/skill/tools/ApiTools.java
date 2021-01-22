@@ -12,13 +12,13 @@
  */
 package info.tomfi.shabbattimes.skill.tools;
 
-import static info.tomfi.hebcal.api.enums.ItemCategories.CANDLES;
-import static info.tomfi.hebcal.api.enums.ItemCategories.HAVDALAH;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.CANDLES;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.HAVDALAH;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 import static java.util.stream.Collectors.toList;
 
-import info.tomfi.hebcal.api.response.ApiResponse;
-import info.tomfi.hebcal.api.response.items.ResponseItem;
+import info.tomfi.hebcal.shabbat.response.Response;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
@@ -46,15 +46,15 @@ public final class ApiTools {
    * @return a sorted by date list of {@link
    *     info.tomfi.hebcal.api.response.items.ResponseItem} objects.
    */
-  public static List<ResponseItem> getCandlesAndHavdalahItems(final ApiResponse response) {
-    return response.getItems().stream()
+  public static List<ResponseItem> getCandlesAndHavdalahItems(final Response response) {
+    return response.items().get().stream()
         .filter(
             item ->
-                Arrays.asList(CANDLES.getValue(), HAVDALAH.getValue()).contains(item.getCategory()))
+                Arrays.asList(CANDLES.category(), HAVDALAH.category()).contains(item.category()))
         .sorted(
             (prevItem, currentItem) ->
-                ZonedDateTime.parse(prevItem.getDate(), ISO_OFFSET_DATE_TIME)
-                    .compareTo(ZonedDateTime.parse(currentItem.getDate(), ISO_OFFSET_DATE_TIME)))
+                ZonedDateTime.parse(prevItem.date(), ISO_OFFSET_DATE_TIME)
+                    .compareTo(ZonedDateTime.parse(currentItem.date(), ISO_OFFSET_DATE_TIME)))
         .collect(toList());
   }
 
@@ -74,10 +74,10 @@ public final class ApiTools {
   public static Optional<ResponseItem> getShabbatCandlesItem(
       final List<ResponseItem> items, final LocalDate shabbatDate) {
     return items.stream()
-        .filter(item -> item.getCategory().equals(CANDLES.getValue()))
+        .filter(item -> item.category().equals(CANDLES.category()))
         .filter(
             item ->
-                ZonedDateTime.parse(item.getDate(), ISO_OFFSET_DATE_TIME)
+                ZonedDateTime.parse(item.date(), ISO_OFFSET_DATE_TIME)
                     .toLocalDate()
                     .equals(shabbatDate))
         .findFirst();
@@ -99,10 +99,10 @@ public final class ApiTools {
   public static Optional<ResponseItem> getShabbatHavdalahItem(
       final List<ResponseItem> items, final LocalDate shabbatDate) {
     return items.stream()
-        .filter(item -> item.getCategory().equals(HAVDALAH.getValue()))
+        .filter(item -> item.category().equals(HAVDALAH.category()))
         .filter(
             item ->
-                ZonedDateTime.parse(item.getDate(), ISO_OFFSET_DATE_TIME)
+                ZonedDateTime.parse(item.date(), ISO_OFFSET_DATE_TIME)
                     .toLocalDate()
                     .equals(shabbatDate))
         .findFirst();

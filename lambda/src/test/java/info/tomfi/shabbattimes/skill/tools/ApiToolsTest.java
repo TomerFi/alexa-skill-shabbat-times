@@ -12,21 +12,22 @@
  */
 package info.tomfi.shabbattimes.skill.tools;
 
-import static info.tomfi.hebcal.api.enums.ItemCategories.CANDLES;
-import static info.tomfi.hebcal.api.enums.ItemCategories.HAVDALAH;
-import static info.tomfi.hebcal.api.enums.ItemCategories.HOLIDAY;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.CANDLES;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.HAVDALAH;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.HOLIDAY;
 import static info.tomfi.shabbattimes.skill.assertions.Assertions.assertThat;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import info.tomfi.hebcal.api.response.ApiResponse;
-import info.tomfi.hebcal.api.response.items.ResponseItem;
+import info.tomfi.hebcal.shabbat.response.Response;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -48,20 +49,20 @@ public final class ApiToolsTest {
 
   @BeforeEach
   public void initialize() {
-    when(holidayItem.getCategory()).thenReturn(HOLIDAY.getValue());
-    when(holidayItem.getDate()).thenReturn("2019-10-13");
+    when(holidayItem.category()).thenReturn(HOLIDAY.category());
+    when(holidayItem.date()).thenReturn("2019-10-13");
 
-    when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.getValue());
-    when(candlesHolidayItem.getDate()).thenReturn("2019-10-13T17:53:00+03:00");
+    when(candlesHolidayItem.category()).thenReturn(CANDLES.category());
+    when(candlesHolidayItem.date()).thenReturn("2019-10-13T17:53:00+03:00");
 
-    when(havdalaHolidayItem.getCategory()).thenReturn(HAVDALAH.getValue());
-    when(havdalaHolidayItem.getDate()).thenReturn("2019-10-14T19:00:00+03:00");
+    when(havdalaHolidayItem.category()).thenReturn(HAVDALAH.category());
+    when(havdalaHolidayItem.date()).thenReturn("2019-10-14T19:00:00+03:00");
 
-    when(candlesShabbatItem.getCategory()).thenReturn(CANDLES.getValue());
-    when(candlesShabbatItem.getDate()).thenReturn("2019-10-18T17:47:00+03:00");
+    when(candlesShabbatItem.category()).thenReturn(CANDLES.category());
+    when(candlesShabbatItem.date()).thenReturn("2019-10-18T17:47:00+03:00");
 
-    when(havdalaShabbatItem.getCategory()).thenReturn(HAVDALAH.getValue());
-    when(havdalaShabbatItem.getDate()).thenReturn("2019-10-19T18:54:00+03:00");
+    when(havdalaShabbatItem.category()).thenReturn(HAVDALAH.category());
+    when(havdalaShabbatItem.date()).thenReturn("2019-10-19T18:54:00+03:00");
   }
 
   @Test
@@ -108,22 +109,22 @@ public final class ApiToolsTest {
   @Test
   @DisplayName("test the reducing and sorting of the response items list")
   public void getCandlesAndHavdalahItems_unsortedFullList_sortedMinmizedList() {
-    final ApiResponse response = mock(ApiResponse.class);
-    when(response.getItems())
-        .thenReturn(
+    final Response response = mock(Response.class);
+    when(response.items())
+        .thenReturn(Optional.of(
             Arrays.asList(
                 havdalaShabbatItem,
                 candlesShabbatItem,
                 havdalaHolidayItem,
                 candlesHolidayItem,
-                holidayItem));
+                holidayItem)));
 
     assertThat(ApiTools.getCandlesAndHavdalahItems(response))
         .containsExactly(
             candlesHolidayItem, havdalaHolidayItem, candlesShabbatItem, havdalaShabbatItem)
         .isSortedAccordingTo(
             (prevItem, currentItem) ->
-                ZonedDateTime.parse(prevItem.getDate(), ISO_OFFSET_DATE_TIME)
-                    .compareTo(ZonedDateTime.parse(currentItem.getDate(), ISO_OFFSET_DATE_TIME)));
+                ZonedDateTime.parse(prevItem.date(), ISO_OFFSET_DATE_TIME)
+                    .compareTo(ZonedDateTime.parse(currentItem.date(), ISO_OFFSET_DATE_TIME)));
   }
 }

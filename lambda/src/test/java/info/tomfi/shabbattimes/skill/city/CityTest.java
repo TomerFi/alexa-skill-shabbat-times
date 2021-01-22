@@ -14,13 +14,14 @@ package info.tomfi.shabbattimes.skill.city;
 
 import static info.tomfi.shabbattimes.skill.assertions.Assertions.assertThat;
 
-import com.google.gson.GsonBuilder;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +37,7 @@ public final class CityTest {
                     .getContextClassLoader()
                     .getResource("cities/TST_City1.json")
                     .toURI()))) {
-                      final City city = new GsonBuilder().create().fromJson(breader, City.class);
+                      final City city = new ObjectMapper().readValue(breader, City.class);
 
                       assertThat(city)
                           .cityNameIs("testCity1")

@@ -13,23 +13,20 @@
 package info.tomfi.shabbattimes.skill.di;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.gson.GsonBuilder;
-import info.tomfi.hebcal.api.ApiRequestMaker;
-import info.tomfi.hebcal.api.response.ApiResponse;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.hebcal.shabbat.request.Request;
+import info.tomfi.hebcal.shabbat.response.Response;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.time.LocalDate;
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -40,7 +37,7 @@ import org.springframework.context.annotation.Lazy;
 @Import(DiProdConfiguration.class)
 public class DiMockApiConfiguration {
   @Bean
-  public ApiRequestMaker getRequestMaker()
+  public ShabbatAPI getShabbatAPI()
       throws IllegalStateException, IOException, URISyntaxException {
     try (final BufferedReader breader =
         Files.newBufferedReader(
@@ -49,23 +46,13 @@ public class DiMockApiConfiguration {
                     .getContextClassLoader()
                     .getResource("api-responses/response_real.json")
                     .toURI()))) {
-                      final ApiResponse fakeResponse = new GsonBuilder().create().fromJson(breader, ApiResponse.class);
+                      var fakeResponse = new ObjectMapper().readValue(breader, Response.class);
+                      var future = new CompletableFuture<Response>();
+                      future.complete(fakeResponse);
 
-                      final ApiRequestMaker mockedMaker = mock(ApiRequestMaker.class);
-                      when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
-                      when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-                      when(mockedMaker.send()).thenReturn(fakeResponse);
-                      return mockedMaker;
+                      final ShabbatAPI mockAPI = mock(ShabbatAPI.class);
+                      when(mockAPI.sendAsync(any(Request.class))).thenReturn(future);
+                      return mockAPI;
                     }
-  }
-
-  @Bean
-  public GenericUrl getApiUrl() {
-    return mock(GenericUrl.class);
-  }
-
-  @Bean
-  public HttpTransport getTransport() {
-    return mock(NetHttpTransport.class);
   }
 }

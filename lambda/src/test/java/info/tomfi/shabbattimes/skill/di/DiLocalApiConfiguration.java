@@ -12,7 +12,9 @@
  */
 package info.tomfi.shabbattimes.skill.di;
 
-import com.google.api.client.http.GenericUrl;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import java.lang.reflect.InvocationTargetException;
+import java.util.ServiceLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -23,7 +25,9 @@ import org.springframework.context.annotation.Lazy;
 @Import(DiProdConfiguration.class)
 public class DiLocalApiConfiguration {
   @Bean
-  public GenericUrl getApiUrl() {
-    return new GenericUrl("http://localhost:1234/shabbat");
+  public ShabbatAPI getShabbatAPI() throws InstantiationException, IllegalAccessException, IllegalArgumentException,
+      InvocationTargetException, NoSuchMethodException, SecurityException {
+    var apiType = ServiceLoader.load(ShabbatAPI.class).stream().findFirst().get().type();
+    return apiType.getDeclaredConstructor(String.class).newInstance("http://localhost:1234/shabbat");
   }
 }

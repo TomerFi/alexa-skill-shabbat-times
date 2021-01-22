@@ -14,16 +14,9 @@ package info.tomfi.shabbattimes.skill.di;
 
 import static org.springframework.core.Ordered.LOWEST_PRECEDENCE;
 
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestInitializer;
-import com.google.api.client.http.HttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
-import com.google.api.client.json.JsonObjectParser;
-import com.google.api.client.json.gson.GsonFactory;
 import info.tomfi.shabbattimes.skill.ShabbatTimesSkillCreator;
-import info.tomfi.hebcal.api.ApiRequestMaker;
-import java.io.IOException;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import java.util.ServiceLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -66,27 +59,7 @@ public class DiProdConfiguration {
   }
 
   @Bean
-  public ApiRequestMaker getRequestMaker() {
-    return new ApiRequestMaker();
-  }
-
-  @Bean
-  public GenericUrl getApiUrl() {
-    return new GenericUrl("https://www.hebcal.com/shabbat/");
-  }
-
-  @Bean
-  public HttpTransport getTransport() {
-    return new NetHttpTransport();
-  }
-
-  @Bean
-  public HttpRequestInitializer getInitializer() {
-    return new HttpRequestInitializer() {
-      @Override
-      public void initialize(final HttpRequest request) throws IOException {
-        request.setParser(new JsonObjectParser(new GsonFactory()));
-      }
-    };
+  public ShabbatAPI getShabbatAPI() {
+    return ServiceLoader.load(ShabbatAPI.class).stream().findFirst().get().get();
   }
 }
