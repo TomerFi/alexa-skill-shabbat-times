@@ -15,7 +15,7 @@ package info.tomfi.shabbattimes.skill.tools;
 import static info.tomfi.shabbattimes.skill.tools.ApiTools.getShabbatCandlesItem;
 import static info.tomfi.shabbattimes.skill.tools.ApiTools.getShabbatHavdalahItem;
 
-import info.tomfi.hebcal.api.response.items.ResponseItem;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
 import info.tomfi.shabbattimes.skill.exception.NoItemFoundForDateException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
@@ -67,7 +67,7 @@ public final class DateTimeUtils {
     if (!shabbatStartItem.isPresent()) {
       throw new NoItemFoundForDateException("no candles item found for requested date");
     }
-    return ZonedDateTime.parse(shabbatStartItem.get().getDate());
+    return ZonedDateTime.parse(shabbatStartItem.get().date());
   }
 
   /**
@@ -87,6 +87,6 @@ public final class DateTimeUtils {
     if (!shabbatEndItem.isPresent()) {
       throw new NoItemFoundForDateException("no havdalah item found for requested date");
     }
-    return ZonedDateTime.parse(shabbatEndItem.get().getDate());
+    return ZonedDateTime.parse(shabbatEndItem.get().date());
   }
 }

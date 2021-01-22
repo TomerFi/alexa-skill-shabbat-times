@@ -13,15 +13,17 @@
 package info.tomfi.shabbattimes.skill.di;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
 
-import info.tomfi.hebcal.api.ApiRequestMaker;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.hebcal.shabbat.request.Request;
+import info.tomfi.hebcal.shabbat.response.Response;
+
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.time.LocalDate;
+import java.util.concurrent.CompletableFuture;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -34,12 +36,11 @@ import org.springframework.core.annotation.Order;
 @Order(HIGHEST_PRECEDENCE)
 public class DiBreakApiConfiguration {
   @Bean
-  public ApiRequestMaker getRequestMaker()
-      throws IllegalStateException, IOException, URISyntaxException {
-    final ApiRequestMaker mockedMaker = mock(ApiRequestMaker.class);
-    when(mockedMaker.setGeoId(anyInt())).thenReturn(mockedMaker);
-    when(mockedMaker.setSpecificDate(any(LocalDate.class))).thenReturn(mockedMaker);
-    when(mockedMaker.send()).thenThrow(new IOException("mocking exception throwing"));
-    return mockedMaker;
+  public ShabbatAPI getShabbatAPI() {
+    var future = new CompletableFuture<Response>();
+    future.completeExceptionally(new IOException("mocking exception throwing"));
+    var mockedAPI = mock(ShabbatAPI.class);
+    when(mockedAPI.sendAsync(any(Request.class))).thenReturn(future);
+    return mockedAPI;
   }
 }

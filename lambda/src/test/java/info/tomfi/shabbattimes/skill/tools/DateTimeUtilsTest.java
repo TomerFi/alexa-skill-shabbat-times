@@ -12,8 +12,8 @@
  */
 package info.tomfi.shabbattimes.skill.tools;
 
-import static info.tomfi.hebcal.api.enums.ItemCategories.CANDLES;
-import static info.tomfi.hebcal.api.enums.ItemCategories.HAVDALAH;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.CANDLES;
+import static info.tomfi.hebcal.shabbat.response.ItemCategories.HAVDALAH;
 import static info.tomfi.shabbattimes.skill.assertions.Assertions.assertThat;
 import static info.tomfi.shabbattimes.skill.assertions.Assertions.assertThatExceptionOfType;
 import static info.tomfi.shabbattimes.skill.tools.DateTimeUtils.getShabbatStartLocalDate;
@@ -21,7 +21,7 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME;
 import static org.mockito.Mockito.when;
 
-import info.tomfi.hebcal.api.response.items.ResponseItem;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
 import info.tomfi.shabbattimes.skill.exception.NoItemFoundForDateException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
@@ -52,17 +52,17 @@ public final class DateTimeUtilsTest {
 
   @BeforeEach
   public void initialize() {
-    when(candlesHolidayItem.getCategory()).thenReturn(CANDLES.getValue());
-    when(candlesHolidayItem.getDate()).thenReturn("2019-10-13T17:53:00+03:00");
+    when(candlesHolidayItem.category()).thenReturn(CANDLES.category());
+    when(candlesHolidayItem.date()).thenReturn("2019-10-13T17:53:00+03:00");
 
-    when(havdalaHolidayItem.getCategory()).thenReturn(HAVDALAH.getValue());
-    when(havdalaHolidayItem.getDate()).thenReturn("2019-10-14T19:00:00+03:00");
+    when(havdalaHolidayItem.category()).thenReturn(HAVDALAH.category());
+    when(havdalaHolidayItem.date()).thenReturn("2019-10-14T19:00:00+03:00");
 
-    when(candlesShabbatItem.getCategory()).thenReturn(CANDLES.getValue());
-    when(candlesShabbatItem.getDate()).thenReturn("2019-10-18T17:47:00+03:00");
+    when(candlesShabbatItem.category()).thenReturn(CANDLES.category());
+    when(candlesShabbatItem.date()).thenReturn("2019-10-18T17:47:00+03:00");
 
-    when(havdalaShabbatItem.getCategory()).thenReturn(HAVDALAH.getValue());
-    when(havdalaShabbatItem.getDate()).thenReturn("2019-10-19T18:54:00+03:00");
+    when(havdalaShabbatItem.category()).thenReturn(HAVDALAH.category());
+    when(havdalaShabbatItem.date()).thenReturn("2019-10-19T18:54:00+03:00");
   }
 
   @Test

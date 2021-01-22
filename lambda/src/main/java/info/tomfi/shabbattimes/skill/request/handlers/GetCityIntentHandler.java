@@ -25,10 +25,10 @@ import static info.tomfi.shabbattimes.skill.tools.SkillTools.getCityFromSlots;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Response;
-import info.tomfi.hebcal.api.ApiRequestMaker;
-import info.tomfi.hebcal.api.response.ApiResponse;
-import info.tomfi.hebcal.api.response.items.ResponseItem;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.hebcal.shabbat.request.Request;
+import info.tomfi.hebcal.shabbat.response.Response;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
 import info.tomfi.shabbattimes.skill.city.City;
 import info.tomfi.shabbattimes.skill.enums.BundleKeys;
 import info.tomfi.shabbattimes.skill.exception.NoCityFoundException;
@@ -36,24 +36,27 @@ import info.tomfi.shabbattimes.skill.exception.NoCityInCountryException;
 import info.tomfi.shabbattimes.skill.exception.NoCitySlotException;
 import info.tomfi.shabbattimes.skill.exception.NoItemFoundForDateException;
 import info.tomfi.shabbattimes.skill.exception.NoResponseFromApiException;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler, handles
- * {#value info.tomfi.shabbattimes.skill.enums.Intents.GET_CITY} intent requests.
+ * Implementation of
+ * com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler, handles
+ * {#value info.tomfi.shabbattimes.skill.enums.Intents.GET_CITY} intent
+ * requests.
  *
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler {
-  @Autowired private ApiRequestMaker requestMaker;
+  @Autowired
+  private ShabbatAPI shabbatAPI;
 
   public GetCityIntentHandler() {
     //
@@ -65,16 +68,16 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent)
-      throws NoCityFoundException, NoCityInCountryException, NoCitySlotException,
-          NoItemFoundForDateException, NoResponseFromApiException {
-    final City selectedCity =
-        getCityFromSlots(intent.getIntent().getSlots(), input.getAttributesManager());
+  public Optional<com.amazon.ask.model.Response> handle(final HandlerInput input, final IntentRequest intent)
+      throws NoCityFoundException, NoCityInCountryException, NoCitySlotException, NoItemFoundForDateException,
+      NoResponseFromApiException {
+    final City selectedCity = getCityFromSlots(intent.getIntent().getSlots(), input.getAttributesManager());
     final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
-    final ApiResponse response;
+    final Response response;
     try {
-      response = requestMaker.setGeoId(selectedCity.getGeoId()).setSpecificDate(shabbatDate).send();
-    } catch (IllegalStateException | IOException exc) {
+      var request = Request.builder().forGeoId(selectedCity.getGeoId()).forDate(shabbatDate).build();
+      response = shabbatAPI.sendAsync(request).get();
+    } catch (IllegalStateException | InterruptedException | ExecutionException exc) {
       throw new NoResponseFromApiException("no response from hebcal's shabbat api", exc);
     }
 
@@ -92,7 +95,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     final String speechOutput =
         String.format(
             getFromBundle(requestAttributes, BundleKeys.SHABBAT_INFORMATION_FMT),
-            response.getLocation().getCity(),
+            response.location().city(),
             startsAtPresentation,
             shabbatStartDateTime.toLocalDate().toString(),
             shabbatStartDateTime.toLocalTime().toString(),

@@ -17,8 +17,8 @@ import static java.util.stream.Collectors.toList;
 
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.model.Slot;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import info.tomfi.shabbattimes.skill.city.City;
 import info.tomfi.shabbattimes.skill.enums.Attributes;
 import info.tomfi.shabbattimes.skill.enums.Slots;
@@ -41,7 +41,7 @@ import java.util.Optional;
  * @author Tomer Figenblat {@literal <tomer.figenblat@gmail.com>}
  */
 public final class SkillTools {
-  private static final Gson GSON_PARSER = new GsonBuilder().create();
+  private static final ObjectMapper MAPPER = new ObjectMapper();
 
   private SkillTools() {
     //
@@ -89,7 +89,7 @@ public final class SkillTools {
                 .getResource(jsonFileName)
                 .toURI()))
     ) {
-      final City[] cityArray = GSON_PARSER.fromJson(breader, City[].class);
+      final City[] cityArray = MAPPER.readValue(breader, City[].class);
       return Arrays.asList(cityArray);
     } catch (IOException | NullPointerException | URISyntaxException exc) {
       throw new NoJsonFileException("No json file found", exc);
