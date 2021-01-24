@@ -75,7 +75,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     final LocalDate shabbatDate = getShabbatStartLocalDate(intent.getTimestamp().toLocalDate());
     final Response response;
     try {
-      var request = Request.builder().forGeoId(selectedCity.getGeoId()).forDate(shabbatDate).build();
+      var request = Request.builder().forGeoId(selectedCity.getGeoId()).withDate(shabbatDate).build();
       response = shabbatAPI.sendAsync(request).get();
     } catch (IllegalStateException | InterruptedException | ExecutionException exc) {
       throw new NoResponseFromApiException("no response from hebcal's shabbat api", exc);
