@@ -14,7 +14,7 @@
         "type": "@ask-cli/lambda-deployer",
         "userConfig": {
           "runtime": "java11",
-          "handler": "info.tomfi.shabbattimes.skill.ShabbatTimesStreamHandler",
+          "handler": "info.tomfi.alexa.shabbattimes.SkillHandler",
           "awsRegion": "us-east-1"
         }
       }
