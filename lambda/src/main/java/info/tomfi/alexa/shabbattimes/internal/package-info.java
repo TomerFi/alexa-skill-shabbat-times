@@ -1,2 +1,2 @@
-/** Package hosting various tool and static helpers. */
+/** Package for internals. */
 package info.tomfi.alexa.shabbattimes.internal;
