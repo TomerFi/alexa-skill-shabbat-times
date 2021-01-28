@@ -10,30 +10,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package info.tomfi.alexa.shabbattimes;
+package info.tomfi.alexa.shabbattimes.exceptions;
 
-public final class SlotName {
-  /** Constant String for identifying the country slot. */
-  public static final String COUNTRY_SLOT = "Country";
+import com.amazon.ask.exception.AskSdkException;
 
-  private SlotName() {
-    //
-  }
+/** Exception to throw when no appropriate respone items were found for the requested date. */
+// TODO: add exception handler
+public final class NoItemsInResponse extends AskSdkException {
+  private static final long serialVersionUID = 16L;
 
-  public enum CitySlot {
-    GB("City_GB"),
-    IL("City_IL"),
-    US("City_US");
-
-    private final String name;
-
-    CitySlot(final String setName) {
-      name = setName;
-    }
-
-    @Override
-    public String toString() {
-      return name;
-    }
+  public NoItemsInResponse() {
+    super("api response does not contains any response items");
   }
 }

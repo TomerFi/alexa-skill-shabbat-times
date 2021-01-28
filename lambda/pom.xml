@@ -22,7 +22,7 @@
     <auto-value.version>1.7.4</auto-value.version>
     <equalsverifier.version>3.5.2</equalsverifier.version>
     <extra-enforcer-rules.version>1.2</extra-enforcer-rules.version>
-    <hebcal-api.version>0.2.0</hebcal-api.version>
+    <hebcal-api.version>0.3.1</hebcal-api.version>
     <jackson.version>2.12.1</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
     <junit-jupiter.version>5.7.0</junit-jupiter.version>
@@ -320,7 +320,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.]]>
             </inlineHeader>
-            <skipExistingHeaders>true</skipExistingHeaders>
+            <skipExistingHeaders>false</skipExistingHeaders>
           </configuration>
         </plugin>
 

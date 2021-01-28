@@ -1,20 +1,24 @@
 /**
- * Copyright Tomer Figenblat Licensed under the Apache License, Version 2.0 (the "License"); you may
- * not use this file except in compliance with the License. You may obtain a copy of the License at
- * http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in
- * writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific
- * language governing permissions and limitations under the License.
+ * Copyright Tomer Figenblat.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package info.tomfi.alexa.shabbattimes.handlers.intent;
 
 import static info.tomfi.alexa.shabbattimes.AttributeKey.COUNTRY;
+import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_OK;
 import static info.tomfi.alexa.shabbattimes.BundleKey.NOT_FOUND_FMT;
 import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
 import static info.tomfi.alexa.shabbattimes.IntentType.NO;
 import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
-import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
@@ -55,9 +59,8 @@ public final class NoIntentHandler implements IntentRequestHandler {
     if (sessionAttributes.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())) {
       // find the requested country
       var selectedAbbr = (String) sessionAttributes.get(COUNTRY.toString());
-      var optCountry = countries.stream()
-          .filter(c -> c.abbreviation().equals(selectedAbbr))
-          .findFirst();
+      var optCountry =
+          countries.stream().filter(c -> c.abbreviation().equals(selectedAbbr)).findFirst();
       // if country not found replay 'ok'
       if (optCountry.isEmpty()) {
         speechOutput = getFromBundle(requestAttributes, DEFAULT_OK);

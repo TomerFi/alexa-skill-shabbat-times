@@ -12,28 +12,8 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
-public final class SlotName {
-  /** Constant String for identifying the country slot. */
-  public static final String COUNTRY_SLOT = "Country";
+import com.amazon.ask.model.Slot;
 
-  private SlotName() {
-    //
-  }
-
-  public enum CitySlot {
-    GB("City_GB"),
-    IL("City_IL"),
-    US("City_US");
-
-    private final String name;
-
-    CitySlot(final String setName) {
-      name = setName;
-    }
-
-    @Override
-    public String toString() {
-      return name;
-    }
-  }
+public interface LocatorService {
+  City locate(Slot countrySlot, Slot citySlot);
 }
