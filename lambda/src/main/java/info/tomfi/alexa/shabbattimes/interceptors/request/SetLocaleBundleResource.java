@@ -17,7 +17,6 @@ import static info.tomfi.alexa.shabbattimes.AttributeKey.L10N_BUNDLE;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 import java.util.Locale;
-import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import org.springframework.stereotype.Component;
 
@@ -36,16 +35,8 @@ public final class SetLocaleBundleResource implements RequestInterceptor {
 
   @Override
   public void process(final HandlerInput input) {
-    System.out.println("got here 1");
-    ResourceBundle bundle;
-    try {
-      System.out.println("got here 2");
-      bundle = ResourceBundle.getBundle(L10N_BASE_NAME, new Locale(input.getRequest().getLocale()));
-    } catch (MissingResourceException exc) {
-      System.out.println("got here 3");
-      bundle = ResourceBundle.getBundle(L10N_BASE_NAME, Locale.US);
-    }
-    System.out.println("got here 4");
+    var bundle =
+        ResourceBundle.getBundle(L10N_BASE_NAME, new Locale(input.getRequest().getLocale()));
     var attribs = input.getAttributesManager().getRequestAttributes();
     attribs.put(L10N_BUNDLE.toString(), bundle);
     input.getAttributesManager().setRequestAttributes(attribs);

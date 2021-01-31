@@ -13,8 +13,10 @@
 package info.tomfi.alexa.shabbattimes.services;
 
 import static info.tomfi.alexa.shabbattimes.assertions.BDDAssertions.then;
+import static org.assertj.core.api.BDDAssertions.assertThatExceptionOfType;
 import static org.assertj.core.api.BDDAssertions.then;
 
+import info.tomfi.alexa.shabbattimes.exceptions.NoJsonFileException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -49,5 +51,10 @@ final class LoaderServiceImplTest {
         .countryAbbreviationIs("TST")
         .geoIdIs(7654321)
         .geoNameIs("TST-testCity2");
+  }
+
+  @Test
+  void trying_to_load_a_non_existing_file_throws_no_json_file_exception() {
+    assertThatExceptionOfType(NoJsonFileException.class).isThrownBy(() -> loader.loadCities(null));
   }
 }
