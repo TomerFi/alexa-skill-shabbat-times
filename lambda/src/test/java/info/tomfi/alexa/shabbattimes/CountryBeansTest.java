@@ -45,6 +45,7 @@ final class CountryBeansTest {
         .citiesAre(List.of(city1, city2));
   }
 
+  @Test
   void verify_instantiation_of_the_united_states(@Mock final City city1, @Mock final City city2) {
     // stub loader with mock cities for IL abbreviation
     given(loader.loadCities("US")).willReturn(List.of(city1, city2));
@@ -57,6 +58,7 @@ final class CountryBeansTest {
         .citiesAre(List.of(city1, city2));
   }
 
+  @Test
   void verify_instantiation_of_great_britain(@Mock final City city1, @Mock final City city2) {
     // stub loader with mock cities for IL abbreviation
     given(loader.loadCities("GB")).willReturn(List.of(city1, city2));

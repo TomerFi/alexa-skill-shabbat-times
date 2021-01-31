@@ -34,7 +34,7 @@ public final class LoaderServiceImpl implements LoaderService {
     var jsonFileName = String.format("cities/%s_Cities.json", abbreviation);
     try (var json = getClass().getClassLoader().getResourceAsStream(jsonFileName)) {
       return Arrays.asList(mapper.readValue(json, City[].class));
-    } catch (IOException | NullPointerException exc) {
+    } catch (IOException | IllegalArgumentException | NullPointerException exc) {
       throw new NoJsonFileException(exc);
     }
   }
