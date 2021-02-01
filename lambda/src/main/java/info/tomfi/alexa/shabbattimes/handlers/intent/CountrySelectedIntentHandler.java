@@ -16,6 +16,7 @@ import static info.tomfi.alexa.shabbattimes.AttributeKey.COUNTRY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.CITIES_IN_COUNTRY_FMT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ASK_FOR_CITY;
 import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
+import static info.tomfi.alexa.shabbattimes.SlotName.COUNTRY_SLOT;
 import static java.util.Objects.isNull;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -23,7 +24,6 @@ import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.shabbattimes.Country;
-import info.tomfi.alexa.shabbattimes.SlotName;
 import info.tomfi.alexa.shabbattimes.TextService;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCountryFoundException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCountrySlotException;
@@ -53,11 +53,13 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler 
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
-    // get the requested country slot
-    var countrySlot = request.getIntent().getSlots().get(SlotName.COUNTRY_SLOT);
-    if (isNull(countrySlot.getValue())) {
+    var slots = request.getIntent().getSlots();
+    if (Boolean.FALSE.equals(slots.containsKey(COUNTRY_SLOT))
+        || isNull(slots.get(COUNTRY_SLOT).getValue())) {
       throw new NoCountrySlotException("No country slot found.");
     }
+    // get the requested country slot
+    var countrySlot = slots.get(COUNTRY_SLOT);
     // get the country object
     var country =
         countries.stream()
