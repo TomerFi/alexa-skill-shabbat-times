@@ -16,8 +16,8 @@ import static info.tomfi.alexa.shabbattimes.AttributeKey.L10N_BUNDLE;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
+import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Locale;
-import java.util.ResourceBundle;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,16 +27,15 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public final class SetLocaleBundleResource implements RequestInterceptor {
-  private static final String L10N_BASE_NAME = "locales/Responses";
+  private final TextService textor;
 
-  public SetLocaleBundleResource() {
-    //
+  public SetLocaleBundleResource(final TextService setTextor) {
+    textor = setTextor;
   }
 
   @Override
   public void process(final HandlerInput input) {
-    var bundle =
-        ResourceBundle.getBundle(L10N_BASE_NAME, new Locale(input.getRequest().getLocale()));
+    var bundle = textor.getResource(new Locale(input.getRequest().getLocale()));
     var attribs = input.getAttributesManager().getRequestAttributes();
     attribs.put(L10N_BUNDLE.toString(), bundle);
     input.getAttributesManager().setRequestAttributes(attribs);

@@ -12,8 +12,12 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
+import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 
 public interface TextService {
   String getText(Map<String, Object> attributes, BundleKey key);
+
+  ResourceBundle getResource(Locale locale);
 }
