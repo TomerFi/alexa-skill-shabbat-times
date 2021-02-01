@@ -17,10 +17,7 @@ import static info.tomfi.alexa.shabbattimes.BundleKey.WELCOME_SPEECH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.verifyNoMoreInteractions;
 
-import com.amazon.ask.attributes.AttributesManager;
-import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
@@ -28,15 +25,11 @@ import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.Optional;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 
-@ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class SessionStartHandlerTest extends HandlerFixtures {
-  @Mock private HandlerInput input;
   @Mock private LaunchRequest request;
   @InjectMocks private SessionStartHandler sut;
 
@@ -47,14 +40,9 @@ final class SessionStartHandlerTest extends HandlerFixtures {
 
   @Test
   void invoking_the_handler_should_return_a_welcome_follow_up(
-      @Mock final AttributesManager attribMngr,
       @Mock final ResponseBuilder builder,
       @Mock final LaunchRequest request,
       @Mock final Response response) {
-    // get request attributes fixture, stub the attributes manager, and the input with it
-    var requestAttribs = getRequestAttribs();
-    given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);
-    given(input.getAttributesManager()).willReturn(attribMngr);
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withSpeech(getText(WELCOME_SPEECH))).willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);
@@ -63,8 +51,7 @@ final class SessionStartHandlerTest extends HandlerFixtures {
     given(input.getResponseBuilder()).willReturn(builder);
     // when invoking the handler
     var resp = sut.handle(input, request);
-    // verify the mocked response return and no more builder steps
+    // verify the mocked response return
     then(resp).isNotEmpty().hasValue(response);
-    verifyNoMoreInteractions(builder);
   }
 }
