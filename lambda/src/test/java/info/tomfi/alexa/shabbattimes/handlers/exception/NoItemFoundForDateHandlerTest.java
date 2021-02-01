@@ -35,8 +35,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class NoItemFoundForDateHandlerTest extends HandlerFixtures {
-  @Mock HandlerInput input;
-  @InjectMocks NoItemFoundForDateHandler sut;
+  @Mock private HandlerInput input;
+  @InjectMocks private NoItemFoundForDateHandler sut;
 
   @Test
   void can_handle_should_return_true_only_for_instances_of_no_item_found_for_date_exception() {
@@ -53,7 +53,7 @@ final class NoItemFoundForDateHandlerTest extends HandlerFixtures {
   void invoking_the_handler_should_play_a_prompt_and_end_the_session(
       @Mock final AttributesManager attribMngr,
       @Mock final ResponseBuilder builder,
-      @Mock Response response,
+      @Mock final Response response,
       @Mock final Throwable throwable) {
     // get request attributes fixture, stub the attributes manager, and the input with it
     var requestAttribs = getRequestAttribs();

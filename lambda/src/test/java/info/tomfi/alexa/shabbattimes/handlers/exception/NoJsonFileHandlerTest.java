@@ -35,8 +35,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class NoJsonFileHandlerTest extends HandlerFixtures {
-  @Mock HandlerInput input;
-  @InjectMocks NoJsonFileHandler sut;
+  @Mock private HandlerInput input;
+  @InjectMocks private NoJsonFileHandler sut;
 
   @Test
   void can_handle_should_return_true_only_for_instances_of_no_json_file_exception() {
@@ -52,7 +52,7 @@ final class NoJsonFileHandlerTest extends HandlerFixtures {
   void invoking_the_handler_should_play_a_prompt_and_end_the_session(
       @Mock final AttributesManager attribMngr,
       @Mock final ResponseBuilder builder,
-      @Mock Response response,
+      @Mock final Response response,
       @Mock final Throwable throwable) {
     // get request attributes fixture, stub the attributes manager, and the input with it
     var requestAttribs = getRequestAttribs();

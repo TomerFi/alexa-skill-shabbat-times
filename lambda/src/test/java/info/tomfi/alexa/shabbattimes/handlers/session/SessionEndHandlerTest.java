@@ -26,17 +26,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class SessionEndHandlerTest {
-  @InjectMocks SessionEndHandler sut;
+  @Mock private HandlerInput input;
+  @Mock private SessionEndedRequest request;
+  @InjectMocks private SessionEndHandler sut;
 
   @Test
-  void can_handle_should_always_return_true_for_types_request_handlers(
-      @Mock final HandlerInput input, @Mock SessionEndedRequest request) {
+  void can_handle_should_always_return_true_for_typed_request_handlers() {
     assertThat(sut.canHandle(input, request)).isTrue();
   }
 
   @Test
-  void handle_should_always_return_empty_response(
-      @Mock final HandlerInput input, @Mock SessionEndedRequest request) {
+  void handle_should_always_return_empty_response() {
     assertThat(sut.handle(input, request)).isEmpty();
   }
 }
