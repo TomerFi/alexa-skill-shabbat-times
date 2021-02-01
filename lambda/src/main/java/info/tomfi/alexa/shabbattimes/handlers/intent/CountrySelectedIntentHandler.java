@@ -16,7 +16,6 @@ import static info.tomfi.alexa.shabbattimes.AttributeKey.COUNTRY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.CITIES_IN_COUNTRY_FMT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ASK_FOR_CITY;
 import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
-import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 import static java.util.Objects.isNull;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -25,6 +24,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.shabbattimes.Country;
 import info.tomfi.alexa.shabbattimes.SlotName;
+import info.tomfi.alexa.shabbattimes.TextService;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCountryFoundException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCountrySlotException;
 import java.util.List;
@@ -37,10 +37,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public final class CountrySelectedIntentHandler implements IntentRequestHandler {
+  private final TextService textor;
   private final List<Country> countries;
 
-  public CountrySelectedIntentHandler(final List<Country> setCountries) {
+  public CountrySelectedIntentHandler(
+      final List<Country> setCountries, final TextService setTextor) {
     countries = setCountries;
+    textor = setTextor;
   }
 
   @Override
@@ -72,10 +75,10 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler 
         .getResponseBuilder()
         .withSpeech(
             String.format(
-                getFromBundle(requestAttributes, CITIES_IN_COUNTRY_FMT),
+                textor.getText(requestAttributes, CITIES_IN_COUNTRY_FMT),
                 country.name(),
                 country.stringCities()))
-        .withReprompt(getFromBundle(requestAttributes, DEFAULT_ASK_FOR_CITY))
+        .withReprompt(textor.getText(requestAttributes, DEFAULT_ASK_FOR_CITY))
         .withShouldEndSession(false)
         .build();
   }

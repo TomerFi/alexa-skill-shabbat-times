@@ -27,7 +27,6 @@ import static info.tomfi.alexa.shabbattimes.BundleKey.SIMPLE_CARD_CONTENT_FMT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.SIMPLE_CARD_TITLE_FMT;
 import static info.tomfi.alexa.shabbattimes.IntentType.GET_CITY;
 import static info.tomfi.alexa.shabbattimes.SlotName.COUNTRY_SLOT;
-import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 import static info.tomfi.hebcal.shabbat.response.ItemCategory.CANDLES;
 import static info.tomfi.hebcal.shabbat.response.ItemCategory.HAVDALAH;
 import static info.tomfi.hebcal.shabbat.tools.Comparators.byItemDate;
@@ -48,6 +47,7 @@ import info.tomfi.alexa.shabbattimes.BundleKey;
 import info.tomfi.alexa.shabbattimes.City;
 import info.tomfi.alexa.shabbattimes.LocatorService;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
+import info.tomfi.alexa.shabbattimes.TextService;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponse;
@@ -75,6 +75,7 @@ import org.springframework.stereotype.Component;
 public final class GetCityIntentHandler implements IntentRequestHandler {
   private final ShabbatAPI shabbatApi;
   private final LocatorService locator;
+  private final TextService textor;
 
   private final List<String> slotKeys;
 
@@ -102,9 +103,13 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
                   ? SHABBAT_START_TODAY
                   : d.equals(SATURDAY) ? SHABBAT_START_YESTERDAY : SHABBAT_START_FRIDAY;
 
-  public GetCityIntentHandler(final ShabbatAPI setShabbatApi, final LocatorService setLocator) {
+  public GetCityIntentHandler(
+      final ShabbatAPI setShabbatApi,
+      final LocatorService setLocator,
+      final TextService setTextor) {
     shabbatApi = setShabbatApi;
     locator = setLocator;
+    textor = setTextor;
     slotKeys = Arrays.stream(CitySlot.values()).map(Object::toString).collect(toList());
   }
 
@@ -151,13 +156,13 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // construct the start at... and ends at... parts of the prompt
     var startsAtPresentation =
-        getFromBundle(requestAttributes, strtAtStmt.apply(currentDateTime.getDayOfWeek()));
+        textor.getText(requestAttributes, strtAtStmt.apply(currentDateTime.getDayOfWeek()));
     var endsAtPresentation =
-        getFromBundle(requestAttributes, endAtStmt.apply(currentDateTime.getDayOfWeek()));
+        textor.getText(requestAttributes, endAtStmt.apply(currentDateTime.getDayOfWeek()));
     // construct the output prompt
     var speechOutput =
         String.format(
-            getFromBundle(requestAttributes, SHABBAT_INFORMATION_FMT),
+            textor.getText(requestAttributes, SHABBAT_INFORMATION_FMT),
             response.location().city(),
             startsAtPresentation,
             shabbatStartDateTime.toLocalDate().toString(),
@@ -168,10 +173,10 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     // construct card items
     var cardTitle =
         String.format(
-            getFromBundle(requestAttributes, SIMPLE_CARD_TITLE_FMT), selectedCity.geoName());
+            textor.getText(requestAttributes, SIMPLE_CARD_TITLE_FMT), selectedCity.geoName());
     var cardContent =
         String.format(
-            getFromBundle(requestAttributes, SIMPLE_CARD_CONTENT_FMT),
+            textor.getText(requestAttributes, SIMPLE_CARD_CONTENT_FMT),
             shabbatStartDateTime.toLocalDate().toString(),
             shabbatStartDateTime.toLocalTime().toString(),
             shabbatEndDateTime.toLocalDate().toString(),
@@ -180,7 +185,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     return input
         .getResponseBuilder()
         .withSpeech(speechOutput)
-        .withReprompt(getFromBundle(requestAttributes, ASK_FOR_ANOTHER_REPROMPT))
+        .withReprompt(textor.getText(requestAttributes, ASK_FOR_ANOTHER_REPROMPT))
         .withSimpleCard(cardTitle, cardContent)
         .withShouldEndSession(false)
         .build();

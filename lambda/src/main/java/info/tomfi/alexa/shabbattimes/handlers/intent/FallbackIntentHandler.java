@@ -14,12 +14,12 @@ package info.tomfi.alexa.shabbattimes.handlers.intent;
 
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ERROR;
 import static info.tomfi.alexa.shabbattimes.IntentType.FALLBACK;
-import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
+import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +29,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public final class FallbackIntentHandler implements IntentRequestHandler {
-  public FallbackIntentHandler() {
-    //
+  private final TextService textor;
+
+  public FallbackIntentHandler(final TextService setTextor) {
+    textor = setTextor;
   }
 
   @Override
@@ -45,7 +47,7 @@ public final class FallbackIntentHandler implements IntentRequestHandler {
     // return ERROR and end the interaction
     return input
         .getResponseBuilder()
-        .withSpeech(getFromBundle(attributes, DEFAULT_ERROR))
+        .withSpeech(textor.getText(attributes, DEFAULT_ERROR))
         .withShouldEndSession(true)
         .build();
   }

@@ -18,13 +18,13 @@ import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_OK;
 import static info.tomfi.alexa.shabbattimes.BundleKey.NOT_FOUND_FMT;
 import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
 import static info.tomfi.alexa.shabbattimes.IntentType.NO;
-import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import info.tomfi.alexa.shabbattimes.Country;
+import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -36,9 +36,11 @@ import org.springframework.stereotype.Component;
 @Component
 public final class NoIntentHandler implements IntentRequestHandler {
   private final List<Country> countries;
+  private final TextService textor;
 
-  public NoIntentHandler(final List<Country> setCountries) {
+  public NoIntentHandler(final List<Country> setCountries, final TextService setTextor) {
     countries = setCountries;
+    textor = setTextor;
   }
 
   @Override
@@ -63,12 +65,13 @@ public final class NoIntentHandler implements IntentRequestHandler {
           countries.stream().filter(c -> c.abbreviation().equals(selectedAbbr)).findFirst();
       // if country not found replay 'ok'
       if (optCountry.isEmpty()) {
-        speechOutput = getFromBundle(requestAttributes, DEFAULT_OK);
+        speechOutput = textor.getText(requestAttributes, DEFAULT_OK);
       } else {
         // retrieve the correct 'in x' phrase (x being a country name)
-        var speechMiddle = getFromBundle(requestAttributes, optCountry.get().bundleKey());
+        var speechMiddle = textor.getText(requestAttributes, optCountry.get().bundleKey());
         // format the 'not fount in x' prompt
-        speechOutput = String.format(getFromBundle(requestAttributes, NOT_FOUND_FMT), speechMiddle);
+        speechOutput =
+            String.format(textor.getText(requestAttributes, NOT_FOUND_FMT), speechMiddle);
       }
     }
     // return empty or constructed speech and end the interaction
