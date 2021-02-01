@@ -10,20 +10,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package info.tomfi.alexa.shabbattimes.internal;
+package info.tomfi.alexa.shabbattimes;
 
-import static info.tomfi.alexa.shabbattimes.AttributeKey.L10N_BUNDLE;
-
-import info.tomfi.alexa.shabbattimes.BundleKey;
 import java.util.Map;
-import java.util.ResourceBundle;
 
-public final class LocalizationUtils {
-  private LocalizationUtils() {
-    //
-  }
-
-  public static String getFromBundle(final Map<String, Object> attributes, final BundleKey key) {
-    return ((ResourceBundle) attributes.get(L10N_BUNDLE.toString())).getString(key.toString());
-  }
+public interface TextService {
+  String getText(Map<String, Object> attributes, BundleKey key);
 }

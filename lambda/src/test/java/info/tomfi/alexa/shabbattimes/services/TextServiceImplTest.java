@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package info.tomfi.alexa.shabbattimes.internal;
+package info.tomfi.alexa.shabbattimes.services;
 
 import static info.tomfi.alexa.shabbattimes.AttributeKey.L10N_BUNDLE;
 import static org.assertj.core.api.BDDAssertions.then;
@@ -30,16 +30,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
-final class LocalizationUtilsTest {
+final class TextServiceImplTest {
   private Faker faker;
+  private TextServiceImpl sut;
 
   @BeforeEach
   void initialize() {
     faker = new Faker();
+    sut = new TextServiceImpl();
   }
 
   @Test
-  void test_the_static_get_from_bundle_tool(@Mock ResourceBundle resource) {
+  void extract_resource_from_bundle_in_attributes(@Mock ResourceBundle resource) {
     // create request attributes with mock bundled resource
     var attribs = Map.of(L10N_BUNDLE.toString(), (Object) resource);
     // create random bundle key and value, and mock resource with it
@@ -47,7 +49,7 @@ final class LocalizationUtilsTest {
     var value = faker.lorem().word();
     given(resource.getString(eq(key.toString()))).willReturn(value);
     // when invoking the tool with the attributes and key
-    var retrieved = LocalizationUtils.getFromBundle(attribs, key);
+    var retrieved = sut.getText(attribs, key);
     // verify the return value
     then(retrieved).isEqualTo(value);
   }

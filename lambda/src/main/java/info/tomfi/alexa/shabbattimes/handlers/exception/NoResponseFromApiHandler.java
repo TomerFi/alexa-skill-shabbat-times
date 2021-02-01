@@ -13,11 +13,11 @@
 package info.tomfi.alexa.shabbattimes.handlers.exception;
 
 import static info.tomfi.alexa.shabbattimes.BundleKey.EXC_UNRECOVERABLE_ERROR;
-import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 
 import com.amazon.ask.dispatcher.exception.ExceptionHandler;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
+import info.tomfi.alexa.shabbattimes.TextService;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
@@ -28,8 +28,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public final class NoResponseFromApiHandler implements ExceptionHandler {
-  public NoResponseFromApiHandler() {
-    //
+  private final TextService textor;
+
+  public NoResponseFromApiHandler(final TextService setTextor) {
+    textor = setTextor;
   }
 
   @Override
@@ -42,7 +44,7 @@ public final class NoResponseFromApiHandler implements ExceptionHandler {
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
-        .withSpeech(getFromBundle(requestAttributes, EXC_UNRECOVERABLE_ERROR))
+        .withSpeech(textor.getText(requestAttributes, EXC_UNRECOVERABLE_ERROR))
         .withShouldEndSession(true)
         .build();
   }
