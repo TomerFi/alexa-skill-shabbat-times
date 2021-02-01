@@ -44,7 +44,7 @@ final class SetLocaleBundleResourceTest {
     given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);
     given(input.getAttributesManager()).willReturn(attribMngr);
     // stub the request locale for predefined to_FI, and stub input with the request
-    given(request.getLocale()).willReturn("to_FI");
+    given(request.getLocale()).willReturn("te_ST");
     given(input.getRequest()).willReturn(request);
     // when intercepting of a request is invoked
     sut.process(input);
@@ -52,7 +52,7 @@ final class SetLocaleBundleResourceTest {
     then(attribMngr).should().setRequestAttributes(eq(requestAttribs));
     // then the bundle should pick up predefined locales/Responses_to_FI.properties resource
     var bundle = (ResourceBundle) requestAttribs.get(L10N_BUNDLE.toString());
-    assertThat(bundle.getString(DEFAULT_OK.toString())).isEqualTo("HELLO_FROM_TO_FI");
+    assertThat(bundle.getString(DEFAULT_OK.toString())).isEqualTo("DEFAULT_OK test text.");
   }
 
   @Test
@@ -65,7 +65,7 @@ final class SetLocaleBundleResourceTest {
     given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);
     given(input.getAttributesManager()).willReturn(attribMngr);
     // stub the request locale for undefined to_FI, and stub input with the request
-    given(request.getLocale()).willReturn("fi_TO");
+    given(request.getLocale()).willReturn("ff_TT");
     given(input.getRequest()).willReturn(request);
     // when intercepting of a request is invoked
     sut.process(input);
