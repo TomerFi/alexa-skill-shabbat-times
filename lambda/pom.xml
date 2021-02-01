@@ -388,9 +388,6 @@ limitations under the License.]]>
             <junit.jupiter.execution.parallel.enabled>true</junit.jupiter.execution.parallel.enabled>
             <junit.jupiter.displayname.generator.default>org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores</junit.jupiter.displayname.generator.default>
           </parameters>
-          <tags>
-            <tag>justme</tag>
-          </tags>
         </configuration>
       </plugin>
 

@@ -32,6 +32,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 @MockitoSettings(strictness = LENIENT)
 public class HandlerFixtures {
   @Mock protected HandlerInput input;
+  @Mock protected AttributesManager attribMngr;
   @Mock protected TextService textor;
 
   private final Map<String, Object> requestAttribs;
@@ -45,7 +46,7 @@ public class HandlerFixtures {
   }
 
   @BeforeEach
-  void initilalizeFixtures(@Mock final AttributesManager attribMngr) {
+  void initilalizeFixtures() {
     // stub the input mock with a mocked attributes manager stubbed with the request attributes
     when(attribMngr.getRequestAttributes()).thenReturn(requestAttribs);
     when(input.getAttributesManager()).thenReturn(attribMngr);

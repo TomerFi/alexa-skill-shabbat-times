@@ -26,6 +26,7 @@ import com.amazon.ask.model.Response;
 import info.tomfi.alexa.shabbattimes.Country;
 import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -50,31 +51,33 @@ public final class NoIntentHandler implements IntentRequestHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
-    // get request attributes
-    var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // get session attributes
-    var sessionAttributes = input.getAttributesManager().getSessionAttributes();
-    // default empty speech - not needed when replying to 'no' by the user
-    String speechOutput = "";
-    // if last intent was country selected intent, the user is replying to:
-    // 'was your city on the list?' after selecting a country
-    if (sessionAttributes.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())) {
-      // find the requested country
-      var selectedAbbr = (String) sessionAttributes.get(COUNTRY.toString());
-      var optCountry =
-          countries.stream().filter(c -> c.abbreviation().equals(selectedAbbr)).findFirst();
-      // if country not found replay 'ok'
-      if (optCountry.isEmpty()) {
-        speechOutput = textor.getText(requestAttributes, DEFAULT_OK);
-      } else {
-        // retrieve the correct 'in x' phrase (x being a country name)
-        var speechMiddle = textor.getText(requestAttributes, optCountry.get().bundleKey());
-        // format the 'not fount in x' prompt
-        speechOutput =
-            String.format(textor.getText(requestAttributes, NOT_FOUND_FMT), speechMiddle);
+    var sessionAttribs = input.getAttributesManager().getSessionAttributes();
+    if (sessionAttribs.containsKey(LAST_INTENT.toString())) {
+      // if last intent was country selected intent, the user is replying to:
+      // 'was your city on the list?' after selecting a country
+      if(sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())
+          && sessionAttribs.containsKey(COUNTRY.toString())) {
+        return countrySelectedFollowUp(input, sessionAttribs);
       }
     }
-    // return empty or constructed speech and end the interaction
+    return Optional.empty();
+  }
+
+  private Optional<Response> countrySelectedFollowUp(
+      final HandlerInput input, final Map<String, Object> sessionAttribs) {
+    // get request attributes
+    var requestAttribs = input.getAttributesManager().getRequestAttributes();
+    // find the requested country
+    var selectedAbbr = (String) sessionAttribs.get(COUNTRY.toString());
+    var optCountry =
+        countries.stream().filter(c -> c.abbreviation().equals(selectedAbbr)).findFirst();
+    // construct the speech output
+    var speechOutput = optCountry.isEmpty() ?
+        textor.getText(requestAttribs, DEFAULT_OK) : // eg ok
+        String.format(
+          textor.getText(requestAttribs, NOT_FOUND_FMT), // eg .. 'city names in %s'
+          textor.getText(requestAttribs, optCountry.get().bundleKey())); // eg 'in israel'
     return input.getResponseBuilder().withSpeech(speechOutput).withShouldEndSession(true).build();
   }
 }
