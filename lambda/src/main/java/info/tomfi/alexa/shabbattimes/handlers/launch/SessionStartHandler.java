@@ -12,13 +12,14 @@
  */
 package info.tomfi.alexa.shabbattimes.handlers.launch;
 
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
+import static info.tomfi.alexa.shabbattimes.BundleKey.WELCOME_SPEECH;
 import static info.tomfi.alexa.shabbattimes.internal.LocalizationUtils.getFromBundle;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
-import info.tomfi.alexa.shabbattimes.BundleKey;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
@@ -42,8 +43,8 @@ public final class SessionStartHandler implements LaunchRequestHandler {
     var attributes = input.getAttributesManager().getRequestAttributes();
     return input
         .getResponseBuilder()
-        .withSpeech(getFromBundle(attributes, BundleKey.WELCOME_SPEECH))
-        .withReprompt(getFromBundle(attributes, BundleKey.DEFAULT_REPROMPT))
+        .withSpeech(getFromBundle(attributes, WELCOME_SPEECH))
+        .withReprompt(getFromBundle(attributes, DEFAULT_REPROMPT))
         .withShouldEndSession(false)
         .build();
   }
