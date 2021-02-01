@@ -19,7 +19,7 @@ import static org.mockito.BDDMockito.given;
 
 import com.github.javafaker.Faker;
 import info.tomfi.alexa.shabbattimes.BundleKey;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
@@ -41,8 +41,7 @@ final class LocalizationUtilsTest {
   @Test
   void test_the_static_get_from_bundle_tool(@Mock ResourceBundle resource) {
     // create request attributes with mock bundled resource
-    var attribs = new HashMap<String, Object>();
-    attribs.put(L10N_BUNDLE.toString(), resource);
+    var attribs = Map.of(L10N_BUNDLE.toString(), (Object) resource);
     // create random bundle key and value, and mock resource with it
     var key = faker.options().nextElement(BundleKey.values());
     var value = faker.lorem().word();
