@@ -38,20 +38,20 @@ public class HandlerFixtures {
   private final ResourceBundle bundle;
 
   public HandlerFixtures() {
+    // load bundle resource for text phrases
     bundle = ResourceBundle.getBundle("locales/Responses", new Locale("te_ST"));
+    // create a map of request attributes
     requestAttribs = Map.of(L10N_BUNDLE.toString(), bundle);
   }
 
   @BeforeEach
   void initilalizeFixtures(@Mock final AttributesManager attribMngr) {
+    // stub the input mock with a mocked attributes manager stubbed with the request attributes
     when(attribMngr.getRequestAttributes()).thenReturn(requestAttribs);
     when(input.getAttributesManager()).thenReturn(attribMngr);
+    // short-circuit the text service to use this local getText method
     when(textor.getText(anyMap(), any(BundleKey.class)))
         .thenAnswer(inv -> getText(inv.getArgument(1)));
-  }
-
-  protected Map<String, Object> getRequestAttribs() {
-    return requestAttribs;
   }
 
   protected String getText(final BundleKey key) {
