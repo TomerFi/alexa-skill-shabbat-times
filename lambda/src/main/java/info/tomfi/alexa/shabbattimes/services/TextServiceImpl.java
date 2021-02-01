@@ -16,7 +16,6 @@ import static info.tomfi.alexa.shabbattimes.AttributeKey.L10N_BUNDLE;
 
 import info.tomfi.alexa.shabbattimes.BundleKey;
 import info.tomfi.alexa.shabbattimes.TextService;
-
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;

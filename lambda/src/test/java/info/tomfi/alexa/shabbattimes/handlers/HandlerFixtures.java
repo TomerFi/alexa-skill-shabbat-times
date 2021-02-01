@@ -32,7 +32,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 @MockitoSettings(strictness = LENIENT)
 public class HandlerFixtures {
   @Mock protected HandlerInput input;
-  @Mock private TextService textor;
+  @Mock protected TextService textor;
 
   private final Map<String, Object> requestAttribs;
   private final ResourceBundle bundle;

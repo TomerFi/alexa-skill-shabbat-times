@@ -22,6 +22,7 @@ import static org.mockito.BDDMockito.then;
 import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Request;
+import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -30,8 +31,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import info.tomfi.alexa.shabbattimes.TextService;
 
 @ExtendWith(MockitoExtension.class)
 final class SetLocaleBundleResourceTest {
@@ -45,7 +44,8 @@ final class SetLocaleBundleResourceTest {
       @Mock final HandlerInput input) {
     // short-circuit text service to load resource bundle
     given(textor.getResource(eq(new Locale("te_ST"))))
-        .willAnswer(inv -> ResourceBundle.getBundle("locales/Responses", (Locale) inv.getArgument(0)));
+        .willAnswer(
+            inv -> ResourceBundle.getBundle("locales/Responses", (Locale) inv.getArgument(0)));
     // stub attribute manager with fake attributes map, and stub input with manager
     var requestAttribs = new HashMap<String, Object>();
     given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);
@@ -69,7 +69,8 @@ final class SetLocaleBundleResourceTest {
       @Mock final HandlerInput input) {
     // short-circuit text service to load resource bundle
     given(textor.getResource(eq(new Locale("ff_TT"))))
-        .willAnswer(inv -> ResourceBundle.getBundle("locales/Responses", (Locale) inv.getArgument(0)));
+        .willAnswer(
+            inv -> ResourceBundle.getBundle("locales/Responses", (Locale) inv.getArgument(0)));
     // stub attribute manager with fake attributes map, and stub input with manager
     var requestAttribs = new HashMap<String, Object>();
     given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);

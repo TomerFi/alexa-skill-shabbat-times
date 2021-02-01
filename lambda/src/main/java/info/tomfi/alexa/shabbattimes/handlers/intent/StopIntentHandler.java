@@ -37,12 +37,12 @@ public final class StopIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(STOP.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(STOP.toString());
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
+  public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get request attributes
     var attributes = input.getAttributesManager().getRequestAttributes();
     // stop the user answer for stopping the help informaton prompt

@@ -114,21 +114,21 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(GET_CITY.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(GET_CITY.toString());
   }
 
   @Override
   public Optional<com.amazon.ask.model.Response> handle(
-      final HandlerInput input, final IntentRequest intent) {
+      final HandlerInput input, final IntentRequest request) {
     // retrieve the requested city
-    var selectedCity = getCity(intent.getIntent().getSlots(), input.getAttributesManager());
+    var selectedCity = getCity(request.getIntent().getSlots(), input.getAttributesManager());
     // calculate the current or next friday date
-    var shabbatDate = bumpToFriday.apply(intent.getTimestamp().toLocalDate());
+    var shabbatDate = bumpToFriday.apply(request.getTimestamp().toLocalDate());
     // build the api request
-    var request = Request.builder().forGeoId(selectedCity.geoId()).withDate(shabbatDate).build();
+    var apiRequest = Request.builder().forGeoId(selectedCity.geoId()).withDate(shabbatDate).build();
     // get the response future
-    var responseFuture = shabbatApi.sendAsync(request);
+    var responseFuture = shabbatApi.sendAsync(apiRequest);
     // get the response
     final Response response;
     try {
@@ -141,7 +141,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
         extractAndSort(
             response.items().orElseThrow(NoItemsInResponse::new), byItemDate(), CANDLES, HAVDALAH);
     // calculate the current and the shabbat start and end date and time
-    var currentDateTime = intent.getTimestamp().toZonedDateTime();
+    var currentDateTime = request.getTimestamp().toZonedDateTime();
     var shabbatStartDateTime =
         parse(
             extractByDate(items, shabbatDate, CANDLES)

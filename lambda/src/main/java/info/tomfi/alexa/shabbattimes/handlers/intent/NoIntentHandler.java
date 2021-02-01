@@ -44,12 +44,12 @@ public final class NoIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(NO.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(NO.toString());
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
+  public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get request attributes
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // get session attributes
