@@ -23,7 +23,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
-import info.tomfi.alexa.shabbattimes.exceptions.NoCityFoundException;
+import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.Optional;
 import org.junit.jupiter.api.Tag;
@@ -35,17 +35,17 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
-final class NoCityFoundHandlerTest extends HandlerFixtures {
+final class NoCitySlotHandlerTest extends HandlerFixtures {
   @Mock HandlerInput input;
-  @InjectMocks NoCityFoundHandler sut;
+  @InjectMocks NoCitySlotHandler sut;
 
   @Test
-  void can_handle_should_return_true_only_for_instances_of_no_city_found_exception() {
-    assertThat(sut.canHandle(input, new NoCityFoundException())).isTrue();
+  void can_handle_should_return_true_only_for_instances_of_no_city_slot_exception() {
+    assertThat(sut.canHandle(input, new NoCitySlotException())).isTrue();
   }
 
   @Test
-  void can_handle_should_return_false_for_exception_other_then_of_no_city_found_exception() {
+  void can_handle_should_return_false_for_exception_other_then_of_no_city_slot_exception() {
     assertThat(sut.canHandle(input, new Throwable())).isFalse();
   }
 

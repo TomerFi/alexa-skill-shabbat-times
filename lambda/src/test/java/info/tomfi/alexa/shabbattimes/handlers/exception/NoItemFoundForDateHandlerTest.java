@@ -12,8 +12,7 @@
  */
 package info.tomfi.alexa.shabbattimes.handlers.exception;
 
-import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
-import static info.tomfi.alexa.shabbattimes.BundleKey.EXC_NO_CITY_FOUND;
+import static info.tomfi.alexa.shabbattimes.BundleKey.EXC_UNRECOVERABLE_ERROR;
 import static org.assertj.core.api.BDDAssertions.assertThat;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.BDDMockito.given;
@@ -23,7 +22,7 @@ import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
-import info.tomfi.alexa.shabbattimes.exceptions.NoCityFoundException;
+import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
 import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.Optional;
 import org.junit.jupiter.api.Tag;
@@ -35,22 +34,23 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
-final class NoCityFoundHandlerTest extends HandlerFixtures {
+final class NoItemFoundForDateHandlerTest extends HandlerFixtures {
   @Mock HandlerInput input;
-  @InjectMocks NoCityFoundHandler sut;
+  @InjectMocks NoItemFoundForDateHandler sut;
 
   @Test
-  void can_handle_should_return_true_only_for_instances_of_no_city_found_exception() {
-    assertThat(sut.canHandle(input, new NoCityFoundException())).isTrue();
+  void can_handle_should_return_true_only_for_instances_of_no_item_found_for_date_exception() {
+    assertThat(sut.canHandle(input, new NoItemFoundForDateException())).isTrue();
   }
 
   @Test
-  void can_handle_should_return_false_for_exception_other_then_of_no_city_found_exception() {
+  void
+      can_handle_should_return_false_for_exception_other_then_of_no_item_found_for_date_exception() {
     assertThat(sut.canHandle(input, new Throwable())).isFalse();
   }
 
   @Test
-  void invoking_the_handler_should_return_a_follow_up(
+  void invoking_the_handler_should_play_a_prompt_and_end_the_session(
       @Mock final AttributesManager attribMngr,
       @Mock final ResponseBuilder builder,
       @Mock Response response,
@@ -60,9 +60,8 @@ final class NoCityFoundHandlerTest extends HandlerFixtures {
     given(attribMngr.getRequestAttributes()).willReturn(requestAttribs);
     given(input.getAttributesManager()).willReturn(attribMngr);
     // stub the builder with the steps expected to be performed by the sut
-    given(builder.withSpeech(getText(EXC_NO_CITY_FOUND))).willReturn(builder);
-    given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);
-    given(builder.withShouldEndSession(Boolean.FALSE)).willReturn(builder);
+    given(builder.withSpeech(getText(EXC_UNRECOVERABLE_ERROR))).willReturn(builder);
+    given(builder.withShouldEndSession(Boolean.TRUE)).willReturn(builder);
     given(builder.build()).willReturn(Optional.of(response));
     given(input.getResponseBuilder()).willReturn(builder);
     // when invoking the handler
