@@ -36,12 +36,12 @@ public final class ThanksIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(THANKS.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(THANKS.toString());
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
+  public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get request attributes
     var attributes = input.getAttributesManager().getRequestAttributes();
     // if the user is polite and reply's `no thanks` to follow up questions

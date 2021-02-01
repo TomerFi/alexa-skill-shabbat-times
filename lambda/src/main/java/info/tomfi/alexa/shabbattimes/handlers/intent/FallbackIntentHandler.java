@@ -36,12 +36,12 @@ public final class FallbackIntentHandler implements IntentRequestHandler {
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(FALLBACK.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(FALLBACK.toString());
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
+  public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get request attributes
     var attributes = input.getAttributesManager().getRequestAttributes();
     // return ERROR and end the interaction

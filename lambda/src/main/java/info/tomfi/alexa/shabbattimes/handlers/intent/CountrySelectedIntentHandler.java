@@ -47,14 +47,14 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler 
   }
 
   @Override
-  public boolean canHandle(final HandlerInput input, final IntentRequest intent) {
-    return intent.getIntent().getName().equals(COUNTRY_SELECTED.toString());
+  public boolean canHandle(final HandlerInput input, final IntentRequest request) {
+    return request.getIntent().getName().equals(COUNTRY_SELECTED.toString());
   }
 
   @Override
-  public Optional<Response> handle(final HandlerInput input, final IntentRequest intent) {
+  public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get the requested country slot
-    var countrySlot = intent.getIntent().getSlots().get(SlotName.COUNTRY_SLOT);
+    var countrySlot = request.getIntent().getSlots().get(SlotName.COUNTRY_SLOT);
     if (isNull(countrySlot.getValue())) {
       throw new NoCountrySlotException("No country slot found.");
     }
