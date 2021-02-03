@@ -137,7 +137,8 @@ final class CountrySelectedIntentHandlerTest extends IntentHandlerFixtures {
     given(country1.name()).willReturn(countryName);
     given(country1.stringCities()).willReturn(cities);
     // stub the builder with the steps expected to be performed by the sut
-    given(builder.withSpeech(String.format(getText(CITIES_IN_COUNTRY_FMT), countryName, cities))).willReturn(builder);
+    given(builder.withSpeech(String.format(getText(CITIES_IN_COUNTRY_FMT), countryName, cities)))
+        .willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_ASK_FOR_CITY))).willReturn(builder);
     given(builder.withShouldEndSession(Boolean.FALSE)).willReturn(builder);
     given(builder.build()).willReturn(Optional.of(response));

@@ -72,6 +72,20 @@ final class LocatorServiceImplTest {
     given(city1.cityName()).willReturn(reqCityAlias);
     given(city2.cityName()).willReturn(reqCityAlias);
     // when locating the city from the predefined country list
+    var city = sut.locate(citySlot);
+    // then the city from the first country should be picked up
+    then(city).isEqualTo(city1);
+  }
+
+  @Test
+  void
+      locate_city_with_null_country_when_two_cities_has_same_name_in_two_countries_returns_first() {
+    // stub the country slot as null to locate without stating a country
+    given(countrySlot.getValue()).willReturn(null);
+    // stub two different cities (from different countries) with the same name
+    given(city1.cityName()).willReturn(reqCityAlias);
+    given(city2.cityName()).willReturn(reqCityAlias);
+    // when locating the city from the predefined country list
     var city = sut.locate(countrySlot, citySlot);
     // then the city from the first country should be picked up
     then(city).isEqualTo(city1);
@@ -79,6 +93,17 @@ final class LocatorServiceImplTest {
 
   @Test
   void locate_city_without_country_when_no_matching_city_found_throws_no_city_found_exception() {
+    // stub the country slot as null to locate without stating a country
+    given(countrySlot.getValue()).willReturn(null);
+    // stub cities with name other then the alias requested
+    given(city1.cityName()).willReturn(faker.lorem().word());
+    given(city2.cityName()).willReturn(faker.lorem().word());
+    // when trying to locate the city NoCityFoundException is thrown
+    thenExceptionOfType(NoCityFoundException.class).isThrownBy(() -> sut.locate(citySlot));
+  }
+
+  @Test
+  void locate_city_with_null_country_when_no_matching_city_found_throws_no_city_found_exception() {
     // stub the country slot as null to locate without stating a country
     given(countrySlot.getValue()).willReturn(null);
     // stub cities with name other then the alias requested
@@ -101,6 +126,22 @@ final class LocatorServiceImplTest {
     given(city1.cityName()).willReturn(reqCityAlias);
     // when locating the city from the predefined country list
     var city = sut.locate(countrySlot, citySlot);
+    // then the city should be returned
+    then(city).isEqualTo(city1);
+  }
+
+  @Test
+  void locate_city_returns_city() {
+    // stub country with a fixed utterence
+    var country1Utterence = faker.lorem().word();
+    given(country1.utterances()).willReturn(List.of(country1Utterence));
+    given(country1.hasUtterance(anyString())).willCallRealMethod();
+    // stub the country slot with a correct country utterence
+    given(countrySlot.getValue()).willReturn(country1Utterence);
+    // stub the city name exactly like the one requested
+    given(city1.cityName()).willReturn(reqCityAlias);
+    // when locating the city from the predefined country list
+    var city = sut.locate(citySlot);
     // then the city should be returned
     then(city).isEqualTo(city1);
   }

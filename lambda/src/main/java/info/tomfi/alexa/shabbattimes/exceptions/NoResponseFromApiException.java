@@ -18,7 +18,7 @@ import com.amazon.ask.exception.AskSdkException;
 public final class NoResponseFromApiException extends AskSdkException {
   private static final long serialVersionUID = 24L;
 
-  public NoResponseFromApiException(final String message, final Throwable cause) {
-    super(message, cause);
+  public NoResponseFromApiException(final Throwable cause) {
+    super("no response from hebcal's shabbat api", cause);
   }
 }

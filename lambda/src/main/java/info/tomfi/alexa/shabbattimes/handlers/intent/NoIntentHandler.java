@@ -56,7 +56,7 @@ public final class NoIntentHandler implements IntentRequestHandler {
     if (sessionAttribs.containsKey(LAST_INTENT.toString())) {
       // if last intent was country selected intent, the user is replying to:
       // 'was your city on the list?' after selecting a country
-      if(sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())
+      if (sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())
           && sessionAttribs.containsKey(COUNTRY.toString())) {
         return countrySelectedFollowUp(input, sessionAttribs);
       }
@@ -73,11 +73,13 @@ public final class NoIntentHandler implements IntentRequestHandler {
     var optCountry =
         countries.stream().filter(c -> c.abbreviation().equals(selectedAbbr)).findFirst();
     // construct the speech output
-    var speechOutput = optCountry.isEmpty() ?
-        textor.getText(requestAttribs, DEFAULT_OK) : // eg ok
-        String.format(
-          textor.getText(requestAttribs, NOT_FOUND_FMT), // eg .. 'city names in %s'
-          textor.getText(requestAttribs, optCountry.get().bundleKey())); // eg 'in israel'
+    var speechOutput =
+        optCountry.isEmpty()
+            ? textor.getText(requestAttribs, DEFAULT_OK)
+            : // eg ok
+            String.format(
+                textor.getText(requestAttribs, NOT_FOUND_FMT), // eg .. 'city names in %s'
+                textor.getText(requestAttribs, optCountry.get().bundleKey())); // eg 'in israel'
     return input.getResponseBuilder().withSpeech(speechOutput).withShouldEndSession(true).build();
   }
 }

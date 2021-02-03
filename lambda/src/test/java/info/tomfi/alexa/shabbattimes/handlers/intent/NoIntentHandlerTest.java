@@ -116,9 +116,10 @@ final class NoIntentHandlerTest extends IntentHandlerFixtures {
   void invoking_handler_after_country_selected_with_unknown_country_should_say_ok_and_end(
       @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub attributes manager with session attributes for follow with unknown country
-    var sessionAttribs = Map.of(
-      LAST_INTENT.toString(), (Object) COUNTRY_SELECTED.toString(),
-      COUNTRY.toString(), (Object) UNKNOWN_COUNTRY_TST_ABBR);
+    var sessionAttribs =
+        Map.of(
+            LAST_INTENT.toString(), (Object) COUNTRY_SELECTED.toString(),
+            COUNTRY.toString(), (Object) UNKNOWN_COUNTRY_TST_ABBR);
     given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withSpeech(getText(DEFAULT_OK))).willReturn(builder);
@@ -135,13 +136,14 @@ final class NoIntentHandlerTest extends IntentHandlerFixtures {
   void invoking_handler_after_country_selected_with_known_country_should_explain_and_end(
       @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub attributes manager with session attributes for follow with unknown country
-    var sessionAttribs = Map.of(
-      LAST_INTENT.toString(), (Object) COUNTRY_SELECTED.toString(),
-      COUNTRY.toString(), (Object) COUNTRY1_TST_ABBR);
+    var sessionAttribs =
+        Map.of(
+            LAST_INTENT.toString(), (Object) COUNTRY_SELECTED.toString(),
+            COUNTRY.toString(), (Object) COUNTRY1_TST_ABBR);
     given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
     // stub the builder with the steps expected to be performed by the sut
-    given(builder.withSpeech(
-      String.format(getText(NOT_FOUND_FMT), getText(NOT_FOUND_IN_ISRAEL)))).willReturn(builder);
+    given(builder.withSpeech(String.format(getText(NOT_FOUND_FMT), getText(NOT_FOUND_IN_ISRAEL))))
+        .willReturn(builder);
     given(builder.withShouldEndSession(Boolean.TRUE)).willReturn(builder);
     given(builder.build()).willReturn(Optional.of(response));
     given(input.getResponseBuilder()).willReturn(builder);
