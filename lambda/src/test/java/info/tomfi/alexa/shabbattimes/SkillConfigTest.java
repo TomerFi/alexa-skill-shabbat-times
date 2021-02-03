@@ -40,7 +40,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-/** Spring context dependency configuration test cases. */
+/** Context dependency configuration test cases. */
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class SkillConfigTest {

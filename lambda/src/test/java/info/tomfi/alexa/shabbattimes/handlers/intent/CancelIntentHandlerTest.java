@@ -31,6 +31,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the CancelIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class CancelIntentHandlerTest extends IntentHandlerFixtures {
   @InjectMocks private CancelIntentHandler sut;

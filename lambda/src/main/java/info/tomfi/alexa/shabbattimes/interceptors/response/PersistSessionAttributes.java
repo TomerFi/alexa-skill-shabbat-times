@@ -23,8 +23,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 /**
- * Implemenation of com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor, intercept
- * response object on their way out and manipulate the session attributes.
+ * Response interceptor saving the current intent name as the last intent name in the session
+ * attributes. for ongoing interactions.
  */
 @Component
 public final class PersistSessionAttributes implements ResponseInterceptor {

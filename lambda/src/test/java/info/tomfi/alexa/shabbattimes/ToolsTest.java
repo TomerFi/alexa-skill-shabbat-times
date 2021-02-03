@@ -45,6 +45,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+/** Test cases for the static tool in Tools class. */
 @Tag("unit-tests")
 final class ToolsTest {
   @ParameterizedTest

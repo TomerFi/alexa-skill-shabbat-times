@@ -15,6 +15,7 @@ package info.tomfi.alexa.shabbattimes.assertions;
 import info.tomfi.alexa.shabbattimes.City;
 import info.tomfi.alexa.shabbattimes.Country;
 
+/** Custom assertions starting point. */
 public final class BDDAssertions {
 
   public static CityAssert then(final City actual) {

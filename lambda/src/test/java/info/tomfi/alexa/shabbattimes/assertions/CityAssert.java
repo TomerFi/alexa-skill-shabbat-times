@@ -18,6 +18,7 @@ import info.tomfi.alexa.shabbattimes.City;
 import java.util.List;
 import org.assertj.core.api.AbstractAssert;
 
+/** Custom assertion implementation for the City class. */
 public final class CityAssert extends AbstractAssert<CityAssert, City> {
   protected CityAssert(final City actual) {
     super(actual, CityAssert.class);

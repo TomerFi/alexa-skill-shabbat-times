@@ -23,10 +23,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Implementation of com.amazon.ask.dispatcher.request.handler.impl.LaunchRequestHandler, handles
- * requests of type com.amazon.ask.model.LaunchRequest.
- */
+/** Handler for handling launch requests. */
 @Component
 public final class SessionStartHandler implements LaunchRequestHandler {
   private final TextService textor;

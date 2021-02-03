@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
+/** Service provider for loading cities for countries. */
 @Component
 public final class LoaderServiceImpl implements LoaderService {
   private final ObjectMapper mapper;

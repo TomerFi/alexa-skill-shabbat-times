@@ -22,10 +22,7 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler. Used for handling {@link
- * info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException} exceptions.
- */
+/** Exception handler used for handling {@link NoItemFoundForDateException} cases. */
 @Component
 public final class NoItemFoundForDateHandler implements ExceptionHandler {
   private final TextService textor;

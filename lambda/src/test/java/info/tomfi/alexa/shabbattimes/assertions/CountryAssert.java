@@ -20,6 +20,7 @@ import info.tomfi.alexa.shabbattimes.Country;
 import java.util.List;
 import org.assertj.core.api.AbstractAssert;
 
+/** Custom assertion implementation for the Country class. */
 public final class CountryAssert extends AbstractAssert<CountryAssert, Country> {
   protected CountryAssert(final Country actual) {
     super(actual, CountryAssert.class);

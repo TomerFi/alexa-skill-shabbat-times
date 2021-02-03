@@ -30,10 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler, handles
- * {#value info.tomfi.shabbattimes.enums.Intents.NO} intent requests.
- */
+/** Intent request handler for handling intent requests with the name {@value NO} */
 @Component
 public final class NoIntentHandler implements IntentRequestHandler {
   private final List<Country> countries;

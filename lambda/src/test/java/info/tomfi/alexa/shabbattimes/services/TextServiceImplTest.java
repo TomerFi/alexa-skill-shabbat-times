@@ -30,6 +30,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/** Text service provider test cases. */
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class TextServiceImplTest {

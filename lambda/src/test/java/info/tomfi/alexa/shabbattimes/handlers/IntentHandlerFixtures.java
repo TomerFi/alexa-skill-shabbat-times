@@ -15,6 +15,8 @@ package info.tomfi.alexa.shabbattimes.handlers;
 import com.amazon.ask.model.IntentRequest;
 import org.mockito.Mock;
 
+// TODO: get rid of this
+/** Various testing fixtures for testing the intent handler classes. */
 public class IntentHandlerFixtures extends HandlerFixtures {
   @Mock protected IntentRequest request;
 }

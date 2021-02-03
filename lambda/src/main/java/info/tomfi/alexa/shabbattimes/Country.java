@@ -18,6 +18,7 @@ import com.google.auto.value.AutoValue;
 import java.util.List;
 import java.util.Optional;
 
+/** Country value abstraction. */
 @AutoValue
 public abstract class Country {
   public abstract String abbreviation();
@@ -30,14 +31,31 @@ public abstract class Country {
 
   public abstract List<String> utterances();
 
+  /**
+   * Retrive the city names from this country value as a String concatenated with a comma.
+   *
+   * @return the city names String.
+   */
   public String stringCities() {
     return cities().stream().map(cityObj -> cityObj.cityName()).collect(joining(", "));
   }
 
+  /**
+   * Check if the country has a specific utterance.
+   *
+   * @param utterance the utterance to look for.
+   * @return true if the country has the the argument utterance.
+   */
   public boolean hasUtterance(final String utterance) {
     return utterances().contains(utterance);
   }
 
+  /**
+   * Get a City instance by the city alias.
+   *
+   * @param alias the city alias to look for.
+   * @return the Optional City instance.
+   */
   public Optional<City> getCity(final String alias) {
     for (var city : cities()) {
       if (city.cityName().equals(alias) || city.aliases().contains(alias)) {
@@ -51,6 +69,7 @@ public abstract class Country {
     return new AutoValue_Country.Builder();
   }
 
+  /** Country value builder abstraction. */
   @AutoValue.Builder
   public abstract static class Builder {
     public abstract Builder abbreviation(String abbreviation);

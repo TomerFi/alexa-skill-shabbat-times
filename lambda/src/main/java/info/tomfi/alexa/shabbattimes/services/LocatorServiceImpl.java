@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
+/** Service provider for locating cities within a predefined list of countries. */
 @Component
 public final class LocatorServiceImpl implements LocatorService {
   private final List<Country> countries;

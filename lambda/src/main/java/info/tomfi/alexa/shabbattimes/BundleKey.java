@@ -12,6 +12,7 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
+/** Enum used for idetifying keys within the resource bundle. */
 public enum BundleKey {
   ASK_FOR_ANOTHER_REPROMPT,
   SIMPLE_CARD_TITLE_FMT,

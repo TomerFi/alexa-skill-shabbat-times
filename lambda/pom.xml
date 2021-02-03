@@ -317,8 +317,7 @@
               <exclude>**/package-info.java</exclude>
             </excludes>
             <includes>
-              <include>**/*.java</include>
-              <!--<include>**/*.properties</include>-->
+              <include>src/**</include>
             </includes>
             <inlineHeader><![CDATA[Copyright Tomer Figenblat.
 Licensed under the Apache License, Version 2.0 (the "License");

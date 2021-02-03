@@ -23,10 +23,7 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler. Used for handling {@link
- * info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException} exceptions.
- */
+/** Exception handler used for handling {@link NoCitySlotException} cases. */
 @Component
 public final class NoCitySlotHandler implements ExceptionHandler {
   private final TextService textor;

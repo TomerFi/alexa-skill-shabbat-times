@@ -22,6 +22,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/** Loader service provider test cases. */
 @Tag("unit-tests")
 final class LoaderServiceImplTest {
   private LoaderServiceImpl loader;

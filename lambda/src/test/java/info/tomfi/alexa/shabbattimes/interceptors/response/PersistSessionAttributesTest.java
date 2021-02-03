@@ -34,6 +34,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/** Test cases for the PersistSessionAttributes response interceptor implementation. */
 @ExtendWith(MockitoExtension.class)
 @SuppressWarnings("unchecked")
 @Tag("unit-tests")

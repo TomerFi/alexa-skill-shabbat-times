@@ -1,7 +1,2 @@
-/**
- * Package hosting ExceptionHandler implementations for handling in-skill exceptions throw.
- *
- * <p>This package is scanned by Spring-Context, bean classes should be marked with the Component
- * annotations.
- */
+/** Exception handler classes. */
 package info.tomfi.alexa.shabbattimes.handlers.exception;

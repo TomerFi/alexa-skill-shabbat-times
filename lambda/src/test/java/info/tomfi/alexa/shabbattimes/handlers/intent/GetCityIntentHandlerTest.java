@@ -70,6 +70,7 @@ import org.mockito.ArgumentMatcher;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the GetCityIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class GetCityIntentHandlerTest extends IntentHandlerFixtures {
   @Mock private Intent intent;

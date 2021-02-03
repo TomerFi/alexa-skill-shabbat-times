@@ -32,6 +32,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the HelpIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class HelpIntentHandlerTest extends IntentHandlerFixtures {
   @InjectMocks HelpIntentHandler sut;

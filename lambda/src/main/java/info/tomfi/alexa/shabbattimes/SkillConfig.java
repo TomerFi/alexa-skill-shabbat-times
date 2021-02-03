@@ -29,7 +29,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
-/** Spring context dependency configuration class. */
+/** Main dependency context configuration class. */
 @Configuration
 @Import(CountryBeans.class)
 @ComponentScan(
@@ -43,6 +43,19 @@ public class SkillConfig {
     //
   }
 
+  /**
+   * Singleton typed bean for constructing and instantiating the Skill.
+   *
+   * @param requestHandlers the injected request handlers, typically
+   *     info.tomfi.alexa.shabbattimes.handlers.intent/launch/session packages.
+   * @param exceptionHandlersthe the injected exception handlers, typically
+   *     info.tomfi.alexa.shabbattimes.handlers.exception package.
+   * @param requestInterceptors the injected request interceptors, typically
+   *     info.tomfi.alexa.shabbattimes.interceptors.request package.
+   * @param responseInterceptors the injected request interceptors, typically
+   *     info.tomfi.alexa.shabbattimes.interceptors.response package.
+   * @return the Skill instance.
+   */
   @Bean
   public Skill getSkill(
       final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers,
@@ -58,6 +71,11 @@ public class SkillConfig {
         .build();
   }
 
+  /**
+   * Use the service loader to instantiate the ShabbatAPI service provider.
+   *
+   * @return the service provider instance.
+   */
   @Bean
   public ShabbatAPI getShabbatAPI() {
     return ServiceLoader.load(ShabbatAPI.class).stream().findFirst().get().get();

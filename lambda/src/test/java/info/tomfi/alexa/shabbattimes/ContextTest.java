@@ -30,6 +30,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+/** Test the context life cycle for the various beans. */
 @Tag("unit-tests")
 final class ContextTest {
   private static AnnotationConfigApplicationContext context;

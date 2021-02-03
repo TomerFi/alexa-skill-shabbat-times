@@ -1,2 +1,2 @@
-/** Package for various ResponseInterceptor implementations. */
+/** Response interceptor classes. */
 package info.tomfi.alexa.shabbattimes.interceptors.response;

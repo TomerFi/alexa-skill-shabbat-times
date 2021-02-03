@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the NoCountrySlotHandler exception handler. */
 @Tag("unit-tests")
 final class NoCountrySlotHandlerTest extends HandlerFixtures {
   @InjectMocks private NoCountrySlotHandler sut;

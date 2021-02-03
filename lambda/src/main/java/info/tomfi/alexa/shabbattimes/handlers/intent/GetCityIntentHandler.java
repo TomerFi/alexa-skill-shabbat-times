@@ -51,6 +51,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import org.springframework.stereotype.Component;
 
+/** Intent request handler for handling intent requests with the name {@value GET_CITY} */
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler {
   private final ShabbatAPI shabbatApi;

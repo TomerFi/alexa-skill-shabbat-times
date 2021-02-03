@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the NoJsonFileHandler exception handler. */
 @Tag("unit-tests")
 final class NoJsonFileHandlerTest extends HandlerFixtures {
   @InjectMocks private NoJsonFileHandler sut;
