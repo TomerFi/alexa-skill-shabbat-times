@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+/** Locator service provider test cases. */
 @MockitoSettings(strictness = LENIENT)
 @Tag("unit-tests")
 final class LocatorServiceImplTest {

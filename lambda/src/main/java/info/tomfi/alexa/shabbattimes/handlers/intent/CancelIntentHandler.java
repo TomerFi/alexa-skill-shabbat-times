@@ -23,10 +23,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler, handles
- * {#value info.tomfi.shabbattimes.enums.Intents.CANCEL} intent requests.
- */
+/** Intent request handler for handling intent requests with the name {@value CANCEL} */
 @Component
 public final class CancelIntentHandler implements IntentRequestHandler {
   private final TextService textor;

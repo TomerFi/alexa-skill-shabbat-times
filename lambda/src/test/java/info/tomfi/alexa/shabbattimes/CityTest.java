@@ -25,6 +25,7 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/** Test cases for the City implementation. */
 @Tag("unit-tests")
 final class CityTest {
   @Test

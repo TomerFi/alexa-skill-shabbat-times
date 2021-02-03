@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the NoResponseFromApiHandler exception handler. */
 @Tag("unit-tests")
 final class NoResponseFromApiHandlerTest extends HandlerFixtures {
   @InjectMocks private NoResponseFromApiHandler sut;

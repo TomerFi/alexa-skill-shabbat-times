@@ -26,6 +26,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/** Test cases for the Country implementation. */
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class CountryTest {

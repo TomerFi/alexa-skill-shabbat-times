@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the session start request handler. */
 @Tag("unit-tests")
 final class SessionStartHandlerTest extends HandlerFixtures {
   @Mock private LaunchRequest request;

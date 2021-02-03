@@ -23,10 +23,7 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoCountrySlotException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler. Used for handling {@link
- * info.tomfi.alexa.shabbattimes.exceptions.NoCountrySlotException} exceptions.
- */
+/** Exception handler used for handling {@link NoCountrySlotException} cases. */
 @Component
 public final class NoCountrySlotHandler implements ExceptionHandler {
   private final TextService textor;

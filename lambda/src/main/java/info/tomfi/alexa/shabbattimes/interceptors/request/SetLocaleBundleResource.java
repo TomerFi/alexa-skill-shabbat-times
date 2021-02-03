@@ -20,11 +20,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Locale;
 import org.springframework.stereotype.Component;
 
-/**
- * Implemenation of com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor, intercept
- * requests prior to their handling and plant the reference for the appropriate resource bundle
- * object based on the requests' locale.
- */
+/** Request inteceptor loading the resource bundle for the request locale as a request attribute. */
 @Component
 public final class SetLocaleBundleResource implements RequestInterceptor {
   private final TextService textor;

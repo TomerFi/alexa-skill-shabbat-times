@@ -32,6 +32,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/** Test cases for the SetLocaleBundleResource request interceptor implementation. */
 @ExtendWith(MockitoExtension.class)
 final class SetLocaleBundleResourceTest {
   @Mock TextService textor;

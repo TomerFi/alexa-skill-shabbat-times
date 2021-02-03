@@ -41,6 +41,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.Mock;
 
+/** Test cases for the NoIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class NoIntentHandlerTest extends IntentHandlerFixtures {
   private static final String COUNTRY1_TST_ABBR = "IL";

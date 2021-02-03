@@ -24,10 +24,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Implementation of com.amazon.ask.dispatcher.request.handler.impl.IntentRequestHandler, handles
- * {#value info.tomfi.shabbattimes.enums.Intents.HELP} intent requests.
- */
+/** Intent request handler for handling intent requests with the name {@value HELP} */
 @Component
 public final class HelpIntentHandler implements IntentRequestHandler {
   private final TextService textor;

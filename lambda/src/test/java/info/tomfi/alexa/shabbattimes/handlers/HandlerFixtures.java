@@ -29,6 +29,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
 
+/** Various testing fixtures for testing the handler classes. */
 @MockitoSettings(strictness = LENIENT)
 public class HandlerFixtures {
   @Mock protected HandlerInput input;

@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the NoCityFoundHandler exception handler. */
 @Tag("unit-tests")
 final class NoCityFoundHandlerTest extends HandlerFixtures {
   @InjectMocks private NoCityFoundHandler sut;

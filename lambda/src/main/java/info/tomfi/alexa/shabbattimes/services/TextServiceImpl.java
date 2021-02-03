@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import org.springframework.stereotype.Component;
 
+/** Service provider working with predefined resource bundles. */
 @Component
 public final class TextServiceImpl implements TextService {
   private static final String L10N_BASE_NAME = "locales/Responses";

@@ -33,11 +33,13 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
+/** Static function and methods helpers. */
 public final class Tools {
   private Tools() {
     //
   }
 
+  /** Function that consumes LocalDate and supplies a LocalDate of the current or next friday. */
   public static UnaryOperator<LocalDate> bumpToFriday =
       d -> {
         var dow = d.getDayOfWeek();
@@ -48,12 +50,14 @@ public final class Tools {
         return d.plusDays(add);
       };
 
+  /** Function that consumes a DOW and suplies the bundle key for ending the info statement. */
   public static Function<DayOfWeek, BundleKey> endAtStmt =
       d ->
           d.equals(FRIDAY)
               ? SHABBAT_END_TOMORROW
               : d.equals(SATURDAY) ? SHABBAT_END_TODAY : SHABBAT_END_SATURDAY;
 
+  /** Function that consumes a DOW and suplies the bundle key for starting the info statement. */
   public static Function<DayOfWeek, BundleKey> strtAtStmt =
       d ->
           d.equals(THURSDAY)
@@ -62,6 +66,12 @@ public final class Tools {
                   ? SHABBAT_START_TODAY
                   : d.equals(SATURDAY) ? SHABBAT_START_YESTERDAY : SHABBAT_START_FRIDAY;
 
+  /**
+   * Find a slot with a non-null non-blank value giving that its key is listed in keys argument.
+   *
+   * @param keys list of keys to compare the slot key to.
+   * @return the slot with a key that exists in the list and a non-null non-blank value.
+   */
   public static Function<Map<String, Slot>, Slot> findCitySlot(final List<String> keys) {
     return m -> {
       var k =

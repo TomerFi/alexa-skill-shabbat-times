@@ -12,6 +12,7 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
+/** Enum used for identifying the attribute keys. */
 public enum AttributeKey {
   CITY("city"),
   COUNTRY("country"),

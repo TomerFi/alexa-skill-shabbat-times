@@ -20,6 +20,7 @@ import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/** Secondary dependency context configuration class, used for creating Country beans. */
 @Configuration
 public class CountryBeans {
   private final LoaderService loader;
@@ -28,6 +29,11 @@ public class CountryBeans {
     loader = setLoader;
   }
 
+  /**
+   * Build a Country object representing Israel, IL.
+   *
+   * @return the Country instance.
+   */
   @Bean("IL")
   public Country getIsrael() {
     return Country.builder()
@@ -39,6 +45,11 @@ public class CountryBeans {
         .build();
   }
 
+  /**
+   * Build a Country object representing the United States, US.
+   *
+   * @return the Country instance.
+   */
   @Bean("US")
   public Country getUnitedStates() {
     return Country.builder()
@@ -50,6 +61,11 @@ public class CountryBeans {
         .build();
   }
 
+  /**
+   * Build a Country object representing Great Britain, GB.
+   *
+   * @return the Country instance.
+   */
   @Bean("GB")
   public Country getGreatBritain() {
     return Country.builder()

@@ -26,6 +26,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+/** Context country instances dependency configuration test cases. */
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class CountryBeansTest {

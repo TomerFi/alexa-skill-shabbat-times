@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
 import java.util.List;
 
+/** City value abstraction. */
 @AutoValue
 @JsonDeserialize(builder = AutoValue_City.Builder.class)
 public abstract class City {
@@ -30,6 +31,7 @@ public abstract class City {
 
   public abstract List<String> aliases();
 
+  /** City value builder abstraction. */
   @AutoValue.Builder
   public abstract static class Builder {
     @JsonProperty("cityName")

@@ -12,6 +12,7 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
+/** Enum for identifying the the intent names. */
 public enum IntentType {
   CANCEL("AMAZON.CancelIntent"),
   COUNTRY_SELECTED("CountrySelected"),

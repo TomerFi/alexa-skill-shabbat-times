@@ -32,6 +32,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the YesIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class YesIntentHandlerTest extends IntentHandlerFixtures {
   @InjectMocks private YesIntentHandler sut;

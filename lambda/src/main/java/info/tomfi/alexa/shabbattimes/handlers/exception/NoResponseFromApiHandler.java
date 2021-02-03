@@ -22,10 +22,7 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/**
- * Extension of com.amazon.ask.dispatcher.exception.ExceptionHandler. Used for handling {@link
- * info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException} exceptions.
- */
+/** Exception handler used for handling {@link NoResponseFromApiException} cases. */
 @Component
 public final class NoResponseFromApiHandler implements ExceptionHandler {
   private final TextService textor;

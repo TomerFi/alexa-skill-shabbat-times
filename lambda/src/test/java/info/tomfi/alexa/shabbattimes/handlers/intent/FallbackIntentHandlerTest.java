@@ -31,6 +31,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the FallbackIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class FallbackIntentHandlerTest extends IntentHandlerFixtures {
   @InjectMocks private FallbackIntentHandler sut;

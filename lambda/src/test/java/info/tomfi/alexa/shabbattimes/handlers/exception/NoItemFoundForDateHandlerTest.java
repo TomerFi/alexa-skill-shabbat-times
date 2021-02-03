@@ -27,6 +27,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+/** Test cases for the NoItemFoundForDateHandler exception handler. */
 @Tag("unit-tests")
 final class NoItemFoundForDateHandlerTest extends HandlerFixtures {
   @InjectMocks private NoItemFoundForDateHandler sut;
