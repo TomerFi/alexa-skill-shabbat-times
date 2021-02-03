@@ -48,7 +48,7 @@ public class SkillConfig {
    *
    * @param requestHandlers the injected request handlers, typically
    *     info.tomfi.alexa.shabbattimes.handlers.intent/launch/session packages.
-   * @param exceptionHandlersthe the injected exception handlers, typically
+   * @param exceptionHandlers the injected exception handlers, typically
    *     info.tomfi.alexa.shabbattimes.handlers.exception package.
    * @param requestInterceptors the injected request interceptors, typically
    *     info.tomfi.alexa.shabbattimes.interceptors.request package.

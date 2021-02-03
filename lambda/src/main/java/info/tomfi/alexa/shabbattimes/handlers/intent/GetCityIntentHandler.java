@@ -51,7 +51,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import org.springframework.stereotype.Component;
 
-/** Intent request handler for handling intent requests with the name {@value GET_CITY} */
+/** Intent request handler for handling intent requests with the name {@value GET_CITY}. */
 @Component
 public final class GetCityIntentHandler implements IntentRequestHandler {
   private final ShabbatAPI shabbatApi;
@@ -60,6 +60,13 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
 
   private final List<String> slotKeys;
 
+  /**
+   * Default contructor.
+   *
+   * @param setShabbatApi the inject shabbat api instance.
+   * @param setLocator the injected locator service provider.
+   * @param setTextor the injected text service provider.
+   */
   public GetCityIntentHandler(
       final ShabbatAPI setShabbatApi,
       final LocatorService setLocator,
@@ -95,7 +102,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
             CITY.toString(), selectedCity.cityName()));
     attribMngr.setSessionAttributes(sessionAttribs);
     // calculate the current or next friday date
-    var shabbatDate = bumpToFriday.apply(request.getTimestamp().toLocalDate());
+    var shabbatDate = bumpToFriday().apply(request.getTimestamp().toLocalDate());
     // build the api request
     var apiRequest = Request.builder().forGeoId(selectedCity.geoId()).withDate(shabbatDate).build();
     // get the response future
@@ -127,9 +134,9 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // construct the start at... and ends at... parts of the prompt
     var startsAtPresentation =
-        textor.getText(requestAttributes, strtAtStmt.apply(currentDateTime.getDayOfWeek()));
+        textor.getText(requestAttributes, strtAtStmt().apply(currentDateTime.getDayOfWeek()));
     var endsAtPresentation =
-        textor.getText(requestAttributes, endAtStmt.apply(currentDateTime.getDayOfWeek()));
+        textor.getText(requestAttributes, endAtStmt().apply(currentDateTime.getDayOfWeek()));
     // construct the output prompt
     var speechOutput =
         String.format(

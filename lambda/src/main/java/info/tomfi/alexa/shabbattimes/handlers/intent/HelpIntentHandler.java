@@ -24,7 +24,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/** Intent request handler for handling intent requests with the name {@value HELP} */
+/** Intent request handler for handling intent requests with the name {@value HELP}. */
 @Component
 public final class HelpIntentHandler implements IntentRequestHandler {
   private final TextService textor;

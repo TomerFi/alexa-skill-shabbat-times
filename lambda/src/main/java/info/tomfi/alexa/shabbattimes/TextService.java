@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /** Service for working with the locales resource bundles. */
 public interface TextService {
   /**
-   * Get a text from the bundle resource by a BundleKey
+   * Get a text from the bundle resource by a BundleKey.
    *
    * @param attributes map storing the resource bundle with the L10N_BUNDLE key.
    * @param key the BundleKey to retrieve from the bundle resource.

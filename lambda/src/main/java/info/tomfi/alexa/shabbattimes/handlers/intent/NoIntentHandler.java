@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/** Intent request handler for handling intent requests with the name {@value NO} */
+/** Intent request handler for handling intent requests with the name {@value NO}. */
 @Component
 public final class NoIntentHandler implements IntentRequestHandler {
   private final List<Country> countries;

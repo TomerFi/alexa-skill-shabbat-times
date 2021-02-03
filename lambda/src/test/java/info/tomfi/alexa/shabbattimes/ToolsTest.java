@@ -54,7 +54,7 @@ final class ToolsTest {
       final String originalDate, final String expectedBumpDate) {
     var requestedDate = LocalDate.parse(originalDate);
     var expectedDate = LocalDate.parse(expectedBumpDate);
-    assertThat(Tools.bumpToFriday.apply(requestedDate)).isEqualTo(expectedDate);
+    assertThat(Tools.bumpToFriday().apply(requestedDate)).isEqualTo(expectedDate);
   }
 
   static Stream<Arguments> test_function_for_bumping_dates_to_the_current_or_next_friday_date() {
@@ -71,7 +71,7 @@ final class ToolsTest {
   @MethodSource
   void test_function_for_preparing_end_of_prompt_statement(
       final DayOfWeek dow, final BundleKey key) {
-    assertThat(Tools.endAtStmt.apply(dow)).isEqualTo(key);
+    assertThat(Tools.endAtStmt().apply(dow)).isEqualTo(key);
   }
 
   static Stream<Arguments> test_function_for_preparing_end_of_prompt_statement() {
@@ -86,7 +86,7 @@ final class ToolsTest {
   @MethodSource
   void test_function_for_preparing_start_of_prompt_statement(
       final DayOfWeek dow, final BundleKey key) {
-    assertThat(Tools.strtAtStmt.apply(dow)).isEqualTo(key);
+    assertThat(Tools.strtAtStmt().apply(dow)).isEqualTo(key);
   }
 
   static Stream<Arguments> test_function_for_preparing_start_of_prompt_statement() {
