@@ -21,10 +21,10 @@
     <property name="acceptOnMatch" value="false"/>
   </module>
 
-  <!--<module name="SuppressionFilter">
+  <module name="SuppressionFilter">
     <property name="file" value="suppressions.xml"/>
     <property name="optional" value="false"/>
-  </module>-->
+  </module>
 
   <module name="FileTabCharacter">
     <property name="eachLine" value="true"/>
@@ -47,7 +47,7 @@
     <!--Sub module start: TreeWalker-->
     <module name="AbbreviationAsWordInName">
       <property name="allowedAbbreviationLength" value="2"/>
-      <property name="allowedAbbreviations" value="SIP,TCP,UDP,CPA,URI,URL,SDP,XML,RTP"/>
+      <property name="allowedAbbreviations" value="SIP,TCP,UDP,BDD,URI,URL,SDP,XML,RTP"/>
     </module>
     <module name="AnnotationLocation">
       <property name="id" value="AnnotationLocationMostCases"/>
@@ -84,10 +84,7 @@
       <message key="name.invalidPattern" value="Class type name ''{0}'' must match pattern ''{1}''."/>
     </module>
     <module name="CommentsIndentation"/>
-    <module name="ConstantName">
-      <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$|^Func_*" />
-      <property name="applyToPrivate" value="false" />
-    </module>
+    <module name="ConstantName" />
     <module name="CustomImportOrder">
       <property name="sortImportsInGroupAlphabetically" value="true"/>
       <property name="separateLineBetweenGroups" value="false"/>
@@ -165,15 +162,13 @@
       <property name="allowUnknownTags" value="true" />
     </module>
     <module name="JavadocVariable">
-      <property name="scope" value="protected"/>
+      <property name="scope" value="public"/>
       <property name="tokens" value="VARIABLE_DEF"/>
       <property name="severity" value="error" />
     </module>
     <module name="LambdaParameterName"/>
     <module name="LeftCurly"/>
-    <module name="LocalFinalVariableName">
-      <property name="format" value="^[a-z][a-zA-Z0-9]*$|^Func_*" />
-    </module>
+    <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName">
       <property name="tokens" value="VARIABLE_DEF"/>
       <property name="format" value="^[a-z]([a-z0-9][a-zA-Z0-9]*)?$"/>

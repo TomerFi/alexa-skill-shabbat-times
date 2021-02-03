@@ -17,6 +17,9 @@ import info.tomfi.alexa.shabbattimes.Country;
 
 /** Custom assertions starting point. */
 public final class BDDAssertions {
+  private BDDAssertions() {
+    //
+  }
 
   public static CityAssert then(final City actual) {
     return new CityAssert(actual);

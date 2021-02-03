@@ -35,7 +35,7 @@ import org.mockito.Mock;
 /** Test cases for the HelpIntentHandler intent request handler. */
 @Tag("unit-tests")
 final class HelpIntentHandlerTest extends IntentHandlerFixtures {
-  @InjectMocks HelpIntentHandler sut;
+  @InjectMocks private HelpIntentHandler sut;
 
   @Test
   void can_handle_should_return_true_for_help_intent_type(@Mock final Intent intent) {

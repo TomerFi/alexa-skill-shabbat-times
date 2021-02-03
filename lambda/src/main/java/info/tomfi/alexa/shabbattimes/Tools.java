@@ -39,38 +39,53 @@ public final class Tools {
     //
   }
 
-  /** Function that consumes LocalDate and supplies a LocalDate of the current or next friday. */
-  public static UnaryOperator<LocalDate> bumpToFriday =
-      d -> {
-        var dow = d.getDayOfWeek();
-        var add =
-            dow.equals(FRIDAY)
-                ? 0
-                : dow.equals(SATURDAY) ? -1 : FRIDAY.minus(dow.getValue()).getValue();
-        return d.plusDays(add);
-      };
+  /**
+   * Get the LocalDate of the current or next friday.
+   *
+   * @return a function that consumes LocalDate and supplies a LocalDate of current or next friday.
+   */
+  public static UnaryOperator<LocalDate> bumpToFriday() {
+    return d -> {
+      var dow = d.getDayOfWeek();
+      var add =
+          dow.equals(FRIDAY)
+              ? 0
+              : dow.equals(SATURDAY) ? -1 : FRIDAY.minus(dow.getValue()).getValue();
+      return d.plusDays(add);
+    };
+  }
 
-  /** Function that consumes a DOW and suplies the bundle key for ending the info statement. */
-  public static Function<DayOfWeek, BundleKey> endAtStmt =
-      d ->
-          d.equals(FRIDAY)
-              ? SHABBAT_END_TOMORROW
-              : d.equals(SATURDAY) ? SHABBAT_END_TODAY : SHABBAT_END_SATURDAY;
+  /**
+   * Get the bundle key for the end of the information meesage based on a day of the week.
+   *
+   * @return a function that consumes a DOW and supplies a bundle key for ending the info sttmnt.
+   */
+  public static Function<DayOfWeek, BundleKey> endAtStmt() {
+    return d ->
+        d.equals(FRIDAY)
+            ? SHABBAT_END_TOMORROW
+            : d.equals(SATURDAY) ? SHABBAT_END_TODAY : SHABBAT_END_SATURDAY;
+  }
 
-  /** Function that consumes a DOW and suplies the bundle key for starting the info statement. */
-  public static Function<DayOfWeek, BundleKey> strtAtStmt =
-      d ->
-          d.equals(THURSDAY)
-              ? SHABBAT_START_TOMORROW
-              : d.equals(FRIDAY)
-                  ? SHABBAT_START_TODAY
-                  : d.equals(SATURDAY) ? SHABBAT_START_YESTERDAY : SHABBAT_START_FRIDAY;
+  /**
+   * Get the bundle key for the start of the information meesage based on a day of the week.
+   *
+   * @return a function that consumes a DOW and supplies a bundle key for starting the info sttmnt.
+   */
+  public static Function<DayOfWeek, BundleKey> strtAtStmt() {
+    return d ->
+        d.equals(THURSDAY)
+            ? SHABBAT_START_TOMORROW
+            : d.equals(FRIDAY)
+                ? SHABBAT_START_TODAY
+                : d.equals(SATURDAY) ? SHABBAT_START_YESTERDAY : SHABBAT_START_FRIDAY;
+  }
 
   /**
    * Find a slot with a non-null non-blank value giving that its key is listed in keys argument.
    *
    * @param keys list of keys to compare the slot key to.
-   * @return the slot with a key that exists in the list and a non-null non-blank value.
+   * @return a function supplying the slot with a key from the list and a non-null non-blank value.
    */
   public static Function<Map<String, Slot>, Slot> findCitySlot(final List<String> keys) {
     return m -> {

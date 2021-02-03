@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/** Intent request handler for handling intent requests with the name {@value COUNTRY_SELECTED} */
+/** Intent request handler for handling intent requests with the name {@value COUNTRY_SELECTED}. */
 @Component
 public final class CountrySelectedIntentHandler implements IntentRequestHandler {
   private final TextService textor;

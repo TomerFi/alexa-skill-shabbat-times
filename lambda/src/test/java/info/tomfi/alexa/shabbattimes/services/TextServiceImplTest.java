@@ -44,7 +44,7 @@ final class TextServiceImplTest {
   }
 
   @Test
-  void extract_resource_from_bundle_in_attributes(@Mock ResourceBundle resource) {
+  void extract_resource_from_bundle_in_attributes(@Mock final ResourceBundle resource) {
     // create request attributes with mock bundled resource
     var attribs = Map.of(L10N_BUNDLE.toString(), (Object) resource);
     // create random bundle key and value, and mock resource with it

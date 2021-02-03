@@ -39,6 +39,7 @@ public class HandlerFixtures {
   private final Map<String, Object> requestAttribs;
   private final ResourceBundle bundle;
 
+  /** Default contructor loads testing resource bundle into testing request attributes. */
   public HandlerFixtures() {
     // load bundle resource for text phrases
     bundle = ResourceBundle.getBundle("locales/Responses", new Locale("te_ST"));
@@ -56,6 +57,12 @@ public class HandlerFixtures {
         .thenAnswer(inv -> getText(inv.getArgument(1)));
   }
 
+  /**
+   * Helper method for short-circuting the text service and retrieving values from resource bundles.
+   *
+   * @param key the bundle key to look for.
+   * @return the the value for the key.
+   */
   protected String getText(final BundleKey key) {
     return bundle.getString(key.toString());
   }

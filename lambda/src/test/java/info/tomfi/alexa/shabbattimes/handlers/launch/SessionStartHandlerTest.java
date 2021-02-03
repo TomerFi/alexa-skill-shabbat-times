@@ -41,9 +41,7 @@ final class SessionStartHandlerTest extends HandlerFixtures {
 
   @Test
   void invoking_the_handler_should_return_a_welcome_follow_up(
-      @Mock final ResponseBuilder builder,
-      @Mock final LaunchRequest request,
-      @Mock final Response response) {
+      @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withSpeech(getText(WELCOME_SPEECH))).willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);

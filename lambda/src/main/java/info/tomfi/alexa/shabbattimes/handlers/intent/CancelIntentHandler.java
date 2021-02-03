@@ -23,7 +23,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.Optional;
 import org.springframework.stereotype.Component;
 
-/** Intent request handler for handling intent requests with the name {@value CANCEL} */
+/** Intent request handler for handling intent requests with the name {@value CANCEL}. */
 @Component
 public final class CancelIntentHandler implements IntentRequestHandler {
   private final TextService textor;

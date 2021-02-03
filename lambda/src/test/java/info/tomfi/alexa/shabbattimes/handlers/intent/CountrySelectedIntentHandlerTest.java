@@ -54,7 +54,7 @@ final class CountrySelectedIntentHandlerTest extends IntentHandlerFixtures {
   private CountrySelectedIntentHandler sut;
 
   @BeforeEach
-  void initialize(@Mock Country country2) {
+  void initialize(@Mock final Country country2) {
     faker = new Faker();
     country1Utterance = faker.lorem().word();
     var country2Utterance = faker.lorem().word();

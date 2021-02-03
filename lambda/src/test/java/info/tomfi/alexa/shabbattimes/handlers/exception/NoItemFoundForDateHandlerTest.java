@@ -38,8 +38,7 @@ final class NoItemFoundForDateHandlerTest extends HandlerFixtures {
   }
 
   @Test
-  void
-      can_handle_should_return_false_for_exception_other_then_of_no_item_found_for_date_exception() {
+  void can_handle_should_return_false_for_exception_other_then_of_no_item_found_for_date() {
     assertThat(sut.canHandle(input, new Throwable())).isFalse();
   }
 
