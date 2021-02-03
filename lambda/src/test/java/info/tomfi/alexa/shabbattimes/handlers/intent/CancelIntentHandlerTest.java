@@ -19,10 +19,11 @@ import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 import static org.mockito.BDDMockito.given;
 
 import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import info.tomfi.alexa.shabbattimes.IntentType;
-import info.tomfi.alexa.shabbattimes.handlers.IntentHandlerFixtures;
+import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.Optional;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,8 @@ import org.mockito.Mock;
 
 /** Test cases for the CancelIntentHandler intent request handler. */
 @Tag("unit-tests")
-final class CancelIntentHandlerTest extends IntentHandlerFixtures {
+final class CancelIntentHandlerTest extends HandlerFixtures {
+  @Mock private IntentRequest request;
   @InjectMocks private CancelIntentHandler sut;
 
   @Test

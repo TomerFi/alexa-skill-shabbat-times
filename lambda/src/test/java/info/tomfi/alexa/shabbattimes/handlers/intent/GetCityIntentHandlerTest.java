@@ -33,6 +33,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 import com.github.javafaker.Faker;
@@ -44,7 +45,7 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponse;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
-import info.tomfi.alexa.shabbattimes.handlers.IntentHandlerFixtures;
+import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import info.tomfi.hebcal.shabbat.ShabbatAPI;
 import info.tomfi.hebcal.shabbat.request.FlagState;
 import info.tomfi.hebcal.shabbat.request.GeoType;
@@ -72,7 +73,8 @@ import org.mockito.Mock;
 
 /** Test cases for the GetCityIntentHandler intent request handler. */
 @Tag("unit-tests")
-final class GetCityIntentHandlerTest extends IntentHandlerFixtures {
+final class GetCityIntentHandlerTest extends HandlerFixtures {
+  @Mock private IntentRequest request;
   @Mock private Intent intent;
   @Mock private ShabbatAPI sapi;
   @Mock private LocatorService locator;

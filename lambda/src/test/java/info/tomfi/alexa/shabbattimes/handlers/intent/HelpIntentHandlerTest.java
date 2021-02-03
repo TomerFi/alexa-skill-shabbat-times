@@ -20,10 +20,11 @@ import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 import static org.mockito.BDDMockito.given;
 
 import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import info.tomfi.alexa.shabbattimes.IntentType;
-import info.tomfi.alexa.shabbattimes.handlers.IntentHandlerFixtures;
+import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.Optional;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,8 @@ import org.mockito.Mock;
 
 /** Test cases for the HelpIntentHandler intent request handler. */
 @Tag("unit-tests")
-final class HelpIntentHandlerTest extends IntentHandlerFixtures {
+final class HelpIntentHandlerTest extends HandlerFixtures {
+  @Mock private IntentRequest request;
   @InjectMocks private HelpIntentHandler sut;
 
   @Test

@@ -25,11 +25,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import info.tomfi.alexa.shabbattimes.Country;
 import info.tomfi.alexa.shabbattimes.IntentType;
-import info.tomfi.alexa.shabbattimes.handlers.IntentHandlerFixtures;
+import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,8 @@ import org.mockito.Mock;
 
 /** Test cases for the NoIntentHandler intent request handler. */
 @Tag("unit-tests")
-final class NoIntentHandlerTest extends IntentHandlerFixtures {
+final class NoIntentHandlerTest extends HandlerFixtures {
+  @Mock private IntentRequest request;
   private static final String COUNTRY1_TST_ABBR = "IL";
   private static final String COUNTRY2_TST_ABBR = "US";
   private static final String UNKNOWN_COUNTRY_TST_ABBR = "GB";
