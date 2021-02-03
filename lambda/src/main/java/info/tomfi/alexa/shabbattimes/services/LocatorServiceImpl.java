@@ -34,6 +34,11 @@ public final class LocatorServiceImpl implements LocatorService {
   }
 
   @Override
+  public City locate(final Slot citySlot) {
+    return locateCity(citySlot.getValue());
+  }
+
+  @Override
   public City locate(final Slot countrySlot, final Slot citySlot) {
     return isNull(countrySlot.getValue())
         ? locateCity(citySlot.getValue())

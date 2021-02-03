@@ -15,5 +15,7 @@ package info.tomfi.alexa.shabbattimes;
 import com.amazon.ask.model.Slot;
 
 public interface LocatorService {
+  City locate(Slot citySlot);
+
   City locate(Slot countrySlot, Slot citySlot);
 }

@@ -33,8 +33,7 @@ final class NoResponseFromApiHandlerTest extends HandlerFixtures {
 
   @Test
   void can_handle_should_return_true_only_for_instances_of_no_response_from_api_exception() {
-    assertThat(sut.canHandle(input, new NoResponseFromApiException("some string", new Throwable())))
-        .isTrue();
+    assertThat(sut.canHandle(input, new NoResponseFromApiException(new Throwable()))).isTrue();
   }
 
   @Test
