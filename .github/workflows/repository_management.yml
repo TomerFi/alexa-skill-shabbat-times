@@ -4,7 +4,7 @@ name: Repository management
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   sync-labels:
