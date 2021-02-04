@@ -34,7 +34,7 @@ public final class SessionStartHandler implements LaunchRequestHandler {
 
   @Override
   public boolean canHandle(final HandlerInput input, final LaunchRequest request) {
-    return Boolean.TRUE;
+    return true;
   }
 
   @Override

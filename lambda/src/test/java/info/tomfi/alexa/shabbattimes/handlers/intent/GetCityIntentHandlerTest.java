@@ -31,6 +31,7 @@ import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 
 import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
@@ -160,6 +161,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     thenExceptionOfType(NoResponseFromApiException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
@@ -200,6 +207,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     thenExceptionOfType(NoResponseFromApiException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
@@ -243,6 +256,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     thenExceptionOfType(NoItemsInResponseException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
@@ -288,6 +307,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     thenExceptionOfType(NoItemFoundForDateException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
@@ -336,6 +361,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     thenExceptionOfType(NoItemFoundForDateException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
@@ -425,6 +456,12 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     // verify the mocked response return
     then(handlerResponse).isNotEmpty().hasValue(skillResponse);
     // verify city information saved as session attributes
+    verify(attribMngr)
+        .setSessionAttributes(
+            argThat(
+                m ->
+                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
+                        && m.get(CITY.toString()).equals(cityName)));
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }

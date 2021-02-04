@@ -75,4 +75,20 @@ final class CountryTest {
     assertThat(country.hasUtterance("utter1")).isTrue();
     assertThat(country.hasUtterance("utter3")).isFalse();
   }
+
+  @Test
+  void value_country_to_string_implementation_should_yield_non_empty_string(
+      @Mock final City mockCity1, @Mock final City mockCity2) {
+    // create a country pojo
+    var country =
+        Country.builder()
+            .abbreviation("AB")
+            .cities(List.of(mockCity1, mockCity2))
+            .name("name")
+            .bundleKey(BundleKey.NOT_FOUND_IN_ISRAEL)
+            .utterances(List.of("utter1", "utter2"))
+            .build();
+    // verify toString implementation
+    assertThat(country.toString()).isNotBlank();
+  }
 }

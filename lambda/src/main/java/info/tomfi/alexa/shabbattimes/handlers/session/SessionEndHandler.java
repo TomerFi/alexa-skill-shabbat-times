@@ -28,7 +28,7 @@ public final class SessionEndHandler implements SessionEndedRequestHandler {
 
   @Override
   public boolean canHandle(final HandlerInput input, final SessionEndedRequest request) {
-    return Boolean.TRUE;
+    return true;
   }
 
   @Override

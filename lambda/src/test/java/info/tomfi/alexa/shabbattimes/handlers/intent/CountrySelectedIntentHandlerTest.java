@@ -20,8 +20,10 @@ import static info.tomfi.alexa.shabbattimes.SlotName.COUNTRY_SLOT;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenExceptionOfType;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
+import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.when;
+import static org.mockito.Mockito.verify;
 
 import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
@@ -151,6 +153,8 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
     // verify the mocked response return
     then(resp).isNotEmpty().hasValue(response);
     // verify the selected country abbrivation is saved as a session attribute
+    verify(attribMngr)
+        .setSessionAttributes(argThat(m -> m.get(COUNTRY.toString()).equals(abbreviation)));
     then(sessionAttribs).hasSize(1).containsKey(COUNTRY.toString()).containsValue(abbreviation);
   }
 }

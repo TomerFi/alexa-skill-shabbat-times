@@ -48,6 +48,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 /** Test cases for the static tool in Tools class. */
 @Tag("unit-tests")
 final class ToolsTest {
+  @Test
+  void instantiation_of_the_utility_class_using_the_default_ctor_throws_illegal_access_exception() {
+    thenExceptionOfType(IllegalAccessException.class)
+        .isThrownBy(() -> Tools.class.getDeclaredConstructor().newInstance());
+  }
+
   @ParameterizedTest
   @MethodSource
   void test_function_for_bumping_dates_to_the_current_or_next_friday_date(
