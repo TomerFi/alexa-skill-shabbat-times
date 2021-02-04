@@ -155,7 +155,7 @@ final class LocatorServiceImplTest {
     given(country1.hasUtterance(anyString())).willCallRealMethod();
     // stub the country slot with a correct country utterence
     given(countrySlot.getValue()).willReturn(country1Utterence);
-    // stub the city name with a diffrent city name then the one requested
+    // stub the city name with a different city name then the one requested
     given(city1.cityName()).willReturn(faker.lorem().word());
     // when trying to locate the city NoCityInCountryException is thrown
     thenExceptionOfType(NoCityInCountryException.class)

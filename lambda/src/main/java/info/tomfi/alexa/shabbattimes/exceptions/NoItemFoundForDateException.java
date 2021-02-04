@@ -14,7 +14,7 @@ package info.tomfi.alexa.shabbattimes.exceptions;
 
 import com.amazon.ask.exception.AskSdkException;
 
-/** Exception to throw when no appropriate respone items were found for the requested date. */
+/** Exception to throw when no appropriate response items were found for the requested date. */
 public final class NoItemFoundForDateException extends AskSdkException {
   private static final long serialVersionUID = 26L;
 
