@@ -39,7 +39,7 @@ import info.tomfi.alexa.shabbattimes.LocatorService;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
 import info.tomfi.alexa.shabbattimes.TextService;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponse;
+import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponseException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import info.tomfi.hebcal.shabbat.ShabbatAPI;
 import info.tomfi.hebcal.shabbat.request.Request;
@@ -117,7 +117,10 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     // get candles and havdalah items from response items
     var items =
         extractAndSort(
-            response.items().orElseThrow(NoItemsInResponse::new), byItemDate(), CANDLES, HAVDALAH);
+            response.items().orElseThrow(NoItemsInResponseException::new),
+            byItemDate(),
+            CANDLES,
+            HAVDALAH);
     // calculate the current and the shabbat start and end date and time
     var currentDateTime = request.getTimestamp().toZonedDateTime();
     var shabbatStartDateTime =
