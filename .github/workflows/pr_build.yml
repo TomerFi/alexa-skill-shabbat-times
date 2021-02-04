@@ -72,10 +72,9 @@ jobs:
 
       - name: Upload coverage report as artifact
         uses: actions/upload-artifact@v2.2.1
-        working-directory: ./lambda
         with:
           name: coverage-report
-          path: target/site/jacoco/jacoco.xml
+          path: ./lambda/target/site/jacoco/jacoco.xml
 
   coverage:
     runs-on: ubuntu-latest
