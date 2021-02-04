@@ -4,7 +4,7 @@ name: Pull request review
 on:
   pull_request_review:
     branches:
-      - dev
+      - master
     types: [submitted, edited]
 
 jobs:

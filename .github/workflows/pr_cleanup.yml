@@ -4,7 +4,7 @@ name: Pull request cleanup
 on:
   pull_request:
     branches:
-      - dev
+      - master
     types: [closed]
 
 jobs:
