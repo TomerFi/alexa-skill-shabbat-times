@@ -2,7 +2,7 @@
 # Alexa Shabbat Times Skill</br>[![gh-build-status]][0] [![codecov-coverage]][1] [![conventional-commits]][2]
 <!-- markdownlint-enable MD013 -->
 
-[![SkillPng](img/shabbat_times_108.png)][3]
+[![SkillPng](skill-package/assets/images/en-US_smallIconUri.png)][3]
 
 Alexa skill that can tell the Shabbat start and end times for various cities in various countries.
 
