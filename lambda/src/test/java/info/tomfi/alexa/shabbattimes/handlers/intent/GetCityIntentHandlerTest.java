@@ -43,7 +43,7 @@ import info.tomfi.alexa.shabbattimes.LocatorService;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponse;
+import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponseException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
 import info.tomfi.hebcal.shabbat.ShabbatAPI;
@@ -240,7 +240,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     future.complete(apiResponse);
     given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
     // when invoking the handler verify exception is thrown
-    thenExceptionOfType(NoItemsInResponse.class).isThrownBy(() -> sut.handle(input, request));
+    thenExceptionOfType(NoItemsInResponseException.class)
+        .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
     then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));

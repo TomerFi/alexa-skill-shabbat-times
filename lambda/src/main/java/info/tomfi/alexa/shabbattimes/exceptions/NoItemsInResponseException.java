@@ -15,11 +15,10 @@ package info.tomfi.alexa.shabbattimes.exceptions;
 import com.amazon.ask.exception.AskSdkException;
 
 /** Exception to throw when no appropriate respone items were found for the requested date. */
-// TODO: add exception handler
-public final class NoItemsInResponse extends AskSdkException {
+public final class NoItemsInResponseException extends AskSdkException {
   private static final long serialVersionUID = 16L;
 
-  public NoItemsInResponse() {
+  public NoItemsInResponseException() {
     super("api response does not contains any response items");
   }
 }
