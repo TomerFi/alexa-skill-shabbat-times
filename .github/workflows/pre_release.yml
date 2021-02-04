@@ -27,9 +27,9 @@ jobs:
         with:
           java-version: 11
 
-      - name: Verify coverage and create report
+      - name: Create coverage report
         working-directory: ./lambda
-        run: mvn jacoco:check jacoco:report -B -ff
+        run: mvn jacoco:report -B -ff
 
       - name: Create release
         uses: marvinpinto/action-automatic-releases@latest
@@ -41,9 +41,8 @@ jobs:
 
       - name: Push to CodeCov
         uses: codecov/codecov-action@v1.1.1
-        working-directory: ./lambda
         with:
-          file: target/site/jacoco/jacoco.xml
+          file: lambda/target/site/jacoco/jacoco.xml
           flags: unittests
           name: shabbat-times-codecov
           fail_ci_if_error: true
