@@ -412,7 +412,11 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
             builder.withSimpleCard(
                 String.format(getText(SIMPLE_CARD_TITLE_FMT), cityGeoName),
                 String.format(
-                    getText(SIMPLE_CARD_CONTENT_FMT), fridayTimestamp.toLocalDate().toString())))
+                    getText(SIMPLE_CARD_CONTENT_FMT),
+                    "2019-10-04",
+                    "18:04",
+                    "2019-10-05",
+                    "19:11")))
         .willReturn(builder);
     given(builder.build()).willReturn(Optional.of(skillResponse));
     given(input.getResponseBuilder()).willReturn(builder);
