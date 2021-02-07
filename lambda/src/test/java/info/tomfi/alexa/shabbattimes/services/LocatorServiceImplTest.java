@@ -53,7 +53,7 @@ final class LocatorServiceImplTest {
   void initialize() {
     faker = new Faker();
     // configure city slot to return a fake city alias
-    reqCityAlias = faker.lorem().word();
+    reqCityAlias = faker.country().capital();
     when(citySlot.getValue()).thenReturn(reqCityAlias);
     // stub country 1
     when(country1.cities()).thenReturn(List.of(city1));
@@ -97,8 +97,8 @@ final class LocatorServiceImplTest {
     // stub the country slot as null to locate without stating a country
     given(countrySlot.getValue()).willReturn(null);
     // stub cities with name other then the alias requested
-    given(city1.cityName()).willReturn(faker.lorem().word());
-    given(city2.cityName()).willReturn(faker.lorem().word());
+    given(city1.cityName()).willReturn(faker.country().capital());
+    given(city2.cityName()).willReturn(faker.country().capital());
     // when trying to locate the city NoCityFoundException is thrown
     thenExceptionOfType(NoCityFoundException.class).isThrownBy(() -> sut.locate(citySlot));
   }
@@ -108,8 +108,8 @@ final class LocatorServiceImplTest {
     // stub the country slot as null to locate without stating a country
     given(countrySlot.getValue()).willReturn(null);
     // stub cities with name other then the alias requested
-    given(city1.cityName()).willReturn(faker.lorem().word());
-    given(city2.cityName()).willReturn(faker.lorem().word());
+    given(city1.cityName()).willReturn(faker.country().capital());
+    given(city2.cityName()).willReturn(faker.country().capital());
     // when trying to locate the city NoCityFoundException is thrown
     thenExceptionOfType(NoCityFoundException.class)
         .isThrownBy(() -> sut.locate(countrySlot, citySlot));
@@ -156,7 +156,7 @@ final class LocatorServiceImplTest {
     // stub the country slot with a correct country utterence
     given(countrySlot.getValue()).willReturn(country1Utterence);
     // stub the city name with a different city name then the one requested
-    given(city1.cityName()).willReturn(faker.lorem().word());
+    given(city1.cityName()).willReturn(faker.country().capital());
     // when trying to locate the city NoCityInCountryException is thrown
     thenExceptionOfType(NoCityInCountryException.class)
         .isThrownBy(() -> sut.locate(countrySlot, citySlot));
@@ -168,7 +168,7 @@ final class LocatorServiceImplTest {
     given(country1.utterances()).willReturn(List.of(faker.lorem().word()));
     given(country1.hasUtterance(anyString())).willCallRealMethod();
     // stub the country slot with a different country utterence
-    given(countrySlot.getValue()).willReturn(faker.lorem().word());
+    given(countrySlot.getValue()).willReturn(faker.country().capital());
     // when trying to locate the city NoCountryFoundException is thrown
     thenExceptionOfType(NoCountryFoundException.class)
         .isThrownBy(() -> sut.locate(countrySlot, citySlot));
