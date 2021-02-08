@@ -70,7 +70,7 @@ final class ToolsTest {
         arguments("2019-09-30", "2019-10-04"), // monday return next friday
         arguments("2019-10-01", "2019-10-04"), // tuesday return next friday
         arguments("2019-10-02", "2019-10-04"), // wednesday return next friday
-        arguments("2019-10-03", "2019-10-04"), // thursday return next friday (tommorow)
+        arguments("2019-10-03", "2019-10-04"), // thursday return next friday (tomorrow)
         arguments("2019-10-04", "2019-10-04"), // friday return today
         arguments("2019-10-05", "2019-10-04"), // saturday returns previous friday (yesterday)
         arguments("2019-10-06", "2019-10-11")); // sunday return next friday
