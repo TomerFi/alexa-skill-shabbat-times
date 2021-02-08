@@ -18,7 +18,6 @@ import static nl.jqno.equalsverifier.Warning.NULL_FIELDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-
 import com.github.javafaker.Faker;
 import java.util.List;
 import nl.jqno.equalsverifier.EqualsVerifier;
