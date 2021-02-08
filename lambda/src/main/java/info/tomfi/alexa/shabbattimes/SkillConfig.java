@@ -57,7 +57,7 @@ public class SkillConfig {
    * @return the Skill instance.
    */
   @Bean
-  public Skill getSkill(
+  Skill getSkill(
       final List<GenericRequestHandler<HandlerInput, Optional<Response>>> requestHandlers,
       final List<GenericExceptionHandler<HandlerInput, Optional<Response>>> exceptionHandlers,
       final List<GenericRequestInterceptor<HandlerInput>> requestInterceptors,
@@ -77,7 +77,7 @@ public class SkillConfig {
    * @return the service provider instance.
    */
   @Bean
-  public ShabbatAPI getShabbatAPI() {
+  ShabbatAPI getShabbatAPI() {
     return ServiceLoader.load(ShabbatAPI.class).stream().findFirst().get().get();
   }
 }

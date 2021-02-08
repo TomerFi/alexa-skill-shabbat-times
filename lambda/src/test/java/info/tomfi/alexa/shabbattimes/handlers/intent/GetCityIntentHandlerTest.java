@@ -133,8 +133,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
   void invoking_handler_with_city_slot_api_fail_throws_no_response_from_api_exception(
       final CitySlot slotName, @Mock final Slot citySlot, @Mock final City city) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
@@ -179,8 +179,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final City city,
       @Mock final Slot countrySlot) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
@@ -226,8 +226,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final Slot countrySlot,
       @Mock final Response apiResponse) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
@@ -276,8 +276,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final Response apiResponse,
       @Mock final ResponseItem holidayItem) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
@@ -328,8 +328,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final ResponseItem holidayItem,
       @Mock final ResponseItem candlesItem) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
@@ -387,8 +387,8 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final ResponseBuilder builder,
       @Mock final com.amazon.ask.model.Response skillResponse) {
     // stub city mock
-    var countryAbbreviation = faker.lorem().characters(2);
-    var cityName = faker.lorem().word();
+    var countryAbbreviation = faker.country().countryCode2();
+    var cityName = faker.country().capital();
     var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
     var cityGeoName = faker.lorem().word();
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);

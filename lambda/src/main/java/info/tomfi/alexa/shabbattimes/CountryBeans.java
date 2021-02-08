@@ -35,7 +35,7 @@ public class CountryBeans {
    * @return the Country instance.
    */
   @Bean("IL")
-  public Country getIsrael() {
+  Country getIsrael() {
     return Country.builder()
         .abbreviation("IL")
         .name("Israel")
@@ -51,7 +51,7 @@ public class CountryBeans {
    * @return the Country instance.
    */
   @Bean("US")
-  public Country getUnitedStates() {
+  Country getUnitedStates() {
     return Country.builder()
         .abbreviation("US")
         .name("the United States")
@@ -67,7 +67,7 @@ public class CountryBeans {
    * @return the Country instance.
    */
   @Bean("GB")
-  public Country getGreatBritain() {
+  Country getGreatBritain() {
     return Country.builder()
         .abbreviation("GB")
         .name("the United Kingdom")
