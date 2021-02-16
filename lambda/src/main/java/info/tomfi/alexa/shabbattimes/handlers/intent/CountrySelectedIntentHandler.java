@@ -60,7 +60,7 @@ public final class CountrySelectedIntentHandler implements IntentRequestHandler 
     // get the country object
     var country =
         countries.stream()
-            .filter(c -> c.hasUtterance(countrySlot.getValue()))
+            .filter(c -> c.hasUtterance(countrySlot.getValue().toLowerCase()))
             .findFirst()
             .orElseThrow(NoCountryFoundException::new);
     // save country abbreviation to session attributes

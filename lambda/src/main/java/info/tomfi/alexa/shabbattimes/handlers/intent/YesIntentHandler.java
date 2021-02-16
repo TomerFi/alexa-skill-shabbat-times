@@ -12,8 +12,11 @@
  */
 package info.tomfi.alexa.shabbattimes.handlers.intent;
 
+import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ASK_FOR_CITY;
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_PLEASE_CLARIFY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
+import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
 import static info.tomfi.alexa.shabbattimes.IntentType.YES;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -40,15 +43,20 @@ public final class YesIntentHandler implements IntentRequestHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
-    // get request attributes
-    var attributes = input.getAttributesManager().getRequestAttributes();
-    // the user reply yes to the question `was you city on the list?`
-    // return follow up for city name and don't end the interaction
-    return input
-        .getResponseBuilder()
-        .withSpeech(textor.getText(attributes, DEFAULT_ASK_FOR_CITY))
-        .withReprompt(textor.getText(attributes, DEFAULT_REPROMPT))
-        .withShouldEndSession(false)
-        .build();
+    // get attributes
+    var requstAttribs = input.getAttributesManager().getRequestAttributes();
+    var sessionAttribs = input.getAttributesManager().getSessionAttributes();
+    // start builder
+    var respBuilder = input.getResponseBuilder()
+        .withReprompt(textor.getText(requstAttribs, DEFAULT_REPROMPT))
+        .withShouldEndSession(false);
+    if (sessionAttribs.containsKey(LAST_INTENT.toString())
+        && sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())) {
+      // the user reply yes to the question `was you city on the list?`
+      respBuilder.withSpeech(textor.getText(requstAttribs, DEFAULT_ASK_FOR_CITY));
+    } else {
+      respBuilder.withSpeech(textor.getText(requstAttribs, DEFAULT_PLEASE_CLARIFY));
+    }
+    return respBuilder.build();
   }
 }

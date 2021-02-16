@@ -15,8 +15,11 @@ package info.tomfi.alexa.shabbattimes.handlers.intent;
 import static info.tomfi.alexa.shabbattimes.AttributeKey.COUNTRY;
 import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_OK;
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_PLEASE_CLARIFY;
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.NOT_FOUND_FMT;
 import static info.tomfi.alexa.shabbattimes.IntentType.COUNTRY_SELECTED;
+import static info.tomfi.alexa.shabbattimes.IntentType.HELP;
 import static info.tomfi.alexa.shabbattimes.IntentType.NO;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -50,19 +53,35 @@ public final class NoIntentHandler implements IntentRequestHandler {
   public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
     // get session attributes
     var sessionAttribs = input.getAttributesManager().getSessionAttributes();
-    if (sessionAttribs.containsKey(LAST_INTENT.toString())) {
-      // if last intent was country selected intent, the user is replying to:
-      // 'was your city on the list?' after selecting a country
-      if (sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())
-          && sessionAttribs.containsKey(COUNTRY.toString())) {
-        return countrySelectedFollowUp(input, sessionAttribs);
-      }
+    if (!sessionAttribs.containsKey(LAST_INTENT.toString())) {
+      // if the user said no after a launch request
+      return askForClarification(input);
+    } else if (sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())) {
+      // if the user is following up on a country selected intent request
+      return countrySelectedFollowUp(input, sessionAttribs);
+    } else if (sessionAttribs.get(LAST_INTENT.toString()).equals(HELP.toString())) {
+      // if the user is following up on an help intent request
+      return askForClarification(input);
+    } else {
+      return Optional.empty();
     }
-    return Optional.empty();
+  }
+
+  private Optional<Response> askForClarification(final HandlerInput input) {
+    // get request attributes
+    var requestAttribs = input.getAttributesManager().getRequestAttributes();
+    return input.getResponseBuilder()
+        .withSpeech(textor.getText(requestAttribs, DEFAULT_PLEASE_CLARIFY))
+        .withReprompt(textor.getText(requestAttribs, DEFAULT_REPROMPT))
+        .withShouldEndSession(false).build();
   }
 
   private Optional<Response> countrySelectedFollowUp(
       final HandlerInput input, final Map<String, Object> sessionAttribs) {
+    if (!sessionAttribs.containsKey(COUNTRY.toString())) {
+      // TODO: return a better answer here
+      return Optional.empty();
+    }
     // get request attributes
     var requestAttribs = input.getAttributesManager().getRequestAttributes();
     // find the requested country
