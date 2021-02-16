@@ -12,8 +12,12 @@
  */
 package info.tomfi.alexa.shabbattimes.handlers.intent;
 
+import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ASK_FOR_CITY;
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_OK;
+import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_PLEASE_CLARIFY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
+import static info.tomfi.alexa.shabbattimes.IntentType.HELP;
 import static info.tomfi.alexa.shabbattimes.IntentType.STOP;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -40,15 +44,31 @@ public final class StopIntentHandler implements IntentRequestHandler {
 
   @Override
   public Optional<Response> handle(final HandlerInput input, final IntentRequest request) {
-    // get request attributes
-    var attributes = input.getAttributesManager().getRequestAttributes();
-    // stop the user answer for stopping the help informaton prompt
-    // return follow-up and don't end the interaction
-    return input
-        .getResponseBuilder()
-        .withSpeech(textor.getText(attributes, DEFAULT_ASK_FOR_CITY))
-        .withReprompt(textor.getText(attributes, DEFAULT_REPROMPT))
-        .withShouldEndSession(false)
+    // get attributes
+    var reqAttribs = input.getAttributesManager().getRequestAttributes();
+    var sessAttribs = input.getAttributesManager().getSessionAttributes();
+
+    // start builder
+    var respBuilder = input.getResponseBuilder();
+
+    if (!sessAttribs.containsKey(LAST_INTENT.toString())) {
+      // if the user said stop after a launch request
+      respBuilder
+        .withSpeech(textor.getText(reqAttribs, DEFAULT_OK))
+        .withShouldEndSession(true)
         .build();
+    } else if (sessAttribs.get(LAST_INTENT.toString()).equals(HELP)) {
+      // if the user said stop while listenting to the help informative message
+      respBuilder
+          .withSpeech(textor.getText(reqAttribs, DEFAULT_ASK_FOR_CITY))
+          .withReprompt(textor.getText(reqAttribs, DEFAULT_REPROMPT))
+          .withShouldEndSession(false);
+    } else {
+      respBuilder
+          .withSpeech(textor.getText(reqAttribs, DEFAULT_PLEASE_CLARIFY))
+          .withReprompt(textor.getText(reqAttribs, DEFAULT_REPROMPT))
+          .withShouldEndSession(false);
+    }
+    return respBuilder.build();
   }
 }
