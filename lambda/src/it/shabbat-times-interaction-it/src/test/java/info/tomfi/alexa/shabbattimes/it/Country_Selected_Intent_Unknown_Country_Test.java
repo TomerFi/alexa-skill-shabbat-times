@@ -15,7 +15,6 @@ package info.tomfi.alexa.shabbattimes.it;
 import static info.tomfi.alexa.skillstester.SkillsTester.givenSkill;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +23,7 @@ import org.junit.jupiter.api.Test;
 final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractionFixtures {
   @Test
   void following_up_with_a_cancel_intent_request_for_an_unknown_country_should_end_the_interaction()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(
           getResource("requests/country_selected/unknown/country_selected_intent.json"))
@@ -43,7 +42,7 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
 
   @Test
   void following_up_with_a_no_intent_request_for_an_unknown_country_should_end_the_interaction()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(
           getResource("requests/country_selected/unknown/country_selected_intent.json"))
@@ -60,7 +59,7 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
 
   @Test
   void following_up_with_a_stop_intent_request_for_an_unknown_country_should_ask_for_clarification()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(
           getResource("requests/country_selected/unknown/country_selected_intent.json"))
@@ -81,7 +80,7 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
 
   @Test
   void following_up_with_a_thanks_intent_request_for_an_unknown_country_should_wait_for_a_followup()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(
           getResource("requests/country_selected/unknown/country_selected_intent.json"))
@@ -100,7 +99,7 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
 
   @Test
   void following_up_with_a_yes_intent_request_for_an_unknown_country_should_wait_for_a_followup()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(
           getResource("requests/country_selected/unknown/country_selected_intent.json"))

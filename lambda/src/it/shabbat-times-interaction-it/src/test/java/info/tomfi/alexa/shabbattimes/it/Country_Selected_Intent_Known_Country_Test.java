@@ -16,7 +16,6 @@ import static info.tomfi.alexa.skillstester.SkillsTester.givenSkill;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -37,7 +36,7 @@ final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionF
   @ParameterizedTest
   @MethodSource(value = "abbreviation_and_name_arguments_provider")
   void following_up_with_a_cancel_intent_request_for_a_known_country_should_end_the_interaction(
-      final String abbr, final String name) throws IOException, URISyntaxException {
+      final String abbr, final String name) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource(
           "requests/country_selected/" + abbr + "/country_selected_intent.json"))
@@ -55,7 +54,7 @@ final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionF
   @ParameterizedTest
   @MethodSource(value = "abbreviation_and_name_arguments_provider")
   void following_up_with_a_no_intent_request_for_a_known_country_should_end_the_interaction(
-      final String abbr, final String name) throws IOException, URISyntaxException {
+      final String abbr, final String name) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource(
           "requests/country_selected/" + abbr + "/country_selected_intent.json"))
@@ -76,7 +75,7 @@ final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionF
   @ParameterizedTest
   @MethodSource(value = "abbreviation_and_name_arguments_provider")
   void following_up_with_a_stop_intent_request_for_a_known_country_should_ask_for_clarification(
-      final String abbr, final String name) throws IOException, URISyntaxException {
+      final String abbr, final String name) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource(
           "requests/country_selected/" + abbr + "/country_selected_intent.json"))
@@ -96,7 +95,7 @@ final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionF
   @ParameterizedTest
   @MethodSource(value = "abbreviation_and_name_arguments_provider")
   void following_up_with_a_thanks_intent_request_for_a_known_country_should_end_the_interaction(
-      final String abbr, final String name) throws IOException, URISyntaxException {
+      final String abbr, final String name) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource(
           "requests/country_selected/" + abbr + "/country_selected_intent.json"))
@@ -114,7 +113,7 @@ final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionF
   @ParameterizedTest
   @MethodSource(value = "abbreviation_and_name_arguments_provider")
   void following_up_with_a_yes_intent_request_for_a_known_country_should_wait_for_a_followup(
-      final String abbr, final String name) throws IOException, URISyntaxException {
+      final String abbr, final String name) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource(
           "requests/country_selected/" + abbr + "/country_selected_intent.json"))

@@ -15,9 +15,6 @@ package info.tomfi.alexa.shabbattimes.it;
 import com.amazon.ask.Skill;
 import info.tomfi.alexa.shabbattimes.SkillConfig;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -44,11 +41,8 @@ public class SkillInteractionFixtures {
    * @param resource the file path and name to load.
    * @return the reprenstation of the file content in byte array format.
    * @throws IOException if an I/O error occurs reading from the file.
-   * @throws URISyntaxException if this file URL is not formatted correctly.
    */
-  protected byte[] getResource(final String resource) throws IOException, URISyntaxException {
-    //return getClass().getClassLoader().getResourceAsStream(resource).readAllBytes();
-    return Files.readAllBytes(
-      Paths.get(Thread.currentThread().getContextClassLoader().getResource(resource).toURI()));
+  protected byte[] getResource(final String resource) throws IOException {
+    return getClass().getClassLoader().getResourceAsStream(resource).readAllBytes();
   }
 }
