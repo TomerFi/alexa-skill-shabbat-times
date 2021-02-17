@@ -38,6 +38,7 @@
     <maven-deploy-plugin.version>3.0.0-M1</maven-deploy-plugin.version>
     <maven-enforcer-plugin.version>3.0.0-M3</maven-enforcer-plugin.version>
     <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
+    <maven-invoker-plugin.version>3.2.1</maven-invoker-plugin.version>
     <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
     <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
     <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
@@ -72,7 +73,7 @@
   </issueManagement>
 
   <scm>
-    <url>https://github.com/TomerFialexa-skill-shabbat-times</url>
+    <url>https://github.com/TomerFi/alexa-skill-shabbat-times</url>
     <connection>scm:git:https://github.com/TomerFi/alexa-skill-shabbat-times.git</connection>
   </scm>
 
@@ -308,6 +309,10 @@
           <version>${maven-install-plugin.version}</version>
         </plugin>
         <plugin>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${maven-invoker-plugin.version}</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven-jar-plugin.version}</version>
         </plugin>
@@ -334,7 +339,9 @@
               <exclude>**/package-info.java</exclude>
             </excludes>
             <includes>
-              <include>src/**</include>
+              <include>src/main/**</include>
+              <include>src/test/**</include>
+              <include>src/it/**/src/test/**</include>
             </includes>
             <inlineHeader><![CDATA[Copyright Tomer Figenblat.
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -502,7 +509,38 @@ limitations under the License.]]>
       </plugin>
 
     </plugins>
-
   </build>
+
+  <profiles>
+    <profile>
+      <!-- Use this profile to run integration tests. -->
+      <id>integration-tests</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-invoker-plugin</artifactId>
+            <configuration>
+              <cloneProjectsTo>${project.build.directory}/it</cloneProjectsTo>
+              <localRepositoryPath>${project.build.directory}/local-it-repo</localRepositoryPath>
+              <goals>
+                <goal>test</goal>
+              </goals>
+              <settingsFile>src/it/settings.xml</settingsFile>
+              <showErrors>true</showErrors>
+            </configuration>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>install</goal>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 
 </project>
