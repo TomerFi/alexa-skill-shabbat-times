@@ -1,0 +1,34 @@
+{
+	"version": "1.0",
+	"session": {
+		"new": false
+	},
+	"context": {
+		"System": {}
+	},
+	"request": {
+		"type": "IntentRequest",
+		"requestId": "amzn1.echo-api.request.fake-request-id",
+		"timestamp": "2019-10-04T10:20:30Z",
+		"locale": "en-US",
+		"intent": {
+			"name": "GetCityIntent",
+			"slots": {
+				"Country": {
+					"name": "Country",
+					"value": "israel"
+				},
+				"City_US": {
+					"name": "City_US"
+				},
+				"City_GB": {
+					"name": "City_GB"
+				},
+				"City_IL": {
+					"name": "City_IL",
+					"value": "jerusalem"
+				}
+			}
+		}
+	}
+}
