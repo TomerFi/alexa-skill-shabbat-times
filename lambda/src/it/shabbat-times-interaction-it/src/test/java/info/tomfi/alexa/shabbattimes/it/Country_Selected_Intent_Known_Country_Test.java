@@ -23,6 +23,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+/** Integration test cases for retrieving information about a specific known country. */
 @Tag("integration-tests")
 final class Country_Selected_Intent_Known_Country_Test extends SkillInteractionFixtures {
   static Stream<Arguments> abbreviation_and_name_arguments_provider() {

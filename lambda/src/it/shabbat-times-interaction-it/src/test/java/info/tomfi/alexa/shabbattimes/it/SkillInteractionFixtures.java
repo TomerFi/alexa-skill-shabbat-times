@@ -18,11 +18,11 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+/** Integration test fixtures to use for the various interaction test cases. */
 public class SkillInteractionFixtures {
   private AnnotationConfigApplicationContext context;
   protected Skill sut;
@@ -38,8 +38,17 @@ public class SkillInteractionFixtures {
     context.close();
   }
 
+  /**
+   * Utility method for loading a resource file and byte array. Used to load the json request files.
+   *
+   * @param resource the file path and name to load.
+   * @return the reprenstation of the file content in byte array format.
+   * @throws IOException if an I/O error occurs reading from the file.
+   * @throws URISyntaxException if this file URL is not formatted correctly.
+   */
   protected byte[] getResource(final String resource) throws IOException, URISyntaxException {
     //return getClass().getClassLoader().getResourceAsStream(resource).readAllBytes();
-    return Files.readAllBytes(Paths.get(Thread.currentThread().getContextClassLoader().getResource(resource).toURI()));
+    return Files.readAllBytes(
+      Paths.get(Thread.currentThread().getContextClassLoader().getResource(resource).toURI()));
   }
 }

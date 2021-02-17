@@ -4,4 +4,6 @@
 <suppressions>
   <suppress files=".*[/\\]test[/\\]" checks="JavadocPackage"/>
   <suppress files="info[\\/]tomfi[\\/]alexa[\\/]shabbattimes[\\/]assertions" checks="MissingJavadocMethod"/>
+  <suppress files=".*[/\\]src[\\/]it[\\/].*[\\/]src[\\/]test[/\\]" checks="JavadocPackage"/>
+  <suppress files=".*[/\\]src[\\/]it[\\/].*[\\/]src[\\/]test[/\\]" checks="TypeName"/>
 </suppressions>
