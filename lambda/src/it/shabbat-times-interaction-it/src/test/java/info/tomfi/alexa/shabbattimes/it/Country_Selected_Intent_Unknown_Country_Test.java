@@ -19,14 +19,15 @@ import java.net.URISyntaxException;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/** Integration test cases for retrieving information about an unknown country. */
 @Tag("integration-tests")
 final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractionFixtures {
   @Test
   void following_up_with_a_cancel_intent_request_for_an_unknown_country_should_end_the_interaction()
       throws IOException, URISyntaxException {
     givenSkill(sut)
-        .whenRequestIs(getResource(
-          "requests/country_selected/unknown/country_selected_intent.json"))
+        .whenRequestIs(
+          getResource("requests/country_selected/unknown/country_selected_intent.json"))
         .thenResponseShould()
           .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. The only countries I know are the United States, "
@@ -44,7 +45,8 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
   void following_up_with_a_no_intent_request_for_an_unknown_country_should_end_the_interaction()
       throws IOException, URISyntaxException {
     givenSkill(sut)
-        .whenRequestIs(getResource("requests/country_selected/unknown/country_selected_intent.json"))
+        .whenRequestIs(
+          getResource("requests/country_selected/unknown/country_selected_intent.json"))
         .thenResponseShould()
             .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. The only countries I know are the United States, "
@@ -60,7 +62,8 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
   void following_up_with_a_stop_intent_request_for_an_unknown_country_should_ask_for_clarification()
       throws IOException, URISyntaxException {
     givenSkill(sut)
-        .whenRequestIs(getResource("requests/country_selected/unknown/country_selected_intent.json"))
+        .whenRequestIs(
+          getResource("requests/country_selected/unknown/country_selected_intent.json"))
         .thenResponseShould()
             .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. The only countries I know are the United States, "
@@ -74,13 +77,14 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
             .haveOutputSpeechOf("Hmmm... I'm not sure I understand.")
             .haveRepromptSpeechOf("Please tell me the requested city name. "
                 + "For a list of all the possible city names, just ask me for help.");
-      }
+  }
 
   @Test
   void following_up_with_a_thanks_intent_request_for_an_unknown_country_should_wait_for_a_followup()
       throws IOException, URISyntaxException {
     givenSkill(sut)
-        .whenRequestIs(getResource("requests/country_selected/unknown/country_selected_intent.json"))
+        .whenRequestIs(
+          getResource("requests/country_selected/unknown/country_selected_intent.json"))
         .thenResponseShould()
             .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. The only countries I know are the United States, "
@@ -98,7 +102,8 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
   void following_up_with_a_yes_intent_request_for_an_unknown_country_should_wait_for_a_followup()
       throws IOException, URISyntaxException {
     givenSkill(sut)
-        .whenRequestIs(getResource("requests/country_selected/unknown/country_selected_intent.json"))
+        .whenRequestIs(
+          getResource("requests/country_selected/unknown/country_selected_intent.json"))
         .thenResponseShould()
             .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. The only countries I know are the United States, "

@@ -67,7 +67,7 @@ final class YesIntentHandlerTest extends HandlerFixtures {
       @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub session attributes with COUNTRY_SELECTED as the previous intent
     given(attribMngr.getSessionAttributes()).willReturn(
-      Map.of(LAST_INTENT.toString(), IntentType.COUNTRY_SELECTED));
+        Map.of(LAST_INTENT.toString(), IntentType.COUNTRY_SELECTED));
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withSpeech(getText(DEFAULT_ASK_FOR_CITY))).willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);

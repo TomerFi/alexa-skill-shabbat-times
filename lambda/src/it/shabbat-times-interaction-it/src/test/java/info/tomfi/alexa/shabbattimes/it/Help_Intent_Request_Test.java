@@ -16,12 +16,12 @@ import static info.tomfi.alexa.skillstester.SkillsTester.givenSkill;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/** Integration test cases for the help intent. */
 @Tag("integration-tests")
 final class Help_Intent_Request_Test extends SkillInteractionFixtures {
   @Test

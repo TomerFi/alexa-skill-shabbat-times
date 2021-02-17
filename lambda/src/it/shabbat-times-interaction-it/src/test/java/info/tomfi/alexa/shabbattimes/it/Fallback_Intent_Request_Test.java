@@ -16,10 +16,10 @@ import static info.tomfi.alexa.skillstester.SkillsTester.givenSkill;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/** Integration test cases for the fallback intent. */
 @Tag("integration-tests")
 final class Fallback_Intent_Request_Test extends SkillInteractionFixtures {
   @Test
@@ -28,7 +28,8 @@ final class Fallback_Intent_Request_Test extends SkillInteractionFixtures {
     givenSkill(sut)
         .whenRequestIs(getResource("requests/fallback/fallback_intent.json"))
         .thenResponseShould()
-            .haveOutputSpeechOf("I'm sorry. I am unable to help you at the moment. Please try again later!")
+            .haveOutputSpeechOf(
+              "I'm sorry. I am unable to help you at the moment. Please try again later!")
             .and()
             .notWaitForFollowup();
   }

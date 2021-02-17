@@ -54,9 +54,9 @@ public final class StopIntentHandler implements IntentRequestHandler {
     if (!sessAttribs.containsKey(LAST_INTENT.toString())) {
       // if the user said stop after a launch request
       respBuilder
-        .withSpeech(textor.getText(reqAttribs, DEFAULT_OK))
-        .withShouldEndSession(true)
-        .build();
+          .withSpeech(textor.getText(reqAttribs, DEFAULT_OK))
+          .withShouldEndSession(true)
+          .build();
     } else if (sessAttribs.get(LAST_INTENT.toString()).equals(HELP)) {
       // if the user said stop while listenting to the help informative message
       respBuilder

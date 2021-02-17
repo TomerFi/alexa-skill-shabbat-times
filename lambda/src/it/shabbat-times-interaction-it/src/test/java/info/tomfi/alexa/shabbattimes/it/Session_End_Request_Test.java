@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+/** Integration test cases for session end requests. */
 @Tag("integration-tests")
 final class Session_End_Request_Test extends SkillInteractionFixtures {
   @Test

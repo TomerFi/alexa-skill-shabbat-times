@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/** Integration test cases for launch requests. */
 @Tag("integration-tests")
 final class Launch_Request_Test extends SkillInteractionFixtures {
   @Test

@@ -28,7 +28,6 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.response.ResponseBuilder;
 import info.tomfi.alexa.shabbattimes.IntentType;
 import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -69,7 +68,8 @@ final class StopIntentHandlerTest extends HandlerFixtures {
   void invoking_as_a_followup_to_the_help_prompt_should_ask_for_the_selected_city(
       @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub session attributes with HELP as the previous intent
-    given(attribMngr.getSessionAttributes()).willReturn(Map.of(LAST_INTENT.toString(), IntentType.HELP));
+    given(attribMngr.getSessionAttributes())
+        .willReturn(Map.of(LAST_INTENT.toString(), IntentType.HELP));
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withSpeech(getText(DEFAULT_ASK_FOR_CITY))).willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);
