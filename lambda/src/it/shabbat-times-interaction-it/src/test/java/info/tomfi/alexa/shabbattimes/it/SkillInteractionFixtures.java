@@ -39,7 +39,7 @@ public class SkillInteractionFixtures {
   }
 
   /**
-   * Utility method for loading a resource file and byte array. Used to load the json request files.
+   * Utility method for loading a resource file as byte array. Used to load the json request files.
    *
    * @param resource the file path and name to load.
    * @return the reprenstation of the file content in byte array format.
