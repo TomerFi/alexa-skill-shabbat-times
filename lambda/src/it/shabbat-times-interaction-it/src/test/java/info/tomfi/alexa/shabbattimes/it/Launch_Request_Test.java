@@ -15,7 +15,6 @@ package info.tomfi.alexa.shabbattimes.it;
 import static info.tomfi.alexa.skillstester.SkillsTester.givenSkill;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -26,7 +25,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 final class Launch_Request_Test extends SkillInteractionFixtures {
   @Test
   void following_up_with_a_cancel_intent_request_should_end_the_interaction()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource("requests/launch/launch_request.json"))
         .thenResponseShould()
@@ -42,7 +41,7 @@ final class Launch_Request_Test extends SkillInteractionFixtures {
 
   @Test
   void following_up_with_a_stop_intent_request_should_end_the_interaction()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource("requests/launch/launch_request.json"))
         .thenResponseShould()
@@ -58,7 +57,7 @@ final class Launch_Request_Test extends SkillInteractionFixtures {
 
   @Test
   void following_up_with_a_thanks_intent_request_should_end_the_interaction()
-      throws IOException, URISyntaxException {
+      throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource("requests/launch/launch_request.json"))
         .thenResponseShould()
@@ -75,7 +74,7 @@ final class Launch_Request_Test extends SkillInteractionFixtures {
   @ParameterizedTest
   @ValueSource(strings = {"requests/launch/no_intent.json", "requests/launch/yes_intent.json"})
   void following_up_with_an_unrelated_intent_request_should_ask_for_clarification(
-      final String followupResource) throws IOException, URISyntaxException {
+      final String followupResource) throws IOException {
     givenSkill(sut)
         .whenRequestIs(getResource("requests/launch/launch_request.json"))
         .thenResponseShould()
