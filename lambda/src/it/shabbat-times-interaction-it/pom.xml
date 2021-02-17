@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>info.tomfi.alexa</groupId>
+  <artifactId>shabbat-times-interaction-it</artifactId>
+  <version>0.0.1</version>
+  <name>shabbat-times-interaction-it</name>
+  <description>Shabbat times skill interaction integration tests</description>
+  <url>https://github.com/TomerFi/alexa-skill-shabbat-times</url>
+
+  <properties>
+    <maven.compiler.release>11</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.install.skip>true</maven.install.skip>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.amazon.alexa</groupId>
+        <artifactId>ask-sdk</artifactId>
+        <version>2.37.1</version>
+      </dependency>
+      <dependency>
+        <groupId>info.tomfi.alexa</groupId>
+        <artifactId>shabbat-times</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+      </dependency>
+      <!-- TESTING DEPENDENCIES -->
+      <dependency>
+        <groupId>info.tomfi.alexa</groupId>
+        <artifactId>alexa-skills-tester</artifactId>
+        <version>0.2.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.7.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-params</artifactId>
+        <version>5.7.0</version>
+      </dependency>
+      <!-- LOGGING DEPENDENCIES -->
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-slf4j-impl</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-core</artifactId>
+        <version>2.14.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.amazon.alexa</groupId>
+      <artifactId>ask-sdk</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>info.tomfi.alexa</groupId>
+      <artifactId>shabbat-times</artifactId>
+    </dependency>
+    <!-- TESTING DEPENDENCIES -->
+    <dependency>
+      <groupId>info.tomfi.alexa</groupId>
+      <artifactId>alexa-skills-tester</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- LOGGING DEPENDENCIES -->
+    <dependency> <!-- needed for ask sdk? -->
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>test</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+      </plugin>
+      <plugin>
+        <groupId>de.sormuras.junit</groupId>
+        <artifactId>junit-platform-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <extensions>true</extensions>
+        <configuration>
+          <executor>JAVA</executor>
+          <javaOptions>
+            <additionalOptions>
+              <jul>-Djava.util.logging.config.file=src/test/resources/logging-test.properties</jul>
+            </additionalOptions>
+          </javaOptions>
+          <parameters>
+            <junit.jupiter.execution.parallel.enabled>true</junit.jupiter.execution.parallel.enabled>
+            <junit.jupiter.displayname.generator.default>org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores</junit.jupiter.displayname.generator.default>
+          </parameters>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+</project>

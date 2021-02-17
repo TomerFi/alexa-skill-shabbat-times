@@ -1,0 +1,22 @@
+{
+	"version": "1.0",
+	"session": {
+		"new": false,
+    "attributes": {
+			"country": "US",
+			"lastIntent": "CountrySelected"
+		}
+	},
+	"context": {
+		"System": {}
+	},
+	"request": {
+		"type": "IntentRequest",
+		"requestId": "amzn1.echo-api.request.fake-request-id",
+		"timestamp": "2019-10-01T10:20:30Z",
+		"locale": "en-US",
+		"intent": {
+			"name": "ThanksIntent"
+		}
+	}
+}
