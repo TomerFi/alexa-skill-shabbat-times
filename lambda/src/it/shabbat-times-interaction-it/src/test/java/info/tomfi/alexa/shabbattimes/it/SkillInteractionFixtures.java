@@ -12,26 +12,63 @@
  */
 package info.tomfi.alexa.shabbattimes.it;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.amazon.ask.Skill;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import info.tomfi.alexa.shabbattimes.SkillConfig;
+import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.hebcal.shabbat.request.Request;
+import info.tomfi.hebcal.shabbat.response.Response;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /** Integration test fixtures to use for the various interaction test cases. */
+@Configuration
+@Import(SkillConfig.class)
 public class SkillInteractionFixtures {
   private AnnotationConfigApplicationContext context;
+  protected ShabbatAPI mockApi;
   protected Skill sut;
+
+  @Bean // removing this bean annotation will make the tests send requests to hebcal's real api
+  ShabbatAPI getShabbatAPI() {
+    // mock api
+    mockApi = mock(ShabbatAPI.class);
+    // instantiate object mapper
+    var mapper = new ObjectMapper();
+    // stub mock api to return real hebcal api response
+    when(mockApi.sendAsync(any(Request.class))).thenAnswer(a -> {
+      var resp = mapper.readValue(
+        getClass().getClassLoader().getResourceAsStream("responses/real_hebcal_api_response.json"),
+        Response.class);
+      var cf = new CompletableFuture<Response>();
+      cf.complete(resp);
+      return cf;
+    });
+    // return mocked api as the context bean
+    return mockApi;
+  }
 
   @BeforeEach
   void initializeFixtures() {
-    context = new AnnotationConfigApplicationContext(SkillConfig.class);
+    // create the di context with a patched configuration
+    context = new AnnotationConfigApplicationContext(SkillInteractionFixtures.class);
+    // retrive the skill from the context
     sut = context.getBean(Skill.class);
   }
 
   @AfterEach
   void cleanupFixtures() {
+    // close the di context
     context.close();
   }
 

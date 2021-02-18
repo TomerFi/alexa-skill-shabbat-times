@@ -1,0 +1,83 @@
+{
+  "title": "Hebcal Jerusalem October 2019",
+  "date": "2021-02-18T09:32:55.128Z",
+  "location": {
+    "title": "Jerusalem, Israel",
+    "city": "Jerusalem",
+    "tzid": "Asia/Jerusalem",
+    "latitude": 31.76904,
+    "longitude": 35.21633,
+    "cc": "IL",
+    "country": "Israel",
+    "admin1": "Jerusalem",
+    "geo": "geoname",
+    "geonameid": 281184
+  },
+  "items": [
+    {
+      "title": "Candle lighting: 17:40",
+      "date": "2019-10-04T17:40:00+03:00",
+      "category": "candles",
+      "title_orig": "Candle lighting",
+      "hebrew": "הדלקת נרות"
+    },
+    {
+      "title": "Shabbat Shuva",
+      "date": "2019-10-05",
+      "category": "holiday",
+      "subcat": "shabbat",
+      "hebrew": "שבת שובה",
+      "link": "https://www.hebcal.com/holidays/shabbat-shuva-2019?i=on&utm_source=js&utm_medium=api",
+      "memo": "Shabbat that falls between Rosh Hashanah and Yom Kippur (Shabbat of Returning)"
+    },
+    {
+      "title": "Parashat Vayeilech",
+      "date": "2019-10-05",
+      "category": "parashat",
+      "hebrew": "פרשת וילך",
+      "link": "https://www.hebcal.com/sedrot/vayeilech-20191005?i=on&utm_source=js&utm_medium=api"
+    },
+    {
+      "title": "Havdalah (50 min): 19:10",
+      "date": "2019-10-05T19:10:00+03:00",
+      "category": "havdalah",
+      "title_orig": "Havdalah",
+      "hebrew": "הבדלה (50 דקות)"
+    },
+    {
+      "title": "Erev Yom Kippur",
+      "date": "2019-10-08",
+      "category": "holiday",
+      "subcat": "major",
+      "hebrew": "ערב יום כפור",
+      "link": "https://www.hebcal.com/holidays/yom-kippur-2019?i=on&utm_source=js&utm_medium=api",
+      "memo": "Day of Atonement"
+    },
+    {
+      "title": "Candle lighting: 17:35",
+      "date": "2019-10-08T17:35:00+03:00",
+      "category": "candles",
+      "title_orig": "Candle lighting",
+      "hebrew": "הדלקת נרות",
+      "memo": "Erev Yom Kippur"
+    },
+    {
+      "title": "Yom Kippur",
+      "date": "2019-10-09",
+      "category": "holiday",
+      "subcat": "major",
+      "yomtov": true,
+      "hebrew": "יום כפור",
+      "link": "https://www.hebcal.com/holidays/yom-kippur-2019?i=on&utm_source=js&utm_medium=api",
+      "memo": "Day of Atonement"
+    },
+    {
+      "title": "Havdalah (50 min): 19:05",
+      "date": "2019-10-09T19:05:00+03:00",
+      "category": "havdalah",
+      "title_orig": "Havdalah",
+      "hebrew": "הבדלה (50 דקות)",
+      "memo": "Yom Kippur"
+    }
+  ]
+}
