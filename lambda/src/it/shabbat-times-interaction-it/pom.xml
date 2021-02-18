@@ -31,6 +31,11 @@
       </dependency>
       <!-- TESTING DEPENDENCIES -->
       <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>2.12.1</version>
+      </dependency>
+      <dependency>
         <groupId>info.tomfi.alexa</groupId>
         <artifactId>alexa-skills-tester</artifactId>
         <version>0.2.3</version>
@@ -44,6 +49,11 @@
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
         <version>5.7.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.7.7</version>
       </dependency>
       <!-- LOGGING DEPENDENCIES -->
       <dependency>
@@ -70,6 +80,11 @@
     </dependency>
     <!-- TESTING DEPENDENCIES -->
     <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
       <groupId>info.tomfi.alexa</groupId>
       <artifactId>alexa-skills-tester</artifactId>
       <scope>test</scope>
@@ -82,6 +97,11 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
       <scope>test</scope>
     </dependency>
     <!-- LOGGING DEPENDENCIES -->
