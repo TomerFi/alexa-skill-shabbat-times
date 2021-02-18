@@ -39,7 +39,13 @@ public class SkillInteractionFixtures {
   protected ShabbatAPI mockApi;
   protected Skill sut;
 
-  @Bean // removing this bean annotation will make the tests send requests to hebcal's real api
+  /**
+   * Bean for mocking the ShabbatAPI for avoiding calls to HebCal's real API. Removing this bean
+   * annotation will make the tests send requests to hebcal's real api.
+   *
+   * @return a ShabbatAPI mock stubbed for returning the fixed response for the date under test.
+   */
+  @Bean
   ShabbatAPI getShabbatAPI() {
     // mock api
     mockApi = mock(ShabbatAPI.class);
@@ -48,8 +54,9 @@ public class SkillInteractionFixtures {
     // stub mock api to return real hebcal api response
     when(mockApi.sendAsync(any(Request.class))).thenAnswer(a -> {
       var resp = mapper.readValue(
-        getClass().getClassLoader().getResourceAsStream("responses/real_hebcal_api_response.json"),
-        Response.class);
+          getClass().getClassLoader().getResourceAsStream(
+            "responses/real_hebcal_api_response.json"),
+          Response.class);
       var cf = new CompletableFuture<Response>();
       cf.complete(resp);
       return cf;

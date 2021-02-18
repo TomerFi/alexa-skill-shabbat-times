@@ -17,13 +17,19 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.io.IOException;
 import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+/**
+ * Integration test cases for the get city intent.
+ *
+ * <p>Please note: Most of the test cases here are based upon Jerusalem, Israel on
+ * 10/01/2019 - 10/04/2019.</p>
+ */
+// CHECKSTYLE.OFF: LambdaBodyLength
 @Tag("integration-tests")
 final class Get_City_Intent_Test extends SkillInteractionFixtures {
   static Stream<Arguments> path_day_speech_matrix_provider() {
@@ -77,7 +83,8 @@ final class Get_City_Intent_Test extends SkillInteractionFixtures {
   void requesting_information_about_an_unknown_city_should_ask_for_another_city_and_wait(
       final String filepath) throws IOException {
     givenSkill(sut)
-        .whenRequestIs(getResource("requests/get_city/" + filepath + "/unknown/get_city_intent.json"))
+        .whenRequestIs(
+          getResource("requests/get_city/" + filepath + "/unknown/get_city_intent.json"))
         .thenResponseShould()
             .waitForFollowup()
             .haveOutputSpeechOf("I'm sorry. I can't seem to find your requested city. "
