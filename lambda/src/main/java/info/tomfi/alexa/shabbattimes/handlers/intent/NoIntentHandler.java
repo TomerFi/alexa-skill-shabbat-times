@@ -76,6 +76,7 @@ public final class NoIntentHandler implements IntentRequestHandler {
         .withShouldEndSession(false).build();
   }
 
+  // CHECKSTYLE.OFF: TodoComment
   private Optional<Response> countrySelectedFollowUp(
       final HandlerInput input, final Map<String, Object> sessionAttribs) {
     if (!sessionAttribs.containsKey(COUNTRY.toString())) {
