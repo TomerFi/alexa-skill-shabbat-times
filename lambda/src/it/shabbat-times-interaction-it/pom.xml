@@ -19,51 +19,10 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>com.amazon.alexa</groupId>
-        <artifactId>ask-sdk</artifactId>
-        <version>2.37.1</version>
-      </dependency>
-      <dependency>
-        <groupId>info.tomfi.alexa</groupId>
-        <artifactId>shabbat-times</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
-      </dependency>
-      <!-- TESTING DEPENDENCIES -->
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>2.12.1</version>
-      </dependency>
-      <dependency>
-        <groupId>info.tomfi.alexa</groupId>
-        <artifactId>alexa-skills-tester</artifactId>
-        <version>0.2.3</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.7.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-params</artifactId>
-        <version>5.7.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>3.7.7</version>
-      </dependency>
-      <!-- LOGGING DEPENDENCIES -->
+      <!-- used by ask-sdk -->
       <dependency>
         <groupId>org.apache.logging.log4j</groupId>
         <artifactId>log4j-slf4j-impl</artifactId>
-        <version>2.14.0</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
         <version>2.14.0</version>
       </dependency>
     </dependencies>
@@ -71,43 +30,52 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.amazon.alexa</groupId>
-      <artifactId>ask-sdk</artifactId>
-    </dependency>
-    <dependency>
       <groupId>info.tomfi.alexa</groupId>
       <artifactId>shabbat-times</artifactId>
+      <version>@project.version@</version>
+      <scope>test</scope>
     </dependency>
-    <!-- TESTING DEPENDENCIES -->
+    <dependency>
+      <groupId>com.amazon.alexa</groupId>
+      <artifactId>ask-sdk</artifactId>
+      <version>2.37.1</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
+      <version>2.12.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>info.tomfi.alexa</groupId>
       <artifactId>alexa-skills-tester</artifactId>
+      <version>0.2.3</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
+      <version>5.7.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
+      <version>5.7.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-core</artifactId>
+      <version>3.7.7</version>
       <scope>test</scope>
     </dependency>
-    <!-- LOGGING DEPENDENCIES -->
-    <dependency> <!-- needed for ask sdk? -->
+    <!-- used by ask-sdk -->
+    <dependency>
       <groupId>org.apache.logging.log4j</groupId>
       <artifactId>log4j-core</artifactId>
+      <version>2.14.0</version>
     </dependency>
   </dependencies>
 
