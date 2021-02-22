@@ -17,5 +17,4 @@ jobs:
           issue-lock-inactive-days: 0
           # yamllint disable-line rule:line-length
           issue-lock-comment: Locking this issue. [Open a new issue](https://github.com/TomerFi/alexa-skill-shabbat-times/issues/new/choose).
-          issue-lock-reason: closed
           process-only: issues
