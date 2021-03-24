@@ -12,6 +12,7 @@
  */
 package info.tomfi.alexa.shabbattimes;
 
+import static com.tngtech.archunit.core.domain.JavaModifier.FINAL;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.library.Architectures.layeredArchitecture;
 import static com.tngtech.archunit.library.GeneralCodingRules.NO_CLASSES_SHOULD_ACCESS_STANDARD_STREAMS;
@@ -24,11 +25,13 @@ import com.amazon.ask.dispatcher.request.handler.impl.SessionEndedRequestHandler
 import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.exception.AskSdkException;
+import com.google.auto.value.AutoValue;
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
 import org.junit.jupiter.api.Tag;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /** Project architecture rules. */
@@ -46,27 +49,29 @@ class ProjectArchTest {
       NO_CLASSES_SHOULD_THROW_GENERIC_EXCEPTIONS;
 
   @ArchTest
-  final ArchRule custom_exceptions_should_only_be_thrown_by_handlers_and_services =
+  final ArchRule exceptions_should_only_be_thrown_by_handlers_and_services =
       classes().that().resideInAPackage("..shabbattimes.exceptions..")
           .should().onlyBeAccessed().byClassesThat()
               .resideInAnyPackage("..shabbattimes.handlers..", "..shabbattimes.services..")
           .as("exceptions thrown are eventully cought and handled by the exception handlers");
 
   @ArchTest
-  final ArchRule custom_exceptions_should_be_public_and_extend_the_ask_sdk_exception =
+  final ArchRule exceptions_should_be_public_final_and_extend_the_ask_sdk_exception =
       classes().that().resideInAPackage("..shabbattimes.exceptions..")
-          .should().bePublic().andShould().beAssignableTo(AskSdkException.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().beAssignableTo(AskSdkException.class)
           .as("exception handling is mostly performed by the api");
 
   @ArchTest
-  final ArchRule custom_handlers_interceptors_and_services_should_be_marked_as_di_components =
+  final ArchRule handlers_interceptors_and_services_should_be_marked_as_di_components =
       classes().that().resideInAnyPackage(
         "..shabbattimes.handlers..", "..shabbattimes.interceptors..", "..shabbattimes.services..")
           .should().beAnnotatedWith(Component.class)
           .as("loose coupling requires the components to be picked up by the di context");
 
   @ArchTest
-  final ArchRule custom_handlers_interceptors_and_services_should_not_be_manually_accessed =
+  final ArchRule handlers_interceptors_and_services_should_not_be_manually_accessed =
       layeredArchitecture()
           .layer("Handlers").definedBy("..shabbattimes.handlers..")
           .layer("Interceptors").definedBy("..shabbattimes.interceptors..")
@@ -78,42 +83,69 @@ class ProjectArchTest {
           .because("loose coupling requires only the di context to pick up the comonents");
 
   @ArchTest
-  final ArchRule exception_handlers_should_be_public_and_implment_exception_handler_interface =
+  final ArchRule exception_handlers_should_be_public_final_and_implement_the_interface =
       classes().that().resideInAPackage("..shabbattimes.handlers.exception..")
-          .should().bePublic().andShould().implement(ExceptionHandler.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(ExceptionHandler.class)
           .as("exception handlers should be accepted by the api");
 
   @ArchTest
-  final ArchRule intent_handlers_should_be_public_and_implment_intent_request_handler_interface =
+  final ArchRule intent_handlers_should_be_public_final_and_implement_the_interface =
       classes().that().resideInAPackage("..shabbattimes.handlers.intent..")
-          .should().bePublic().andShould().implement(IntentRequestHandler.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(IntentRequestHandler.class)
           .as("intent request handlers should be accepted by the api");
 
   @ArchTest
-  final ArchRule launch_handlers_should_be_public_and_implment_launch_request_handler_interface =
+  final ArchRule launch_handlers_should_be_public_final_and_implement_the_interface =
       classes().that().resideInAPackage("..shabbattimes.handlers.launch..")
-          .should().bePublic().andShould().implement(LaunchRequestHandler.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(LaunchRequestHandler.class)
           .as("launch request handlers should be accepted by the api");
 
   @ArchTest
-  final ArchRule sssion_handlers_should_be_public_and_implmnt_sssion_ended_request_handler_intrfce =
+  final ArchRule session_ended_handlers_should_be_public_final_and_implemnt_the_intrfce =
       classes().that().resideInAPackage("..shabbattimes.handlers.session..")
-          .should().bePublic().andShould().implement(SessionEndedRequestHandler.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(SessionEndedRequestHandler.class)
           .as("session ended request handlers should be accepted by the api");
 
   @ArchTest
-  final ArchRule request_interceptors_should_be_public_and_implment_request_interceptor_interface =
+  final ArchRule request_interceptors_should_be_public_final_and_implement_the_interface =
       classes().that().resideInAPackage("..shabbattimes.interceptors.request..")
-          .should().bePublic().andShould().implement(RequestInterceptor.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(RequestInterceptor.class)
           .as("request interceptors should be accepted by the api");
 
   @ArchTest
-  final ArchRule response_intercptors_should_be_public_and_implment_response_interceptor_interface =
+  final ArchRule response_intercptors_should_be_public_final_and_implement_the_interface =
       classes().that().resideInAPackage("..shabbattimes.interceptors.response..")
-          .should().bePublic().andShould().implement(ResponseInterceptor.class)
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .andShould().implement(ResponseInterceptor.class)
           .as("response interceptors should be accepted by the api");
 
   @ArchTest
-  final ArchRule services_should_be_public =
-      classes().that().resideInAPackage("..shabbattimes.services..").should().bePublic();
+  final ArchRule services_should_be_public_final =
+      classes().that().resideInAPackage("..shabbattimes.services..")
+          .should().bePublic()
+          .andShould().haveModifier(FINAL)
+          .as("concrete services does not need to be extended");
+
+  @ArchTest
+  final ArchRule main_package_should_only_contain_interfaces_enums_builders_and_utility_classes =
+      classes().that().resideInAPackage("..shabbattimes")
+          .and().haveSimpleNameNotStartingWith("AutoValue_")
+          .and().doNotHaveSimpleName("Builder")
+          .should().beInterfaces()
+          .orShould().beEnums()
+          .orShould().haveOnlyFinalFields()
+          .orShould().beAnnotatedWith(AutoValue.class)
+          .orShould().beAnnotatedWith(Configuration.class)
+          .as("layered architecture requires classes to be placed in the appropriate package");
 }
