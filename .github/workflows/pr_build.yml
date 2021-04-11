@@ -64,7 +64,7 @@ jobs:
         run: mvn clean verify jacoco:report -B -ff
 
       - name: Upload coverage report as artifact
-        uses: actions/upload-artifact@v2.2.2
+        uses: actions/upload-artifact@v2.2.3
         with:
           name: coverage-report
           path: lambda/target/site/jacoco/jacoco.xml
@@ -83,7 +83,7 @@ jobs:
           name: coverage-report
 
       - name: Push to codecov
-        uses: codecov/codecov-action@v1.3.1
+        uses: codecov/codecov-action@v1.3.2
         with:
           file: jacoco.xml
           flags: unittests
