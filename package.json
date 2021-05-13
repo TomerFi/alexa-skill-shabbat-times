@@ -30,7 +30,7 @@
   "private": true,
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
-    "@commitlint/config-conventional": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.4",
     "ask-cli": "github:TomerFi/ask-cli#fix-maven-assembly-plugin-too-old",
     "husky": "^6.0.0",
     "rimraf": "^3.0.2"
