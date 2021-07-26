@@ -29,7 +29,7 @@
   },
   "private": true,
   "devDependencies": {
-    "@commitlint/cli": "^12.1.4",
+    "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^12.1.4",
     "ask-cli": "github:TomerFi/ask-cli#fix-maven-assembly-plugin-too-old",
     "husky": "^7.0.1",
