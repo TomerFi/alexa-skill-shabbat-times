@@ -83,7 +83,7 @@ jobs:
           name: coverage-report
 
       - name: Push to codecov
-        uses: codecov/codecov-action@v2.0.1
+        uses: codecov/codecov-action@v2.0.2
         with:
           file: jacoco.xml
           flags: unittests

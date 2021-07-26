@@ -41,7 +41,7 @@ jobs:
           title: latest
 
       - name: Push to CodeCov
-        uses: codecov/codecov-action@v2.0.1
+        uses: codecov/codecov-action@v2.0.2
         with:
           file: lambda/target/site/jacoco/jacoco.xml
           flags: unittests
