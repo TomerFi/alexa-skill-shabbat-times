@@ -17,7 +17,7 @@
     <maven.deploy.skip>true</maven.deploy.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
-    <ask-sdk.version>2.39.0</ask-sdk.version>
+    <ask-sdk.version>2.40.0</ask-sdk.version>
     <assertj.version>3.20.2</assertj.version>
     <archunit.version>0.20.1</archunit.version>
     <auto-value.version>1.8.2</auto-value.version>
