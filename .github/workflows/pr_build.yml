@@ -85,7 +85,5 @@ jobs:
       - name: Push to codecov
         uses: codecov/codecov-action@v2.0.2
         with:
-          file: jacoco.xml
-          flags: unittests
-          name: shabbat-times-codecov
+          files: jacoco.xml
           fail_ci_if_error: true
