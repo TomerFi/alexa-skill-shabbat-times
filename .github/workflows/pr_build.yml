@@ -87,3 +87,4 @@ jobs:
         with:
           files: jacoco.xml
           fail_ci_if_error: true
+          verbose: true
