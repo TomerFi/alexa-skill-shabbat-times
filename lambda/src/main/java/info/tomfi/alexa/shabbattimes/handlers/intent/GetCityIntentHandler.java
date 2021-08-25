@@ -27,8 +27,8 @@ import static info.tomfi.alexa.shabbattimes.Tools.strtAtStmt;
 import static info.tomfi.hebcal.shabbat.response.ItemCategory.CANDLES;
 import static info.tomfi.hebcal.shabbat.response.ItemCategory.HAVDALAH;
 import static info.tomfi.hebcal.shabbat.tools.Comparators.byItemDate;
-import static info.tomfi.hebcal.shabbat.tools.ItemExtractors.extractAndSort;
-import static info.tomfi.hebcal.shabbat.tools.ItemExtractors.extractByDate;
+import static info.tomfi.hebcal.shabbat.tools.Helpers.getFirstByDate;
+import static info.tomfi.hebcal.shabbat.tools.Helpers.matchAndSort;
 import static java.time.ZonedDateTime.parse;
 import static java.util.stream.Collectors.toList;
 
@@ -44,6 +44,8 @@ import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import info.tomfi.hebcal.shabbat.ShabbatAPI;
 import info.tomfi.hebcal.shabbat.request.Request;
 import info.tomfi.hebcal.shabbat.response.Response;
+import info.tomfi.hebcal.shabbat.response.ResponseItem;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -115,24 +117,31 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
       throw new NoResponseFromApiException(exc);
     }
     // get candles and havdalah items from response items
-    var items =
-        extractAndSort(
-            response.items().orElseThrow(NoItemsInResponseException::new),
-            byItemDate(),
-            CANDLES,
-            HAVDALAH);
+    List<ResponseItem> items;
+    try {
+      items = matchAndSort(response, byItemDate(), CANDLES, HAVDALAH);
+    } catch (final IllegalArgumentException iae) {
+      throw new NoItemsInResponseException(iae.getMessage());
+    }
+
     // calculate the current and the shabbat start and end date and time
     var currentDateTime = request.getTimestamp().toZonedDateTime();
-    var shabbatStartDateTime =
-        parse(
-            extractByDate(items, shabbatDate, CANDLES)
-                .orElseThrow(NoItemFoundForDateException::new)
-                .date());
-    var shabbatEndDateTime =
-        parse(
-            extractByDate(items, shabbatDate.plusDays(1), HAVDALAH)
-                .orElseThrow(NoItemFoundForDateException::new)
-                .date());
+    ZonedDateTime shabbatStartDateTime;
+    ZonedDateTime shabbatEndDateTime;
+    try {
+      shabbatStartDateTime =
+          parse(
+              getFirstByDate(items, shabbatDate, CANDLES)
+                  .orElseThrow(NoItemFoundForDateException::new)
+                  .date());
+      shabbatEndDateTime =
+          parse(
+              getFirstByDate(items, shabbatDate.plusDays(1), HAVDALAH)
+                  .orElseThrow(NoItemFoundForDateException::new)
+                  .date());
+    } catch (final IllegalArgumentException iae) {
+      throw new NoItemFoundForDateException(iae.getMessage());
+    }
     // retrieve the request attributes
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // construct the start at... and ends at... parts of the prompt

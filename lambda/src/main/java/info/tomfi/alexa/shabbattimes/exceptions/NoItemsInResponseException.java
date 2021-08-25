@@ -18,7 +18,7 @@ import com.amazon.ask.exception.AskSdkException;
 public final class NoItemsInResponseException extends AskSdkException {
   private static final long serialVersionUID = 16L;
 
-  public NoItemsInResponseException() {
-    super("api response does not contains any response items");
+  public NoItemsInResponseException(final String message) {
+    super(message);
   }
 }
