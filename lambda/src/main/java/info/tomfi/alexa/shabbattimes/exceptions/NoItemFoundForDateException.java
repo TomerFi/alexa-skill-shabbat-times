@@ -21,4 +21,8 @@ public final class NoItemFoundForDateException extends AskSdkException {
   public NoItemFoundForDateException() {
     super("no item was found for the requested date");
   }
+
+  public NoItemFoundForDateException(final String message) {
+    super(message);
+  }
 }

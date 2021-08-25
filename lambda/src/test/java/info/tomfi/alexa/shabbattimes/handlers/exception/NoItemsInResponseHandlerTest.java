@@ -34,7 +34,7 @@ final class NoItemsInResponseHandlerTest extends HandlerFixtures {
 
   @Test
   void can_handle_should_return_true_only_for_instances_of_no_items_in_response_exception() {
-    assertThat(sut.canHandle(input, new NoItemsInResponseException())).isTrue();
+    assertThat(sut.canHandle(input, new NoItemsInResponseException("blabla"))).isTrue();
   }
 
   @Test
