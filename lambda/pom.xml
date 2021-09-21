@@ -23,7 +23,7 @@
     <auto-value.version>1.8.2</auto-value.version>
     <equalsverifier.version>3.7.1</equalsverifier.version>
     <extra-enforcer-rules.version>1.3</extra-enforcer-rules.version>
-    <hebcal-api.version>2.1.4</hebcal-api.version>
+    <hebcal-api.version>2.1.5</hebcal-api.version>
     <jackson.version>2.12.5</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
     <junit-jupiter.version>5.8.0</junit-jupiter.version>
