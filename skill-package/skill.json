@@ -12,7 +12,7 @@
     "apis": {
       "custom": {
         "endpoint": {
-          "uri": "arn:aws:lambda:us-east-1:482923858314:function:ask-shabbattimes-default-default-1610888169651"
+          "uri": "arn:aws:lambda:us-east-1:482923858314:function:alexa-skill-shabbat-times"
         }
       }
     },
