@@ -11,13 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     name: Lint project
     steps:
-      - name: Source checkout
+      - name: Checkout sources
         uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
 
       - name: Check for spelling mistakes
         uses: reviewdog/action-misspell@v1.9
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           locale: "US"
           reporter: github-pr-check
           level: error
@@ -28,7 +29,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: false
           LINTER_RULES_PATH: .
-          FILTER_REGEX_EXCLUDE: (/target/)
+          FILTER_REGEX_EXCLUDE: /target/
           VALIDATE_EDITORCONFIG: true
           VALIDATE_JAVA: true
           VALIDATE_JSON: true
@@ -40,10 +41,8 @@ jobs:
     needs: lint
     runs-on: ubuntu-latest
     name: Build project
-    env:
-      CI_HEADLESS: true
     steps:
-      - name: Source checkout
+      - name: Checkout sources
         uses: actions/checkout@v2.3.4
 
       - name: Set up Java 11
@@ -53,32 +52,20 @@ jobs:
           java-version: 11
           cache: maven
 
-      - name: Build and create coverage report
+      - name: Verify the project and create coverage reports
         working-directory: ./lambda
         run: mvn clean verify jacoco:report -B -ff
 
-      - name: Upload coverage report as artifact
-        uses: actions/upload-artifact@v2.2.4
+      - name: Report test summary
+        uses: EnricoMi/publish-unit-test-result-action@v1.19
+        if: always()
         with:
-          name: coverage-report
-          path: lambda/target/site/jacoco/jacoco.xml
-
-  coverage:
-    runs-on: ubuntu-latest
-    name: Push coverage report to codecov
-    needs: build
-    steps:
-      - name: Source checkout
-        uses: actions/checkout@v2.3.4
-
-      - name: Download coverage report from artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: coverage-report
+          test_changes_limit: 0
+          files: lambda/target/junit-platform/TEST-junit-jupiter.xml
 
       - name: Push to codecov
         uses: codecov/codecov-action@v2.1.0
         with:
-          files: jacoco.xml
+          files: lambda/target/site/jacoco/jacoco.xml
           fail_ci_if_error: true
           verbose: true
