@@ -183,7 +183,7 @@ final class CountryTest {
             .bundleKey(faker.options().nextElement(BundleKey.values()))
             .utterances(List.of(faker.lorem().word()))
             .build();
-    // querying for known utterance should return true
-    assertThat(country.hasUtterance(faker.lorem().word())).isFalse();
+    // querying for an unknown utterance should return false
+    assertThat(country.hasUtterance("aabbccdd")).isFalse();
   }
 }

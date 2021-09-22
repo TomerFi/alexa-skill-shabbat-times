@@ -37,7 +37,6 @@
     <slf4j.version>1.7.30</slf4j.version>
     <springframework.version>5.3.10</springframework.version>
     <!-- Plugins -->
-    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
@@ -335,15 +334,6 @@
       <plugins>
         <!-- Apache Plugins -->
         <plugin>
-          <artifactId>maven-assembly-plugin</artifactId>
-          <version>${maven-assembly-plugin.version}</version>
-          <configuration>
-            <descriptorRefs>
-              <descriptorRef>jar-with-dependencies</descriptorRef>
-            </descriptorRefs>
-          </configuration>
-        </plugin>
-        <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>${maven-clean-plugin.version}</version>
         </plugin>
@@ -605,6 +595,9 @@ limitations under the License.]]>
     <profile>
       <!-- Use this profile to run integration tests. -->
       <id>its</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>

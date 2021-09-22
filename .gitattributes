@@ -15,7 +15,7 @@
 *.rtf text eol=crlf diff=text
 # Documentation
 *.markdown text eol=crlf
-*.md text eol=crlf
+*.md text eol=lf
 *.mdtxt text eol=crlf
 *.mdtext text eol=crlf
 *.txt text eol=crlf
@@ -68,9 +68,9 @@ makefile text eol=lf
 Dockerfile text eol=crlf
 Dockerfile* text eol=crlf
 # Git
-*.gitattributes text eol=crlf
-.gitignore text eol=crlf
-.gitmodules text eol=clrf
+*.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitmodules text eol=rf
 # Web files
 *.coffee text eol=lf
 *.css text eol=lf diff=css

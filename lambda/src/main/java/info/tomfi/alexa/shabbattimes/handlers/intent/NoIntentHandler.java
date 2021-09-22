@@ -31,7 +31,6 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.stereotype.Component;
 
 /** Intent request handler for handling intent requests with the name {@value NO}. */
