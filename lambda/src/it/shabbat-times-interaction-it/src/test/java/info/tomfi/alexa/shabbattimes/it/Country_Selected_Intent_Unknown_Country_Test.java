@@ -54,7 +54,9 @@ final class Country_Selected_Intent_Unknown_Country_Test extends SkillInteractio
             .haveRepromptSpeechOf("Please tell me the requested city name. "
                 + "For a list of all the possible city names, just ask me for help.")
         .followingUpWith(getResource("requests/country_selected/unknown/no_intent.json"))
-        .thenResponseShould().beEmpty();
+        .thenResponseShould()
+            .notWaitForFollowup()
+            .haveNoOutputSpeech();
   }
 
   @Test

@@ -31,6 +31,7 @@ jobs:
           IGNORE_GITIGNORED_FILES: true
           IGNORE_GENERATED_FILES: true
           VALIDATE_EDITORCONFIG: true
+          VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_JAVA: true
           VALIDATE_JSON: true
           VALIDATE_MARKDOWN: true
