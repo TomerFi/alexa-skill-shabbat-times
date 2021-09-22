@@ -86,14 +86,20 @@ final class NoIntentHandlerTest extends HandlerFixtures {
   @ParameterizedTest
   @EnumSource(mode = EXCLUDE, names = { "COUNTRY_SELECTED", "HELP" })
   void invoking_as_a_followup_after_a_non_country_selected_intent_should_end_the_interaction(
-      final IntentType intentType) {
+      final IntentType intentType,
+      @Mock final ResponseBuilder builder,
+      @Mock final Response response) {
     // stub attributes manager with session attributes with any last intent besides country selected
     var sessionAttribs = Map.of(LAST_INTENT.toString(), (Object) intentType.toString());
     given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
+    // stub the builder with the steps expected to be performed by the sut
+    given(builder.withShouldEndSession(Boolean.TRUE)).willReturn(builder);
+    given(builder.build()).willReturn(Optional.of(response));
+    given(input.getResponseBuilder()).willReturn(builder);
     // when invoking the handler
     var resp = sut.handle(input, request);
-    // verify empty response
-    then(resp).isEmpty();
+    // verify the mocked response return
+    then(resp).isNotEmpty().hasValue(response);
   }
 
   @Test
@@ -114,14 +120,19 @@ final class NoIntentHandlerTest extends HandlerFixtures {
   }
 
   @Test
-  void invoking_as_a_followup_after_country_selected_with_no_country_value_should_just_end() {
+  void invoking_as_a_followup_after_country_selected_with_no_country_value_should_just_end(
+      @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub attributes manager with session attributes for follow with no country
     var sessionAttribs = Map.of(LAST_INTENT.toString(), (Object) COUNTRY_SELECTED.toString());
     given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
+    // stub the builder with the steps expected to be performed by the sut
+    given(builder.withShouldEndSession(Boolean.TRUE)).willReturn(builder);
+    given(builder.build()).willReturn(Optional.of(response));
+    given(input.getResponseBuilder()).willReturn(builder);
     // when invoking the handler
     var resp = sut.handle(input, request);
-    // verify empty response
-    then(resp).isEmpty();
+    // verify the mocked response return
+    then(resp).isNotEmpty().hasValue(response);
   }
 
   @Test

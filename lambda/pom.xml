@@ -4,7 +4,7 @@
 
   <groupId>info.tomfi.alexa</groupId>
   <artifactId>shabbat-times</artifactId>
-  <version>3.1.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Shabbat Times</name>
   <description>Alexa skill handler for retrieving the Shabbat start and stop times in various cities around the world.</description>
@@ -12,24 +12,29 @@
   <inceptionYear>2017</inceptionYear>
 
   <properties>
-    <jacoco.coverage.minimum>85%</jacoco.coverage.minimum>
+    <coverage.threshold>85%</coverage.threshold>
+    <mutation.coverage.threshold>85</mutation.coverage.threshold>
     <maven.compiler.release>11</maven.compiler.release>
     <maven.deploy.skip>true</maven.deploy.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.40.0</ask-sdk.version>
+    <ask-sdk-model-runtime.version>1.0.5</ask-sdk-model-runtime.version>
     <assertj.version>3.21.0</assertj.version>
     <archunit.version>0.21.0</archunit.version>
     <auto-value.version>1.8.2</auto-value.version>
+    <commons-codec.version>1.15</commons-codec.version>
     <equalsverifier.version>3.7.1</equalsverifier.version>
     <extra-enforcer-rules.version>1.3</extra-enforcer-rules.version>
     <hebcal-api.version>2.1.5</hebcal-api.version>
+    <httpclient.version>4.5.13</httpclient.version>
     <jackson.version>2.12.5</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
     <junit-jupiter.version>5.8.0</junit-jupiter.version>
     <log4j.version>2.14.1</log4j.version>
     <mockito.version>3.12.4</mockito.version>
     <reflections.version>0.9.12</reflections.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <springframework.version>5.3.10</springframework.version>
     <!-- Plugins -->
     <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
@@ -83,7 +88,6 @@
     <url>https://github.com/TomerFi/alexa-skill-shabbat-times/actions</url>
   </ciManagement>
 
-
   <dependencyManagement>
     <dependencies>
       <!-- ANNOTATION PROCESSING DEPENDENCIES -->
@@ -102,6 +106,12 @@
         <groupId>com.amazon.alexa</groupId>
         <artifactId>ask-sdk</artifactId>
         <version>${ask-sdk.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
@@ -124,6 +134,11 @@
         <artifactId>jackson-databind</artifactId>
         <version>${jackson.version}</version>
       </dependency>
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${jackson.version}</version>
+      </dependency>
       <!-- TESTING DEPENDENCIES -->
       <dependency>
         <groupId>com.github.javafaker</groupId>
@@ -134,6 +149,12 @@
         <groupId>com.tngtech.archunit</groupId>
         <artifactId>archunit-junit5</artifactId>
         <version>${archunit.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-engine</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>
@@ -186,16 +207,42 @@
         <artifactId>log4j-core</artifactId>
         <version>${log4j.version}</version>
       </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+      <!-- DEPENDENCY CONVERGENCE -->
+      <dependency>
+        <groupId>com.amazon.alexa</groupId>
+        <artifactId>ask-sdk-model-runtime</artifactId>
+        <version>${ask-sdk-model-runtime.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${httpclient.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
     <!-- ANNOTATION PROCESSING DEPENDENCIES -->
-    <!-- Change to provided scope, compile scope fixes issue with junit plugin 1.1.3. -->
     <dependency>
       <groupId>com.google.auto.value</groupId>
       <artifactId>auto-value-annotations</artifactId>
-      <!--<scope>provided</scope>-->
+      <scope>provided</scope>
     </dependency>
     <!-- CODING DEPENDENCIES -->
     <dependency>
@@ -374,6 +421,14 @@ limitations under the License.]]>
           <groupId>de.sormuras.junit</groupId>
           <artifactId>junit-platform-maven-plugin</artifactId>
           <version>${junit-platform-maven-plugin.version}</version>
+          <!--<configuration>
+            <tags>
+              <tag>dev</tag>
+            </tags>
+            <tweaks>
+              <failIfNoTests>false</failIfNoTests>
+            </tweaks>
+          </configuration>-->
         </plugin>
 
         <plugin>
@@ -384,12 +439,9 @@ limitations under the License.]]>
             <propertyName>jacoco.java.option</propertyName>
             <rules>
               <rule>
-                <element>BUNDLE</element>
                 <limits>
                   <limit>
-                    <counter>INSTRUCTION</counter>
-                    <value>COVEREDRATIO</value>
-                    <minimum>${jacoco.coverage.minimum}</minimum>
+                    <minimum>${coverage.threshold}</minimum>
                   </limit>
                 </limits>
               </rule>
@@ -420,9 +472,15 @@ limitations under the License.]]>
               <excludedMethod>equals</excludedMethod>
               <excludedMethod>hashCode</excludedMethod>
             </excludedMethods>
+            <exportLineCoverage>true</exportLineCoverage>
+            <jvmArgs>
+              <arg>-Xshare:off</arg>
+            </jvmArgs>
+            <mutationThreshold>${mutation.coverage.threshold}</mutationThreshold>
             <mutators>
               <mutator>STRONGER</mutator>
             </mutators>
+            <timestampedReports>false</timestampedReports>
           </configuration>
         </plugin>
 
@@ -454,6 +512,7 @@ limitations under the License.]]>
             <additionalOptions>
               <jul>-Djava.util.logging.config.file=src/test/resources/logging-test.properties</jul>
               <jacoco>${jacoco.java.option}</jacoco>
+              <cds>-Xshare:off</cds>
             </additionalOptions>
           </javaOptions>
           <parameters>
@@ -507,14 +566,14 @@ limitations under the License.]]>
         </executions>
         <configuration>
           <rules>
-            <!--<dependencyConvergence />-->
+            <dependencyConvergence />
             <requireJavaVersion>
               <version>[11,)</version>
             </requireJavaVersion>
             <requireMavenVersion>
               <version>[3.6,)</version>
             </requireMavenVersion>
-            <!--<banDuplicateClasses />-->
+            <banDuplicateClasses />
             <banCircularDependencies />
           </rules>
         </configuration>
@@ -524,9 +583,28 @@ limitations under the License.]]>
   </build>
 
   <profiles>
+
+    <!-- use this profile manually for development stage. -->
+    <profile>
+      <id>dev</id>
+      <properties>
+        <coverage.threshold>0%</coverage.threshold>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <failOnWarning>false</failOnWarning>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
     <profile>
       <!-- Use this profile to run integration tests. -->
-      <id>integration-tests</id>
+      <id>its</id>
       <build>
         <plugins>
           <plugin>
@@ -552,7 +630,28 @@ limitations under the License.]]>
         </plugins>
       </build>
     </profile>
-  </profiles>
 
+    <!-- Use this profile to execute mutation testing. -->
+    <profile>
+      <id>mut</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.pitest</groupId>
+            <artifactId>pitest-maven</artifactId>
+            <executions>
+              <execution>
+                <phase>verify</phase>
+                <goals>
+                  <goal>scmMutationCoverage</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+  </profiles>
 
 </project>
