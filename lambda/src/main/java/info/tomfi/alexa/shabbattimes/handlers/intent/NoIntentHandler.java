@@ -31,6 +31,7 @@ import info.tomfi.alexa.shabbattimes.TextService;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+
 import org.springframework.stereotype.Component;
 
 /** Intent request handler for handling intent requests with the name {@value NO}. */
@@ -63,7 +64,8 @@ public final class NoIntentHandler implements IntentRequestHandler {
       // if the user is following up on an help intent request
       return askForClarification(input);
     } else {
-      return Optional.empty();
+      // nothing else to do, end the session
+      return input.getResponseBuilder().withShouldEndSession(true).build();
     }
   }
 
@@ -76,12 +78,11 @@ public final class NoIntentHandler implements IntentRequestHandler {
         .withShouldEndSession(false).build();
   }
 
-  // CHECKSTYLE.OFF: TodoComment
   private Optional<Response> countrySelectedFollowUp(
       final HandlerInput input, final Map<String, Object> sessionAttribs) {
     if (!sessionAttribs.containsKey(COUNTRY.toString())) {
-      // TODO: return a better answer here
-      return Optional.empty();
+      // nothing else to do, end the session
+      return input.getResponseBuilder().withShouldEndSession(true).build();
     }
     // get request attributes
     var requestAttribs = input.getAttributesManager().getRequestAttributes();
