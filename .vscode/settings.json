@@ -1,5 +1,0 @@
-{
-  "markdownlint.config": {
-    "extends": ".github/linters/.markdown-lint.yml"
-  }
-}

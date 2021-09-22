@@ -579,6 +579,7 @@ limitations under the License.]]>
       <id>dev</id>
       <properties>
         <coverage.threshold>0%</coverage.threshold>
+        <mutation.coverage.threshold>0</mutation.coverage.threshold>
       </properties>
       <build>
         <plugins>
@@ -595,9 +596,6 @@ limitations under the License.]]>
     <profile>
       <!-- Use this profile to run integration tests. -->
       <id>its</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <build>
         <plugins>
           <plugin>
