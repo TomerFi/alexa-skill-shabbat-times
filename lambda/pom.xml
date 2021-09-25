@@ -30,6 +30,7 @@
     <httpclient.version>4.5.13</httpclient.version>
     <jackson.version>2.12.5</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
+    <joda-time.version>2.10.11</joda-time.version>
     <junit-jupiter.version>5.8.1</junit-jupiter.version>
     <log4j.version>2.14.1</log4j.version>
     <mockito.version>3.12.4</mockito.version>
@@ -233,6 +234,11 @@
         <artifactId>commons-codec</artifactId>
         <version>${commons-codec.version}</version>
       </dependency>
+      <dependency>
+        <groupId>joda-time</groupId>
+        <artifactId>joda-time</artifactId>
+        <version>${joda-time.version}</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -411,14 +417,6 @@ limitations under the License.]]>
           <groupId>de.sormuras.junit</groupId>
           <artifactId>junit-platform-maven-plugin</artifactId>
           <version>${junit-platform-maven-plugin.version}</version>
-          <!--<configuration>
-            <tags>
-              <tag>dev</tag>
-            </tags>
-            <tweaks>
-              <failIfNoTests>false</failIfNoTests>
-            </tweaks>
-          </configuration>-->
         </plugin>
 
         <plugin>
