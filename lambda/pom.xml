@@ -16,6 +16,7 @@
     <mutation.coverage.threshold>85</mutation.coverage.threshold>
     <maven.compiler.release>11</maven.compiler.release>
     <maven.deploy.skip>true</maven.deploy.skip>
+    <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.40.0</ask-sdk.version>
@@ -203,11 +204,6 @@
         <version>${log4j.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-core</artifactId>
-        <version>${log4j.version}</version>
-      </dependency>
-      <dependency>
         <groupId>org.slf4j</groupId>
         <artifactId>slf4j-api</artifactId>
         <version>${slf4j.version}</version>
@@ -222,12 +218,6 @@
         <groupId>org.apache.httpcomponents</groupId>
         <artifactId>httpclient</artifactId>
         <version>${httpclient.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-          </exclusion>
-        </exclusions>
       </dependency>
       <dependency>
         <groupId>commons-codec</groupId>
@@ -325,11 +315,6 @@
       <groupId>org.reflections</groupId>
       <artifactId>reflections</artifactId>
       <scope>test</scope>
-    </dependency>
-    <!-- LOGGING DEPENDENCIES -->
-    <dependency> <!-- needed for ask sdk? -->
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
     </dependency>
   </dependencies>
 
@@ -594,6 +579,9 @@ limitations under the License.]]>
     <profile>
       <!-- Use this profile to run integration tests. -->
       <id>its</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <build>
         <plugins>
           <plugin>
