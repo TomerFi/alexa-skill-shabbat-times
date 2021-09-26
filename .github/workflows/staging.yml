@@ -1,0 +1,48 @@
+---
+name: Staging
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    name: Stage skill infrastructure
+    steps:
+      - name: Source checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup Node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Setup Java 11
+        uses: actions/setup-java@v2.3.0
+        with:
+          distribution: adopt
+          java-version: 11
+
+      - name: Install and configure ask cli
+        run: npm install -g ask-cli
+
+      - name: Deploy skill to lambda (no publish)
+        env:
+          ASK_DEFAULT_PROFILE: default
+          ASK_ACCESS_TOKEN: ${{ secrets.ASK_ACCESS_TOKEN }}
+          ASK_REFRESH_TOKEN: ${{ secrets.ASK_REFRESH_TOKEN }}
+          ASK_VENDOR_ID: ${{ secrets.ASK_VENDOR_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SKILL_ID: ${{ secrets.SKILL_ID }}
+        run: ask deploy --ignore-hash --target skill-infrastructure
+
+      - name: Push to CodeCov
+        uses: codecov/codecov-action@v2.1.0
+        with:
+          files: lambda/target/site/jacoco/jacoco.xml
+          fail_ci_if_error: true
