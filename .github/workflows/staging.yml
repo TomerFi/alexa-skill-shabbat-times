@@ -27,7 +27,7 @@ jobs:
           distribution: adopt
           java-version: 11
 
-      - name: Install and configure ask cli
+      - name: Install ask cli
         run: npm install -g ask-cli
 
       - name: Deploy skill to lambda (no publish)
