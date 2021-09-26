@@ -1,0 +1,125 @@
+---
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tweet:
+        description: "Tweet new release?"
+        required: false
+        default: "yes"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: deployment
+    name: Build, publish, release, and announce
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Setup Node 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Setup Python 3.9
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.9
+
+      - name: Setup Java 11
+        uses: actions/setup-java@v2.3.0
+        with:
+          distribution: adopt
+          java-version: 11
+          cache: maven
+
+      - name: Install ask cli
+        run: npm install -g ask-cli
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Deploy skill
+        env:
+          ASK_DEFAULT_PROFILE: default
+          ASK_ACCESS_TOKEN: ${{ secrets.ASK_ACCESS_TOKEN }}
+          ASK_REFRESH_TOKEN: ${{ secrets.ASK_REFRESH_TOKEN }}
+          ASK_VENDOR_ID: ${{ secrets.ASK_VENDOR_ID }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SKILL_ID: ${{ secrets.SKILL_ID }}
+        run: ask deploy --ignore-hash
+
+      - name: Publish lambda function
+        id: publish_lambda
+        run: |
+          echo '::set-output name=function_version::$( aws lambda publish-version --function-name alexa-skill-shabbat-times | jq -r ".Version" )'
+
+      - name: Direct live label to new function
+        run: >
+          aws lambda update-alias
+          --function-name alexa-skill-shabbat-times
+          --name Live
+          --function-version ${{ steps.publish_lambda.outputs.function_version }}
+
+      - name: Determine version and create changelog
+        id: bumper
+        uses: tomerfi/version-bumper-action@1.0.0
+        with:
+          changelog: true
+
+      - name: Configure git
+        run: |
+          git config --global user.name "shabbat-times-skill"
+          git config --global user.email "noreply@shabbat-times-skill.tomfi.info"
+
+      - name: Set new project version
+        working-directory: ./lambda
+        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.new_version }} -DgenerateBackupPoms=false
+
+      - name: Commit, tag, and push
+        run: |
+          git add pom.xml
+          git commit -m "build: bump version to ${{ steps.bumper.outputs.new_version }} [skip ci]"
+          git push
+          git tag ${{ steps.bumper.outputs.new_version }} -m ${{ steps.bumper.outputs.new_version }}
+          git push origin ${{ steps.bumper.outputs.new_version }}
+
+      - name: Set development project version
+        working-directory: ./lambda
+        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.next_dev_iteration }} -DgenerateBackupPoms=false
+
+      - name: Commit and push
+        run: |
+          git add pom.xml
+          git commit -m "build: bump version to ${{ steps.bumper.outputs.next_dev_iteration }} [skip ci]"
+          git push
+
+      - name: Release to GitHub
+        id: gh_release
+        uses: ncipollo/release-action@v1.8.9
+        with:
+          bodyFile: changelog-${{ steps.bumper.outputs.new_version }}.md
+          tag: ${{ steps.bumper.outputs.new_version }}
+
+      - name: Tweet new release
+        if: ${{ github.event.inputs.tweet == 'yes' }}
+        uses: lazy-actions/tweet-action@1.0.1
+        with:
+          oauth_consumer_key: ${{ secrets.TWITTER_API_KEY }}
+          oauth_consumer_secret: ${{ secrets.TWITTER_API_SECRET_KEY }}
+          oauth_token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
+          oauth_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+          message: |
+            🚀🎉 Shabbat Times skill ${{ steps.bumper.outputs.new_version }} has been released! 🎉🚀
+            ${{ steps.gh_release.outputs.html_url }}
+            #shabbat_times_alexa_skill
