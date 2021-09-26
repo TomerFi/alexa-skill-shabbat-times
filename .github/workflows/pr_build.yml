@@ -55,7 +55,7 @@ jobs:
 
       - name: Verify the project and create coverage reports
         working-directory: ./lambda
-        run: mvn clean verify jacoco:report -Pits -B -ff
+        run: mvn clean verify -B -ff
 
       - name: Report test summary
         uses: EnricoMi/publish-unit-test-result-action@v1.19

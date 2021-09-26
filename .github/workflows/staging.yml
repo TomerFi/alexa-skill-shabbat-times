@@ -11,9 +11,9 @@ jobs:
   staging:
     runs-on: ubuntu-latest
     environment: staging
-    name: Stage skill infrastructure
+    name: Stage skill
     steps:
-      - name: Source checkout
+      - name: Checkout sources
         uses: actions/checkout@v2.3.4
 
       - name: Setup Node 16
@@ -26,6 +26,7 @@ jobs:
         with:
           distribution: adopt
           java-version: 11
+          cache: maven
 
       - name: Install ask cli
         run: npm install -g ask-cli
@@ -39,7 +40,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SKILL_ID: ${{ secrets.SKILL_ID }}
-        run: ask deploy --ignore-hash --target skill-infrastructure
+        run: ask deploy --ignore-hash
 
       - name: Push to CodeCov
         uses: codecov/codecov-action@v2.1.0
