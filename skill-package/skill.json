@@ -24,9 +24,9 @@
         "en-US": {
           "summary": "Would you like to know the shabbat times in your city?",
           "examplePhrases": [
-            "Alexa, ask shabbat times for the shabbat times in new york",
-            "Alexa, ask shabbat times to list all the city names in israel",
-            "Alexa, ask shabbat times about tel aviv"
+            "Alexa, start shabbat times",
+            "Alexa, ask shabbat times for help",
+            "Alexa, ask shabbat times to list the city names"
           ],
           "keywords": [
             "shabbat",
@@ -44,9 +44,9 @@
         "en-AU": {
           "summary": "Would you like to know the shabbat times in your city?",
           "examplePhrases": [
-            "Alexa, ask shabbat times for the shabbat times in new york",
-            "Alexa, ask shabbat times to list all the city names in israel",
-            "Alexa, ask shabbat times about tel aviv"
+            "Alexa, start shabbat times",
+            "Alexa, ask shabbat times for help",
+            "Alexa, ask shabbat times to list the city names"
           ],
           "keywords": [
             "shabbat",
@@ -64,9 +64,9 @@
         "en-CA": {
           "summary": "Would you like to know the shabbat times in your city?",
           "examplePhrases": [
-            "Alexa, ask shabbat times for the shabbat times in new york",
-            "Alexa, ask shabbat times to list all the city names in israel",
-            "Alexa, ask shabbat times about tel aviv"
+            "Alexa, start shabbat times",
+            "Alexa, ask shabbat times for help",
+            "Alexa, ask shabbat times to list the city names"
           ],
           "keywords": [
             "shabbat",
@@ -84,9 +84,9 @@
         "en-IN": {
           "summary": "Would you like to know the shabbat times in your city?",
           "examplePhrases": [
-            "Alexa, ask shabbat times for the shabbat times in new york",
-            "Alexa, ask shabbat times to list all the city names in israel",
-            "Alexa, ask shabbat times about tel aviv"
+            "Alexa, start shabbat times",
+            "Alexa, ask shabbat times for help",
+            "Alexa, ask shabbat times to list the city names"
           ],
           "keywords": [
             "shabbat",
@@ -104,9 +104,9 @@
         "en-GB": {
           "summary": "Would you like to know the shabbat times in your city?",
           "examplePhrases": [
-            "Alexa, ask shabbat times for the shabbat times in new york",
-            "Alexa, ask shabbat times to list all the city names in israel",
-            "Alexa, ask shabbat times about tel aviv"
+            "Alexa, start shabbat times",
+            "Alexa, ask shabbat times for help",
+            "Alexa, ask shabbat times to list the city names"
           ],
           "keywords": [
             "shabbat",

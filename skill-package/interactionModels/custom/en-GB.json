@@ -99,6 +99,7 @@
         {
           "name": "AMAZON.HelpIntent",
           "samples": [
+            "for help",
             "what are the city names you know",
             "list the city names",
             "to list the city names",
