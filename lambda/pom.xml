@@ -585,9 +585,6 @@ limitations under the License.]]>
     <profile>
       <!-- Use this profile to run integration tests. -->
       <id>its</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <build>
         <plugins>
           <plugin>

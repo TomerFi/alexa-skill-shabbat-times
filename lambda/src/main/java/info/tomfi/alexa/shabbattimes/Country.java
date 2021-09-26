@@ -58,7 +58,7 @@ public abstract class Country {
    */
   public Optional<City> getCity(final String alias) {
     for (var city : cities()) {
-      if (city.cityName().equals(alias) || city.aliases().contains(alias)) {
+      if (city.cityName().equalsIgnoreCase(alias) || city.aliases().contains(alias)) {
         return Optional.of(city);
       }
     }
