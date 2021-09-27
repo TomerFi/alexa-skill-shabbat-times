@@ -36,6 +36,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Build skill handler
+        working-directory: ./lambda
         run: mvn package -Pzip -B -ff
 
       - name: Deploy skill handler to lambda
