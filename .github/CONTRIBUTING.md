@@ -22,11 +22,41 @@ VALIDATE_JSON=true -e VALIDATE_MARKDOWN=true -e VALIDATE_XML=true -e VALIDATE_YA
 -v ${PWD}:/tmp/lint ghcr.io/github/super-linter:slim-v4
 ```
 
+## Metadata and infrastructure deployment
+
+The ci workflows in this repository will handle the skill infrastructure part only, i.e. the lambda
+function:
+
+- [stage](workflows/stage.yml) will deploy the lambda function.
+- [release](workflows/release.yml) will deploy the lambda function, publish it, and direct the
+  *Live* alias to it.
+
+If any changes were made to the skill metadata,</br>
+we can use the UI or [ask cli][1] to deploy the metadata part manually.</br>
+Here are some useful commands for the process:
+
+```shell
+ask deploy --ignore-hash --target skill-metadata
+
+ask smapi submit-skill-validation --locales en-US,en-AU,en-CA,en-IN,en-GB --skill-id <skill-id>
+ask smapi get-skill-validations --skill-id <skill-id> --validation-id <validation-id>
+
+ask smapi submit-skill-for-certification --skill-id <skill-id>
+ask smapi get-certification-review --skill-id <skill-id>
+ask smapi withdraw-skill-from-certification --skill-id <skill-id>
+
+```
+
+> I tried incorporating the skill metadata part with the ci workflows,</br>
+> unfortunately, it feels like *ask-cli* is not quite mature enough for automated work.</br>
+> If anything changes, I would like to try this again.
+
 ## Code of Conduct
 
 Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) document before contributing.
 
 <!-- Real Links -->
 [0]: https://conventionalcommits.org
+[1]: https://developer.amazon.com/en-US/docs/alexa/smapi/ask-cli-command-reference.html
 <!-- Badges Links -->
 [conventional-commits]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg

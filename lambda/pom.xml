@@ -39,6 +39,7 @@
     <slf4j.version>1.7.32</slf4j.version>
     <springframework.version>5.3.10</springframework.version>
     <!-- Plugins -->
+    <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <maven-dependency-plugin.version>3.2.0</maven-dependency-plugin.version>
@@ -332,6 +333,10 @@
       <plugins>
         <!-- Apache Plugins -->
         <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>${maven-clean-plugin.version}</version>
         </plugin>
@@ -571,7 +576,7 @@ limitations under the License.]]>
 
   <profiles>
 
-    <!-- use this profile manually for development stage. -->
+    <!-- use this profile for development stage. -->
     <profile>
       <id>dev</id>
       <properties>
@@ -590,12 +595,9 @@ limitations under the License.]]>
       </build>
     </profile>
 
+    <!-- Use this profile to create jacoco execution report. -->
     <profile>
-      <!-- Use this profile to create jacoco execution report. -->
       <id>cov</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <build>
         <plugins>
           <plugin>
@@ -604,7 +606,6 @@ limitations under the License.]]>
             <executions>
               <execution>
                 <id>jacoco-report</id>
-                <phase>package</phase> <!-- phase package is used for ask cli deployment -->
                 <goals>
                     <goal>report</goal>
                 </goals>
@@ -615,12 +616,9 @@ limitations under the License.]]>
       </build>
     </profile>
 
+    <!-- Use this profile to run integration tests. -->
     <profile>
-      <!-- Use this profile to run integration tests. -->
       <id>its</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <build>
         <plugins>
           <plugin>
@@ -636,7 +634,6 @@ limitations under the License.]]>
             </configuration>
             <executions>
               <execution>
-                <phase>package</phase> <!-- phase package is used for ask cli deployment -->
                 <goals>
                   <goal>install</goal>
                   <goal>run</goal>
@@ -661,6 +658,33 @@ limitations under the License.]]>
                 <phase>verify</phase>
                 <goals>
                   <goal>scmMutationCoverage</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- Use this profile to create zip file with all the dependencies for lambda upload. -->
+    <profile>
+      <id>zip</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <appendAssemblyId>false</appendAssemblyId>
+              <finalName>skill-handler-function</finalName>
+              <descriptors>
+                <descriptor>${project.basedir}/src/assembly/zip-with-dependencies.xml</descriptor>
+              </descriptors>
+            </configuration>
+            <executions>
+              <execution>
+                <phase>package</phase>
+                <goals>
+                  <goal>single</goal>
                 </goals>
               </execution>
             </executions>
