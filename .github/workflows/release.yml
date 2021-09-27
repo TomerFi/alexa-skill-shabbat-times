@@ -77,7 +77,7 @@ jobs:
           git add lambda/pom.xml
           git commit -m "build: bump version to ${{ steps.bumper.outputs.new_version }} [skip ci]"
           git push
-          git tag ${{ steps.bumper.outputs.new_version }} -m ${{ steps.bumper.outputs.new_version }}
+          git tag ${{ steps.bumper.outputs.new_version }} -m "Function v${{ steps.publish_lambda.outputs.function_version }}"
           git push origin ${{ steps.bumper.outputs.new_version }}
 
       - name: Set development project version
