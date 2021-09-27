@@ -70,7 +70,7 @@ jobs:
 
       - name: Set new project version
         working-directory: ./lambda
-        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.new_version }} -DgenerateBackupPoms=false
+        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.new_version }} -DgenerateBackupPoms=false -B -ff
 
       - name: Commit, tag, and push
         run: |
@@ -82,7 +82,7 @@ jobs:
 
       - name: Set development project version
         working-directory: ./lambda
-        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.next_dev_iteration }} -DgenerateBackupPoms=false
+        run: mvn versions:set -DnewVersion=${{ steps.bumper.outputs.next_dev_iteration }} -DgenerateBackupPoms=false -B -ff
 
       - name: Commit and push
         run: |
