@@ -5,33 +5,32 @@ updates:
     directory: "/lambda"
     schedule:
       interval: "daily"
-    target-branch: "master"
     assignees:
       - "TomerFi"
     labels:
       - "type: dependencies"
     commit-message:
       prefix: "build"
+      prefix-development: "test"
       include: "scope"
 
   - package-ecosystem: "maven"
     directory: "/lambda/src/it/shabbat-times-interaction-it"
     schedule:
       interval: "daily"
-    target-branch: "master"
     assignees:
       - "TomerFi"
     labels:
       - "type: dependencies"
     commit-message:
       prefix: "build"
+      prefix-development: "test"
       include: "scope"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "daily"
-    target-branch: "master"
     assignees:
       - "TomerFi"
     labels:
