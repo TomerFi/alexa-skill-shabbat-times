@@ -48,7 +48,8 @@ jobs:
       - name: Publish lambda function
         id: publish_lambda
         run: |
-          echo '::set-output name=function_version::$( aws lambda publish-version --function-name alexa-skill-shabbat-times | jq -r ".Version" )'
+          function_version=$( aws lambda publish-version --function-name alexa-skill-shabbat-times | jq -r ".Version" )
+          echo '::set-output name=function_version::'$function_version
 
       - name: Update alias Live with new function version
         run: >
@@ -96,6 +97,7 @@ jobs:
         with:
           bodyFile: changelog-${{ steps.bumper.outputs.new_version }}.md
           tag: ${{ steps.bumper.outputs.new_version }}
+          name: Function v${{ steps.publish_lambda.outputs.function_version }}
 
       - name: Tweet new release
         if: ${{ github.event.inputs.tweet == 'yes' }}
