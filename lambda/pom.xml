@@ -27,7 +27,7 @@
     <commons-codec.version>1.15</commons-codec.version>
     <equalsverifier.version>3.7.1</equalsverifier.version>
     <extra-enforcer-rules.version>1.4</extra-enforcer-rules.version>
-    <hebcal-api.version>2.1.5</hebcal-api.version>
+    <hebcal-api.version>2.1.6</hebcal-api.version>
     <httpclient.version>4.5.13</httpclient.version>
     <jackson.version>2.12.5</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
