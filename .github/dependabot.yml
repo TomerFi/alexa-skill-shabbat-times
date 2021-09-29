@@ -22,7 +22,7 @@ updates:
     labels:
       - "type: dependencies"
     commit-message:
-      prefix: "build"
+      prefix: "test"
       include: "scope"
 
   - package-ecosystem: "github-actions"
