@@ -57,6 +57,14 @@ jobs:
         working-directory: ./lambda
         run: mvn verify -Pits,cov -B -ff
 
+      - name: Upload integration test logs
+        uses: action/upload-artifact@v2.2.4
+        if: always()
+        with:
+          name: it-logs
+          path: lambda/target/it/shabbat-times-interaction-it/build.log
+          if-no-files-found: warn
+
       - name: Report test summary
         uses: EnricoMi/publish-unit-test-result-action@v1.22
         if: always()
@@ -68,5 +76,3 @@ jobs:
         uses: codecov/codecov-action@v2.1.0
         with:
           files: lambda/target/site/jacoco/jacoco.xml
-          fail_ci_if_error: true
-          verbose: true
