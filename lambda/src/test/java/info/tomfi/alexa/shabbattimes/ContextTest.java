@@ -13,6 +13,7 @@
 package info.tomfi.alexa.shabbattimes;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.reflections.scanners.Scanners.MethodsAnnotated;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
@@ -25,7 +26,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
-import org.reflections.scanners.MethodAnnotationsScanner;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
@@ -118,8 +118,7 @@ final class ContextTest {
 
   @Test
   void verify_country_beans() {
-    var reflections =
-        new Reflections("info.tomfi.alexa.shabbattimes", new MethodAnnotationsScanner());
+    var reflections = new Reflections("info.tomfi.alexa.shabbattimes", MethodsAnnotated);
     var beanMethods = reflections.getMethodsAnnotatedWith(Bean.class);
     beanMethods.removeIf(m -> !m.getDeclaringClass().equals(CountryBeans.class));
     assertThat(context.getBeansOfType(Country.class)).size().isEqualTo(beanMethods.size());
