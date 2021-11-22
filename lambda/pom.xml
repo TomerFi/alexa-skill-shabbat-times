@@ -34,7 +34,7 @@
     <joda-time.version>2.10.13</joda-time.version>
     <junit-jupiter.version>5.8.1</junit-jupiter.version>
     <log4j.version>2.14.1</log4j.version>
-    <mockito.version>4.0.0</mockito.version>
+    <mockito.version>4.1.0</mockito.version>
     <reflections.version>0.10.2</reflections.version>
     <slf4j.version>1.7.32</slf4j.version>
     <springframework.version>5.3.13</springframework.version>
