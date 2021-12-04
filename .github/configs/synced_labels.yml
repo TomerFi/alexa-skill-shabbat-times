@@ -25,13 +25,13 @@
 # Status labels
 - name: "status: on-hold"
   color": "fef2c0"
-  description": "This issue or pull request is on hold"
+  description: "This issue or pull request is on hold"
 - name: "status: wontfix"
   color: "ffffff"
   description: "This will not be worked on"
 - name: "status: needs information"
   color": "fef2c0"
-  description": "Further information is required"
+  description: "Further information is required"
 - name: "status: duplicate"
   color: "cfd8d7"
   description: "This issue or pull request already exists"
@@ -40,7 +40,7 @@
   description: "Issue confirmed"
 - name: "status: can't reproduce"
   color: "fec1c1"
-  description": "Unable to reproduce"
+  description: "Unable to reproduce"
 - name: "status: invalid"
   color: "e4e669"
   description: "This doesn't seem right"
@@ -94,7 +94,7 @@
 # Priority labels
 - name: "priority: critical"
   color: "b60205"
-  description": "Priority is critical"
+  description: "Priority is critical"
 - name: "priority: high"
   color: "d93f0b"
   description: "Priority is high"
@@ -124,3 +124,8 @@
 - name: "scope: skill-package"
   color: "bfe5bf"
   description: "Modify skill package"
+
+# Various labels
+- name: "help wanted"
+  color: "12ba0c"
+  description: "Contributing help wanted"
