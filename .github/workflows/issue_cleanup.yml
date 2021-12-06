@@ -13,7 +13,7 @@ jobs:
       - name: Lock closed issues
         uses: dessant/lock-threads@v3
         with:
-          issue-lock-inactive-days: 0
+          issue-inactive-days: 0
           # yamllint disable-line rule:line-length
-          issue-lock-comment: Locking this issue. [Open a new issue](https://github.com/TomerFi/alexa-skill-shabbat-times/issues/new/choose).
+          issue-comment: Locking this issue. [Open a new issue](https://github.com/TomerFi/alexa-skill-shabbat-times/issues/new/choose).
           process-only: issues
