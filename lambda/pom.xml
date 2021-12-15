@@ -23,7 +23,7 @@
     <ask-sdk-model-runtime.version>1.0.5</ask-sdk-model-runtime.version>
     <assertj.version>3.21.0</assertj.version>
     <archunit.version>0.22.0</archunit.version>
-    <auto-value.version>1.8.2</auto-value.version>
+    <auto-value.version>1.9</auto-value.version>
     <commons-codec.version>1.15</commons-codec.version>
     <equalsverifier.version>3.8</equalsverifier.version>
     <extra-enforcer-rules.version>1.4</extra-enforcer-rules.version>
