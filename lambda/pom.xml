@@ -4,7 +4,7 @@
 
   <groupId>info.tomfi.alexa</groupId>
   <artifactId>shabbat-times</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2.dev</version>
   <packaging>jar</packaging>
   <name>Shabbat Times</name>
   <description>Alexa skill handler for retrieving the Shabbat start and stop times in various cities around the world.</description>
