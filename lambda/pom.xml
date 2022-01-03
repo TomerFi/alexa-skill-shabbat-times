@@ -21,7 +21,7 @@
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.42.1</ask-sdk.version>
     <ask-sdk-model-runtime.version>1.0.5</ask-sdk-model-runtime.version>
-    <assertj.version>3.21.0</assertj.version>
+    <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.22.0</archunit.version>
     <auto-value.version>1.9</auto-value.version>
     <commons-codec.version>1.15</commons-codec.version>
