@@ -36,7 +36,7 @@
     <log4j.version>2.17.1</log4j.version>
     <mockito.version>4.3.0</mockito.version>
     <reflections.version>0.10.2</reflections.version>
-    <slf4j.version>1.7.33</slf4j.version>
+    <slf4j.version>1.7.35</slf4j.version>
     <springframework.version>5.3.15</springframework.version>
     <!-- Plugins -->
     <maven-assembly-plugin.version>3.3.0</maven-assembly-plugin.version>
