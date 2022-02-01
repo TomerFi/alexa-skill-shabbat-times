@@ -25,7 +25,7 @@
     <archunit.version>0.22.0</archunit.version>
     <auto-value.version>1.9</auto-value.version>
     <commons-codec.version>1.15</commons-codec.version>
-    <equalsverifier.version>3.8.3</equalsverifier.version>
+    <equalsverifier.version>3.9</equalsverifier.version>
     <extra-enforcer-rules.version>1.5.1</extra-enforcer-rules.version>
     <hebcal-api.version>2.1.6</hebcal-api.version>
     <httpclient.version>4.5.13</httpclient.version>
