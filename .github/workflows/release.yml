@@ -7,7 +7,7 @@ on:
       tweet:
         description: "Tweet new release?"
         required: false
-        default: "yes"
+        default: "no"
 
 jobs:
   release:
@@ -61,13 +61,11 @@ jobs:
       - name: Determine release version and create changelog
         id: bumper
         uses: tomerfi/version-bumper-action@1.1.2
-        with:
-          changelog: true
 
       - name: Configure git
         run: |
-          git config --global user.name "shabbat-times-skill"
-          git config --global user.email "noreply@shabbat-times-skill.tomfi.info"
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Set new project version
         working-directory: ./lambda
@@ -91,13 +89,18 @@ jobs:
           git commit -m "build: bump version to ${{ steps.bumper.outputs.next_dev_iteration }} [skip ci]"
           git push
 
-      - name: Release to GitHub
+      - name: Create a release
         id: gh_release
-        uses: ncipollo/release-action@v1.9.0
+        uses: actions/github-script@v6
         with:
-          bodyFile: changelog-${{ steps.bumper.outputs.new_version }}.md
-          tag: ${{ steps.bumper.outputs.new_version }}
-          name: Function v${{ steps.publish_lambda.outputs.function_version }}
+          script: |
+            const repo_name = context.payload.repository.full_name
+            const response = await github.request('POST /repos/' + repo_name + '/releases', {
+              tag_name: '${{ steps.bumper.outputs.new_version }}',
+              name: 'Function v${{ steps.publish_lambda.outputs.function_version }}',
+              generate_release_notes: true
+            })
+            core.setOutput('html_url', response.data.html_url)
 
       - name: Tweet new release
         if: ${{ github.event.inputs.tweet == 'yes' }}
@@ -111,4 +114,4 @@ jobs:
             🚀🎉 Shabbat Times skill ${{ steps.bumper.outputs.new_version }} has been released! 🎉🚀
             ${{ steps.gh_release.outputs.html_url }}
 
-            #shabbat_times_alexa_skill
+            #shabbat_times_alexa_skill #alexa #java
