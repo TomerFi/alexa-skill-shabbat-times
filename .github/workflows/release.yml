@@ -48,6 +48,7 @@ jobs:
       - name: Publish lambda function
         id: publish_lambda
         run: |
+          set -o pipefail
           function_version=$( aws lambda publish-version --function-name alexa-skill-shabbat-times | jq -r ".Version" )
           echo '::set-output name=function_version::'$function_version
 
