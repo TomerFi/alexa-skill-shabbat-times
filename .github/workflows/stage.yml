@@ -56,7 +56,9 @@ jobs:
         if: steps.function_state.outputs.state != 'Active'
         uses: actions/github-script@v6
         with:
-          script: core.notice('the function is not in an active state, please try again later')
+          script: |
+            core.warning('the function is being updated, please try again later')
+            core.notice('the function is being updated, please try again later')
 
       - name: Deploy skill handler to lambda (no publish)
         if: steps.function_state.outputs.state == 'Active'
