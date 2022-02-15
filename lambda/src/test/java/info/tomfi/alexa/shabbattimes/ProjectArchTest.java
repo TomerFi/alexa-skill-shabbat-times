@@ -26,10 +26,13 @@ import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.exception.AskSdkException;
 import com.google.auto.value.AutoValue;
+import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
+import com.tngtech.archunit.core.importer.Location;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
+import java.util.regex.Pattern;
 import org.junit.jupiter.api.Tag;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -37,7 +40,8 @@ import org.springframework.stereotype.Component;
 /** Project architecture rules. */
 @Tag("arch-tests")
 @AnalyzeClasses(
-    packages = "info.tomfi.alexa.shabbattimes", importOptions = {DoNotIncludeTests.class})
+    packages = "info.tomfi.alexa.shabbattimes",
+    importOptions = {DoNotIncludeTests.class, NotPackageInfo.class})
 // CHECKSTYLE.OFF: VisibilityModifier
 class ProjectArchTest {
   @ArchTest
@@ -148,4 +152,10 @@ class ProjectArchTest {
           .orShould().beAnnotatedWith(AutoValue.class)
           .orShould().beAnnotatedWith(Configuration.class)
           .as("layered architecture requires classes to be placed in the appropriate package");
+}
+class NotPackageInfo implements ImportOption {
+  @Override
+  public boolean includes(final Location location) {
+    return !location.matches(Pattern.compile(".*package-info\\.class$"));
+  }
 }
