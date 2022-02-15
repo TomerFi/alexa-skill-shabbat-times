@@ -7,6 +7,9 @@ on:
     branches:
       - master
 
+env:
+  LAMBDA_FUNCTION: alexa-skill-shabbat-times
+
 jobs:
   stage:
     runs-on: ubuntu-latest
@@ -46,7 +49,7 @@ jobs:
       - name: Get function state
         id: function_state
         run: |
-          state=$(aws lambda get-function --function-name alexa-skill-shabbat-times --query 'Configuration.State' --output text)
+          state=$(aws lambda get-function --function-name ${{ env.LAMBDA_FUNCTION }} --query 'Configuration.State' --output text)
           echo '::set-output name=state::'$state
 
       - name: Verify function is in active state
@@ -59,7 +62,7 @@ jobs:
         if: steps.function_state.outputs.state == 'Active'
         run: >
           aws lambda update-function-code
-          --function-name alexa-skill-shabbat-times
+          --function-name ${{ env.LAMBDA_FUNCTION }}
           --zip-file fileb://./lambda/target/skill-handler-function.zip
 
       - name: Push coverage report

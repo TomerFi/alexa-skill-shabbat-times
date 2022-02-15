@@ -9,6 +9,9 @@ on:
         required: false
         default: "no"
 
+env:
+  LAMBDA_FUNCTION: alexa-skill-shabbat-times
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -43,7 +46,7 @@ jobs:
       - name: Get function state
         id: function_state
         run: |
-          state=$(aws lambda get-function --function-name alexa-skill-shabbat-times --query 'Configuration.State' --output text)
+          state=$(aws lambda get-function --function-name ${{ env.LAMBDA_FUNCTION }} --query 'Configuration.State' --output text)
           echo '::set-output name=state::'$state
 
       - name: Verify function is in active state
@@ -55,20 +58,23 @@ jobs:
       - name: Deploy skill handler to lambda
         run: >
           aws lambda update-function-code
-          --function-name alexa-skill-shabbat-times
+          --function-name ${{ env.LAMBDA_FUNCTION }}
           --zip-file fileb://./lambda/target/skill-handler-function.zip
+
+      - name: Wait for function to be updated
+        run: aws lambda wait function-updated --function-name ${{ env.LAMBDA_FUNCTION }}
 
       - name: Publish lambda function
         id: publish_lambda
         run: |
           set -o pipefail
-          function_version=$( aws lambda publish-version --function-name alexa-skill-shabbat-times | jq -r ".Version" )
+          function_version=$( aws lambda publish-version --function-name ${{ env.LAMBDA_FUNCTION }} | jq -r ".Version" )
           echo '::set-output name=function_version::'$function_version
 
       - name: Update alias Live with new function version
         run: >
           aws lambda update-alias
-          --function-name alexa-skill-shabbat-times
+          --function-name ${{ env.LAMBDA_FUNCTION }}
           --name Live
           --function-version ${{ steps.publish_lambda.outputs.function_version }}
 
