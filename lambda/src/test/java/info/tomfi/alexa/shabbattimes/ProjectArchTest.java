@@ -54,7 +54,7 @@ class ProjectArchTest {
   final ArchRule exceptions_should_only_be_thrown_by_handlers_and_services =
       classes().that().resideInAPackage("..shabbattimes.exceptions..")
           .should().onlyBeAccessed().byClassesThat()
-              .resideInAnyPackage("..shabbattimes.handlers..", "..shabbattimes.services..")
+              .resideInAnyPackage("..shabbattimes.handlers..", "..shabbattimes.services..", "..shabbattimes..")
           .as("exceptions thrown are eventully cought and handled by the exception handlers");
 
   @ArchTest
