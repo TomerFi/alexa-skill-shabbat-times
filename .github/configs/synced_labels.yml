@@ -105,26 +105,6 @@
   color: "0e8a16"
   description: "Priority is low"
 
-# Project specific scope labels
-- name: "scope: project"
-  color: "bfe5bf"
-  description: "Modify root"
-- name: "scope: tests"
-  color: "bfe5bf"
-  description: "Modify test sources"
-- name: "scope: ci"
-  color: "bfe5bf"
-  description: "Modify ci configuration"
-- name: "scope: skill-infrastructure"
-  color: "bfe5bf"
-  description: "Modify skill infrastructure"
-- name: "scope: skill-handler"
-  color: "bfe5bf"
-  description: "Modify skill handler"
-- name: "scope: skill-package"
-  color: "bfe5bf"
-  description: "Modify skill package"
-
 # Various labels
 - name: "help wanted"
   color: "12ba0c"
