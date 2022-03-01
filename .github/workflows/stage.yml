@@ -48,9 +48,13 @@ jobs:
       # https://aws.amazon.com/blogs/compute/tracking-the-state-of-lambda-functions/
       - name: Get function state
         id: function_state
+        # editorconfig-checker-disable
+        # yamllint disable
         run: |
           state=$(aws lambda get-function --function-name ${{ env.LAMBDA_FUNCTION }} --query 'Configuration.State' --output text)
-          echo '::set-output name=state::'$state
+          echo '::set-output name=state::'"$state"
+        # editorconfig-checker-enable
+        # yamllint enable
 
       - name: Verify function is in active state
         if: steps.function_state.outputs.state != 'Active'

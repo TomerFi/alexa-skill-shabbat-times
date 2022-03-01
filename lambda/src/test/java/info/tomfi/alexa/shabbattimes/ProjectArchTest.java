@@ -26,8 +26,8 @@ import com.amazon.ask.dispatcher.request.interceptor.RequestInterceptor;
 import com.amazon.ask.dispatcher.request.interceptor.ResponseInterceptor;
 import com.amazon.ask.exception.AskSdkException;
 import com.google.auto.value.AutoValue;
-import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludePackageInfos;
+import com.tngtech.archunit.core.importer.ImportOption.DoNotIncludeTests;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
 import com.tngtech.archunit.lang.ArchRule;
@@ -54,7 +54,8 @@ class ProjectArchTest {
   final ArchRule exceptions_should_only_be_thrown_by_handlers_and_services =
       classes().that().resideInAPackage("..shabbattimes.exceptions..")
           .should().onlyBeAccessed().byClassesThat()
-              .resideInAnyPackage("..shabbattimes.handlers..", "..shabbattimes.services..", "..shabbattimes..")
+              .resideInAnyPackage(
+                "..shabbattimes.handlers..", "..shabbattimes.services..", "..shabbattimes..")
           .as("exceptions thrown are eventully cought and handled by the exception handlers");
 
   @ArchTest
