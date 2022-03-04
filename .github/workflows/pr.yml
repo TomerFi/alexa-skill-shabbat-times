@@ -83,7 +83,7 @@ jobs:
         run: mvn verify -Pits,cov -B -ff
 
       - name: Upload integration test logs
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: it-logs
@@ -91,7 +91,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Push test and coverage reports as artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: reports
           if-no-files-found: error
