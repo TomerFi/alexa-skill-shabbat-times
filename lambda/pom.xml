@@ -24,6 +24,7 @@
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
     <auto-value.version>1.9</auto-value.version>
+    <byte-buddy.version>1.12.8</byte-buddy.version>
     <commons-codec.version>1.15</commons-codec.version>
     <equalsverifier.version>3.9</equalsverifier.version>
     <extra-enforcer-rules.version>1.5.1</extra-enforcer-rules.version>
@@ -236,6 +237,11 @@
         <groupId>joda-time</groupId>
         <artifactId>joda-time</artifactId>
         <version>${joda-time.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
