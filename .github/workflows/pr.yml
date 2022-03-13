@@ -66,7 +66,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build and verify skill handler
     permissions:
-      pull-requests: read
+      checks: write
+      pull-requests: write
     steps:
       - name: Checkout sources
         uses: actions/checkout@v3
@@ -90,37 +91,15 @@ jobs:
           path: lambda/target/it/shabbat-times-interaction-it/build.log
           if-no-files-found: warn
 
-      - name: Push test and coverage reports as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: reports
-          if-no-files-found: error
-          path: |
-            ./lambda/target/junit-platform/TEST-junit-jupiter.xml
-            ./lambda/target/site/jacoco/jacoco.xml
-
-  report:
-    runs-on: ubuntu-latest
-    needs: build
-    name: Publish tests and coverage reports
-    permissions:
-      checks: write
-      issues: write
-      pull-requests: write
-    steps:
-      - name: Download coverage report from artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: reports
-          path: reports
-
       - name: Report test summary
         uses: EnricoMi/publish-unit-test-result-action@v1.31
+        if: always()
         with:
           test_changes_limit: 0
-          files: reports/junit-platform/TEST-junit-jupiter.xml
+          files: ./lambda/target/junit-platform/TEST-junit-jupiter.xml
+          report_individual_runs: true
 
       - name: Push coverage report
         uses: codecov/codecov-action@v2.1.0
         with:
-          files: reports/site/jacoco/jacoco.xml
+          files: ./lambda/target/site/jacoco/jacoco.xml
