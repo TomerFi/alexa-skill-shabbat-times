@@ -10,6 +10,8 @@ updates:
     commit-message:
       prefix: "build"
       include: "scope"
+    assignees:
+      - "tomerfi"
 
   - package-ecosystem: "maven"
     directory: "/lambda/src/it/shabbat-times-interaction-it"
@@ -20,6 +22,8 @@ updates:
     commit-message:
       prefix: "test"
       include: "scope"
+    assignees:
+      - "tomerfi"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -30,3 +34,5 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
+    assignees:
+      - "tomerfi"
