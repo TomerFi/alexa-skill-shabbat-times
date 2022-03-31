@@ -80,7 +80,7 @@ jobs:
           --name Live
           --function-version ${{ steps.publish_lambda.outputs.function_version }}
 
-      - name: Determine release version and create changelog
+      - name: Determine next SemVer
         id: bumper
         uses: tomerfi/version-bumper-action@1.1.2
 
@@ -122,7 +122,7 @@ jobs:
             const repo_name = context.payload.repository.full_name
             const response = await github.request('POST /repos/' + repo_name + '/releases', {
               tag_name: '${{ steps.bumper.outputs.new_version }}',
-              name: 'Function v${{ steps.publish_lambda.outputs.function_version }}',
+              name: '${{ steps.bumper.outputs.new_version }} - Function v${{ steps.publish_lambda.outputs.function_version }}',
               generate_release_notes: true
             })
             core.setOutput('html_url', response.data.html_url)
