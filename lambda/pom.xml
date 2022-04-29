@@ -20,7 +20,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.43.2</ask-sdk.version>
-    <ask-sdk-model-runtime.version>1.0.5</ask-sdk-model-runtime.version>
+    <ask-sdk-model-runtime.version>1.0.6</ask-sdk-model-runtime.version>
     <assertj.version>3.22.0</assertj.version>
     <archunit.version>0.23.1</archunit.version>
     <auto-value.version>1.9</auto-value.version>
