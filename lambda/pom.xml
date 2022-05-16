@@ -30,7 +30,7 @@
     <extra-enforcer-rules.version>1.5.1</extra-enforcer-rules.version>
     <hebcal-api.version>2.1.8</hebcal-api.version>
     <httpclient.version>4.5.13</httpclient.version>
-    <jackson.version>2.13.2</jackson.version>
+    <jackson.version>2.13.3</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
     <joda-time.version>2.10.14</joda-time.version>
     <junit-jupiter.version>5.8.2</junit-jupiter.version>
