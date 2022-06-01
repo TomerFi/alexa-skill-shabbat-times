@@ -22,7 +22,7 @@ import static org.assertj.core.api.BDDAssertions.thenExceptionOfType;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.when;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.verify;
 
 import com.amazon.ask.model.Intent;
@@ -62,14 +62,14 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
     faker = new Faker();
     country1Utterance = faker.lorem().word();
     var country2Utterance = faker.lorem().word();
-    when(country1.hasUtterance(country1Utterance)).thenReturn(Boolean.TRUE);
-    when(country2.hasUtterance(country2Utterance)).thenReturn(Boolean.TRUE);
+    lenient().when(country1.hasUtterance(country1Utterance)).thenReturn(Boolean.TRUE);
+    lenient().when(country2.hasUtterance(country2Utterance)).thenReturn(Boolean.TRUE);
     sut = new CountrySelectedIntentHandler(List.of(country1, country2), textor);
   }
 
   @Test
   void can_handle_should_return_true_for_country_selected_intent_type() {
-    // stub intent with COUNTRY_SELECTED as name and stub request with intnet
+    // stub intent with COUNTRY_SELECTED as name and stub request with intent
     given(intent.getName()).willReturn(COUNTRY_SELECTED.toString());
     given(request.getIntent()).willReturn(intent);
     // verify handler can handle
@@ -80,7 +80,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
   @EnumSource(mode = EXCLUDE, names = "COUNTRY_SELECTED")
   void can_handle_should_return_false_for_non_country_selected_intent_type(
       final IntentType intentType) {
-    // stub intent with intent type as name and stub request with intnet
+    // stub intent with intent type as name and stub request with intent
     given(intent.getName()).willReturn(intentType.toString());
     given(request.getIntent()).willReturn(intent);
     // verify handler cannot handle
@@ -89,7 +89,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
 
   @Test
   void invoking_handler_with_no_country_slot_throws_no_country_exception() {
-    // stub intnet with empty slot map and stub request with intent
+    // stub intent with empty slot map and stub request with intent
     var slots = new HashMap<String, Slot>();
     given(intent.getSlots()).willReturn(slots);
     given(request.getIntent()).willReturn(intent);
@@ -100,7 +100,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
   @Test
   void invoking_handler_with_null_country_value_throws_no_country_slot_exception(
       @Mock final Slot countrySlot) {
-    // stub intnet with null value country slot and stub request with intent
+    // stub intent with null value country slot and stub request with intent
     given(countrySlot.getValue()).willReturn(null);
     var slots = Map.of(COUNTRY_SLOT.toString(), countrySlot);
     given(intent.getSlots()).willReturn(slots);
@@ -112,7 +112,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
   @Test
   void invoking_handler_unknown_country_value_throws_no_country_found_exception(
       @Mock final Slot countrySlot) {
-    // stub intnet with unknown country slot value and stub request with intent
+    // stub intent with unknown country slot value and stub request with intent
     given(countrySlot.getValue()).willReturn(faker.lorem().word());
     var slots = Map.of(COUNTRY_SLOT.toString(), countrySlot);
     given(intent.getSlots()).willReturn(slots);
@@ -126,7 +126,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
       @Mock final Slot countrySlot,
       @Mock final ResponseBuilder builder,
       @Mock final Response response) {
-    // stub intnet with known country slot value and stub request with intent
+    // stub intent with known country slot value and stub request with intent
     given(countrySlot.getValue()).willReturn(country1Utterance);
     var slots = Map.of(COUNTRY_SLOT.toString(), countrySlot);
     given(intent.getSlots()).willReturn(slots);

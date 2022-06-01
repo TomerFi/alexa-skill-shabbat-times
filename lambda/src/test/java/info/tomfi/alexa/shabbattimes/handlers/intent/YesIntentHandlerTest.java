@@ -13,7 +13,6 @@
 package info.tomfi.alexa.shabbattimes.handlers.intent;
 
 import static info.tomfi.alexa.shabbattimes.AttributeKey.LAST_INTENT;
-import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_ASK_FOR_CITY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_PLEASE_CLARIFY;
 import static info.tomfi.alexa.shabbattimes.BundleKey.DEFAULT_REPROMPT;
 import static info.tomfi.alexa.shabbattimes.IntentType.YES;
@@ -69,7 +68,6 @@ final class YesIntentHandlerTest extends HandlerFixtures {
     given(attribMngr.getSessionAttributes()).willReturn(
         Map.of(LAST_INTENT.toString(), IntentType.COUNTRY_SELECTED));
     // stub the builder with the steps expected to be performed by the sut
-    given(builder.withSpeech(getText(DEFAULT_ASK_FOR_CITY))).willReturn(builder);
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);
     given(builder.withShouldEndSession(Boolean.FALSE)).willReturn(builder);
     given(builder.build()).willReturn(Optional.of(response));
