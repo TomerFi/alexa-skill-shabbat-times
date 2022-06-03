@@ -92,7 +92,7 @@ jobs:
           if-no-files-found: warn
 
       - name: Report test summary
-        uses: EnricoMi/publish-unit-test-result-action@v1.36
+        uses: EnricoMi/publish-unit-test-result-action@v1.37
         if: always()
         with:
           test_changes_limit: 0
