@@ -9,9 +9,6 @@ on:
         required: false
         default: "no"
 
-env:
-  LAMBDA_FUNCTION: alexa-skill-shabbat-times
-
 jobs:
   release:
     runs-on: ubuntu-latest

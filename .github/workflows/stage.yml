@@ -7,9 +7,6 @@ on:
     branches:
       - master
 
-env:
-  LAMBDA_FUNCTION: alexa-skill-shabbat-times
-
 jobs:
   stage:
     runs-on: ubuntu-latest
