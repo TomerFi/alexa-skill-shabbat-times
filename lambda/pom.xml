@@ -32,7 +32,7 @@
     <httpclient.version>4.5.13</httpclient.version>
     <jackson.version>2.13.3</jackson.version>
     <javafaker.version>1.0.2</javafaker.version>
-    <joda-time.version>2.11.0</joda-time.version>
+    <joda-time.version>2.11.1</joda-time.version>
     <junit-jupiter.version>5.9.0</junit-jupiter.version>
     <log4j.version>2.18.0</log4j.version>
     <mockito.version>4.7.0</mockito.version>
