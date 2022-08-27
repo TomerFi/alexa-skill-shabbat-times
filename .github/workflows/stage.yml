@@ -48,7 +48,7 @@ jobs:
         # editorconfig-checker-disable
         # yamllint disable
         run: |
-          state=$(aws lambda get-function --function-name ${{ env.LAMBDA_FUNCTION }} --query 'Configuration.State' --output text)
+          state=$(aws lambda get-function --function-name ${{ secrets.LAMBDA_FUNCTION }} --query 'Configuration.State' --output text)
           echo '::set-output name=state::'"$state"
         # editorconfig-checker-enable
         # yamllint enable
@@ -65,7 +65,7 @@ jobs:
         if: steps.function_state.outputs.state == 'Active'
         run: >
           aws lambda update-function-code
-          --function-name ${{ env.LAMBDA_FUNCTION }}
+          --function-name ${{ secrets.LAMBDA_FUNCTION }}
           --zip-file fileb://./lambda/target/skill-handler-function.zip
 
       - name: Push coverage report
