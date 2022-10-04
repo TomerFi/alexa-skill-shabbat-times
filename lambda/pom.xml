@@ -55,7 +55,7 @@
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <junit-platform-maven-plugin.version>1.1.6</junit-platform-maven-plugin.version>
     <license-maven-plugin.version>4.1</license-maven-plugin.version>
-    <pitest-maven.version>1.9.5</pitest-maven.version>
+    <pitest-maven.version>1.9.6</pitest-maven.version>
     <pitest-junit5-plugin.version>1.1.0</pitest-junit5-plugin.version>
     <versions-maven-plugin.version>2.12.0</versions-maven-plugin.version>
   </properties>
