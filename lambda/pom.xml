@@ -23,7 +23,7 @@
     <ask-sdk-model-runtime.version>1.0.6</ask-sdk-model-runtime.version>
     <assertj.version>3.23.1</assertj.version>
     <archunit.version>0.23.1</archunit.version>
-    <auto-value.version>1.9</auto-value.version>
+    <auto-value.version>1.10</auto-value.version>
     <byte-buddy.version>1.12.17</byte-buddy.version>
     <commons-codec.version>1.15</commons-codec.version>
     <equalsverifier.version>3.10.1</equalsverifier.version>
