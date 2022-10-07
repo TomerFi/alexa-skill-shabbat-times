@@ -76,6 +76,7 @@ class ProjectArchTest {
   @ArchTest
   final ArchRule handlers_interceptors_and_services_should_not_be_manually_accessed =
       layeredArchitecture()
+          .consideringAllDependencies()
           .layer("Handlers").definedBy("..shabbattimes.handlers..")
           .layer("Interceptors").definedBy("..shabbattimes.interceptors..")
           .layer("Services").definedBy("..shabbattimes.services..")
@@ -83,7 +84,7 @@ class ProjectArchTest {
           .whereLayer("Handlers").mayNotBeAccessedByAnyLayer()
           .whereLayer("Interceptors").mayNotBeAccessedByAnyLayer()
           .whereLayer("Services").mayNotBeAccessedByAnyLayer()
-          .because("loose coupling requires only the di context to pick up the comonents");
+          .because("loose coupling requires only the di context to pick up the components");
 
   @ArchTest
   final ArchRule exception_handlers_should_be_public_final_and_implement_the_interface =
