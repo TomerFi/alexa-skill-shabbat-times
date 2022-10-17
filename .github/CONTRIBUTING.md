@@ -1,4 +1,4 @@
-# Contributing to `alexa-skill-shabbat-times`</br>[![conventional-commits]][0]
+# Contributing to `alexa-skill-shabbat-times`
 
 :clap: First off, thank you for taking the time to contribute. :clap:
 
@@ -51,20 +51,3 @@ ask smapi withdraw-skill-from-certification --skill-id <skill-id>
 > unfortunately, it feels like *ask-cli* is not quite mature enough for automated work.</br>
 > If anything changes, I would like to try this again.
 
-## Commit messages
-
-Commit messages must:
-
-- adhere the [Conventional Commits Specification][0]
-- be signed-off based on the [Developer Certificate of Origin][2]
-
-## Code of Conduct
-
-Please check the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) document before contributing.
-
-<!-- Real Links -->
-[0]: https://conventionalcommits.org
-[1]: https://developer.amazon.com/en-US/docs/alexa/smapi/ask-cli-command-reference.html
-[2]: https://developercertificate.org
-<!-- Badges Links -->
-[conventional-commits]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
