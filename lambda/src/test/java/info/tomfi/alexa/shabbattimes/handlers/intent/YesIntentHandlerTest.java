@@ -65,8 +65,8 @@ final class YesIntentHandlerTest extends HandlerFixtures {
   void invoking_as_a_followup_to_the_country_selected_prompt_should_ask_for_the_selected_city(
       @Mock final ResponseBuilder builder, @Mock final Response response) {
     // stub session attributes with COUNTRY_SELECTED as the previous intent
-    given(attribMngr.getSessionAttributes()).willReturn(
-        Map.of(LAST_INTENT.toString(), IntentType.COUNTRY_SELECTED));
+    given(attribMngr.getSessionAttributes())
+        .willReturn(Map.of(LAST_INTENT.toString(), IntentType.COUNTRY_SELECTED));
     // stub the builder with the steps expected to be performed by the sut
     given(builder.withReprompt(getText(DEFAULT_REPROMPT))).willReturn(builder);
     given(builder.withShouldEndSession(Boolean.FALSE)).willReturn(builder);
@@ -79,7 +79,9 @@ final class YesIntentHandlerTest extends HandlerFixtures {
   }
 
   @ParameterizedTest
-  @EnumSource(mode = EXCLUDE, names = { "YES", "COUNTRY_SELECTED" })
+  @EnumSource(
+      mode = EXCLUDE,
+      names = {"YES", "COUNTRY_SELECTED"})
   void invoking_as_a_followup_after_a_non_country_selected_intent_should_ask_for_clarification(
       final IntentType intentType,
       @Mock final ResponseBuilder builder,

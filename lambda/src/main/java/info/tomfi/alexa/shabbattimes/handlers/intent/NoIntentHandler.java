@@ -71,10 +71,12 @@ public final class NoIntentHandler implements IntentRequestHandler {
   private Optional<Response> askForClarification(final HandlerInput input) {
     // get request attributes
     var requestAttribs = input.getAttributesManager().getRequestAttributes();
-    return input.getResponseBuilder()
+    return input
+        .getResponseBuilder()
         .withSpeech(textor.getText(requestAttribs, DEFAULT_PLEASE_CLARIFY))
         .withReprompt(textor.getText(requestAttribs, DEFAULT_REPROMPT))
-        .withShouldEndSession(false).build();
+        .withShouldEndSession(false)
+        .build();
   }
 
   private Optional<Response> countrySelectedFollowUp(

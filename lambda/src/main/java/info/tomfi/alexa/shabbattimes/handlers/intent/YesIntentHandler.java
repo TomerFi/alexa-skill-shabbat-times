@@ -47,9 +47,11 @@ public final class YesIntentHandler implements IntentRequestHandler {
     var requstAttribs = input.getAttributesManager().getRequestAttributes();
     var sessionAttribs = input.getAttributesManager().getSessionAttributes();
     // start builder
-    var respBuilder = input.getResponseBuilder()
-        .withReprompt(textor.getText(requstAttribs, DEFAULT_REPROMPT))
-        .withShouldEndSession(false);
+    var respBuilder =
+        input
+            .getResponseBuilder()
+            .withReprompt(textor.getText(requstAttribs, DEFAULT_REPROMPT))
+            .withShouldEndSession(false);
     if (sessionAttribs.containsKey(LAST_INTENT.toString())
         && sessionAttribs.get(LAST_INTENT.toString()).equals(COUNTRY_SELECTED.toString())) {
       // the user reply yes to the question `was you city on the list?`

@@ -27,12 +27,8 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
 import java.util.List;
 import java.util.Optional;
-import java.util.ServiceLoader;
-import java.util.ServiceLoader.Provider;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -86,23 +82,5 @@ final class SkillConfigTest {
     then(skillBuilder).should().addExceptionHandlers(eq(List.of(exceptionHandler)));
     then(skillBuilder).should().build();
     then(skillBuilder).shouldHaveNoMoreInteractions();
-  }
-
-  @Test
-  void instantiating_the_api_implementation_should_invoke_the_service_loader_api(
-      @Mock final ServiceLoader<ShabbatAPI> apiLoader,
-      @Mock final Provider<ShabbatAPI> apiProvider,
-      @Mock final ShabbatAPI expectedApi) {
-    // stub the service provider the the mocked api
-    given(apiProvider.get()).willReturn(expectedApi);
-    // stub the service loader with the mock provider
-    given(apiLoader.stream()).willReturn(Stream.of(apiProvider));
-    // mock ServiceLoader class
-    try (var loaderMock = mockStatic(ServiceLoader.class)) {
-      // stub static load factory with mocked service loader
-      loaderMock.when(() -> ServiceLoader.load(eq(ShabbatAPI.class))).thenReturn(apiLoader);
-      // retrieving the api from the sut yields the mocked api
-      assertThat(sut.getShabbatAPI()).isEqualTo(expectedApi);
-    }
   }
 }

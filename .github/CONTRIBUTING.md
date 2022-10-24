@@ -11,7 +11,6 @@ Contributing is pretty straight-forward:
 Please feel free to contribute, even to this contributing guideline file, if you see fit.
 
 - [Run superlinter locally](#run-superlinter-locally)
-- [Code of Conduct](#code-of-conduct)
 
 ## Run superlinter locally
 
@@ -32,7 +31,9 @@ function:
   *Live* alias to it.
 
 If any changes were made to the skill metadata,</br>
-we can use the UI or [ask cli][1] to deploy the metadata part manually.</br>
+we can use the UI or
+[ask cli](https://developer.amazon.com/en-US/docs/alexa/smapi/ask-cli-command-reference.html)
+to deploy the metadata part manually.</br>
 Here are some useful commands for the process:
 
 ```shell
@@ -50,4 +51,3 @@ ask smapi withdraw-skill-from-certification --skill-id <skill-id>
 > I tried incorporating the skill metadata part with the ci workflows,</br>
 > unfortunately, it feels like *ask-cli* is not quite mature enough for automated work.</br>
 > If anything changes, I would like to try this again.
-

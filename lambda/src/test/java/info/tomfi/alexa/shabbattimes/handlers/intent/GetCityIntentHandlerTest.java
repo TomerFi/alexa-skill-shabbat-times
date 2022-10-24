@@ -22,9 +22,6 @@ import static info.tomfi.alexa.shabbattimes.BundleKey.SIMPLE_CARD_CONTENT_FMT;
 import static info.tomfi.alexa.shabbattimes.BundleKey.SIMPLE_CARD_TITLE_FMT;
 import static info.tomfi.alexa.shabbattimes.IntentType.GET_CITY;
 import static info.tomfi.alexa.shabbattimes.SlotName.COUNTRY_SLOT;
-import static info.tomfi.hebcal.shabbat.response.ItemCategory.CANDLES;
-import static info.tomfi.hebcal.shabbat.response.ItemCategory.HAVDALAH;
-import static info.tomfi.hebcal.shabbat.response.ItemCategory.HOLIDAY;
 import static org.assertj.core.api.BDDAssertions.then;
 import static org.assertj.core.api.BDDAssertions.thenExceptionOfType;
 import static org.junit.jupiter.params.provider.EnumSource.Mode.EXCLUDE;
@@ -43,19 +40,11 @@ import info.tomfi.alexa.shabbattimes.IntentType;
 import info.tomfi.alexa.shabbattimes.LocatorService;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponseException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
 import info.tomfi.alexa.shabbattimes.handlers.HandlerFixtures;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
-import info.tomfi.hebcal.shabbat.request.FlagState;
-import info.tomfi.hebcal.shabbat.request.GeoType;
-import info.tomfi.hebcal.shabbat.request.OutputType;
-import info.tomfi.hebcal.shabbat.request.ParamKey;
-import info.tomfi.hebcal.shabbat.request.Request;
-import info.tomfi.hebcal.shabbat.response.Response;
-import info.tomfi.hebcal.shabbat.response.ResponseItem;
-import info.tomfi.hebcal.shabbat.response.ResponseLocation;
+import info.tomfi.shabbat.APIRequest;
+import info.tomfi.shabbat.APIResponse;
+import info.tomfi.shabbat.ShabbatAPI;
 import java.time.OffsetDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -135,10 +124,10 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     // stub city mock
     var countryAbbreviation = faker.country().countryCode2();
     var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
+    var cityGeoid = (int) faker.number().randomNumber(5, true);
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
+    given(city.geoId()).willReturn(cityGeoid);
     // stub slot value with city name
     given(citySlot.getValue()).willReturn(cityName);
     // create slot map with city slot and stub it to the request
@@ -154,7 +143,7 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
     given(request.getTimestamp()).willReturn(fridayTimestamp);
     // stub shabbat api with future and complete the future exceptionally to mimic api fail
-    var future = new CompletableFuture<Response>();
+    var future = new CompletableFuture<APIResponse>();
     future.completeExceptionally(new CompletionException(new Throwable()));
     given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
     // when invoking the handler verify exception is thrown
@@ -181,10 +170,10 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     // stub city mock
     var countryAbbreviation = faker.country().countryCode2();
     var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
+    var cityGeoid = (int) faker.number().randomNumber(5, true);
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
+    given(city.geoId()).willReturn(cityGeoid);
     // stub slot value with city name
     given(citySlot.getValue()).willReturn(cityName);
     // create slot map with city and country slot and stub it to the request
@@ -200,165 +189,11 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
     given(request.getTimestamp()).willReturn(fridayTimestamp);
     // stub shabbat api with future and complete the future exceptionally to mimic api fail
-    var future = new CompletableFuture<Response>();
+    var future = new CompletableFuture<APIResponse>();
     future.completeExceptionally(new CompletionException(new Throwable()));
     given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
     // when invoking the handler verify exception is thrown
     thenExceptionOfType(NoResponseFromApiException.class)
-        .isThrownBy(() -> sut.handle(input, request));
-    // verify city information saved as session attributes
-    verify(attribMngr)
-        .setSessionAttributes(
-            argThat(
-                m ->
-                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
-                        && m.get(CITY.toString()).equals(cityName)));
-    then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
-    then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
-  }
-
-  @ParameterizedTest
-  @EnumSource
-  void invoking_handler_api_return_response_has_no_items_throws_no_items_in_response_exception(
-      final CitySlot slotName,
-      @Mock final Slot citySlot,
-      @Mock final City city,
-      @Mock final Slot countrySlot,
-      @Mock final Response apiResponse) {
-    // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
-    given(city.countryAbbreviation()).willReturn(countryAbbreviation);
-    given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
-    // stub slot value with city name
-    given(citySlot.getValue()).willReturn(cityName);
-    // create slot map with city and country slot and stub it to the request
-    var slots = Map.of(slotName.toString(), citySlot, COUNTRY_SLOT, countrySlot);
-    given(intent.getSlots()).willReturn(slots);
-    given(request.getIntent()).willReturn(intent);
-    // stub empty session attributes map to attributes manager
-    var sessionAttribs = new HashMap<String, Object>();
-    given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
-    // stub locator to return mock city for locating by mock city and country slots
-    given(locator.locate(eq(countrySlot), eq(citySlot))).willReturn(city);
-    // stub request with a random friday offset date and time
-    var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
-    given(request.getTimestamp()).willReturn(fridayTimestamp);
-    // stub response with empty response items list
-    given(apiResponse.items()).willReturn(Optional.empty());
-    // stub shabbat api with a completed future completed with mock response
-    var future = new CompletableFuture<Response>();
-    future.complete(apiResponse);
-    given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
-    // when invoking the handler verify exception is thrown
-    thenExceptionOfType(NoItemsInResponseException.class)
-        .isThrownBy(() -> sut.handle(input, request));
-    // verify city information saved as session attributes
-    verify(attribMngr)
-        .setSessionAttributes(
-            argThat(
-                m ->
-                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
-                        && m.get(CITY.toString()).equals(cityName)));
-    then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
-    then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
-  }
-
-  @ParameterizedTest
-  @EnumSource
-  void invoking_handler_api_response_has_no_candles_item_throws_no_item_found_for_date_exception(
-      final CitySlot slotName,
-      @Mock final Slot citySlot,
-      @Mock final City city,
-      @Mock final Slot countrySlot,
-      @Mock final Response apiResponse,
-      @Mock final ResponseItem holidayItem) {
-    // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
-    given(city.countryAbbreviation()).willReturn(countryAbbreviation);
-    given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
-    // stub slot value with city name
-    given(citySlot.getValue()).willReturn(cityName);
-    // create slot map with city and country slot and stub it to the request
-    var slots = Map.of(slotName.toString(), citySlot, COUNTRY_SLOT, countrySlot);
-    given(intent.getSlots()).willReturn(slots);
-    given(request.getIntent()).willReturn(intent);
-    // stub empty session attributes map to attributes manager
-    var sessionAttribs = new HashMap<String, Object>();
-    given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
-    // stub locator to return mock city for locating by mock city and country slots
-    given(locator.locate(eq(countrySlot), eq(citySlot))).willReturn(city);
-    // stub request with a random friday offset date and time
-    var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
-    given(request.getTimestamp()).willReturn(fridayTimestamp);
-    // stub response with response items (no candles or havdalah items)
-    given(holidayItem.category()).willReturn(HOLIDAY.toString());
-    given(apiResponse.items()).willReturn(Optional.of(List.of(holidayItem)));
-    // stub shabbat api with a completed future completed with mock response
-    var future = new CompletableFuture<Response>();
-    future.complete(apiResponse);
-    given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
-    // when invoking the handler verify exception is thrown
-    thenExceptionOfType(NoItemFoundForDateException.class)
-        .isThrownBy(() -> sut.handle(input, request));
-    // verify city information saved as session attributes
-    verify(attribMngr)
-        .setSessionAttributes(
-            argThat(
-                m ->
-                    m.get(COUNTRY.toString()).equals(countryAbbreviation)
-                        && m.get(CITY.toString()).equals(cityName)));
-    then(sessionAttribs).hasEntrySatisfying(COUNTRY.toString(), o -> o.equals(countryAbbreviation));
-    then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
-  }
-
-  @ParameterizedTest
-  @EnumSource
-  void invoking_handler_api_response_has_no_havdalah_item_throws_no_item_found_for_date_exception(
-      final CitySlot slotName,
-      @Mock final Slot citySlot,
-      @Mock final City city,
-      @Mock final Slot countrySlot,
-      @Mock final Response apiResponse,
-      @Mock final ResponseItem holidayItem,
-      @Mock final ResponseItem candlesItem) {
-    // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
-    given(city.countryAbbreviation()).willReturn(countryAbbreviation);
-    given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
-    // stub slot value with city name
-    given(citySlot.getValue()).willReturn(cityName);
-    // create slot map with city and country slot and stub it to the request
-    var slots = Map.of(slotName.toString(), citySlot, COUNTRY_SLOT, countrySlot);
-    given(intent.getSlots()).willReturn(slots);
-    given(request.getIntent()).willReturn(intent);
-    // stub empty session attributes map to attributes manager
-    var sessionAttribs = new HashMap<String, Object>();
-    given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
-    // stub locator to return mock city for locating by mock city and country slots
-    given(locator.locate(eq(countrySlot), eq(citySlot))).willReturn(city);
-    // stub request with a random friday offset date and time
-    var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
-    given(request.getTimestamp()).willReturn(fridayTimestamp);
-    // stub response with response items (no havdalah item)
-    given(holidayItem.category()).willReturn(HOLIDAY.toString());
-    given(candlesItem.category()).willReturn(CANDLES.toString());
-    given(candlesItem.date()).willReturn("2019-10-04T18:04:00+03:00");
-    given(apiResponse.items()).willReturn(Optional.of(List.of(holidayItem, candlesItem)));
-    // stub shabbat api with a completed future completed with mock response
-    var future = new CompletableFuture<Response>();
-    future.complete(apiResponse);
-    given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
-    // when invoking the handler verify exception is thrown
-    thenExceptionOfType(NoItemFoundForDateException.class)
         .isThrownBy(() -> sut.handle(input, request));
     // verify city information saved as session attributes
     verify(attribMngr)
@@ -379,21 +214,23 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final Slot citySlot,
       @Mock final City city,
       @Mock final Slot countrySlot,
-      @Mock final Response apiResponse,
-      @Mock final ResponseItem holidayItem,
-      @Mock final ResponseItem candlesItem,
-      @Mock final ResponseItem havdalahItem,
-      @Mock final ResponseLocation location,
+      @Mock final APIResponse apiResponse,
+      @Mock final APIResponse.Item holidayItem,
+      @Mock final APIResponse.Item candlesItem,
+      @Mock final APIResponse.Item havdalahItem,
+      @Mock final APIResponse.Location location,
       @Mock final ResponseBuilder builder,
-      @Mock final com.amazon.ask.model.Response skillResponse) {
+      @Mock final com.amazon.ask.model.Response skillResponse)
+      throws NoSuchFieldException, SecurityException, IllegalArgumentException,
+          IllegalAccessException {
     // stub city mock
     var countryAbbreviation = faker.country().countryCode2();
     var cityName = faker.country().capital();
-    var cityGeoid = String.valueOf(faker.number().randomNumber(5, true));
+    var cityGeoid = (int) faker.number().randomNumber(5, true);
     var cityGeoName = faker.lorem().word();
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
-    given(city.geoId()).willReturn(Integer.parseInt(cityGeoid));
+    given(city.geoId()).willReturn(cityGeoid);
     given(city.geoName()).willReturn(cityGeoName);
     // stub slot value with city name
     given(citySlot.getValue()).willReturn(cityName);
@@ -410,18 +247,22 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     var fridayTimestamp = OffsetDateTime.parse("2019-10-04T10:20:30Z");
     given(request.getTimestamp()).willReturn(fridayTimestamp);
     // stub response with response items
-    given(holidayItem.category()).willReturn(HOLIDAY.toString());
-    given(candlesItem.category()).willReturn(CANDLES.toString());
-    given(candlesItem.date()).willReturn("2019-10-04T18:04:00+03:00");
-    given(havdalahItem.category()).willReturn(HAVDALAH.toString());
-    given(havdalahItem.date()).willReturn("2019-10-05T19:11:00+03:00");
-    given(apiResponse.items())
-        .willReturn(Optional.of(List.of(holidayItem, candlesItem, havdalahItem)));
+    setFinalField(holidayItem, "category", APIResponse.Item.Category.HOLIDAY);
+    setFinalField(candlesItem, "category", APIResponse.Item.Category.CANDLES);
+    setFinalField(candlesItem, "date", "2019-10-04T18:04:00+03:00");
+    setFinalField(havdalahItem, "category", APIResponse.Item.Category.HAVDALAH);
+    setFinalField(havdalahItem, "date", "2019-10-05T19:11:00+03:00");
+    setFinalField(
+        apiResponse, "items", Optional.of(List.of(holidayItem, candlesItem, havdalahItem)));
+    setFinalField(candlesItem, "category", APIResponse.Item.Category.CANDLES);
     // stub response with response location
-    given(location.city()).willReturn(cityName);
-    given(apiResponse.location()).willReturn(location);
+    setFinalField(location, "city", cityName);
+    setFinalField(apiResponse, "location", location);
+    // stub the response utility methods
+    given(apiResponse.getShabbatStart()).willReturn(OffsetDateTime.parse(candlesItem.date));
+    given(apiResponse.getShabbatEnd()).willReturn(OffsetDateTime.parse(havdalahItem.date));
     // stub shabbat api with a completed future completed with mock response
-    var future = new CompletableFuture<Response>();
+    var future = new CompletableFuture<APIResponse>();
     future.complete(apiResponse);
     given(sapi.sendAsync(argThat(verifyRequest(cityGeoid, fridayTimestamp)))).willReturn(future);
     // stub the builder with the steps expected to be performed by the sut
@@ -466,20 +307,30 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
     then(sessionAttribs).hasEntrySatisfying(CITY.toString(), o -> o.equals(cityName));
   }
 
-  private ArgumentMatcher<Request> verifyRequest(
-      final String geoId, final OffsetDateTime timestamp) {
+  private ArgumentMatcher<APIRequest> verifyRequest(
+      final int geoId, final OffsetDateTime timestamp) {
     var exp =
         Map.of(
-            ParamKey.OUTPUT_FORMAT.toString(), OutputType.JSON.toString(),
-            ParamKey.GEO_TYPE.toString(), GeoType.GEO_NAME.toString(),
-            ParamKey.GEO_ID.toString(), geoId,
-            ParamKey.ASHKENAZIS_TRANSLITERATIONS.toString(), FlagState.OFF.toString(),
-            ParamKey.CANDLE_LIGHTING.toString(), "18",
-            ParamKey.HAVDALAH.toString(), "50",
-            ParamKey.INCLUDE_TURAH_HAFTARAH.toString(), FlagState.OFF.toString(),
-            ParamKey.GREGORIAN_YEAR.toString(), String.valueOf(timestamp.getYear()),
-            ParamKey.GREGORIAN_MONTH.toString(), String.valueOf(timestamp.getMonthValue()),
-            ParamKey.GREGORIAN_DAY.toString(), String.valueOf(timestamp.getDayOfMonth()));
+            APIRequest.ParamKey.OUTPUT_FORMAT, APIRequest.OutputType.JSON,
+            APIRequest.ParamKey.GEO_TYPE, APIRequest.GeoType.GEO_NAME,
+            APIRequest.ParamKey.GEO_ID, APIRequest.IntWrapper.of(geoId),
+            APIRequest.ParamKey.ASHKENAZIS_TRANSLITERATIONS, APIRequest.FlagState.OFF,
+            APIRequest.ParamKey.CANDLE_LIGHTING, APIRequest.IntWrapper.of(18),
+            APIRequest.ParamKey.HAVDALAH, APIRequest.IntWrapper.of(50),
+            APIRequest.ParamKey.INCLUDE_TURAH_HAFTARAH, APIRequest.FlagState.OFF,
+            APIRequest.ParamKey.GREGORIAN_YEAR, APIRequest.IntWrapper.of(timestamp.getYear()),
+            APIRequest.ParamKey.GREGORIAN_MONTH,
+                APIRequest.PaddedIntWrapper.of(timestamp.getMonthValue()),
+            APIRequest.ParamKey.GREGORIAN_DAY,
+                APIRequest.PaddedIntWrapper.of(timestamp.getDayOfMonth()));
     return r -> r.queryParams().equals(exp);
+  }
+
+  private static void setFinalField(final Object instance, final String name, final Object value)
+      throws NoSuchFieldException, SecurityException, IllegalArgumentException,
+          IllegalAccessException {
+    var field = instance.getClass().getDeclaredField(name);
+    field.setAccessible(true);
+    field.set(instance, value);
   }
 }

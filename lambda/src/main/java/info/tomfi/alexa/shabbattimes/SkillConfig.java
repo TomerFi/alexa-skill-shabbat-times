@@ -20,10 +20,9 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.shabbat.ShabbatAPI;
 import java.util.List;
 import java.util.Optional;
-import java.util.ServiceLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -72,12 +71,12 @@ public class SkillConfig {
   }
 
   /**
-   * Use the service loader to instantiate the ShabbatAPI service provider.
+   * Get an instance of ShabbatAPI.
    *
-   * @return the service provider instance.
+   * @return the instantiated API.
    */
   @Bean
   ShabbatAPI getShabbatAPI() {
-    return ServiceLoader.load(ShabbatAPI.class).stream().findFirst().get().get();
+    return new ShabbatAPI();
   }
 }
