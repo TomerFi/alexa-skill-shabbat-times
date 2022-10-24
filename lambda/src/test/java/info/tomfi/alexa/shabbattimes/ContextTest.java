@@ -20,7 +20,7 @@ import com.amazon.ask.request.exception.handler.GenericExceptionHandler;
 import com.amazon.ask.request.handler.GenericRequestHandler;
 import com.amazon.ask.request.interceptor.GenericRequestInterceptor;
 import com.amazon.ask.request.interceptor.GenericResponseInterceptor;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
+import info.tomfi.shabbat.ShabbatAPI;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;

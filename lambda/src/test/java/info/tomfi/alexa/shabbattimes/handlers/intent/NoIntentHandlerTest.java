@@ -84,7 +84,9 @@ final class NoIntentHandlerTest extends HandlerFixtures {
   }
 
   @ParameterizedTest
-  @EnumSource(mode = EXCLUDE, names = { "COUNTRY_SELECTED", "HELP" })
+  @EnumSource(
+      mode = EXCLUDE,
+      names = {"COUNTRY_SELECTED", "HELP"})
   void invoking_as_a_followup_after_a_non_country_selected_intent_should_end_the_interaction(
       final IntentType intentType,
       @Mock final ResponseBuilder builder,

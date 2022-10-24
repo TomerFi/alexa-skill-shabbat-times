@@ -83,7 +83,9 @@ final class StopIntentHandlerTest extends HandlerFixtures {
   }
 
   @ParameterizedTest
-  @EnumSource(mode = EXCLUDE, names = { "STOP", "HELP" })
+  @EnumSource(
+      mode = EXCLUDE,
+      names = {"STOP", "HELP"})
   void invoking_as_a_followup_after_a_non_help_intent_should_ask_for_clarification(
       final IntentType intentType,
       @Mock final ResponseBuilder builder,

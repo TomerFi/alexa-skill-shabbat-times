@@ -19,6 +19,6 @@ public final class NoResponseFromApiException extends AskSdkException {
   private static final long serialVersionUID = 24L;
 
   public NoResponseFromApiException(final Throwable cause) {
-    super("no response from hebcal's shabbat api", cause);
+    super("no response from shabbat api", cause);
   }
 }

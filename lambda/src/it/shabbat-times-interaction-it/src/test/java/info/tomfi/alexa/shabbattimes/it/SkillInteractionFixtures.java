@@ -19,9 +19,9 @@ import static org.mockito.Mockito.when;
 import com.amazon.ask.Skill;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import info.tomfi.alexa.shabbattimes.SkillConfig;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
-import info.tomfi.hebcal.shabbat.request.Request;
-import info.tomfi.hebcal.shabbat.response.Response;
+import info.tomfi.shabbat.APIRequest;
+import info.tomfi.shabbat.APIResponse;
+import info.tomfi.shabbat.ShabbatAPI;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import org.junit.jupiter.api.AfterEach;
@@ -40,8 +40,7 @@ public class SkillInteractionFixtures {
   protected Skill sut;
 
   /**
-   * Bean for mocking the ShabbatAPI for avoiding calls to HebCal's real API. Removing this bean
-   * annotation will make the tests send requests to hebcal's real api.
+   * Bean for mocking the ShabbatAPI for avoiding real calls.
    *
    * @return a ShabbatAPI mock stubbed for returning the fixed response for the date under test.
    */
@@ -51,13 +50,13 @@ public class SkillInteractionFixtures {
     mockApi = mock(ShabbatAPI.class);
     // instantiate object mapper
     var mapper = new ObjectMapper();
-    // stub mock api to return real hebcal api response
-    when(mockApi.sendAsync(any(Request.class))).thenAnswer(a -> {
+    // stub mock api to return real api response
+    when(mockApi.sendAsync(any(APIRequest.class))).thenAnswer(a -> {
       var resp = mapper.readValue(
           getClass().getClassLoader().getResourceAsStream(
             "responses/real_hebcal_api_response.json"),
-          Response.class);
-      var cf = new CompletableFuture<Response>();
+          APIResponse.class);
+      var cf = new CompletableFuture<APIResponse>();
       cf.complete(resp);
       return cf;
     });

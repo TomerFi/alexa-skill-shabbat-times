@@ -24,12 +24,6 @@ import static info.tomfi.alexa.shabbattimes.Tools.bumpToFriday;
 import static info.tomfi.alexa.shabbattimes.Tools.endAtStmt;
 import static info.tomfi.alexa.shabbattimes.Tools.findCitySlot;
 import static info.tomfi.alexa.shabbattimes.Tools.strtAtStmt;
-import static info.tomfi.hebcal.shabbat.response.ItemCategory.CANDLES;
-import static info.tomfi.hebcal.shabbat.response.ItemCategory.HAVDALAH;
-import static info.tomfi.hebcal.shabbat.tools.Comparators.byItemDate;
-import static info.tomfi.hebcal.shabbat.tools.Helpers.getFirstByDate;
-import static info.tomfi.hebcal.shabbat.tools.Helpers.matchAndSort;
-import static java.time.ZonedDateTime.parse;
 import static java.util.stream.Collectors.toList;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -38,14 +32,10 @@ import com.amazon.ask.model.IntentRequest;
 import info.tomfi.alexa.shabbattimes.LocatorService;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
 import info.tomfi.alexa.shabbattimes.TextService;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemFoundForDateException;
-import info.tomfi.alexa.shabbattimes.exceptions.NoItemsInResponseException;
 import info.tomfi.alexa.shabbattimes.exceptions.NoResponseFromApiException;
-import info.tomfi.hebcal.shabbat.ShabbatAPI;
-import info.tomfi.hebcal.shabbat.request.Request;
-import info.tomfi.hebcal.shabbat.response.Response;
-import info.tomfi.hebcal.shabbat.response.ResponseItem;
-import java.time.ZonedDateTime;
+import info.tomfi.shabbat.APIRequest;
+import info.tomfi.shabbat.APIResponse;
+import info.tomfi.shabbat.ShabbatAPI;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -106,42 +96,22 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     // calculate the current or next friday date
     var shabbatDate = bumpToFriday().apply(request.getTimestamp().toLocalDate());
     // build the api request
-    var apiRequest = Request.builder().forGeoId(selectedCity.geoId()).withDate(shabbatDate).build();
+    var apiRequest =
+        APIRequest.builder().forGeoId(selectedCity.geoId()).withDate(shabbatDate).build();
     // get the response future
     var responseFuture = shabbatApi.sendAsync(apiRequest);
     // get the response
-    final Response response;
+    final APIResponse response;
     try {
       response = responseFuture.get();
     } catch (IllegalStateException | InterruptedException | ExecutionException exc) {
       throw new NoResponseFromApiException(exc);
     }
-    // get candles and havdalah items from response items
-    List<ResponseItem> items;
-    try {
-      items = matchAndSort(response, byItemDate(), CANDLES, HAVDALAH);
-    } catch (final IllegalArgumentException iae) {
-      throw new NoItemsInResponseException(iae.getMessage());
-    }
 
-    // calculate the current and the shabbat start and end date and time
     var currentDateTime = request.getTimestamp().toZonedDateTime();
-    ZonedDateTime shabbatStartDateTime;
-    ZonedDateTime shabbatEndDateTime;
-    try {
-      shabbatStartDateTime =
-          parse(
-              getFirstByDate(items, shabbatDate, CANDLES)
-                  .orElseThrow(NoItemFoundForDateException::new)
-                  .date());
-      shabbatEndDateTime =
-          parse(
-              getFirstByDate(items, shabbatDate.plusDays(1), HAVDALAH)
-                  .orElseThrow(NoItemFoundForDateException::new)
-                  .date());
-    } catch (final IllegalArgumentException iae) {
-      throw new NoItemFoundForDateException(iae.getMessage());
-    }
+    var shabbatStartDateTime = response.getShabbatStart().toZonedDateTime();
+    var shabbatEndDateTime = response.getShabbatEnd().toZonedDateTime();
+
     // retrieve the request attributes
     var requestAttributes = input.getAttributesManager().getRequestAttributes();
     // construct the start at... and ends at... parts of the prompt
@@ -153,7 +123,7 @@ public final class GetCityIntentHandler implements IntentRequestHandler {
     var speechOutput =
         String.format(
             textor.getText(requestAttributes, SHABBAT_INFORMATION_FMT),
-            response.location().city(),
+            response.location.city,
             startsAtPresentation,
             shabbatStartDateTime.toLocalDate().toString(),
             shabbatStartDateTime.toLocalTime().toString(),
