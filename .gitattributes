@@ -21,9 +21,9 @@
 *.txt text eol=crlf
 *.rst text eol=crlf
 CHANGELOG text eol=crlf
-CONTRIBUTING text eol=crlf
+CONTRIBUTING text eol=lf
 *COPYRIGHT* text eol=crlf
-LICENSE text eol=crlf
+LICENSE text eol=lf
 *README* text eol=lf
 # Configs
 *.cnf text eol=lf
