@@ -40,7 +40,6 @@ import org.springframework.stereotype.Component;
 @AnalyzeClasses(
     packages = "info.tomfi.alexa.shabbattimes",
     importOptions = {DoNotIncludeTests.class, DoNotIncludePackageInfos.class})
-// CHECKSTYLE.OFF: VisibilityModifier
 class ProjectArchTest {
   @ArchTest
   final ArchRule no_classes_should_access_standard_streams =

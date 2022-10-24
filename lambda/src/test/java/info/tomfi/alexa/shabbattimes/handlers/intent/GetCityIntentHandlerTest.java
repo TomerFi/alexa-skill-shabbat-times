@@ -208,7 +208,6 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
 
   @ParameterizedTest
   @EnumSource
-  // CHECKSTYLE.OFF: ParameterNumber
   void invoking_handler_api_response_with_candles_and_havdalah_item_return_a_follow_up(
       final CitySlot slotName,
       @Mock final Slot citySlot,

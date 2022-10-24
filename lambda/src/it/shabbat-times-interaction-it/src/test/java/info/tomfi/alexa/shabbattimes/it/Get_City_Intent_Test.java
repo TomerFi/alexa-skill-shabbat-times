@@ -29,7 +29,6 @@ import org.junit.jupiter.params.provider.ValueSource;
  * <p>Please note: Most of the test cases here are based upon Jerusalem, Israel on
  * 10/01/2019 - 10/04/2019.</p>
  */
-// CHECKSTYLE.OFF: LambdaBodyLength
 @Tag("integration-tests")
 final class Get_City_Intent_Test extends SkillInteractionFixtures {
   static Stream<Arguments> path_day_speech_matrix_provider() {

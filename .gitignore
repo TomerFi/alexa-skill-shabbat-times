@@ -33,7 +33,7 @@ target
 **/bin
 **/obj
 
-# reports (superlinter)
+# reports
 *.report
 
 # alexa skills kit

@@ -40,8 +40,6 @@ jobs:
         run: mvn package -Pzip -B -ff
 
       # https://aws.amazon.com/blogs/compute/tracking-the-state-of-lambda-functions/
-      # yamllint disable rule:line-length
-      # editorconfig-checker-disable
       - name: Get function state
         id: function_state
         run: |
@@ -120,9 +118,6 @@ jobs:
               generate_release_notes: true
             })
             core.setOutput('html_url', response.data.html_url)
-
-      # yamllint enable rule:line-length
-      # editorconfig-checker-enable
 
       - name: Tweet new release
         if: ${{ github.event.inputs.tweet == 'yes' }}
