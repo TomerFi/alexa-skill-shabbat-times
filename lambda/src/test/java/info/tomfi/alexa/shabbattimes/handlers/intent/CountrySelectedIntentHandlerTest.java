@@ -18,7 +18,6 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
-import com.github.javafaker.Faker;
 import info.tomfi.alexa.shabbattimes.Country;
 import info.tomfi.alexa.shabbattimes.IntentType;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCountryFoundException;
@@ -42,14 +41,12 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
   @Mock private Intent intent;
   @Mock private Country country1;
   private String country1Utterance;
-  private Faker faker;
   private CountrySelectedIntentHandler sut;
 
   @BeforeEach
   void initialize(@Mock final Country country2) {
-    faker = new Faker();
-    country1Utterance = faker.lorem().word();
-    var country2Utterance = faker.lorem().word();
+    country1Utterance = "acountryutterance";
+    var country2Utterance = "anothercountryutterance";
     lenient().when(country1.hasUtterance(country1Utterance)).thenReturn(Boolean.TRUE);
     lenient().when(country2.hasUtterance(country2Utterance)).thenReturn(Boolean.TRUE);
     sut = new CountrySelectedIntentHandler(List.of(country1, country2), textor);
@@ -101,7 +98,7 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
   void invoking_handler_unknown_country_value_throws_no_country_found_exception(
       @Mock final Slot countrySlot) {
     // stub intent with unknown country slot value and stub request with intent
-    given(countrySlot.getValue()).willReturn(faker.lorem().word());
+    given(countrySlot.getValue()).willReturn("Israel");
     var slots = Map.of(COUNTRY_SLOT.toString(), countrySlot);
     given(intent.getSlots()).willReturn(slots);
     given(request.getIntent()).willReturn(intent);
@@ -123,9 +120,9 @@ final class CountrySelectedIntentHandlerTest extends HandlerFixtures {
     var sessionAttribs = new HashMap<String, Object>();
     given(attribMngr.getSessionAttributes()).willReturn(sessionAttribs);
     // stub selected country
-    var abbreviation = faker.lorem().characters(2);
-    var countryName = faker.country().name();
-    var cities = faker.lorem().sentence();
+    var abbreviation = "LL";
+    var countryName = "LaLa";
+    var cities = "ffaa eeepp fffll";
     given(country1.abbreviation()).willReturn(abbreviation);
     given(country1.name()).willReturn(countryName);
     given(country1.stringCities()).willReturn(cities);

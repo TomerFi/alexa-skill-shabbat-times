@@ -19,7 +19,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.mock;
 
 import com.amazon.ask.model.Slot;
-import com.github.javafaker.Faker;
 import info.tomfi.alexa.shabbattimes.SlotName.CitySlot;
 import info.tomfi.alexa.shabbattimes.exceptions.NoCitySlotException;
 import java.time.DayOfWeek;
@@ -99,12 +98,11 @@ final class ToolsTest {
 
   @Test
   void test_the_find_slot_tool_with_active_city_slot_should_retun_the_active_slot() {
-    var faker = new Faker();
     // select a random city slot name
-    var slotInUse = faker.options().nextElement(CitySlot.values());
+    var slotInUse = CitySlot.US;
     // mock active slot and stub with value
     var activeSlot = mock(Slot.class);
-    given(activeSlot.getValue()).willReturn(faker.lorem().word());
+    given(activeSlot.getValue()).willReturn("word");
     // create slot map
     var slots = new HashMap<String, Slot>();
     // populate map with mock active slot and non-active slots returning null by default
@@ -120,12 +118,11 @@ final class ToolsTest {
 
   @Test
   void test_the_find_slot_tool_with_wrong_keys_list_throws_no_city_slot_exception() {
-    var faker = new Faker();
     // select a random city slot name
-    var slotInUse = faker.options().nextElement(CitySlot.values());
+    var slotInUse = CitySlot.IL;
     // mock active slot and stub with value
     var activeSlot = mock(Slot.class);
-    given(activeSlot.getValue()).willReturn(faker.lorem().word());
+    given(activeSlot.getValue()).willReturn("notme");
     // create slot map
     var slots = new HashMap<String, Slot>();
     // populate map with mock active slot and non-active slots returning null by default
@@ -134,7 +131,7 @@ final class ToolsTest {
         .filter(v -> !slotInUse.equals(v))
         .forEach(v -> slots.put(v.toString(), mock(Slot.class)));
     // create keys to compare slot keys to
-    var keys = List.of(faker.lorem().word(), faker.lorem().word());
+    var keys = List.of("meniether", "nitherdidi");
     // verify function throws excption
     thenExceptionOfType(NoCitySlotException.class)
         .isThrownBy(() -> Tools.findCitySlot(keys).apply(slots));

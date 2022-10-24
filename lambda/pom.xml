@@ -13,49 +13,28 @@
 
   <properties>
     <coverage.threshold>85%</coverage.threshold>
-    <mutation.coverage.threshold>85</mutation.coverage.threshold>
     <maven.compiler.release>11</maven.compiler.release>
     <maven.deploy.skip>true</maven.deploy.skip>
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.44.0</ask-sdk.version>
-    <ask-sdk-model-runtime.version>1.0.6</ask-sdk-model-runtime.version>
-    <assertj.version>3.23.1</assertj.version>
-    <archunit.version>1.0.0</archunit.version>
     <auto-value.version>1.10</auto-value.version>
-    <byte-buddy.version>1.12.18</byte-buddy.version>
-    <commons-codec.version>1.15</commons-codec.version>
-    <equalsverifier.version>3.10.1</equalsverifier.version>
-    <extra-enforcer-rules.version>1.6.1</extra-enforcer-rules.version>
-    <shabbat-api.version>3.0.0</shabbat-api.version>
-    <httpclient.version>4.5.13</httpclient.version>
     <jackson.version>2.13.4</jackson.version>
-    <javafaker.version>1.0.2</javafaker.version>
-    <joda-time.version>2.12.0</joda-time.version>
-    <junit-jupiter.version>5.9.1</junit-jupiter.version>
-    <log4j.version>2.19.0</log4j.version>
-    <mockito.version>4.8.1</mockito.version>
-    <reflections.version>0.10.2</reflections.version>
-    <slf4j.version>2.0.3</slf4j.version>
+    <shabbat-api.version>3.0.0</shabbat-api.version>
     <springframework.version>5.3.23</springframework.version>
+    <!-- TESTING DEPENDENCIES -->
+    <assertj.version>3.23.1</assertj.version>
+    <equalsverifier.version>3.10.1</equalsverifier.version>
+    <junit-jupiter.version>5.9.1</junit-jupiter.version>
+    <mockito.version>4.8.1</mockito.version>
     <!-- Plugins -->
     <maven-assembly-plugin.version>3.4.2</maven-assembly-plugin.version>
-    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-dependency-plugin.version>3.3.0</maven-dependency-plugin.version>
-    <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
-    <maven-enforcer-plugin.version>3.1.0</maven-enforcer-plugin.version>
-    <maven-install-plugin.version>3.0.1</maven-install-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-    <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-    <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
     <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
     <junit-platform-maven-plugin.version>1.1.6</junit-platform-maven-plugin.version>
-    <pitest-maven.version>1.9.8</pitest-maven.version>
-    <pitest-junit5-plugin.version>1.1.0</pitest-junit5-plugin.version>
     <versions-maven-plugin.version>2.13.0</versions-maven-plugin.version>
   </properties>
 
@@ -109,59 +88,13 @@
         <groupId>com.amazon.alexa</groupId>
         <artifactId>ask-sdk</artifactId>
         <version>${ask-sdk.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-          </exclusion>
-        </exclusions>
       </dependency>
       <dependency>
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${springframework.version}</version>
       </dependency>
-      <!-- SERIALIZATION DEPENDENCIES -->
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-annotations</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-core</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.13.4.2</version>
-        <!-- temporary fix for addressing security vulnerability -->
-        <!-- https://github.com/FasterXML/jackson-databind/issues/3432 -->
-        <!-- https://github.com/FasterXML/jackson-databind/issues/3428 -->
-      </dependency>
-      <dependency>
-        <groupId>com.fasterxml.jackson.datatype</groupId>
-        <artifactId>jackson-datatype-jsr310</artifactId>
-        <version>${jackson.version}</version>
-      </dependency>
       <!-- TESTING DEPENDENCIES -->
-      <dependency>
-        <groupId>com.github.javafaker</groupId>
-        <artifactId>javafaker</artifactId>
-        <version>${javafaker.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>com.tngtech.archunit</groupId>
-        <artifactId>archunit-junit5</artifactId>
-        <version>${archunit.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-engine</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>
         <artifactId>equalsverifier</artifactId>
@@ -179,11 +112,6 @@
       </dependency>
       <dependency>
         <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-engine</artifactId>
-        <version>${junit-jupiter.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-params</artifactId>
         <version>${junit-jupiter.version}</version>
       </dependency>
@@ -196,54 +124,6 @@
         <groupId>org.mockito</groupId>
         <artifactId>mockito-junit-jupiter</artifactId>
         <version>${mockito.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.reflections</groupId>
-        <artifactId>reflections</artifactId>
-        <version>${reflections.version}</version>
-      </dependency>
-      <!-- LOGGING DEPENDENCIES -->
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-slf4j-impl</artifactId>
-        <version>${log4j.version}</version>
-        <exclusions>
-          <exclusion>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api-java9</artifactId>
-          </exclusion>
-        </exclusions>
-      </dependency>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-      <!-- DEPENDENCY CONVERGENCE -->
-      <dependency>
-        <groupId>com.amazon.alexa</groupId>
-        <artifactId>ask-sdk-model-runtime</artifactId>
-        <version>${ask-sdk-model-runtime.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpclient</artifactId>
-        <version>${httpclient.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>commons-codec</groupId>
-        <artifactId>commons-codec</artifactId>
-        <version>${commons-codec.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>joda-time</groupId>
-        <artifactId>joda-time</artifactId>
-        <version>${joda-time.version}</version>
-      </dependency>
-      <dependency>
-        <groupId>net.bytebuddy</groupId>
-        <artifactId>byte-buddy</artifactId>
-        <version>${byte-buddy.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -268,30 +148,7 @@
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
     </dependency>
-    <!-- SERIALIZATION DEPENDENCIES -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-annotations</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-core</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
     <!-- TESTING DEPENDENCIES -->
-    <dependency>
-      <groupId>com.github.javafaker</groupId>
-      <artifactId>javafaker</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>com.tngtech.archunit</groupId>
-      <artifactId>archunit-junit5</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>nl.jqno.equalsverifier</groupId>
       <artifactId>equalsverifier</artifactId>
@@ -309,11 +166,6 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-params</artifactId>
       <scope>test</scope>
     </dependency>
@@ -325,11 +177,6 @@
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-junit-jupiter</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.reflections</groupId>
-      <artifactId>reflections</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -345,28 +192,8 @@
           <version>${maven-assembly-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-clean-plugin</artifactId>
-          <version>${maven-clean-plugin.version}</version>
-        </plugin>
-        <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>${maven-dependency-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-deploy-plugin</artifactId>
-          <version>${maven-deploy-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-enforcer-plugin</artifactId>
-          <version>${maven-enforcer-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-install-plugin</artifactId>
-          <version>${maven-install-plugin.version}</version>
         </plugin>
         <plugin>
           <artifactId>maven-invoker-plugin</artifactId>
@@ -375,18 +202,6 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>${maven-jar-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>${maven-resources-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>${maven-site-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>${maven-surefire-plugin.version}</version>
         </plugin>
         <!-- Third-Party Plugins -->
         <plugin>
@@ -422,38 +237,6 @@
           </configuration>
         </plugin>
 
-        <plugin>
-          <groupId>org.pitest</groupId>
-          <artifactId>pitest-maven</artifactId>
-          <version>${pitest-maven.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.pitest</groupId>
-              <artifactId>pitest-junit5-plugin</artifactId>
-              <version>${pitest-junit5-plugin.version}</version>
-            </dependency>
-          </dependencies>
-          <configuration>
-            <excludedClasses>
-              <excludedClass>info.tomfi.alexa.shabbattimes.AutoValue*Builder</excludedClass>
-              <excludedClass>info.tomfi.alexa.shabbattimes.SkillHandler</excludedClass>
-            </excludedClasses>
-            <excludedMethods>
-              <excludedMethod>equals</excludedMethod>
-              <excludedMethod>hashCode</excludedMethod>
-            </excludedMethods>
-            <exportLineCoverage>true</exportLineCoverage>
-            <jvmArgs>
-              <arg>-Xshare:off</arg>
-            </jvmArgs>
-            <mutationThreshold>${mutation.coverage.threshold}</mutationThreshold>
-            <mutators>
-              <mutator>STRONGER</mutator>
-            </mutators>
-            <timestampedReports>false</timestampedReports>
-          </configuration>
-        </plugin>
-
       </plugins>
     </pluginManagement>
 
@@ -481,7 +264,6 @@
           <executor>JAVA</executor>
           <javaOptions>
             <additionalOptions>
-              <jul>-Djava.util.logging.config.file=src/test/resources/logging-test.properties</jul>
               <jacoco>${jacoco.java.option}</jacoco>
               <cds>-Xshare:off</cds>
             </additionalOptions>
@@ -506,37 +288,6 @@
         </configuration>
       </plugin>
 
-      <plugin>
-        <artifactId>maven-enforcer-plugin</artifactId>
-        <dependencies>
-          <dependency>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>extra-enforcer-rules</artifactId>
-            <version>${extra-enforcer-rules.version}</version>
-          </dependency>
-        </dependencies>
-        <executions>
-          <execution>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <rules>
-            <dependencyConvergence />
-            <requireJavaVersion>
-              <version>[11,)</version>
-            </requireJavaVersion>
-            <requireMavenVersion>
-              <version>[3.6,)</version>
-            </requireMavenVersion>
-            <banDuplicateClasses />
-            <banCircularDependencies />
-          </rules>
-        </configuration>
-      </plugin>
-
     </plugins>
   </build>
 
@@ -547,7 +298,6 @@
       <id>dev</id>
       <properties>
         <coverage.threshold>0%</coverage.threshold>
-        <mutation.coverage.threshold>0</mutation.coverage.threshold>
       </properties>
       <build>
         <plugins>
@@ -603,27 +353,6 @@
                 <goals>
                   <goal>install</goal>
                   <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!-- Use this profile to execute mutation testing. -->
-    <profile>
-      <id>mut</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.pitest</groupId>
-            <artifactId>pitest-maven</artifactId>
-            <executions>
-              <execution>
-                <phase>verify</phase>
-                <goals>
-                  <goal>scmMutationCoverage</goal>
                 </goals>
               </execution>
             </executions>
