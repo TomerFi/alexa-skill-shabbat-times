@@ -6,7 +6,6 @@ import static org.assertj.core.api.BDDAssertions.then;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
-import com.github.javafaker.Faker;
 import info.tomfi.alexa.shabbattimes.BundleKey;
 import java.util.Locale;
 import java.util.Map;
@@ -22,12 +21,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class TextServiceImplTest {
-  private Faker faker;
   private TextServiceImpl sut;
 
   @BeforeEach
   void initialize() {
-    faker = new Faker();
     sut = new TextServiceImpl();
   }
 
@@ -36,8 +33,8 @@ final class TextServiceImplTest {
     // create request attributes with mock bundled resource
     var attribs = Map.of(L10N_BUNDLE.toString(), (Object) resource);
     // create random bundle key and value, and mock resource with it
-    var key = faker.options().nextElement(BundleKey.values());
-    var value = faker.lorem().word();
+    var key = BundleKey.DEFAULT_PLEASE_CLARIFY;
+    var value = "avalue";
     given(resource.getString(eq(key.toString()))).willReturn(value);
     // when invoking the tool with the attributes and key
     var retrieved = sut.getText(attribs, key);

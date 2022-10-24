@@ -6,10 +6,8 @@ import static nl.jqno.equalsverifier.Warning.NULL_FIELDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
-import com.github.javafaker.Faker;
 import java.util.List;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +18,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 @Tag("unit-tests")
 final class CountryTest {
-  private Faker faker;
-
-  @BeforeEach
-  void initialize() {
-    faker = new Faker();
-  }
-
   @Test
   void verify_country_object_equals_and_hashcode_implementations() {
     // verify abstraction, not implementing equals and hashcode
@@ -91,7 +82,7 @@ final class CountryTest {
 
   @Test
   void get_a_city_by_a_correct_name_value_should_return_the_city(@Mock final City city) {
-    var cityName = faker.country().capital();
+    var cityName = "Jerusalem";
     // stub the mocked cities with a fake name and alias
     given(city.cityName()).willReturn(cityName);
     // build the country using the builder
@@ -109,7 +100,7 @@ final class CountryTest {
 
   @Test
   void get_a_city_by_a_correct_alias_value_should_return_the_city(@Mock final City city) {
-    var cityAlias = faker.lorem().word();
+    var cityAlias = "jeru";
     // stub the mocked cities with a fake name and alias
     given(city.cityName()).willReturn("cityName");
     given(city.aliases()).willReturn(List.of(cityAlias));
@@ -141,19 +132,19 @@ final class CountryTest {
             .utterances(List.of("utter1", "utter2"))
             .build();
     // verify retrieving the city by an incorrect value returns empty
-    assertThat(country.getCity(faker.lorem().word())).isEmpty();
+    assertThat(country.getCity("notexistingcity")).isEmpty();
   }
 
   @Test
   void querying_country_for_known_uterrance_yields_true(@Mock final City city) {
     // build the country using the builder
-    var countryUtterance = faker.lorem().word();
+    var countryUtterance = "notexistingcountry";
     var country =
         Country.builder()
             .abbreviation("AB")
             .cities(List.of(city))
             .name("countryName")
-            .bundleKey(faker.options().nextElement(BundleKey.values()))
+            .bundleKey(BundleKey.DEFAULT_OK)
             .utterances(List.of(countryUtterance))
             .build();
     // querying for known utterance should return true
@@ -168,8 +159,8 @@ final class CountryTest {
             .abbreviation("AB")
             .cities(List.of(city))
             .name("countryName")
-            .bundleKey(faker.options().nextElement(BundleKey.values()))
-            .utterances(List.of(faker.lorem().word()))
+            .bundleKey(BundleKey.DEFAULT_PLEASE_CLARIFY)
+            .utterances(List.of("someutterance"))
             .build();
     // querying for an unknown utterance should return false
     assertThat(country.hasUtterance("aabbccdd")).isFalse();

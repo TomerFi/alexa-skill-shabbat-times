@@ -22,7 +22,6 @@ import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
-import com.github.javafaker.Faker;
 import info.tomfi.alexa.shabbattimes.City;
 import info.tomfi.alexa.shabbattimes.IntentType;
 import info.tomfi.alexa.shabbattimes.LocatorService;
@@ -40,7 +39,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -57,12 +55,6 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
   @Mock private ShabbatAPI sapi;
   @Mock private LocatorService locator;
   @InjectMocks private GetCityIntentHandler sut;
-  private Faker faker;
-
-  @BeforeEach
-  void intiailize() {
-    faker = new Faker();
-  }
 
   @Test
   void can_handle_should_return_true_for_get_city_intent_type() {
@@ -110,9 +102,9 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
   void invoking_handler_with_city_slot_api_fail_throws_no_response_from_api_exception(
       final CitySlot slotName, @Mock final Slot citySlot, @Mock final City city) {
     // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = (int) faker.number().randomNumber(5, true);
+    var countryAbbreviation = "IL";
+    var cityName = "Jerusalem";
+    var cityGeoid = 12345;
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
     given(city.geoId()).willReturn(cityGeoid);
@@ -156,9 +148,9 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       @Mock final City city,
       @Mock final Slot countrySlot) {
     // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = (int) faker.number().randomNumber(5, true);
+    var countryAbbreviation = "US";
+    var cityName = "Afula";
+    var cityGeoid = 54321;
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
     given(city.geoId()).willReturn(cityGeoid);
@@ -211,10 +203,10 @@ final class GetCityIntentHandlerTest extends HandlerFixtures {
       throws NoSuchFieldException, SecurityException, IllegalArgumentException,
           IllegalAccessException {
     // stub city mock
-    var countryAbbreviation = faker.country().countryCode2();
-    var cityName = faker.country().capital();
-    var cityGeoid = (int) faker.number().randomNumber(5, true);
-    var cityGeoName = faker.lorem().word();
+    var countryAbbreviation = "GT";
+    var cityName = "Uooll";
+    var cityGeoid = 69863;
+    var cityGeoName = "Uooll, GT";
     given(city.countryAbbreviation()).willReturn(countryAbbreviation);
     given(city.cityName()).willReturn(cityName);
     given(city.geoId()).willReturn(cityGeoid);
