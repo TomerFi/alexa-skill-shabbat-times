@@ -2,21 +2,20 @@
 
 :clap: First off, thank you for taking the time to contribute. :clap:
 
-Contributing is pretty straight-forward:
-
 - Fork the repository
+- Create a new branch on your fork
 - Commit your changes
 - Create a pull request against the `master` branch
 
-Please feel free to contribute, even to this contributing guideline file, if you see fit.
+> NOTE: This document (and the base code) requires some work, i.e. redesigning, I hope to find the time to update it soon.
 
 ## Metadata and infrastructure deployment
 
 The ci workflows in this repository will handle the skill infrastructure part only, i.e. the lambda
 function:
 
-- [stage](workflows/stage.yml) will deploy the lambda function.
-- [release](workflows/release.yml) will deploy the lambda function, publish it, and direct the
+- [stage](https://github.com/TomerFi/alexa-skill-shabbat-times/blob/master/.github/workflows/release.yml) will deploy the lambda function.
+- [release](https://github.com/TomerFi/alexa-skill-shabbat-times/blob/master/.github/workflows/stage.yml) will deploy the lambda function, publish it, and direct the
   *Live* alias to it.
 
 If any changes were made to the skill metadata,</br>
@@ -36,7 +35,3 @@ ask smapi get-certification-review --skill-id <skill-id>
 ask smapi withdraw-skill-from-certification --skill-id <skill-id>
 
 ```
-
-> I tried incorporating the skill metadata part with the ci workflows,</br>
-> unfortunately, it feels like *ask-cli* is not quite mature enough for automated work.</br>
-> If anything changes, I would like to try this again.
