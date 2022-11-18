@@ -1,28 +1,27 @@
 {
   "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "lamdba-arn-goes-here:Live"
+        }
+      }
+    },
     "manifestVersion": "1.0",
     "permissions": [],
     "privacyAndCompliance": {
       "allowsPurchases": false,
       "containsAds": false,
-      "isExportCompliant": true,
       "isChildDirected": false,
+      "isExportCompliant": true,
       "usesPersonalInfo": false
     },
-    "apis": {
-      "custom": {
-        "endpoint": {
-          "uri": "lamdba-arn-goes-here"
-        }
-      }
-    },
     "publishingInformation": {
-      "isAvailableWorldwide": true,
-      "testingInstructions": "You can ask alexa for shabbat times in various cities in the united states, the united kingdom or in israel.",
       "category": "RELIGION_AND_SPIRITUALITY",
+      "isAvailableWorldwide": true,
       "locales": {
         "en-US": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -36,13 +35,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=709910d049fd3ce6dd551c3f8dc7af60c4d227b5b52fba15a3f4b3ec1853f002",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
-          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fc5143ef6fd60bffd12491b9a281d72ea1f824b381f0a7fc13af89519991369a",
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-AU": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -56,13 +55,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=709910d049fd3ce6dd551c3f8dc7af60c4d227b5b52fba15a3f4b3ec1853f002",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
-          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fc5143ef6fd60bffd12491b9a281d72ea1f824b381f0a7fc13af89519991369a",
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-CA": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -76,13 +75,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=709910d049fd3ce6dd551c3f8dc7af60c4d227b5b52fba15a3f4b3ec1853f002",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
-          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0d130bc3aee1f8ff2bfba00c131c880544de0e619229e3ac47e752d76a9222e9",
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-IN": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -96,13 +95,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=709910d049fd3ce6dd551c3f8dc7af60c4d227b5b52fba15a3f4b3ec1853f002",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
-          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86399&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=0d130bc3aee1f8ff2bfba00c131c880544de0e619229e3ac47e752d76a9222e9",
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-GB": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -116,12 +115,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/68fc213d807e4c78a3ec9aac92b705be/APP_ICON_LARGE?versionId=Oxc_sLkDDjCYBI_MpHEGbOciwlnNWSzv&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=709910d049fd3ce6dd551c3f8dc7af60c4d227b5b52fba15a3f4b3ec1853f002",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
-          "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/416bba776c814adbaca8991c9bee020f/APP_ICON?versionId=.gKk5_SbEGYuDSpggqtjL2caFqVRmZIr&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20221118T093532Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QGAVVTZ74%2F20221118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=fc5143ef6fd60bffd12491b9a281d72ea1f824b381f0a7fc13af89519991369a",
+          "summary": "Would you like to know the shabbat times in your city?"
         }
-      }
+      },
+      "testingInstructions": "You can ask alexa for shabbat times in various cities in the united states, the united kingdom or in israel."
     }
   }
 }
