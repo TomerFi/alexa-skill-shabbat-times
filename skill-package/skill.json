@@ -1,28 +1,27 @@
 {
   "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "lamdba-arn-goes-here:Live"
+        }
+      }
+    },
     "manifestVersion": "1.0",
     "permissions": [],
     "privacyAndCompliance": {
       "allowsPurchases": false,
       "containsAds": false,
-      "isExportCompliant": true,
       "isChildDirected": false,
+      "isExportCompliant": true,
       "usesPersonalInfo": false
     },
-    "apis": {
-      "custom": {
-        "endpoint": {
-          "uri": "lamdba-arn-goes-here"
-        }
-      }
-    },
     "publishingInformation": {
-      "isAvailableWorldwide": true,
-      "testingInstructions": "You can ask alexa for shabbat times in various cities in the united states, the united kingdom or in israel.",
       "category": "RELIGION_AND_SPIRITUALITY",
+      "isAvailableWorldwide": true,
       "locales": {
         "en-US": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -36,13 +35,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-AU": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -56,13 +55,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-CA": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -76,13 +75,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-IN": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -96,13 +95,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "summary": "Would you like to know the shabbat times in your city?"
         },
         "en-GB": {
-          "summary": "Would you like to know the shabbat times in your city?",
+          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "examplePhrases": [
             "Alexa, start shabbat times",
             "Alexa, ask shabbat times for help",
@@ -116,12 +115,13 @@
             "judaism",
             "religion"
           ],
+          "largeIconUri": "file://assets/images/en-US_largeIconUri.png",
           "name": "Shabbat Times",
-          "description": "Get the Shabbat start and end times in various cities in the Israel, the United States and the United Kingdom.",
           "smallIconUri": "file://assets/images/en-US_smallIconUri.png",
-          "largeIconUri": "file://assets/images/en-US_largeIconUri.png"
+          "summary": "Would you like to know the shabbat times in your city?"
         }
-      }
+      },
+      "testingInstructions": "You can ask alexa for shabbat times in various cities in the united states, the united kingdom or in israel."
     }
   }
 }

@@ -121,6 +121,10 @@
         },
         {
           "name": "AMAZON.CancelIntent"
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
         }
       ],
       "types": [
@@ -582,5 +586,5 @@
       ]
     }
   },
-  "version": "1"
+  "version": "70"
 }
