@@ -24,7 +24,7 @@
     <shabbat-api.version>3.0.1</shabbat-api.version>
     <springframework.version>5.3.25</springframework.version>
     <!-- TESTING DEPENDENCIES -->
-    <assertj.version>3.24.1</assertj.version>
+    <assertj.version>3.24.2</assertj.version>
     <equalsverifier.version>3.12.3</equalsverifier.version>
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
     <mockito.version>5.0.0</mockito.version>
