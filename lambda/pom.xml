@@ -25,7 +25,7 @@
     <springframework.version>5.3.25</springframework.version>
     <!-- TESTING DEPENDENCIES -->
     <assertj.version>3.24.2</assertj.version>
-    <equalsverifier.version>3.12.4</equalsverifier.version>
+    <equalsverifier.version>3.13</equalsverifier.version>
     <junit-jupiter.version>5.9.2</junit-jupiter.version>
     <mockito.version>5.1.1</mockito.version>
     <!-- Plugins -->
