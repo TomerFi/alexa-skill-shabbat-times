@@ -3,11 +3,6 @@ name: Release
 
 on:
   workflow_dispatch:
-    inputs:
-      tweet:
-        description: "Tweet new release?"
-        required: false
-        default: "no"
 
 jobs:
   release:
@@ -118,17 +113,3 @@ jobs:
               generate_release_notes: true
             })
             core.setOutput('html_url', response.data.html_url)
-
-      - name: Tweet new release
-        if: ${{ github.event.inputs.tweet == 'yes' }}
-        uses: lazy-actions/tweet-action@1.0.1
-        with:
-          oauth_consumer_key: ${{ secrets.TWITTER_API_KEY }}
-          oauth_consumer_secret: ${{ secrets.TWITTER_API_SECRET_KEY }}
-          oauth_token: ${{ secrets.TWITTER_ACCESS_TOKEN }}
-          oauth_token_secret: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
-          message: |
-            🚀🎉 Shabbat Times skill ${{ steps.bumper.outputs.new_version }} has been released! 🎉🚀
-            ${{ steps.gh_release.outputs.html_url }}
-
-            #shabbat_times_alexa_skill #alexa #java
