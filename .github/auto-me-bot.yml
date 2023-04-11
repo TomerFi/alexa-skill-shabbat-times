@@ -1,11 +1,6 @@
 # https://github.com/apps/auto-me-bot
 ---
 pr:
-  autoApprove:
-    users: ['dependabot', 'allcontributors']
-  conventionalTitle:
-    rules:
-      'body-max-line-length': [2, 'always', 120]
   lifecycleLabels:
     ignoreDrafts: true
     labels:
@@ -15,4 +10,9 @@ pr:
       reviewStarted: "status: review started"
       approved: "status: approved"
       merged: "status: merged"
+  conventionalTitle:
+    rules:
+      'body-max-line-length': [2, 'always', 120]
   tasksList:
+  autoApprove:
+    users: ['dependabot', 'allcontributors']
