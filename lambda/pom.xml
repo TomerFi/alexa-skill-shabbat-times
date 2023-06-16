@@ -22,7 +22,7 @@
     <auto-value.version>1.10.1</auto-value.version>
     <jackson.version>2.13.4</jackson.version>
     <shabbat-api.version>3.0.2</shabbat-api.version>
-    <springframework.version>5.3.27</springframework.version>
+    <springframework.version>5.3.28</springframework.version>
     <!-- TESTING DEPENDENCIES -->
     <assertj.version>3.24.2</assertj.version>
     <equalsverifier.version>3.14.2</equalsverifier.version>
