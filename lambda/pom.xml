@@ -18,7 +18,7 @@
     <maven.install.skip>true</maven.install.skip>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
-    <ask-sdk.version>2.73.0</ask-sdk.version>
+    <ask-sdk.version>2.74.0</ask-sdk.version>
     <auto-value.version>1.10.1</auto-value.version>
     <jackson.version>2.13.4</jackson.version>
     <shabbat-api.version>3.0.2</shabbat-api.version>
