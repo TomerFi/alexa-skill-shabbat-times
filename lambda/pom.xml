@@ -19,7 +19,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <!-- DEPENDENCIES -->
     <ask-sdk.version>2.77.0</ask-sdk.version>
-    <auto-value.version>1.10.1</auto-value.version>
+    <auto-value.version>1.10.2</auto-value.version>
     <jackson.version>2.13.4</jackson.version>
     <shabbat-api.version>3.0.2</shabbat-api.version>
     <springframework.version>5.3.28</springframework.version>
