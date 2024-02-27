@@ -1,4 +1,9 @@
-# Alexa Shabbat Times Skill</br>[![gh-build-status]][0] [![codecov-coverage]][1]
+# Alexa Shabbat Times Skill is Archived
+
+<details>
+<summary>OLD README</summary>
+
+# Alexa Shabbat Times Skill
 
 [![SkillPng](https://raw.githubusercontent.com/TomerFi/alexa-skill-shabbat-times/master/skill-package/assets/images/en-US_smallIconUri.png)][2]
 
@@ -7,7 +12,7 @@ Alexa skill that can tell the Shabbat start and end times for various cities in 
 - [Watch the skill in action][3]
 - [Enable the skill in the alexa skill store][2]
 
-## Contributors [![all-contributors]][5]
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key][4]):
 
@@ -38,3 +43,5 @@ Thanks goes to these wonderful people ([emoji key][4]):
 [all-contributors]: https://img.shields.io/github/all-contributors/tomerfi/alexa-skill-shabbat-times?color=ee8449&style=flat-square
 [codecov-coverage]: https://codecov.io/gh/TomerFi/alexa-skill-shabbat-times/branch/master/graph/badge.svg
 [gh-build-status]: https://github.com/TomerFi/alexa-skill-shabbat-times/workflows/Stage/badge.svg
+
+</details>
